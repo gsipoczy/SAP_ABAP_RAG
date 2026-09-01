@@ -1,0 +1,17 @@
+&FUNCTIONALITY&
+Liest eine benutzerspezifische Selektionsvariante aus der
+Datenbanktabelle ESDUS.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+Importparameter:
+
+IM_REPORT:           Reportname
+IM_ESDUS_ACTION:     Schlüssel Tabelle ESDUS (hier immer Name des
+                     Reports)
+IM_STANDARD_VARIANT: Standardvariante, falls die zu lesende
+                     benutzerspezifische Variante zwischenzeitlich
+                     gelöscht wurde
+DE-EN-LANG-SWITCH-NO-TRANSLATION

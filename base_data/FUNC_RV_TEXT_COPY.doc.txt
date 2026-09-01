@@ -1,0 +1,14 @@
+This function module attempts to find texts, according to Customizing
+settings (access sequences). You can also use it to maintain specific
+texts, which means the system then does not determine them.
+
+The function module also enables you to use a user exit (data transfer
+routine) to copy texts into an SD document using your own rules.
+In this case, the texts can be copied or referenced. The latter is the
+standard procedure.
+The text determination analysis simulates the copying process according
+to the current Customizing settings. The system does not include texts
+that were created, changed or deleted manually. The determination
+analysis also does not include any texts that were supplied externally
+by the table parameter FTLINEKOM.
+

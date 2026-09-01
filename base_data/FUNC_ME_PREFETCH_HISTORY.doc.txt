@@ -1,0 +1,29 @@
+&FUNCTIONALITY&
+Ermittelt die Abrufentwicklung bei Kontrakten.
+Die Funktion wird mit einer internen Tabelle der Struktur (Belegnummer,
+Belegposition) aufgerufen. Die Angabe der Belegposition ist optional.
+Wird die Position nicht angegeben, dann wird die Abrufentwicklung für
+alle Positionen des EK-Belegs ermittelt.
+Das Ergebnis wird in der internen Tabelle t_ekab abgelegt und von der
+Funktion ME_READ_AFTER_PREFETCH_RELDOCU weiterverarbeitet.
+
+&EXAMPLE&
+call function 'ME_PREFETCH_RELDOCU'
+       tables
+         sel_tab = it_ekko.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Ermittelt die Bestellentwicklung bei Bestellungen und Lieferplänen.
+Die Funktion wird mit einer internen Tabelle der Struktur (Belegnummer,
+Belegposition) aufgerufen. Die Angabe der Belegposition ist optional.
+Wird die Position nicht angegeben, dann wird die Bestellentwicklung für
+alle Positionen des EK-Belegs ermittelt.
+Das Ergebnis wird in den internen Tabellen t_ekbe bzw. t_ekbz (Historie
+der Bezugsnebenkosten) abgelegt und von der Funktion
+ME_READ_AFTER_PREFETCH_HISTORY weiterverarbeitet.
+
+&EXAMPLE&
+call function 'ME_PREFETCH_HISTORY'
+     tables
+         sel_tab = it_ekko.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

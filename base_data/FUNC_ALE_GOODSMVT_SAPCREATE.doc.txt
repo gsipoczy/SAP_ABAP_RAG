@@ -1,0 +1,43 @@
+&FUNCTIONALITY&
+SAP internal!
+&EXAMPLE&
+
+&HINTS&
+This BAPI and the interfaces thathave arisen from it serve exclusively
+the SAP internal communication in the "Cross System Flow of Goods"
+scenario.
+It is forbidden to use this without explicit permission from the
+Inventory Management department. No incidents of any kind are analyzed
+or corrected.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function model was generated from the object  <LS>BUS2017</> and me
+<LS>SAPCREATE</> for the BAPI call via ALE.
+The function module is executed in the outbound system. It first
+converts the data from the BAPI parameters into the IDoc format. Then
+the IDoc is sent to the receiving system. Here the BAPI is called.
+The interface of the function module contains all the outbound
+parameters from the BAPI function module and also the following
+parameters that are used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This inbound parameter contains the <DS:DE.CHNUM>channel number</>. It
+is used only for active serialization.
+<LS>RECEIVERS</>
+This parameter contains the names of the  <DS:DE.LOGSYS>logical systems
+</> (receivers), in which the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+The return table contains the names of the logical system in field
+LOGSYS, the object type in field OBJTYPE aund the object key in field
+OBJKEY. It indicates that an object of type <LS>IDOC</> has been
+created with this key in this logical system.
+<LS>APPLICATION_OBJECTS</>
+the input table contains the objects from applications that are
+processed, when the BAPI is called.
+In the LOGSYS field enter the name of the logical system from which the
+application objects originate. The application objects are identified
+by the object type OBJTYP and object key OBJKEY.
+
+&EXAMPLE&
+

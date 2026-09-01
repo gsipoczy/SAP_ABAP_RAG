@@ -1,0 +1,46 @@
+Die Tabelle ESLL wird gepuffert gelesen.
+Es kann sowohl auf eine komplettes Paket (mit hpackno) als auch auf ein
+Teilpaket (mit packno) zugegriffen werden. Die Pufferung erfolgt immer
+auf  Ebene des kompletten Paketes.
+Optional kann eine Tabelle von Paketnummern mitgegeben werden, auf
+deren Ebene gepuffert wird.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Mit dem Funktionsbaustein werden Leistungsverzeichnisse logisch
+gelöscht, d.h. in allen Leistungszeilen wird das Löschkennzeichen
+gesetzt.
+Ferner ist es möglich, das Löschen wieder zurückzunehmen.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Mit dem Funktionsbaustein werden Leistungsverzeichnisse logisch
+gelöscht, d.h. in allen Leistungszeilen wird das Löschkennzeichen
+gesetzt. Ferner ist es möglich, das Löschen wieder zurückzunehmen.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein setzt das Konto in Leistungsverzeichnissen,
+welche bisher kein Konto enthielten (z.B. "alte" Arbeitspläne).
+Die Kommunikationsstruktur COMSRV ist zu fuellen. Das Defaultkonto wird
+in dem Feld COMSRV-DEF_ACCOUNT mitgegeben. Die automatische
+Kontenfindung hat Priorität vor diesem Konto.
+Tritt bei der Prüfung des gesetzten/gefundenen Kontos ein Fehler auf,
+wird das Konto nicht in die entsprechende Zeile übernommen und die
+Ausnahme ACCOUNT_MISSING ausgelöst.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

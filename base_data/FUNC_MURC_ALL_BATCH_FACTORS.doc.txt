@@ -1,0 +1,21 @@
+&FUNCTIONALITY&
+This module reads the conversion factor for each material between the
+stockkeeping unit and all other units defined for this material on
+batch and plant level. To do this, it reads the factors from
+classification for units of measure with variable converstion on
+material level and with fixed conversion on batch level.
+In addition, the module also calculates the conversion for all units of
+measure that were not defined by the user as alternative units of
+measure but that can be converted using standard conversion (kg <-> g,
+for example). The MARM table contains alternative units of measure
+only.
+the result is returned as an internal table. The older function module
+<ZH>Material_Unit_Find30</> reads the conversion on the material level
+only.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+For further information, see the documentation for the function module
+<ZH>Batch_Conversion_Factor</>.

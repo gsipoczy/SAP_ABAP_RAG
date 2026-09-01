@@ -1,0 +1,11 @@
+&FUNCTIONALITY&
+Mit diesem Funktionsbaustein werden der Archivierung die Nummern der
+Leistungspakete, die in das Archiv geschrieben werden sollen,
+übergeben.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

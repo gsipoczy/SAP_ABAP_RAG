@@ -1,0 +1,72 @@
+&FUNCTIONALITY&
+You can use this method to reverse a posted account maintenance
+document, thereby restoring the original difference on the GR/IR
+clearing account.
+You must transfer the key fields (fiscal year and document number) of
+the account maintenance document that you want to reverse, together with
+the posting date, as import parameters for the method. In addition, you
+can enter a reference document number and a document header text.
+The document number and document year of the reversal document are
+returned in export parameter CANCEL_DOCUMENT.
+<ZH>Return messages</>
+Messages are returned in the <ZK>Return</>  parameter. The return values
+and their meanings are described in the documentation for this
+parameter.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+You can use this method to clear a balance on the GR/IR clearing account
+directly. A balance on the GR/IR clearing account occurs when there are
+quantity differences between goods receipt and invoice receipt for a
+purchase order.
+You use structure GRIRDOC_SELECT to transfer the purchase order with the
+purchase order number, item, and account assignment, and use additional
+selection criteria to define which purchase order items you want to
+clear directly by using account maintenance.
+You use structure GRIRDOC_FLAGS to specify whether you want to directly
+clear a balance on the GR/IR account, differences in delivery costs, or
+both. You can also specify whether you want to clear documents with a
+delivery surplus or an invoice surplus. If you want to clear documents
+for which you use automatic invoice creation, set the GRIRDOC_FLAGS-ERS
+field to <LB>x</>.
+You can use the TESTRUN parameter to specify whether the method is run
+in simulation mode. In this case, clearing of the GR/IR account is only
+simulated, which means that the data of the account maintenance document
+is not written to the database.
+The document number of the posted account maintenance document and the
+fiscal year are returned by the system as key fields of the document.
+Return Messages
+Messages are returned in the <ZK>Return</> parameter. The return values
+and their meanings are described in the documentation for this
+parameter.
+&EXAMPLE&
+The following example shows which data you must enter when posting an
+account maintenance document for clearing the GR/IR clearing account.
+You order 10m of a material at USD 10.00 per meter. On goods receipt,
+11m are posted. The invoice is for USD 100.00, for 10m of the material.
+Enter the following data:
+POSTING_DATE (Posting date of document): February 10, 2006
+<ZH>Structure GRIRDOC_SELECT:</>
+PO_NUMBER (Purchase order number): <LB>45....xxx</>
+PO_ITEM (Item number of purchasing document): blank
+SERIAL_NO (Sequence number of account assignment): blank
+REF_DOC (Document number of a reference document): blank
+REF_DOC_IT (Item of a reference document): blank
+REF_DOC_YEAR (Fiscal year of the current period): blank
+<ZH>Structure GRIRDOC_FLAGS:</>
+DEL_SURPLUS (Delivery surplus indicator): <LB>x</>
+INV_SURPLUS (Invoice surplus indicator): blank
+GR_CLEARNING (Clear GR/IR clearing account): <LB>x</>
+DEL_COST_ACCOUNTS (Clear delivery costs accounts): blank
+ERS (Evaluated receipt settlement): blank
+For more information, see the parameter documentation.
+&HINTS&
+
+
+
+&FURTHER_SOURCES_OF_INF&
+

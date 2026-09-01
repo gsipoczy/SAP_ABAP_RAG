@@ -1,0 +1,20 @@
+The function module works as follows:
+Input:  report name
+Output: variant name and variant text
+Procedure:
+Check whether the specified report exists
+no  --> RAISE
+yes --> 2.
+The function module was called up using variant <> blank
+yes --> variant exists --> return variant text
+        variant does not exist --> RAISE
+no  --> read and list variants and variant text for the report
+Variant was selected from list
+Return name and text
+End
+This function module supports the processing of an address list.
+The COMMIT WORK is carried out by the calling program.
+If the module is called up with 'B' mode, the calling program first has
+to block the address management data before carrying out COMMIT WORK,
+i.e. the calling program must call up the ADDRESS_ENQUEUE function
+module using 'A' mode.

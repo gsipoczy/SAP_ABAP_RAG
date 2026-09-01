@@ -1,0 +1,164 @@
+&FUNCTIONALITY&
+This function module selects material stocks from different plant
+storage locations based on selected import parameters. It then exports
+the information to different tables. This function module does not
+support stocks related to industry sector, it only supports core
+functionality.
+
+There are no dependencies on other function modules. This function
+module can be called several times if there is a requirement to retrieve
+current stocks of a material in a plant frequently.
+When the function module is called by the system, the following import
+parameters are by default selected:
+IV_MARC
+IV_MARD
+IV_MCHA
+IV_MCHB
+IV_MSKU
+IV_MSLB
+IV_MSKA
+IV_MSPR
+IV_MBEW
+IV_NULL_STOCKS
+IT_MATERIAL
+IT_PLANT
+The null stocks for plant materials are selected if the import parameter
+<LS>IV_NULL_STOCKS </>is selected. The export variables
+<LS>EV_KZ_BEW_KAUFT_BEST </>and <LS>EV_KZ_BEW_PAUFT_BEST </>are included
+if special valuated stock in customer orders on hand and project stock
+exists respectively.
+
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This extractor function module selects different goods movements from
+plant storage locations. It then exports the information to the
+<LS>E_T_MMDA_IM_S_BX_BF_UM </>table. This function module does not
+support stocks related to industry sectors, it only supports stocks
+related to core functionality.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used as an extractor in the <LS>0MM_IM_BX
+</>DataSource. This function module selects different stocks of a
+material placed in different storage locations of a plant. It then
+exports the information to the <LS>E_T_MMDA_IM_S_BX_BF_UM </>table.
+This function module does not support stocks related to industry sector,
+it only supports core functionality
+&HINTS&
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This extractor function module is used to retrieve revaluation (price
+change) data. The extract structure for this FM is <LS>MMDA_I
+M_S_BX_BF_UM</>. The data retrieved from the <LS>BKPF</> and <LS>BSEG</>
+tables is stored in the <LS>E_T_MMDA_IM_S_BX_BF_UM </>table.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module selects different goods movements from plant
+storage locations. It then applies transformation rules to the goods
+movements and exports the information to the <ZK>ET_TR_DS </>table.
+This function module is a remote-enabled function module that can be
+used in parallel processing.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module selects different material stocks in different
+plant storage locations. This function module then applies
+transformation rules to the material stocks and exports the information
+to the <LS>ET_TR_DS </>table.
+This function module is a remote-enabled function module that can be
+used in parallel processing. The extractor function module
+<LS>MMDA_IM_RR_DS </>retrieves this stock initialization data along with
+goods movement data and revaluation data for different stocks of a
+material from different plants in parallel processing.
+
+&EXAMPLE&
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module selects material revaluation data from different
+plants. It then applies transformation rules to the goods movements and
+exports the information to the <LS>ET_TR_DS </>table.
+This function module is a remote-enabled function module that can be
+used in parallel processing.
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This extractor function module is used as an extractor for the
+<LS>0MM_IM_STOCK </>DataSource. It retrieves stock initialization data,
+goods movement data, and revaluation data for different stocks of a
+material from different plants. It then applies transformation rules and
+exports the information to the <LS>E_T_MMDA_IM_S_0IC_C03 </>table.
+For parallel processing this function module calls the following
+function modules if there are enough free work processes available:
+MMDA_IM_PAR_GET_BX
+MMDA_IM_PAR_GET_BF
+MMDA_IM_PAR_GET_UM
+&EXAMPLE&
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used to map different stocks in an import table
+to one export table <LS>ET_STOCK</>. This function module does not
+support stocks related to industry sector, it only supports core
+functionality.
+The following import parameters are included when the system calls this
+function module:
+IT_MARC
+IT_MARD
+IT_MCHA
+IT_MCHB
+IT_MKOL
+IT_MSKU
+IT_MSLB
+IT_MSKA
+IT_MSPR
+IT_MBEW
+IT_EBEW
+IT_QBEW
+
+To fill the above import parameters the function module
+<LS>MMDA_IM_CONTENT_STOCK_SELECT </>can be called before calling this
+function module. This function module can be called several times if
+there is a frequent requirement to map current stocks of a material in a
+plant to one export table.
+
+
+&HINTS&
+
+
+
+&FURTHER_SOURCES_OF_INF&
+

@@ -1,0 +1,11 @@
+&FUNCTIONALITY&
+You can call this function module by choosing F4 help. It gives you a
+list of all address selection reports in a tree structure.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+At present, the new search help procedure cannot display the hit list
+in a tree structure. Therefore, the system calls a basis function
+module.

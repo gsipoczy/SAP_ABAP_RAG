@@ -1,0 +1,26 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein gibt die in der Tabelle 'error_messages'
+gesammelten Fehlermeldungen über Standardbausteine des R/3-Systems als
+PopUP aus. Es besteht die Möglichkeit vorhandene Langtexte anzuwählen.
+Wahlweise kann die Ausgabe der Fehlermeldungen auf einen bestimmten
+Konditionssatz eingeschränkt werden, falls die Tabelle noch weitere
+Daten enthält (Parameter 'only_for_condition_number').
+Fehlermeldungen ohne Konditionssatznummer, d.h. Meldungen auf
+Abspracheebene, werden stets ausgegeben.
+Sollte überhaupt keine Fehlermeldung auszugeben sein, erfolgt keine
+Ausgabe des Bausteines.
+Die Ausgabe der Positionsnummer kann unterdrückt werden (Parameter
+'display_posnr').
+Der Parameter 'title' beeinflußt die Titelüberschrift des PopUp's, der
+Parameter 'variable_key' dient der Zuordnung der Zwischenüberschrift
+zum Konditionssatz.
+&HINTS&
+Bitte beachten:
+Von der sechstelligen Positionsnummer können leider nur die letzten
+drei Ziffern übernommen werden.
+&FURTHER_SOURCES_OF_INF&
+Allgemeine Information zur nachträglichen Abrechnung finden Sie in der
+Online-Dokumentation, in der Report-Dokumentation zu den Reports
+RWMBON01, RWMBON02, RWMBON03, usw., sowie in dem ausführlichen Handbuch
+'Nachträgliche Abrechnung von Konditionen', Bestellnummer 5001 2920.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

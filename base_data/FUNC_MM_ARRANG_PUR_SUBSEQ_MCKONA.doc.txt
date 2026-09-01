@@ -1,0 +1,31 @@
+&FUNCTIONALITY&
+Ermitteln der Konditionen und Timesätze für den nachträglichen Aufbau
+der LIS-Statistiken im Bereich Einkauf. Über den Parameter
+'CONDITION_ALL' kann gesteuert werden, ob alle Konditionen einer
+Absprache oder nur die mit dem Kennzeichen 'verspätet eingestellt' für
+die Weiterverarbeitung bereitgestellt werden sollen.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Ermitteln der Kommunikationsstruktur (MCKONA) für die nachträglichen
+Abrechnung im Einkauf für den Aufbau des Einzelnachweises.
+Voraussetzung ist, das der Index für die nachträgliche Abrchnung im
+Einkauf fortgeschrieben wurde.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+Dieser Baustein ermittelt die Daten für die oben genannte
+LIS-Kommunikationsstruktur, wenn die Absprache und somit auch die
+Konditionen verspätet eingestellt wurden. Die fehlenden
+Preisfindungsdaten werden in diesem Baustein bereitgestellt und
+aufbereitet. Sollten die zu verarbeitenden Konditionen im Rahmen der
+Preisfindung schon eingestellt worden sein, werden diese
+berücksichtigt.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

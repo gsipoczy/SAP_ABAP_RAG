@@ -1,0 +1,11 @@
+&FUNCTIONALITY&
+This function module is used as an extractor for the 0MM_PUR_PO_CGR
+(Produced Activity: Delivery of Confirmations) DataSource. The
+parameters in this DataSource are data-extraction-framework specific and
+therefore cannot be used by other applications.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

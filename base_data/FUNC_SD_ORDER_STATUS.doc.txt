@@ -1,0 +1,10 @@
+&FUNCTIONALITY&
+This function module lists the different statuses for a sales document.
+Header and/or item statuses are displayed.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

@@ -1,0 +1,21 @@
+&FUNCTIONALITY&
+Erzeugt zu gegebenen Kopfdaten, abgelegt in der Kommunikationsstruktur
+KOMK, und den dazugehörigen Positionsdaten, abgelegt in der
+Kommunikationsstruktur KOMP, die LIS-Struktur für die
+Indexfortschreibung der nachträglichen Abrechnung gemäß
+Customizingeinstellungen in der Konditionsartenpflege und den
+dazugehörigen Zugriffsfolgen, bzw. Konditionstabellen. Es werden die zu
+den Konditionsarten der nachträglchen Abrechnung Zugriffsfolgen
+ausgewertet und auf Gültigkeit und Vollständigkeit überprüft, weiterhin
+werden die Bedingungen der Zugriffsfolgen geprüft. Sind die Felder der
+jeweiligen Zugriffsfolgen füllbar und die Bedingung des jeweiligen
+Zugriffs erfüllt, werden diese Informationen zur Forschreibung des
+Index der nachträglichen Abrechnung herangezogen und die
+Fortschreibungsstruktur aufgebaut.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

@@ -1,0 +1,23 @@
+&FUNCTIONALITY&
+This function module can be used to import
+ <DS:GLOS.3526C7A9AFAB52B9E10000009B38F974>material listing</> and
+ <DS:GLOS.3526C74BAFAB52B9E10000009B38F974>material exclusion</>
+condition data created externally into an SAP S/4HANA system.
+The function module validates the imported material listing/exclusion
+data, saves valid records to the database, and returns messages if any
+error occurs.
+
+&EXAMPLE&
+This function module is called by the <LS>"material listing and
+exclusion"</> migration object found in <LS>Migrate Your Data -
+Migration Cockpit</> app. The migration object requires an upload of
+material listing/exclusion data in a *.csv file.
+The migration object parses the material listing/exclusion data included
+in the *.csv file according to the parameters of the <NP>A
+PI_LSTG_EXCLSN_MIGRTN_CREATE</> function module.
+
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

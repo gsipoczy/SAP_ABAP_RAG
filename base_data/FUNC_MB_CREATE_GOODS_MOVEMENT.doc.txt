@@ -1,0 +1,130 @@
+&FUNCTIONALITY&
+The function module MB_POST_GOODS_MOVEMENT has to run after the function
+module <DS:FU.MB_CREATE_GOODS_MOVEMENT>MB_CREATE_GOODS_MOVEMENT</>.
+It calls form routine BUCHEN_AUSFUEHREN in program SAPMM07M, which then
+uses <ZH>IN UPDATE TASK</> to call the posting function modules in the
+relevant application. You must ensure that function module
+MB_CREATE_GOODS_MOVEMENT has been processed and that there is at least
+one item to be posted. This is checked internally. If this is not the
+case, the system displays a termination message.
+After you call MB_CREATE_GOODS_MOVEMENT, the EMKPF-SUBRC field is filled
+with the value 1 if items exist. If this is not the case, EMKPF-SUBRC
+contains a value greater than 5, and the relevant messages are noted in
+EMKPF or EMSEG, depending on where the error occurred.
+Table EMSEG contains all required information relating to the items. If
+error messages have been triggered, they are also stored here. After you
+have called MB_CREATE_GOODS_MOVEMENT, error handling must be run in the
+calling application (and, if items are to be corrected or added,
+MB_CREATE_GOODS_MOVEMENT must be called again).
+When all items in the application being used have been processed, the
+system calls function module MB_POST_GOODS_MOVEMENT. If errors occur
+within this function module, the system displays a termination message.
+If there are no more errors, the field EMKPF-SUBRC is initialized.
+After MB_POST_GOODS_MOVEMENT is called, COMMIT WORK is set in the
+program being used.
+The following processing sequence must be guaranteed:
+MB_CREATE_GOODS_MOVEMENT
+MB_POST_GOODS_MOVEMENT
+COMMIT WORK
+If you try to call the function module MB_CREATE_GOODS_MOVEMENT several
+times to generate several material documents without COMMIT WORK, the
+system displays a termination message.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module provides the function that can be initiated from
+within the Inventory Management menu using "Cancel material document".
+A reversal with reference to a material document is carried out.
+The calling program must pass on the material document number, the
+material document year, and the posting date to the function module. If
+required, the material document item can also be included. Then only
+this item will be reversed. Specification of a transaction code is
+optional. If a transaction code is passed on, it must be ensured that
+it is included in table T158.
+The material document to be cancelled is read within the function
+module, and the reversal movement type is applied to it. Then the
+general function module used to post goods movements is called up:
+MB_CREATE_GOODS_MOVEMENT.
+The output of the function module contains the structure EMKPF where,
+for example, error codes are returned. Also, tables IMSEG and EMSEG are
+filled and returned to the calling program so that an error log can be
+created there, if required.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+The function module provides a general interface for posting goods
+movements.
+Movements performed in the framework of subcontracting (e.g. goods
+receipt for vendor with reference to subcontract order item or
+subsequent adjustment of "material to be provided" items) are currently
+not supported.
+In addition, it is assumed that in a goods movement with reference to a
+reservation, the reservation has already been read. The data of the
+reservation is to be made available through IMSEG. As of Release 3.0D,
+it is also possible to only submit the reservation number and item. In
+this case, the field XRERE of structure IMSEG must be filled with 'X'.
+If a reversal with reference to a reservation is to be posted - and the
+XRERE indicator set -, the XSTOB field in the IMSEG structure must be
+filled with X. In this case, no value is submitted in the IMSEG-BWART
+field.
+As of Release 3.0D, it is possible to have the system suggest the
+quantity to be posted. This has been implemented for movements with
+reference to reservations, production orders, and purchase orders.
+Enter an 'X' in the field IMSEG-XMEVO. The field IMSEG-ERFMG must
+remain blank.
+The system uses either the SY-TCODE or the transaction code that has
+explicitly been provided in the import parameter CTCOD. You have to
+make sure that an entry for the transaction is contained in table T158.
+In addition, you have to maintain the transaction/valid movement type
+combination in table T158B.
+There is no dialog. That is, error handling has to be ensured by the
+caller. The function module has been designed so that new items can
+only be added at the end. They cannot be inserted at any other point,
+because then the correct allocation between IMSEG and EMSEG will be
+lost (via SY-TABIX). The error messages are returned to the caller via
+the structure EMKPF or EMSEG. The COMMIT occurs at the caller.
+The parameter XALLP controls that the material document can only be
+generated after all items have been posted. Parameter XALLR controls
+whether in the case of repeated calls all tables are to be initialized
+or only the new/corrected items are to be processed. If in the calling
+program, new items are inserted between existing items, this parameter
+must be set.
+There is also the following option: Items that caused an error in the
+first call can be omitted when repeating the call. For this purpose,
+the field XNIBU in table IMSEG must be set.
+The structure EMKPF and tables IMSEG and EMSEG are returned. The field
+IMSEG-BEAKZ indicates when processing of an item was successful.
+In the field EMSEG-YZEIL, the preliminary
+line number is contained in the material document. If the document is
+posted, the line number is contained in field EMSEG-MBLPO of the
+material document. The field EMKPF-SUBRC indicates where the program
+found the error.
+
+EMKPF-SUBRC        Ereror
+------------------------------------------------------------------------
+16              Initialization incorrect
+15              Header data incorrect
+11              Error when reading material master records per PREFETCH
+10              Error when reading material short texts per PREFETCH
+08              Allocation of IMSEG to EMSEG incorrect
+07              Error when correcting an item
+06              Error when creating an item
+05              No item generated
+04              It is only permitted to post all items; however, there
+                    is at least one incorrect item
+03              Error when posting the document
+02              Allocation of IMSEG to EMSEG incorrect
+01              Allocation of YMBUZ to XMSEG incorrect
+Please note that in EMKPF, the message ID, message number, etc. need not
+necessarily be set. It can also be the case that the system only
+indicates that an error has occurred. However, the relevant error
+message can be found in table EMSEG (with reference to the relevant
+line). For the following EMKPF-SUBRC's, the error messages are contained
+in table EMSEG: 07, 06, 05, 04.

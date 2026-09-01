@@ -1,0 +1,33 @@
+&FUNCTIONALITY&
+Determination of all documents for the time records. All relevant
+documents matching up to the variable key, the application, the
+condition table, and the validity period of the time records are
+determined from LIS table S111. This data is collected in a
+communication structure and made available for subsequent processing.
+In addition, all documents relating to the conditions are collected and
+checked for uniqueness to ensure that no double database accessing
+occurs during the reading of the document headers and items.
+&EXAMPLE&
+
+&HINTS&
+A separate category is used as communication structure.
+&FURTHER_SOURCES_OF_INF&
+This module is the basis for the subsequent, or retrospective,
+compilation of statistics for "subsequent settlement" in Purchasing.
+&FUNCTIONALITY&
+Ermitteln aller Belege zu den Timesätzen. Es werden aus der LIS-Tabelle
+S111 alle relevanten Belege ermittelt die zum Variablen-Schlüssel, der
+Applikation, der Konditionstabelle sowie mit dem Gültigkeitszeitraum
+der Timesätze vereinbar sind. Diese Daten werden in einer
+Kommunikationsstruktur gesammelt und für die spätere Verarbeitung
+bereitgestellt. Zusätzlich werden alle Belege zu den Konditionen
+gesammelt und auf ihre Eindeutigkeit geprüft, damit kein doppelter
+Datenbankzugriff beim Lesen der Belegköpfe und Positionen erfolgt.
+&EXAMPLE&
+
+&HINTS&
+Als Kommunikationsstruktur wird ein eigener Typ verwendet.
+&FURTHER_SOURCES_OF_INF&
+Dieser Baustein ist die Grundlage für den nachträglichen
+Statistikaufbaufür die nachträgliche Abrechnug im Einkauf.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

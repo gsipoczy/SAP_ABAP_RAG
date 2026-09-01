@@ -1,0 +1,8 @@
+&FUNCTIONALITY&
+This function module saves all sales activities that have been
+processed with function modules SDCAS_SALES_ACTIVITY_CREATE,
+SDCAS_SALES_ACTIVITY_CHANGE, and SDCAS_SALES_ACTIVITY_DELETE.
+&EXAMPLE&
+&HINTS&
+The commit must be carried out by the calling program.
+&FURTHER_SOURCES_OF_INF&

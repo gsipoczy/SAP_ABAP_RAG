@@ -1,0 +1,31 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein wird in den entsprechenden BAdIs innerhalb der
+Funktionsbausteine ME_FILL_KOMK_PO und ME_FILL_KOMP_PO gerufen. Er
+puffert die Bestelldaten wie Kopfdaten, Positionsdaten und Partnerdaten
+für die Preisfindung. Beim Verlassen der Bestellung (Funktionsbaustein
+MEPOBADI_CLOSE) werden die Daten wieder gelöscht.
+Innerhalb der Formroutine FRM_KONDI_WERT_141 wird zuerst dieser
+Funktionsbaustein aufgerufen, um die gepufferten Bestelldaten auszulesen
+und am Ende um die vom GTS (Global Trade Services) erhaltenen Daten
+wiederum zu puffern.
+&EXAMPLE&
+
+&HINTS&
+Folgende BAdI-Implementationen müssen aktiviert sein:
+BUFFER_PO_DATA_CLEAR, die das BAdI ME_PROCESS_PO implementiert und
+BUFFER_PO_DATA, die das BAdI ME_PO_PRICING implementiert.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein prüft, ob im Bereich Einkauf Konditionsarten mit
+Zugriffsfolge für Steuern existieren. Wenn dem so ist, kann die Suche
+nach Steuerkennzeichen erfolgreich sein; ansonsten kann kein
+Steuerkennzeichen ermittelt werden.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

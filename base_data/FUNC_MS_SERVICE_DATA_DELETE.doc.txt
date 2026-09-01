@@ -1,0 +1,22 @@
+&FUNCTIONALITY&
+Mit diesem Funktionsbaustein werden der Archivierung die Nummern der
+Leistungspakete, die in das Archiv geschrieben werden sollen,
+übergeben.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein löscht alle Daten eines Leistungsverzeichnisses
+physisch von der Datenbank. Das Datenbank-Commit muss extern gesetzt
+werden.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

@@ -1,0 +1,11 @@
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Das im lokalen Gedächtnis enthaltene Rechnungsprüfungsprotokoll wird in
+der Datenbank gespeichert.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

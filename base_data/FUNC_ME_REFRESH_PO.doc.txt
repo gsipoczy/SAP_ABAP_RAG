@@ -1,0 +1,54 @@
+Dieser Funktionsbaustein erzeugt einen Bestellkopf und speichert ihn im
+lokalen Gedächtnis.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein legt alle Daten für eine Bestellposition an.
+Im Einzelnen sind dies:
+Die Grunddaten der Position (EKPO)
+Die Einteilungen zur Position, die über die Tabelle XEKET übergeben
+werden.
+Die Kontierungen zur Position, die über die Tabelle XEKKN übergeben
+werden. Diese werden aber nur dann angelegt, wenn der Import-Parameter
+I_KNTTP mit einem gültigen Kontierungstyp gefüllt ist. Sollen mehrere
+Kontierungspositionen zu einer Bestellposition erfasst werden
+(Multikontierung), so müssen ausser den Einträgen in der Tabelle XEKKN
+auch die Import-Parameter I_VRTKZ und I_TWRKZ mit gültigen Werten
+gefüllt werden.
+Die Komponenten zu einer Lohnbearbeiterposition, wenn das Material eine
+Stückliste hat. Im Falle Lohnbearbeitung (I_PSTYP wird mit '3'
+übergeben) können nur solche Positionen erfasst werden, bei denen eine
+automatische Stücklistenauflösung möglich ist.
+Die Konditionen werden automatisch über die Konditionenfindung
+ermittelt. Es ist nur möglich, Positionen zu erfassen, für diese die
+automatische Findung möglich ist, ansonsten bricht der
+Funktionsbaustein mit einer Fehlermeldung ab.
+Bei Streckenpositionen (I_PSTYP wird mit '5' übergeben) muß entweder
+der Import-Parameter I_KUNNR (Kundennummer) oder I_ADRNR (Adressnummer)
+mitübergeben werden.
+Die Importdaten zu einer Bestellposition werden automatisch ermittelt,
+wenn es sich um einen EG-Importfall handelt.
+Die Daten werden dann in verschiedenen internen Tabellen gehalten. Der
+Funktionsbaustein kann mehrfach hintereinander aufgerufen werden -
+ebensoviele Positionen werden erzeugt.
+Erst wenn der Funktionsbausteine ME_POST_PO aufgerufen wird, werden die
+Daten auf die Datenbank geschrieben.
+
+Hinweis zum Positionstyp:
+Wird der Positionstyp (I_PSTYP) nicht explizit übergeben, so wird der
+Defaultwert '0' gesetzt. Dies entspricht einer 'Normalposition'. Soll
+der Positionstyp aber aus Bestellanforderungen übernommen werden, so
+muß er mit ' ' übergeben werden.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein verbucht alle Daten zu einer Bestellung, die
+vorher durch die Funktionsbausteine ME_CREATE_PO_HEADER und
+ME_CREATE_PO_ITEM angelegt wurden. Vor Aufruf des Funktionsbausteins
+ME_POST_PO befinden sich die Daten lediglich im lokalen Gedächtnis und
+werden erst beim Aufruf auf den jeweiligen Datenbanken verbucht. Der
+COMMIT WORK wird vom Funktionsbaustein gesetzt.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein setzt alle Tabellen, Strukturen, interne
+Tabellen und Hilfsfelder zurück, die beim Anlegen einer Bestellung
+benötigt werden.
+Dieser Funktionsbaustein muß immer vor Aufruf des Funktionsbausteins
+ME_CREATE_PO_HEADER aufgerufen werden. Nur so ist die Korrektheit der
+Daten gewährleistet.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

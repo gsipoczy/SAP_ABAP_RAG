@@ -1,0 +1,11 @@
+&FUNCTIONALITY&
+Function module MIGO_CUST_FIELDS_GENERATE is used to generate the field
+selection for the Enjoy Transaction MIGO in Inventory Management from
+the previous field selection table T156B. The new field selection is
+stored in table MIGO_CUST_FIELDS.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

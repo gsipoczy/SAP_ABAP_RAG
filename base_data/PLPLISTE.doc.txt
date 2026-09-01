@@ -1,0 +1,192 @@
+&FUNCTIONALITY&
+The function module contains the determination and the call of the
+program for printing a letter with the corresponding output media.
+Furthermore, the request data are stored in the ABAP memory. The called
+program can store an error code in the ABAP-Memory, which will then be
+processed.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+The function module contains the determination and the call of the
+program for printing a letter for the request data. Furthermore, the
+request data are stored in the ABAP memory. The called program can
+store an error code in the ABAP-Memory, which will then be processed.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+&FUNCTIONALITY&
+The function module contains the determination and the calls of the
+function modules
+1. to print a letter for the corresponding output media
+2. the output of the output media themselves
+The table KONV_TAB contains all information of the request data.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+The function module provides the value selection for the F4 function
+for the key selection in the item entry. The origin indicator is a
+prerequisite. By means of the origin indicator it is controlled which
+value help shall be built up.
+For the time being the following value helps are supported: material
+selection, item proposals SD and product proposal list CH (if
+implemented).
+If the key field contains a value, a generic selection takes place.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module composes the names of the master data file
+respectively the request file. The name is derived from the entries in
+the Customizing table for output files. The default names can be stored
+- dependent on the sales organization - in the Customizing table. If
+specific keywords have been marked with the * sign for the assignment
+of names, they will be replaced by the relevant values:
+VKORG,,=> ,,Sales organization
+VTWEG ,,=> ,,Distribution channel
+SPART,,=> ,,Division
+VERL,,,,=>,,Distributor
+MBEG,,=> ,,Report start
+MEND,,=> ,,Report end
+ALFNR,,=> ,,Request run number
+KEYRO ,,=> ,,Value of the field 'Control Request'
+DATE,,,,=> ,,System date
+TIME,,,,=> ,,System time
+USER,,,,=>,,System user name
+All other names are copied in their original versions in the assignment
+of names.
+
+&EXAMPLE&
+The entry (sales organization 0001 and distributor 4711)
+ANF*VKORG*VERLEGER*VERL*.ABS
+results in the file name
+ANF0001VERLEGER4711.ABS
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+The function module checks the entry of the key field while entering
+the items in the request data. The check depends on the origin
+indicator. The function module checks the validity of the material
+respectively item proposal from SD.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+The function module prepares the data for the value list while
+selecting the key in the item entry of the request data. The required
+data are made available through separate function modules (Customizing
+entries).
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+The function module checks whether the customer number or the
+distributor number can be used as sold-to party when the indirect
+orders are entered.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module controls the output of the request data. As a
+standard procedure the request data are enhanced by further information
+that is only relevant to the output and that is transferred to the
+relevant output function module.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used to determine the partner function of the
+customer as sold-to party. As default the customer is entered as sold-
+to party.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used to determine the partner function of the
+object in the order. As default the object is entered as ship-to party.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+&FUNCTIONALITY&
+This function module is used to determine the partner function of the
+distributor in the order. As a standard procedure the distributor is
+entered as bill-to party.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module determines the beginning and end of a period. The
+determination is based on the request date and the period group encoded
+in the period indicator.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module determines the previous periods. The determination
+is based on the request date as well as the period group and the number
+of periods that are encoded in the period indicator.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+&FUNCTIONALITY&
+The function module contains the determination and the call of the
+function module to print a letter as well as the call of the function
+module with the key '01' from the Customizing table for output media.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+The function module contains the determination and the call of the
+program to output the request data. The request data are also stored in
+the ABAP memory. The called program can store an error code in the ABAP
+memory that can then be processed.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

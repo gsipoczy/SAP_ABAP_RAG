@@ -1,0 +1,20 @@
+&FUNCTIONALITY&
+You can use this method to reverse a posted account maintenance
+document, thereby restoring the original difference on the GR/IR
+clearing account.
+You must transfer the key fields (fiscal year and document number) of
+the account maintenance document that you want to reverse, together with
+the posting date, as import parameters for the method. In addition, you
+can enter a reference document number and a document header text.
+The document number and document year of the reversal document are
+returned in export parameter CANCEL_DOCUMENT.
+<ZH>Return messages</>
+Messages are returned in the <ZK>Return</>  parameter. The return values
+and their meanings are described in the documentation for this
+parameter.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

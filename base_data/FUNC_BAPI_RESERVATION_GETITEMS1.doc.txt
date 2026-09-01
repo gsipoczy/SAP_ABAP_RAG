@@ -1,0 +1,252 @@
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2093</> and method <LS>CHANGE</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_RESERVATION_CHANGE</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2093</> and method <LS>CREATEFROMDATA1</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_RESERVATION_CREATE1</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function model was generated from the object  <LS>BUS2093</> and me
+<LS>DELETE</> for the BAPI call via ALE.
+The function module is executed in the outbound system. It first
+converts the data from the BAPI parameters into the IDoc format. Then
+the IDoc is sent to the receiving system. Here the BAPI is called.
+The interface of the function module contains all the outbound
+parameters from the BAPI function module and also the following
+parameters that are used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This inbound parameter contains the <DS:DE.CHNUM>channel number</>. It
+is used only for active serialization.
+<LS>RECEIVERS</>
+This parameter contains the names of the  <DS:DE.LOGSYS>logical systems
+</> (receivers), in which the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+The return table contains the names of the logical system in field
+LOGSYS, the object type in field OBJTYPE aund the object key in field
+OBJKEY. It indicates that an object of type <LS>IDOC</> has been
+created with this key in this logical system.
+<LS>APPLICATION_OBJECTS</>
+the input table contains the objects from applications that are
+processed, when the BAPI is called.
+In the LOGSYS field enter the name of the logical system from which the
+application objects originate. The application objects are identified
+by the object type OBJTYP and object key OBJKEY.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+You can use this method to list detailed data for a reservation.
+&EXAMPLE&
+
+&HINTS&
+The following authorization objects are checked for activity <NP>03</>
+(Display):
+<DS:UO.M_MRES_BWA>M_RES_BWA</>,,Reservations: Movement Type
+<DS:UO.M_MRES_WWA>M_MRES_WWA</>,,Reservations: Plant
+The header data for the reservation number passed on is returned in the
+table <LS>ReservationHeader</> and the item data in the table
+<LS>ReservationItems</>.
+Customers' own fields can be passed on via the <LS>ExtensionOut</>
+table.
+For customers' own fields to be adopted in this table, implement the
+<ZK>RESDATA_TO_EXTENSIONOUT</> method of the Business Add-In
+<DS:SIMG.MB_RES_BAPI_DETAIL1>Display Customer's Own Fields in
+Reservations</>.
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+The method can only be invoked successfully if all header and item data
+of the reservation could be processed without errors and the <ZK>Return
+</> table does not issue any error messages.
+No transaction control is implemented. Therefore, execute the <ZH>commit
+work</> yourself after the successful invocation of the method.
+&FUNCTIONALITY&
+Create reservation
+&EXAMPLE&
+You can use this method to create individual reservations.
+&HINTS&
+The following authorization objects are checked with the activity 01
+(create):
+ Reservations: movement type
+ Reservations: plant
+
+The system transfers the header data of the reservation in the
+ReservationHeader parameter. The following data is required for this:
+-,,movement type (Field MOVE_TYPE)
+-,,the account assignment object (for example, the cost center in the
+COSTCENTER field) if the movement type requires an account assignment
+
+The system transfers the item data in the ReservationItems table. The
+following data is required for this:
+-,,plant (PLANT field)
+-,,material number (MATERIAL field)
+-,,requirement date (REQ_DATE field) if no base date ( RES_DATE field)
+has been entered in the header data
+
+The reservation number is returned in the parameter 'Reservation'.
+
+Messages are returned in the parameter 'Return'. The documentation for
+this parameter contains the return values and their meanings.
+
+No transaction control is implemented. The caller therefore has to
+carry out the 'Commit Work' (for example, using the
+BAPI_TRANSACTION_COMMIT) after this method has been called up
+successfully; that is, if no errors were displayed in the parameter
+'Return'.
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+Delete reservation
+&EXAMPLE&
+You can use this method to delete individual reservations.
+&HINTS&
+The system checks the following authorization objects with the activity
+06 (delete):
+-,,M_MRES_BWA,,Reservations: movement type
+-,,M_MRES_WWA,,Reservations: plant
+The number of the reservation that is to be deleted must be transferred
+in the RESERVATION parameter
+The TESTRUN parameter can also be set. This has the effect that the
+system carries out all the checks but without creating the reservation.
+Messages are returned in the parameter 'Return'. The documentation for
+this parameter contains the return values and their meanings.
+
+&FURTHER_SOURCES_OF_INF&
+The method can only carry out its function if no error messages were
+created in the parameter 'Return'.
+No transaction control is implemented. The caller therefore has to
+carry out the 'Commit Work' (for example, using the
+BAPI_TRANSACTION_COMMIT) after this method has been called up
+successfully; that is, if no errors were displayed in the parameter
+'Return'.
+
+&FUNCTIONALITY&
+You can use this BAPI to change reservations.
+&EXAMPLE&
+With this method, you can change individual reservations or add further
+items to existing reservations.
+You can change the following fields in a reservation item:
+Storage Location (field <DS:DE.LGORT_D>STGE_LOC</>)
+Batch Number (field <DS:DE.CHARG_D>BATCH</>)
+Quantity in Unit of Entry (field <DS:DE.ERFMG>ENTRY_QNT</>)
+Requirements Date of Component (field <DS:DE.BDTER>REQ_DATE</>)
+Item Text (field <DS:DE.SGTXT>ITEM_TEXT</>)
+Goods Recipient (field <DS:DE.WEMPF>GR_RCPT</>)
+Unloading Point (field <DS:DE.ABLAD>UNLOAD_PT</>)
+Set the 'Quantity is fixed' indicator (field <DS:DE.FMENG>FIXED_QUAN</>)
+Set the 'Goods movement for reservation allowed' indicator (field
+<DS:DE.XWAOK>MOVEMENT</>)
+Set the 'Item is deleted' indicator (field <DS:DE.XLOEK>DELETE_IND</>)
+Set the 'Final issue for this reservation' indicator (field
+<DS:DE.KZEAR>WITHDRAWN</>)
+
+&HINTS&
+The system checks the following authorization objects with activity 02
+(change):
+Reservations: Movement type (<DS:UO.M_MRES_BWA>M_MRES_BWA</>)
+Reservations: Plant (<DS:UO.M_MRES_WWA>M_MRES_WWA</>)
+The reservation to be changed must be transferred to the <LS>Reservation
+</> parameter.
+It is not possible to make changes and insertions simultaneously during
+one method call. During a call, you can either only change or only
+insert items.
+The changed reservation items are transferred to parameter
+<LS>RESERVATIONITEMS_CHANGED</>, and to identify the item to be changed,
+you must specify the item number (field <DS:DE.RSPOS>RES_ITEM</>).
+You can identify the fields relevant for change by a marker, in other
+words, fields relevant for change are identified in parameter
+<LS>RESERVATIONITEMS_CHANGEDX</> by a corresponding marker in the
+corresponding component:
+'X'
+This value means that the relevant component has a value relevant for
+change in the parameter.
+' ' (No value)
+If there is no value, this means that the relevant component of the
+parameter does not need to be updated.
+The new reservation items to be added are transferred to parameter
+<LS>RESERVATIONITEMS_NEW</>. Note that; although it is not possible to
+make changes and insertions simultaneously, when you add new items you
+must still transfer both parameters <LS>RESERVATIONITEMS_CHANGED</> and
+<LS>RESERVATIONITEMS_CHANGEDX</>.
+The system returns messages in parameter <LS>RETURN</>. In the parameter
+documentation, you will find the return values and their meanings.
+No transaction control is implemented. After this method has been called
+successfully and without errors in the RETURN parameter, the caller must
+therefore execute the 'Commit Work' (with the help of
+BAPI_TRANSACTION_COMMIT) himself.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+You can use this method to list the reservations.
+You transfer the desired selection criteria (for example, requirement
+date/time, plant, goods recipient) in the import parameters. For more
+information, see the relevant parameter documentation.
+&EXAMPLE&
+
+&HINTS&
+The system checks the following authorization objects with the activity
+03 (Display):
+<DS:UO.M_MRES_BWA>M_RES_BWA</> Reservations: Movement type
+<DS:UO.M_MRES_WWA>M_MRES_WWA</> Reservations: Plant
+If errors occur during processing, they are returned in the RETURN
+table. This table also logs information messages.
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF

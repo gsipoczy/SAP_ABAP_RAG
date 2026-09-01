@@ -1,0 +1,22 @@
+&FUNCTIONALITY&
+Die beiden internen Tabellen XVBPA und YVBPA der Partnerbearbeitung
+werden aufgrund der Abladestelleneingabe aktualisiert.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Prüfe, ob ein Partner mit den angegebenen Attributen existiert. Wenn
+nicht, wird eine EXCEPTION ausgelöst bzw. alternativ durch den
+Funktionsbaustein eine Fehlermeldung ausgegeben, wenn die EXCEPTION
+nicht abonniert war.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

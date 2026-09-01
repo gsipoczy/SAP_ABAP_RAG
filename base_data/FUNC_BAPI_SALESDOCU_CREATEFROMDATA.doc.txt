@@ -1,0 +1,56 @@
+&FUNCTIONALITY&
+You can use this method to make a delivery confirmation in the SD
+scheduling agreement.
+&EXAMPLE&
+1. Generating delivery for a scheduling agreement item.
+2. Changing of a delivery item.
+3. Posting a goods issue for delivery.
+4. Deleting a delivery item or a delivery.
+&HINTS&
+1. Required information
+
+The order number must be entered in the structure SALESDOCUMENT.
+The structure DLVITEM must be filled for every order item. If the
+deletion indicator DELETEFLAG is not set, the structure DLVITEMDATA
+must also be filled for these items.
+2. Database Commit Control
+
+The BAPI does not execute a database commit. Therefore, the running
+application must initiate the commit so that changes to the database
+can be made. The BAPI BAPI_TRANSACTION_COMMIT is available for this.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+Using this method, you can create sales documents.
+Sales document type is checked with sales and distribtion document
+type.
+You must at least enter order header data (using the structure
+ORDER_HEADER_IN) and partner data (using the table ORDER_PARTNERS).
+Furthermore, you must enter the business object for which the sales
+document is to be created:
+               - BUS2030 for inquiries
+               - BUS2031 for quotations
+               - BUS2032 for sales orders
+Enter the item data in the table ORDER_ITEMS_IN. The item numbers can
+be assigned manually, by filling in the relevant fields, or
+automatically, according to Customizing, by leaving the relevant fields
+blank.
+In the case of configurable data, you must enter this in the
+ORDER_CFGS_REF, ORDER_CFGS_INST, ORDER_CFGS_PART_OF and
+ORDER_CFGS_VALUE tables.
+Credit card data can be transferred, using the BAPICARD structure, on
+the one hand, data for card identification, on the other, data for an
+authorization which has taken place in an external system.
+Once you have created the sales documents successfully, you will
+receive the document number (SALESDOCUMENT field) and detailed data for
+the partners involved will also be sent back (via the SOLD_TO_PARTY,
+SHIP_TO_PARTY and BILLING_PARTY). Any errors that may occur will be
+announced via the RETURN parameter. In order to make a statement
+regarding price and availability situation, you will receive detailed
+information in the ORDER_ITEMS_OUT table.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

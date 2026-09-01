@@ -1,0 +1,10 @@
+&FUNCTIONALITY&
+Anzeige der Stammdaten des Konditionsgewährers der nachträglichen
+Abrechnung.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

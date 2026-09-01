@@ -1,0 +1,10 @@
+&FUNCTIONALITY&
+Absprung aus der Massenänderung in die Änderung des Einkaufsinfosatzes.
+&EXAMPLE&
+
+&HINTS&
+Die dynamische Zuweisung des Namens des Funktionsbausteines erfolgt
+über die Transaktion MASSOBJ (Application Exit).
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

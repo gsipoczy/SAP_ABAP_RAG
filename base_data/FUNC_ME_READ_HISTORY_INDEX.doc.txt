@@ -1,0 +1,4 @@
+Der Funktionsbaustein liest die Bestellentwicklung anhand der
+Matchcode-ID 'D' zum Einkaufsbeleg und übergibt alle Bestellungen, bei
+denen die WE-Menge und RE-Menge ungleich sind.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

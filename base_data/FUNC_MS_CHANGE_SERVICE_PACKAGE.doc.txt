@@ -1,0 +1,19 @@
+Die Tabelle ESLL wird gepuffert gelesen.
+Es kann sowohl auf eine komplettes Paket (mit hpackno) als auch auf ein
+Teilpaket (mit packno) zugegriffen werden. Die Pufferung erfolgt immer
+auf  Ebene des kompletten Paketes.
+Optional kann eine Tabelle von Paketnummern mitgegeben werden, auf
+deren Ebene gepuffert wird.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Mit dem Funktionsbaustein werden Leistungsverzeichnisse logisch
+gelöscht, d.h. in allen Leistungszeilen wird das Löschkennzeichen
+gesetzt.
+Ferner ist es möglich, das Löschen wieder zurückzunehmen.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

@@ -1,0 +1,96 @@
+&FUNCTIONALITY&
+By creating a purchase order an external partner (for example Ariba
+network) can trigger a goods movement in the SAP system like S/4HANA or
+SAP HANA Cloud Platform.
+This goods movement will be stored by a material document in the
+suitable database.
+
+As reply on the goods movement a conformation will be sent to the
+external partner which send the material document request.
+This function module will be called in the AIF process which is
+responsible for the mapping and sending of the conformation to the
+external partner.
+
+The task of this function module is to receipt the generation of a
+material document. As response with material document number and the
+creation date is sent.
+Beside that the function module offers the possibility to do further
+mappings by calling an internal or external BADI.
+The internal BADI is reserved for extensions by SAP, the external BADI
+for extension by the customer.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+& FUNCTIONALITY
+By creating a purchase order an external partner (for example Ariba
+network) can trigger a goods movement in the SAP system like S/4HANA or
+SAP HANA Cloud Platform. This goods movement will be stored by a
+material document in the suitable database.
+As reply on the goods movement a conformation will be sent to the
+external partner.
+Furthermore a notification can be sent to relevant receivers dependent
+on the customizing done in the output management.
+This function module will be called in the AIF process which is
+responsible for the mapping and sending of the notification to the
+relevant receivers.
+The task of this function module is to determine certain material
+document dependent data from the database and to map the data in the
+corresponding fields of the notification.
+Beside that the function module offers the possibility to do further
+mappings by calling an internal or external BADI. The internal BADI is
+reserved for extensions by SAP, the external BADI for extension by the
+customer.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+By creating a purchase order an external partner (for example Ariba
+network) can trigger a goods movement in the SAP system like S/4HANA or
+SAP HANA Cloud Platform.
+This goods movement will be stored by a material document in the
+suitable database.
+The task of this function module is to create a new material document on
+the database dependent on data of the corresponding fields of the
+request.
+Beside that the function module offers the possibility to do further
+mappings by calling an internal or external BADI. The internal BADI is
+reserved for extensions by SAP, the external BADI for extension by the
+customer.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+By creating a purchase order an external partner (for example Ariba
+network) can trigger a goods movement in the SAP system like S/4HANA or
+SAP HANA Cloud Platform.
+This goods movement will be stored by a material document in the
+suitable database.
+
+The task of this function module is to create a new material document on
+the database dependent on data of the corresponding fields of the
+request. It is called as function module for the AIF Action
+MATDOCCREATEREQIN. This action is assigned to the AIF interface
+MMIM_MDREQ of the defined namespace.
+Create new action for dependent namespace:
+SAP Customizing Implementation Guide -> Cross-Application Components ->
+General Application Functions -> SAP Application Interface Framework ->
+Define Actions => Define Functions
+Assign this action to its interface:
+SAP Customizing Implementation Guide -> Cross-Application Components ->
+General Application Functions -> SAP Application Interface Framework ->
+Define Structure Mappings => Assign Action
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

@@ -1,0 +1,132 @@
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2014</> and method <LS>CHANGE</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_CONTRACT_CHANGE</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2014</> and method <LS>CREATE</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_CONTRACT_CREATE</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2014</> and method <LS>GETDETAIL</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_CONTRACT_GETDETAIL</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+BAPI for changing a purchase contract.
+&EXAMPLE&
+
+&HINTS&
+<ZH>Master conditions</>
+When creating outline agreements, you can specify only one <ZH>period</>
+per variable key. This means that just one period can be specified for
+the document header (i.e. condition table A019). The same applies to
+each item (i.e. condition table A016) and to each item/plant combination
+(i.e. condition table A068).
+You can use any periods. However they must not overlap for a variable
+key.
+When conditions are changed, new condition records are nevertheless
+written.
+Because <ZH>volume rebate conditions</> are not taken into account in
+outline agreements, they are not processed.
+No <ZH>subitems</> (e.g. inclusive/exclusive bonus quantities, display,
+etc.) are taken into account.
+The <ZH>control key for quality management in procurement</>
+(EKPO-SSQSS) and the <ZH>certificate category</> (EKPO-ZGTYP) are only
+taken into account to a certain extent. These two items of information
+are copied from the reference contract or material master, but cannot be
+changed; neither are any checks carried out for these two fields.
+The <ZH>revision level</> (EKPO-REVLV) cannot be changed because various
+quality management routines were not implemented.
+<ZH>Version management</> (Document Change Management) is not supported.
+<ZH>External services</> (planned or unplanned) are not supported.
+The creation or changing of <ZH>configurations</> is not supported.
+&FURTHER_SOURCES_OF_INF&
+When a purchase contract is changed (activity 02), the following
+authorization objects are checked:
+<DS:UO.M_RAHM_BSA>M_RAHM_BSA</> Document type in contract
+<DS:UO.M_RAHM_EKG>M_RAHM_EKG</> Purchasing group in contract
+<DS:UO.M_RAHM_EKO>M_RAHM_EKO</> Purchasing organization in contract
+<DS:UO.M_RAHM_WRK>M_RAHM_WRK</> Plant in contract

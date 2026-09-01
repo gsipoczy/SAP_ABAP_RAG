@@ -1,0 +1,8 @@
+Dieser Funktionsbaustein liest die Bestätigungen zu einer
+Bestellposition und merkt sich diese Daten für ein eventuelles Update
+im Funktionsbaustein ME_CONFIRMATION_UPDATE_GR.
+Die kumulierte Menge der wareneingangsrelevanten Bestätigungen (i.d.R.
+Lieferavise) wird zurückgegeben. Falls Lieferavis und Position als
+Import-Parameter übergeben wurden, wird die Menge aus diesem Lieferavis
+zurückgegeben.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

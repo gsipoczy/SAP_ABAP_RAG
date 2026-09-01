@@ -1,0 +1,98 @@
+&FUNCTIONALITY&
+Absprung aus der Massenänderung in die Änderung des Einkaufsinfosatzes.
+&EXAMPLE&
+
+&HINTS&
+Die dynamische Zuweisung des Namens des Funktionsbausteines erfolgt
+über die Transaktion MASSOBJ (Application Exit).
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Absprung aus der Massenänderung in die Änderung der Bestellung.
+&EXAMPLE&
+
+&HINTS&
+Die dynamische Zuweisung des Namens des Funktionsbausteines erfolgt
+über die Transaktion MASSOBJ (Application Exit).
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Absprung aus der Massenänderung in die Änderung der Bestellanforderung.
+&EXAMPLE&
+
+&HINTS&
+Die dynamische Zuweisung des Namens des Funktionsbausteines erfolgt
+über die Transaktion MASSOBJ (Application Exit).
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Absprung aus der Massenänderung in die Anzeige des Einkaufsinfosatzes.
+&EXAMPLE&
+
+&HINTS&
+Die dynamische Zuweisung des Namens des Funktionsbausteines erfolgt
+über die Transaktion MASSOBJ (Application Exit).
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Absprung aus der Massenänderung in die Anzeige der Bestellung.
+&EXAMPLE&
+
+&HINTS&
+Die dynamische Zuweisung des Namens des Funktionsbausteines erfolgt
+über die Transaktion MASSOBJ (Application Exit).
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Absprung aus der Massenänderung in die Anzeige der Bestellanforderung.
+&EXAMPLE&
+
+&HINTS&
+Die dynamische Zuweisung des Namens des Funktionsbausteines erfolgt
+über die Transaktion MASSOBJ (Application Exit).
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Zu der angegebenen Tabelle werden die selektierten Sätze in einer
+'Standard Table' mitgegeben. Der Baustein muß den Schlüssel zu diesen
+Sätzen ermitteln, entsprechende Texte als Beschreibung suchen und diese
+dann in einer (beliebigen) Struktur zurückgeben. Es können zur
+Beschreibung mehrere Felder genutzt werden; man sollte sich jedoch
+beschränken, um die Länge der resultierenden Zeilen in Grenzen zu
+halten.
+&EXAMPLE&
+Ein einfaches Beispiel aus dem Materialstamm ist in dem Baustein
+eingefügt.
+&HINTS&
+Die dynamische Zuweisung des Namens des Funktionsbausteines erfolgt
+über die Transaktion MASSOBJ (Application Exit).
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Dem Baustein wird eine Liste der Felder übergegeben, die zum Ändern in
+Frage kommen. Diese Liste besteht zunächst aus allen
+Nicht-Schlüsselfeldern der Tabelle. Die Liste kann eingeschränkt
+werden, indem die nicht gewünschten Einträge gelöscht werden.
+Falls der Verbuchungsbaustein aus einer ALE-Schnittstelle generiert
+wurde, werden Felder die in keinem ALE-Segment vorkommen, automatisch
+ausgeblendet.
+&EXAMPLE&
+
+&HINTS&
+Einschränkung der Felder der Tabellen EINA (Einkaufsinfosatz -
+allgemeine Daten) und EINE ( Einkaufsinfosatz -
+Einkaufsorganisationsdaten), welche für die Massenänderung zugelassen
+werden können.
+
+Die dynamische Zuweisung des Namens des Funktionsbausteines erfolgt
+über die Transaktion MASSOBJ (Application Exit).
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

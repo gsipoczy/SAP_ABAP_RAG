@@ -1,0 +1,22 @@
+&FUNCTIONALITY&
+The function module reads all documents (even documents that are not
+blocked) according to the input parameters. You can use this function
+module to perform certain actions in Credit Management. The action is
+provided as a code when you call the function module )for example,
+RELEASE to release blocked documents). You can view the list of
+available actions in the value range for domain RVKRD_TACTION.
+&EXAMPLE&
+
+&HINTS&
+The list of orders blocked for credit reasons is displayed if the input
+parameters  IT_RG_CMGST and IT_RG_GBSTK contain the following entries:
+IT_RG_CMGST:
+,,IT_RG_CMGST-SIGN = I
+,,IT_RG_CMGST-OPTION = EQ
+,,IT_RG_CMGST-LOW = B
+IT_RG_GBSTK:
+,,IT_RG_GBSTK-SIGN   = I
+,,IT_RG_GBSTK-OPTION = NE
+,,IT_RG_GBSTK-LOW =  C,,
+&FURTHER_SOURCES_OF_INF&
+

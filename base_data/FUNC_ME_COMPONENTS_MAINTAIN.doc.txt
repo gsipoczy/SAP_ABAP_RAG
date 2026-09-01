@@ -1,0 +1,4 @@
+Über diesen Funktionsbaustein wird ein Bild zur Pflege von Komponenten
+zur Lohnbearbeitungsbestellung oder -Bestellanforderung aufgerufen.
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

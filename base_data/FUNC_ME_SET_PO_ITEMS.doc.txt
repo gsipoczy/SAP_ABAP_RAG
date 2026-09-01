@@ -1,0 +1,36 @@
+&FUNCTIONALITY&
+Prüft, ob die Bestellposition erzeugt werden kann. Es wird noch nichts
+angelegt.
+
+&EXAMPLE&
+
+&HINTS&
+Es muß entweder genau ein Lieferant oder ein Lieferwerk eingegeben
+werden. Die Eingabe der Bestellart ist optional (Defaulwert: 'NB').
+Das Rücksetzen der internen Strukturen wird beim Lieferantenwechsel
+durchgeführt. Einkaufsorganisation und Buchungskreis werden nur beim
+Wechsel des empfangenden Werks neu ermittelt.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Prüft, ob Bestellkopf und -position erzeugt werden kann. Es wird noch
+nichts angelegt. Wenn der Parameter PI_PREPDBUPD (prepare data base
+update) gesetzt ist, werden die Positionen zwischengespeichert, und
+können anschließend durch Aufruf des Funktionsbausteins ME_POST_DOC auf
+die Datenbank geschrieben werden.
+Das Bezugsfeld des Parameters PI_PREPDBUPD (RM06E-OLDZL) hat keine
+semantische Bedeutung, es wurde nur gewählt, weil es die Domäne XFELD
+hat.
+&EXAMPLE&
+
+&HINTS&
+Es muß entweder genau ein Lieferant oder ein Lieferwerk eingegeben
+werden. Die Eingabe der Bestellart ist optional (Defaulwert: 'NB').
+Das Rücksetzen der internen Strukturen wird bei Lieferantenwechsel bzw.
+bei Wechsel des Parameters PI_PREPDBUPD von ' ' -> 'X' durchgeführt.
+Einkaufsorganisation und Buchungskreis werden nur bei Wechsel des
+empfangenden Werks neu ermittelt.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

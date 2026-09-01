@@ -1,0 +1,8 @@
+&FUNCTIONALITY&
+This function module changes the priority of close-by plants.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

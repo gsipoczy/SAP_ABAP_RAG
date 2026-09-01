@@ -1,0 +1,122 @@
+&FUNCTIONALITY&
+You can use this method to make a delivery confirmation in the SD
+scheduling agreement.
+&EXAMPLE&
+1. Generating delivery for a scheduling agreement item.
+2. Changing of a delivery item.
+3. Posting a goods issue for delivery.
+4. Deleting a delivery item or a delivery.
+&HINTS&
+1. Required information
+
+The order number must be entered in the structure SALESDOCUMENT.
+The structure DLVITEM must be filled for every order item. If the
+deletion indicator DELETEFLAG is not set, the structure DLVITEMDATA
+must also be filled for these items.
+2. Database Commit Control
+
+The BAPI does not execute a database commit. Therefore, the running
+application must initiate the commit so that changes to the database
+can be made. The BAPI BAPI_TRANSACTION_COMMIT is available for this.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+Using this method, you can create sales documents.
+Sales document type is checked with sales and distribtion document
+type.
+You must at least enter order header data (using the structure
+ORDER_HEADER_IN) and partner data (using the table ORDER_PARTNERS).
+Furthermore, you must enter the business object for which the sales
+document is to be created:
+               - BUS2030 for inquiries
+               - BUS2031 for quotations
+               - BUS2032 for sales orders
+Enter the item data in the table ORDER_ITEMS_IN. The item numbers can
+be assigned manually, by filling in the relevant fields, or
+automatically, according to Customizing, by leaving the relevant fields
+blank.
+In the case of configurable data, you must enter this in the
+ORDER_CFGS_REF, ORDER_CFGS_INST, ORDER_CFGS_PART_OF and
+ORDER_CFGS_VALUE tables.
+Credit card data can be transferred, using the BAPICARD structure, on
+the one hand, data for card identification, on the other, data for an
+authorization which has taken place in an external system.
+Once you have created the sales documents successfully, you will
+receive the document number (SALESDOCUMENT field) and detailed data for
+the partners involved will also be sent back (via the SOLD_TO_PARTY,
+SHIP_TO_PARTY and BILLING_PARTY). Any errors that may occur will be
+announced via the RETURN parameter. In order to make a statement
+regarding price and availability situation, you will receive detailed
+information in the ORDER_ITEMS_OUT table.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+You can use this method to create sales orders.
+You must enter at least the order header data (from the ORDER_HEADER_IN
+structure) as well as partner data (using the ORDER_PARTNERS table) as
+input parameters.
+Enter item data using the ORDER_ITEMS_IN table.  You can allocate the
+item number by filling in the relevant fields manually, or the system
+does it according to the settings in Customizing, whereby the relevant
+fields remain blank.
+If the item is configurable, you need to enter the configuration data
+in the ORDER_CFGS_REF, ORDER_CFGS_INST, ORDER_CFGS_PART_OF and
+ORDER_CFGS_VALUE tables.
+You can use the BAPICCARD structure to enter credit card data. You can
+either enter data for identifying the card or, you can enter data for
+an authorization in an external system.
+Once you have successfully created the sales order, the system displays
+the document number (in the SALESDOCUMENT field), as well as detailed
+data about the other parties (in the OLD_TO_PARTY,  SHIP_TO_PARTY and
+BILLING_PARTY structures). The RETURN parameter displays any errors
+that may have occured.
+The ORDER_ITEMS_OUT table contains more detailed information that will
+enable you to judge the pricing and availability of an item.
+&EXAMPLE&
+
+&HINTS&
+Mandatory entries:
+ORDER_HEADER_IN : DOC_TYPE     Sales document type
+                  SALES_ORG    Sales organization
+                  DISTR_CHAN   Distribution channel
+                  DIVISION     Division
+ORDER_PARTNERS..: PARTN_ROLE   Partner functions, SP sold-to party
+                  PARTN_NUMB   Customer number
+
+ORDER_ITEMS_IN..: MATERIAL     Material number
+                  REQ_QTY      Order quantity in sales unit
+
+Ship-to party
+
+
+If a ship-to party hasn't been entered, the ship-to party = sold-to
+party
+COMMIT control:Parameter WITHOUT_COMMIT
+If this switch is activated, the system does not process any Commit
+Work and the application that has called it up must trigger the Commit
+itself. To do this, useBAPI_TRANSACTION_COMMIT.
+German keywords:
+The following keywords must be entered in German, regardless of the
+logon language:
+DOC_TYPE       Sales document type, for example TA for standard order
+PARTN_ROLE     Partner function, for example, WE for ship-to party
+&FURTHER_SOURCES_OF_INF&
+You can see further notes in OSS. Note 93091 contains general
+information about the SD BAPIs.
+&FUNCTIONALITY&
+You can use this method to create sales orders.
+This BAPI is no longer maintained.
+Use one of the following BAPIs to create sales documents:
+- BAPI_INQUIRY_CREATEFROMDATA      Create sales inquiries
+- BAPI_QUOTATION_CREATEFROMDATA    Create quotation
+- BAPI_SALESORDER_CREATEFROMDAT1   Create sales orders
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

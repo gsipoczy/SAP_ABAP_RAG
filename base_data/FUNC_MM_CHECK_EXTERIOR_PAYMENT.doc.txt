@@ -1,0 +1,13 @@
+&FUNCTIONALITY&
+Prüft, ob es sich aus Sicht des Finanzwesens grundsätzlich um eine
+Auslandszahlung handelt.
+Nicht geprüft werden kann derzeit, ob das Abstimmkonto die Zusatzdaten
+zwingend erfodert. Ggf. tritt eine entsprechende Meldung der
+Rechungwesenschnittstelle auf.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

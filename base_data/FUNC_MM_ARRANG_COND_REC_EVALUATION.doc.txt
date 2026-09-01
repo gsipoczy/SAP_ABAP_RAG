@@ -1,0 +1,11 @@
+&FUNCTIONALITY&
+
+&EXAMPLE&
+
+&HINTS&
+Konvention für die Nachrichtennummer im Parameter
+'I_ERR_MSGNO_NO_BUKRS' ist: 1. Parameter Absprachenummer, 2. Parameter
+Funktionsbausteinname.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

@@ -1,0 +1,89 @@
+&FUNCTIONALITY&
+This function module generates a where-clause as an internal table
+(WHERE_CLAUSE) for a select with dynamic SQL using control tables.
+
+&EXAMPLE&
+An internal table (CONTROL_TABLE) is necessary for entries, in which
+values for requirements are set up for different combinations of the
+two key fields. For archiving material documents (Report RS07MARC), for
+example, the table is filled with combinations of transaction type and
+plant, and the earliest possible date for archiving is determined. The
+function module generates the following where-clauses for the
+requirements defined in this table.
+From the control table (CONTROL_TABLE) with the two entries
+  FIELD1       FIELD2        FIELD3
+   WA          0001       19980101
+   WE          0100       19980505
+the call returns
+    CALL FUNCTION 'DYNSQL_GENERATE_WHERE_CLAUSE'
+         EXPORTING
+              FIELDNAME_KEY_1           = 'VGART'
+              FIELDNAME_KEY_2           = 'WERKS'
+              FIELDNAME_VALUE           = 'BUDAT'
+              OPERATOR                  = '<='
+         TABLES
+              WHERE_CLAUSE              = DYN_SQL
+              CONTROL_TABLE             = ZTVARA
+              ALL_VALUES_KEY_1          = VGART_ALL
+              VALUES_KEY_1              = VGART_TEIL
+              ALL_VALUES_KEY_2          = WERKS_ALL
+              VALUES_KEY_2              = WERKS_TEIL
+         EXCEPTIONS
+              WHERE_CLAUSE_TOO_LARGE         = 1
+              WRONG_ENTRY_IN_CONTROL_TABLE   = 2
+              KEY_VALUES_INCONSISTENT        = 3
+              NO_ENTRY_FOUND                 = 4
+              FUNCTION_ALREADY_CALLED        = 5.
+the following where-clauses:
+   BUDAT <= '19980101' AND VGART = 'WA' AND WERKS = '0001' OR
+   BUDAT <= '19980505' AND VGART = 'WE' AND WERKS = '0100'
+Generic values for the key are an option to ensure that not every
+combination of key fields has to be transferred individually. The
+generic keys are processed using the four additional input tables. For
+each key the tables ALL_VALUES_KEY_1 or ALL_VALUES_KEY_2 and
+VALUES_KEY_1 or VALUES_KEY_2 are required.  In ALL_VALUES_KEY_1 all of
+the values available in the database for the first key and in
+VALUES_KEY_1 only the values, which should be taken into consideration
+in the where-clause, must be transferred. The generic values in the key
+are always overridden by unique entries. The control table with
+   FIELD1       FIELD2        FIELD3
+    W*          *          19980101
+    WA          010*       19980505
+and the remaining input tables with the entries
+   ALL_VALUES_KEY_1 : WA  , WE  , WI  , WL
+   VALUES_KEY_1     : WA  , WE  , WI
+   ALL_VALUES_KEY_2 : 0001, 0100, 0101, 0102
+   VALUES_KEY_2     : 0001, 0100, 0101, 0102
+give the following where-clause:
+BUDAT <= '19980101' AND ( VGART BETWEEN 'WE' AND 'WL'  OR
+                          VGART = 'WA' AND WERKS = '0001'   ) OR
+BUDAT <= '19980505' AND   VGART = 'WA' AND
+                          WERKS BETWEEN '0100' AND '0102'
+All requirements are restricted using BETWEEN, in order to keep the
+where-clause as compact as possible. If there are two different generic
+entries in a control table for a combination of key fields, then the
+entry which is more applicable to key 1 is taken. A control table with
+   FIELD1       FIELD2        FIELD3
+    *           0001       19980101
+    WA          *          19980505
+and the remaining input tables as above result in:
+BUDAT <= '19980101' AND VGART BETWEEN 'WE' AND 'WI' AND
+                     WERKS = '0001'                          OR
+BUDAT <= '19980505' AND VGART = 'WA'
+For the order type 'WA' and the sales organization '0001' the posting
+date '19980505' applies. In addition to the requirement included in the
+where-clause, two other fields can be transferred with the
+CONTROL_TABLE CONTROL_TABLE. Using the function module
+DYNSQL_READ_CONTROL_TABLE these values can then be picked out for each
+combination of the two key fields.
+&FUNCTIONALITY&
+Reads a preferred combination of key fields for the values, which can
+be seen in the internal control table (CONTROL_TABLE) when called up
+using DYNSQL_GENERATE_WHERE_CLAUSE. In the internal buffer for the
+control table, generic entries are broken down so that rapid access can
+be obtained.
+Only those combinations of key fields are allowed, for which there is
+an entry in the control table (CONTROL_TABLE) when called up using
+DYNSQL_GENERATE_WHERE_CLAUSE. Moreover the value of a key field must be
+contained in the table VALUES_KEY_1(2). If this is not the case, an
+exception is created.

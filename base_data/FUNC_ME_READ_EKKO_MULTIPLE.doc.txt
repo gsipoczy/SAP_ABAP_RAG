@@ -1,0 +1,28 @@
+&FUNCTIONALITY&
+Aufbau oder Ergänzung der Dynsel Struktur durch Parameter oder Ranges
+Tabellen (z.B. über Select Options). Die Definition des Parameters
+(Pi_Selpars) oder der Ranges Tabelle (Ti_Selpars) darf beliebig sein.
+Der Funktionsbaustein erkennt die Struktur und hängt diese geordnet an
+die Clauses und Tranges Tabellen des Rsds_Type an. Die Übergabe des
+Tabellennamens (Taname) und des Feldnamens (Finame) zum Parameter oder
+der Ranges Tabelle ist zwingend erforderlich. Die Ermittlung kann vom
+aufrufenden Pogramm z.B. dynamisch über den Funktionsbaustein
+'SELOPTS_AND_PARAMS' erfolgen. Dabei kann 'ME_MODIFY_DYNSEL' (z.B. in
+einem Loop) mehrmals hintereinander aufgerufen werden.
+Die Ergänzung der Dynsel Struktur macht nur Sinn, wenn der
+Funktionsbaustein 'ME_READ_EKKO_MULTIPLE' auch nach den entsprechenden
+Tabellen und Feldern selektiert oder die entsprechenden Daten explizit
+aus der Dynsel Struktur herausliest (siehe entsprechende
+Dokumentation). Sind in Dynsel identische Tabellenfelder zu Taname und
+Finame vorhanden, so werden diese zunächst von der Dynsel Struktur
+gelöscht, aber anschließend wieder in die Ranges Tabelle aufgenommen
+(so daß nichts verloren geht - aber alles geordnet bleibt). Doppelte
+Einträge werden herausgenommen.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+

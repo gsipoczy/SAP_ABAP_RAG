@@ -1,0 +1,15 @@
+This function module gives you the components to be provided to the
+subcontractor for one or more subcontracting items.
+
+As input, you must supply function module with a document number. In
+addition, you can supply an item number. If no item number is
+specified, all SC items of the purchase order are recorded.
+
+As output, you get a table with the fields MATNR, WERKS, LGORT, ERMNG,
+ERFME, LIFNR, containing the required component materials with
+the total quantities.
+
+If a goods receipt has already been posted for part of the purchase
+order, the component quantities contained are no longer suggested.
+Test Carsten
+DE-EN-LANG-SWITCH-NO-TRANSLATION

@@ -1,0 +1,25 @@
+&FUNCTIONALITY&
+This function module extracts multiple account assignment (MAA)
+information based on purchase order (PO) history. It extracts amounts
+used at account assignment level both for materials and services. It
+extracts both goods-receipt postings and service-entry-sheet postings.
+&EXAMPLE&
+Service PO 4510029089 item 10 has 2 service lines.
+<ZH>Service line 1 </>quantity 10 (net value = 100)
+The net value distribution is:
+Cost center 1000 = 40% (net value = 40)
+Cost center 1002 = 60% (net value = 60)
+A service entry sheet is created for this PO and a goods receipt posting
+is made for quantity 5 (net value = 50)
+Now the net value distribution is:
+Cost center 1000 = 20% (net value = 20)
+Cost center 1002 = 30% (net value = 30)
+This function module returns net values at account assignment level (MAA
+data)
+Cost center 1000 - net value = 20
+Cost center 1002 - net value = 30
+The same applies for the material line.
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

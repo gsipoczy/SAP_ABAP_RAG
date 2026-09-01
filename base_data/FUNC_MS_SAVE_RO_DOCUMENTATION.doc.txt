@@ -1,0 +1,12 @@
+&FUNCTIONALITY&
+Der Funktionsbaustein MS_SAVE_RO_DOCUMENTATION ruft die Verbuchung der
+Abrufdokumentation bei ungeplant erfassten Leistungen auf. Grundlage für
+die Fortschreibung der Abrufdokumentation sind die ungeplant erfassten
+Werte pro Kontrakt (Tabellen XESUC, YESUC).
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

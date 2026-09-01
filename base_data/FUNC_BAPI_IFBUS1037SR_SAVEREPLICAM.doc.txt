@@ -1,0 +1,4 @@
+&FUNCTIONALITY&
+The function module saves the objects that were replicated using the
+methods <ZH>Replicate</> or <ZH>ReplicateChanged</>.
+For Release 4.5A, there will be no implementation.

@@ -1,0 +1,55 @@
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+The function module <ZH>MIGO_GR_CREATE </>is used to call up the
+<ZH>MIGO</> transaction.
+MIGO is a one-screen transaction that selects the action to be carried
+out via a list box. The function module has to be given more information
+on how the MIGO transaction is to be started.
+Description of parameters:
+<ZH>I_ACTION</>: Action. Possible actions are: A01 = goods receipt, A02
+= return delivery, A03 = reversal, A04 = display, A05 = release blocked
+stock.
+<ZH>I_REFDOC</>: Reference document. R01 = purchase order, R02 =
+material, 03 = delivery note, R04 = inbound delivery, R05 = outbound
+delivery, R06 = transportation, R07 = transport ID code.
+<ZH>I_NOTREE:</> If this is set, MIGO is started without a tree, even if
+the user has set a tree as a default. This is re-generated for the first
+action that requires a tree.
+<ZH>I_NO_AUTH_CHECK</>: The function module checks the TCODE
+authorization for MIGO or the alternative transaction. You can stop the
+system from doing this with this flag.
+<ZH>I_SKIP_FIRST_SCREEN</>: Determines whether the initial screen is
+visible in case the function module has to divert to one of the old
+transactions when calling up this function.
+<ZH>I_DEADEND</>: When this parameter is set, the list boxes and the
+input field for the document numbers are not ready for input. You can
+only work with the current document. This is only advisable in the case
+of "Display material document".
+<ZH>I_OKCODE</>: The first OK code for MIGO. The default OK_GO is the
+ENTER button.
+<ZH>I_EBELN, I_EBELP</>: PO data for I_REFDOC = R01.
+<ZH>I_MBLNR, I_MJAHR</>: Material document data for I_REFDOC = R02.
+At present, MIGO can only work with the transaction/event type GR. For
+R02 with a document of a different type, the old transaction is called
+up after I_MBLNR and I_MJAHR have been put in the SET/GET parameters.
+&EXAMPLE&
+Displaying a material document
+call function 'MIGO_GR_CREATE'
+  exporting
+    i_mblnr = ....
+    i_mjahr = ....
+
+Calling up MIGO with prepared GR for PO, but not yet started
+call function 'MIGO_GR_CREATE'
+  exporting
+    i_action = 'A01'
+    i_refdoc = 'R01'
+    i_skip_first_screen = ''
+    i_ebeln = ...
+    i_ebelp = ...
+
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

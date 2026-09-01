@@ -1,0 +1,82 @@
+&FUNCTIONALITY&
+Die Konditionen zur gegebenen Rechnungsposition werden ermittelt. Zu
+beachten ist, daﬂ die Positionsnummern der Konditionen in Tabelle
+PRCD_ELEMENTS unterschiedlich abgelegt werden.
+So wird bei der Preisfindung zum Wareneingangs-Datums die
+Einkaufsbeleg-Positionsnummer angegeben, ansonsten die
+Materialbeleg-Positionsnummer.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Die Konditionen zur gegebenen Rechnungsposition werden ermittelt. Zu
+beachten ist, daﬂ die Positionsnummern der Konditionen in Tabelle KONV
+unterschiedlich abgelegt werden.
+So wird bei der Preisfindung zum Wareneingangs-Datums die
+Einkaufsbeleg-Positionsnummer angegeben, ansonsten die
+Materialbeleg-Positionsnummer.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Die Konditionen zur gegebenen Rechnungsposition werden ermittelt. Zu
+beachten ist, daﬂ die Positionsnummern der Konditionen in Tabelle
+PRCD_ELEMENTS unterschiedlich abgelegt werden.
+So wird bei der Preisfindung zum Wareneingangs-Datums die
+Einkaufsbeleg-Positionsnummer angegeben, ansonsten die
+Materialbeleg-Positionsnummer.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Die Konditionen zur gegebenen Rechnungsposition werden ermittelt. Zu
+beachten ist, daﬂ die Positionsnummern der Konditionen in Tabelle
+PRCD_ELEMENTS unterschiedlich abgelegt werden.
+So wird bei der Preisfindung zum Wareneingangs-Datums die
+Einkaufsbeleg-Positionsnummer angegeben, ansonsten die
+Materialbeleg-Positionsnummer.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+ME_READ_COND_FOR_INVOICE liest die Konditionen einer Rechnung mit der
+angegebenen Position. Diese Position muﬂ schon in der Datenbank
+gespeichert sein.
+Diese Funktion entstand aus ME_CHANGE_COND_FOR_INVOICE.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Die Konditionen zur gegebenen Rechnungsposition werden ermittelt. Zu
+beachten ist, daﬂ die Positionsnummern der Konditionen in Tabelle
+PRCD_ELEMENTS unterschiedlich abgelegt werden.
+So wird bei Preisfindung zum Wareneingangs-Datums die Einkaufsbeleg-
+Positionsnummer angegeben, sonst die Materialbeleg-Positionsnummer.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

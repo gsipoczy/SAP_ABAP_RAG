@@ -1,0 +1,3 @@
+Die Tabelle ESKl wird gepuffert gelesen. Optional kann eine Tabelle von
+Paketnummern mitgegeben werden, auf deren Ebene gepuffert wird.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

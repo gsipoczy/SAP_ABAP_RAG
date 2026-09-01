@@ -1,0 +1,39 @@
+&FUNCTIONALITY&
+This function module determines an update date for a LIS structure
+provided that the update data day (SPTAG), month (SPMON), week (SPWOC),
+posting period (SPBUC) and fiscal year variant (PERIV) corresponding to
+the period category are known.
+This is thus exactly the reverse function to sub-program
+PERIDODE_ERMITTELN in report RMCS1000, which is executed during the
+updating of a key figure.
+It is thus possible, for example, to update key figures in such a way
+that they are assigned to an already known dataset (characteristics).
+The earliest valid date is determined.
+&FUNCTIONALITY&
+LIS table S015 has a different data retention level (key fields) than
+the operative table S074 provided for the determination of business
+volumes.
+In order that the updating of income also works properly for LIS table
+S015, the rebate income must be apportioned at the finest level during
+compilation of the communication structure 'MCKONA' for LIS updating
+(function module 'ME_STATISTICS_BONUS_INCOME', function group 'EINS').
+This also applies to the updating of the dissolved provisions.
+When you work with a reference purchasing organization, the rebate
+arrangement is created for the reference purchasing organization with
+which the price determination process is carried out. The updating of
+the business volumes in LIS table S015 is carried out with the
+"original" purchasing organization from the purchasing document
+however.
+For this reason, it is necessary for the income and the dissolved
+provisions to be redistributed from the level "plant" to the level
+"material group", "purchasing organization", "purchasing group". The
+apportionment is carried out by share in business volume according to
+the condition basis that has accumulated in S015.
+This module imports the statistics records for the condition record and
+plant.
+&FURTHER_SOURCES_OF_INF&
+You will find general information on the subject of "subsequent
+settlement" in the online documentation, in the documentation for
+reports RWMBON01, RWMBON02, RWMBON03, etc., and in the more detailed
+manual "Subsequent Settlement with Respect to Conditions', order no.
+5001 2920.

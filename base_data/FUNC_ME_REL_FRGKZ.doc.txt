@@ -1,0 +1,91 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein löst für alle Banfpositionen, für die eine
+Freigabe mit einem workflowrelevantem Freigabecode erforderlich ist,
+das Ereignis 'Create' des Objekttyps 'EBAN' aus.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Dieser Funktionsbaustein löst für alle Banfpositionen, für die eine
+Freigabe mit einem workflowrelevantem Freigabecode erforderlich ist,
+das Ereignis 'Create' des Objekttyps 'EBAN' aus.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Dieser Funktionsbaustein löst für eine Bestellanforderung, die der
+Gesamtfreigabe unterliegt und für welche die Freigabe mit einem
+workflowrelevanten Freigabecode erforderlich ist, ein Ereignis 'Create'
+des Objekttyps 'EBAN' aus
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein prüft, ob für den übergebenen Freigabecode die
+Rücknahme der Freigabe durchgeführt werden kann. Wenn dies der Fall
+ist, wird die Freigabe zurückgesetzt. Falls gewünscht, wird ein
+Dialogfenster gesendet, was den daraus resultierenden Freigabezustand
+anzeigt.
+Anderenfalls werden entsprechende Meldungen gesendet.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein prüft, ob für den übergebenen Freigabecode die
+Freigabe durchgeführt werden kann. Wenn dies der Fall ist, wird die
+Freigabe gesetzt und, falls gewünscht, ein Dialogfenster gesendet, was
+den daraus resultierenden Freigabezustand anzeigt.
+Anderenfalls werden entsprechende Meldungen gesendet.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Ist das Kennzeichen SINGLE gesetzt, so wird der Baustein aus der
+CL20/CL21 heraus aufgerufen. In der Tabelle OTAB steht genau die
+Strategie vom Einstiegsbild der Transaktion. Es wird auf Existenz der
+Strategie geprüft und die Bezeichnung der Sprache LANGUAGE
+zurückgeliefert.
+Ist SINGLE nicht gesetzt, so werden nur die Bezeichnungen der
+Strategien der Tabelle OTAB gelesen.
+
+Parameter: LANGUAGE        : Sprachenschlüssel Default SYST-LANGU
+(Export)
+           LOCK            : Kennzeichen: X = Lieferant sperren
+
+           SINGLE          : X = ein Lieferant von CL20/CL21 übergeben
+                             ' ' Tabelle gefüllt.
+
+           CALLED_FROM     : 1 Baustein wird von DVS gerufen (Default)
+                             2 Aufruf aus Klassifizierung
+
+Parameter: MESSAGE_TYPE    : Nachrichtentyp: E=Error       W=Warning
+(Import)                                     I=Information S=Sucess
+
+
+           FAULT_TEXT      : Nachrichtentext
+
+           NO_AUTH         : Keine Berechtigung für die Tabellenpflege
+
+
+Tables   : OTAB            : Tabelle mit den Objekten aus der
+                             Klassifizierung.
+
+
+Ausnahmen: FOREIGN_LOCK    : Satz von anderem Benutzer bereits gesperrt
+
+           SYSTEM_FAILURE  : Allgemeiner Sperrfehler
+
+           OBJECT_NOT_FOUND: Strategie nicht vorhanden
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein ermittelt, ob das Freigabeverfahren für das
+angegebene Objekt aktiv ist.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein ermittelt zu einem Freigabezustand das
+jeweilige Freigabekennzeichen. Weiterhin wird bei vollständiger
+Freigabe das Kennzeichen 'Freigaberelevant' zurückgesetzt.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

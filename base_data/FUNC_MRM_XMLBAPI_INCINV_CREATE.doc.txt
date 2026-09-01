@@ -1,0 +1,50 @@
+&FUNCTIONALITY&
+You can use this method to display complaints data for a reduced
+incoming invoice.
+For automatically reduced invoices, only the invoice header is displayed
+with the reduction amount at header level. For reduced invoice items,
+the invoice header and the reduced items are displayed.
+The data displayed is the same as the data of a complaints letter in
+logistics invoice verification.
+&EXAMPLE&
+
+&HINTS&
+The following authorization object is checked for all reduced invoice
+items with activity <ZK>03</>:
+
+<DS:UO.M_RECH_WRK>M_RECH_WRK</> Plant authorization for entering
+incoming invoices
+
+<DS:UO.M_RECH_BUK>M_RECH_BUK</> Company Code authorization for entering
+incoming invoices
+
+
+In Customizing for Logistics Invoice Verification, message types REKL
+and REK6 are defined for automatic printing of complaints letters and
+sending of IDocs in case of an invoice reduction. BAPI COMPLAIN can be
+called for any reduced invoice, whether or not a message record of
+message type REKL or REK6 exists for it. BAPI COMPLAIN does not change
+the status of the message record. The message record is only updated by
+the <ZK>Output Messages</> function in Logistics Invoice Verification
+(transaction MR90) - for example, set to <ZK>Processed Successfully</>.
+Input parameters
+The key fields of the incoming invoice (InvoiceDocNumber and FiscalYear)
+must be transferred to the method as import parameters.
+Output parameters
+The header data of the incoming invoice is returned in structure
+Headerdata.
+The Addressdata structure contains the address data and tax number(s) of
+the supplier.
+The data for individual reduced invoice items is exported to table
+Itemdata.  The Taxdata table contains the tax information for the
+invoice reduction.
+Return messages
+INCLUDE BAPI_RET OBJECT DOKU ID TX LANGUAGE EN
+&FURTHER_SOURCES_OF_INF&
+This method can only perform its function if no error messages are
+generated in table Return. This is the case if both the header data and
+all the reduced items can be processed correctly.
+For more information, see the parameter documentation.
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION

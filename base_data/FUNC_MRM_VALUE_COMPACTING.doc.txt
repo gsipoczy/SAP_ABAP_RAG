@@ -1,0 +1,51 @@
+&FUNCTIONALITY&
+The invoice (I_BELNR, I_GJAHR) is deleted.
+All data that was created during invoice verification is deleted. The
+following records are deleted:
+relevant record in RBKP
+relevant record in RBKPB
+relevant records in RBSELBEST/FRBR/LIFS/WERK
+relevant records in RBVD
+relevant records in RBVDMAT
+relevant records in RBDRSEG
+If the parameter I_LOCK is set, the invoice is protected with a logical
+block during processing. If the invoice is blocked by another user, the
+exception INVOICE_LOCKED is raised.
+&FUNCTIONALITY&
+The selection criteria of an invoice are changed.
+The database tables RBSELBEST/FRBR/LIFS/WERK and (if parameter
+I_RBKPB_UPDATE is set) RBKPB are filled. Only one invoice document is
+processed. Therefore the fields BELNR and GJAHR in the tables
+T_SELBEST/FRBR/LIFS/WERK must equal the parameters I_BELNR and I_GJAHR.
+Otherwise, processing is cancelled and an error message is displayed.
+If the parameter I_RBKPB_UPDATE is set, the delivery date delimitation
+(I_LFDATABLI, I_LFDATBISLI, I_LFDATABRT, I_LFDATBISRT) and the global
+assignment indicators (I_KZZUORDLI, I_KZZUORDRT) are written to the
+relevant record in table RBKPB. If the record in RBKPB has already been
+read when the call is performed, the date delimitation should be
+maintained there to avoid performance problems and data inconsistency.
+If the relevant record does not exist in RBKPB, the exception
+INVOICE_NOT_FOUND is raised.
+If the parameter I_LOCK is set, the invoice and the selection criteria
+are protected with logical blocks before the creation and then released.
+If the invoice is already locked by another user, the exception
+INVOICE_LOCKED is raised.
+&FUNCTIONALITY&
+This function module aggregates item data. In order to be able to
+display and process item data in an aggregated form for subsequent error
+handling, the aggregation is performed for incorrect invoices only.
+In technical terms, two aggregation levels are provided:
+On the one hand, an aggregation is performed for the following
+combination: Purchasing document, account assignment, fiscal year and
+number of the material document, delivery note number, plant number.
+On the other hand, an aggregation per material number is performed.
+A distinction is made between the various input tax codes. The
+calculation of the input tax amounts is based on the total values.
+Depending on I_XRBVD and I_XRBVDMAT, the tables T_RBVD and T_RBVDMAT are
+calculated from the data of T_DRSEG.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

@@ -1,0 +1,94 @@
+&FUNCTIONALITY&
+Eingabe:  IUNAME      : Benutzername (optional)
+                  IOBJECT_TYP : verwendetes Objekt (siehe Tabelle
+TOJTB)
+                        z.B. 'BUS2091' für ServiceEntrySheet
+                  IOBJECT_ID  : Id des gerade verwendeten Objektes
+                        z.B. '1000000206' : LBLNI für Erfassungsblatt
+                 ISAVE       : Flag, ob Daten auf die Datenbank
+geschrieben
+                        werden sollen (default BLANK -> nicht
+speichern)
+                        (optional)
+
+Fügt das Objekt in die interne Tabelle mit ein. Ist es schon
+vorhanden wird es überschrieben mit aktuellem Zeitstempel,
+sonst wird es vorne angehängt. Es gibt beim Anhängen keine Obergrenze.
+Ist ISAVE = X werden die Daten mit MODIFY in die DB-Tabelle ESRUO ge-
+schrieben.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Eingabe:  IUNAME   : Benutzername (optional)
+                  IACTION  : betroffene Action (optional)
+                          (CHAR30)   z.B. 'ME21' (Transaktion) oder
+                          '0200' (Dynpro)
+                  IELEMENT : Element, daß auf-/abgeblendet wird
+(optional)
+                           (CHAR50)   z.B. 'Langtext'
+                  IACTIVE  : Wert der Einstellung der Action (optional)
+                           (CHAR50)
+                  ISAVE    : Flag, ob Daten auf die Datenbank
+geschrieben
+                     werden sollen (default BLANK -> nicht speichern)
+                     (optional)
+                  IESDUS   : Tabelle mit aktuellen
+Benutzereinstellungen in
+                     der Form Action / Element / Active, die angehängt
+                     werden sollen (optional)
+
+Wenn eine der Eingaben IACTION, IELEMENT oder IACTIVE gefüllt sind,
+wird genau dieser Eintrag in die interne Tabelle eingefügt.
+Sind die Eingaben leer, so werden alle Einträge in der Tabelle IESDUS
+in die interne Tabelle eingetragen.
+Ist es schon vorhanden wird es überschrieben, sonst wird angehängt.
+Ist ISAVE = X werden die Daten mit MODIFY in die DB-Tabelle ESDUS ge-
+schrieben.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Eingabe:  IUNAME   : Benutzername (optional)
+                  IACTION  : betroffene Action (optional)
+                          (CHAR30)   z.B. 'ME21' (Transaktion) oder
+                          '0200' (Dynpro)
+                  IELEMENT : Element, daß auf-/abgeblendet wird
+(optional)
+                           (CHAR50)   z.B. 'Langtext'
+                  IACTIVE  : Wert der Einstellung der Action (optional)
+                           (CHAR50)
+                  ISAVE    : Flag, ob Daten auf die Datenbank
+geschrieben
+                     werden sollen (default BLANK -> nicht speichern)
+                     (optional)
+                  IESDUS   : Tabelle mit aktuellen
+Benutzereinstellungen in
+                     der Form Action / Element / Active, die angehängt
+                     werden sollen (optional)
+
+Wenn eine der Eingaben IACTION, IELEMENT oder IACTIVE gefüllt sind,
+wird genau dieser Eintrag in die interne Tabelle eingefügt.
+Sind die Eingaben leer, so werden alle Einträge in der Tabelle IESDUS
+in die interne Tabelle eingetragen.
+Ist es schon vorhanden wird es überschrieben, sonst wird angehängt.
+Ist ISAVE = X werden die Daten mit MODIFY in die DB-Tabelle ESDUS ge-
+schrieben.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

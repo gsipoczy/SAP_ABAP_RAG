@@ -1,0 +1,54 @@
+&FUNCTIONALITY&
+Funktionsbaustein zur Ermittlung der Abladestelle zu einem Debitor.
+Es werden die Abladestellen zum übergebenen Debitor gelesen. Sollte es
+mehr als eine Abladestelle geben, so wird die erste Abladestelle (laut
+Datenbestand) als Default markiert und die Liste aller verfügbaren
+Abladestellen alphabetisch zur Auswahl angeboten.
+Sollte nur eine Abladestelle verfügbar sein oder der Parameter
+FIF_NO_DIALOG = 'X' gesetzt sein oder der Aufruf im BATCH erfolgen, so
+wird die erste Abladestelle (laut Datenbestand) ausgewählt.
+Die gewählte Abladestelle wird zurückgeliefert.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+This function module displays the address of a partner you entered, so
+that you can make changes.  When you have changed the address, the
+system updates the internal data retention.
+The parameter FIF_FIRST_MAINTAINING is not currently in use.
+If you fill parameter FIS_VBUV by making an entry in the incompletion
+log, the address screen appears in full screen mode. If possible, the
+system places the cursor in the data field named in the entry.
+FIF_DISPLAY_ONLY = 'X' specifies that the address cannot be changed
+(display mode).
+FEF_ADDRESS_CHANGED tells you whether the partner's address has been
+changed.
+FEF_CANCEL indicates that the user terminated the dialog.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+Funktionsbaustein zur Ermittlung der Adresse eines Partners.
+Geliefert wird die Adresse zum angegebenen Partner, die im Beleg
+derzeitig gültig ist (Belegadresse). Dabei beinhaltet
+FES_OLD_ADDRESS_FORMAT die Adresse im bis 4.6A verwendeten Format der
+Tabelle SADR (Struktur VBADR). FES_ADDRESS_TYPE gibt den Adresstyp an,
+in abhängigkeit dessen die Parameter FES_ADDR1, FES_ADDR2 sowie
+FES_ADDR3 die jeweilige, zum Partner gehörende, Adresse liefern.
+&EXAMPLE&
+
+&HINTS&
+Die Adresse zu einem, auf der Partnerart "PE" (Personal) basierenden,
+Partner kann dabei nur im alten Adressformat (FES_OLD_ADDRESS_FORMAT)
+geliefert werden, da die HR Unterstützung für die ZAV (Zentrale
+Adressverwaltung) noch nicht eingeführt wurde.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

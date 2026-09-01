@@ -1,0 +1,9 @@
+&FUNCTIONALITY&
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+This function module is enabled for RFC due to technical reasons.
+It is not intended to be used from outside the application server!

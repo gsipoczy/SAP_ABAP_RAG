@@ -1,0 +1,189 @@
+&FUNCTIONALITY&
+This method can be used to change purchase requisitions.
+&EXAMPLE&
+
+&HINTS&
+The following authorization objects are checked with activity 02
+(change):
+
+<DS:UO.M_BANF_BSA>M_BANF_BSA</>,,Document type in requisition
+<DS:UO.M_BANF_EKG>M_BANF_EKG</>,,Purchasing group in requisition
+<DS:UO.M_BANF_EKO>M_BANF_EKO</>,,Purch. organization in requisition
+<DS:UO.M_BANF_WRK>M_BANF_WRK</>,,Plant in requisition
+<ZH>Transfer</>
+You must pass on the purchase requisition number and the necessary
+tables for the items that are to be changed. For more information, refer
+to the documentation on the table parameters.
+To fill the table parameters correctly with the old status, use the
+method <LS>GetDetail</> of the business object <LS>PurchaseRequisition
+</>before invoking this method.
+<ZH>Return messages</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This method enables you to create purchase requisitions.
+&EXAMPLE&
+
+&HINTS&
+The following authorization objects are checked with activity 01
+(Create):
+
+<DS:UO.M_BANF_BSA>M_BANF_BSA</>,,Document type in requisition
+<DS:UO.M_BANF_EKG>M_BANF_EKG</>,,Purchasing group in requisition
+<DS:UO.M_BANF_EKO>M_BANF_EKO</>,,Purchasing organization in requisition
+<DS:UO.M_BANF_WRK>M_BANF_WRK</>,,Plant in requisition
+The data of the purchase requisition items is passed on to the table
+<LS>RequisitionItems</>. The data that has to be passed on is listed in
+the parameter documentation.
+<ZH>Account assignments</>
+If the account assignment category is set in the item, account
+assignment data can be passed on for each purchase requisition item in
+the transfer table <LS>RequirementAccountAs</>. The account assignment
+category determines which costing-relevant objects must be passed on in
+the account assignment data. If the account assignment is K, for
+example, a cost center must be passed on.
+The account assignment can also be a multiple account assignment, i.e.
+the account assignment table can contain more than one entry. In this
+case, the following indicators must be set in the item data:
+
+Distribution indicator (DISTRIB)
+"Partial" invoice indicator (PART_INV)
+If the account assignment category is not set, a stock item is
+generated.
+<ZH>Texts</>
+Texts for purchase requisition item can be passed on in the table
+<LB>RequirementItemText</>.
+<ZH>Limits</>
+Limit data pertaining to the requisition item can be passed on in the
+tables <LS>RequisitionLimits</> and <LS>RequisitionContractLimits</>.
+<ZH>Services</>
+Service data pertaining to the requisition item can be passed on in the
+tables <LS>RequisitionServices</> and
+<LS>RequisitionSrvAccAssValues</>.
+<ZH>Number assignment</>
+If an entry is made in the field PREQ_NO in the item data, the system
+checks whether the number is an allowed external requisition number. If
+no entry is made in this field, the number is assigned internally and
+returned in the parameter <LS>Number</>.
+<ZH>Messages returned</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This method enables you to delete and/or close purchase requisitions.
+&EXAMPLE&
+
+&HINTS&
+The following authorization objects are checked with activity 02
+(Change):
+
+<DS:UO.M_BANF_BSA>M_BANF_BSA</>,,Document type in requisition
+<DS:UO.M_BANF_EKG>M_BANF_EKG</>,,Purchasing group in requisition
+<DS:UO.M_BANF_EKO>M_BANF_EKO</>,,Purchasing organization in requisition
+<DS:UO.M_BANF_WRK>M_BANF_WRK</>,,Plant in requisition
+All requisition items for which the deletion indicator and/or the
+"closed" indicator is to be set are passed on in the table
+<LS>RequisitionItemsToDe</>. Since this method changes the purchase
+requisition, change documents are created when you save.
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This method enables you to list detailed data on a purchase
+requisition.
+&EXAMPLE&
+
+&HINTS&
+The following authorization objects are checked with activity 03
+(Display):
+
+<DS:UO.M_BANF_BSA>M_BANF_BSA</>,,Document type in requisition
+<DS:UO.M_BANF_EKG>M_BANF_EKG</>,,Purchasing group in requisition
+<DS:UO.M_BANF_EKO>M_BANF_EKO</>,,Purchasing organization in requisition
+<DS:UO.M_BANF_WRK>M_BANF_WRK</>,,Plant in requisition
+<ZH>Transfer</>
+Via the parameters <LS>AccountAssignment</>, <LS>ItemTexts</>, and
+<LS>Services</>, you can specify whether you wish to display
+information relating to the release process, account assignments,
+texts, and service items in addition to the other detailed information
+(document type, responsible purchasing group, requisitioner, etc.).
+In the standard system, the parameters for this additional information
+are not set, i.e. only the detailed data for the item is returned.
+These parameters influence both the volume of data and system
+performance.
+<ZH>Return</>
+The detailed data is returned in table <LS>RequisitionItems</>. If the
+above parameters are set, the data is returned in the relevant tables.
+<ZH>Return messages</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This method enables you to list purchase requisition items. The desired
+selection criteria (e.g. requisitioner and plant) are passed on in the
+import parameters. For further information, refer to the relevant
+parameter documentation.
+&EXAMPLE&
+
+&HINTS&
+The following authorization objects are checked with activity 03
+(Display):
+
+<DS:UO.M_BANF_BSA>M_BANF_BSA</>,,Document type in requisition
+<DS:UO.M_BANF_EKG>M_BANF_EKG</>,,Purchasing group in requisition
+<DS:UO.M_BANF_EKO>M_BANF_EKO</>,,Purchasing organization in requisition
+<DS:UO.M_BANF_WRK>M_BANF_WRK</>,,Plant in requisition
+<ZH>Return</>
+The items that satisfy the selection criteria are returned in the table
+<LS>RequisitionItems</>.
+<ZH>Return messages</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This method enables you to list all purchase requisitions that have to
+be released with a certain release code and group (collective release).
+&EXAMPLE&
+
+&HINTS&
+The authorization object <DS:UO.M_EINK_FRG>M_EINK_FRG</> is checked.
+<ZH>Transfer</>
+The release code must be passed on in the parameter <LS>RelCode</> and
+the release group in the parameter <LS>RelGroup</>.
+The parameter <LS>ItemsForRelease</> determines whether only those
+requisitions awaiting release are listed, or only those that have
+already been released. The latter is useful if you wish to have a list
+for the purposes of cancelling releases that have already been
+effected.
+<ZH>Return</>
+The result is returned in the table <LB>RequisitionItems</>.
+<ZH>Return messages</>
+INCLUDE BAPI_RET
+                                                                      .
+&FURTHER_SOURCES_OF_INF&
+Weitere Informationen zur Freigabe finden Sie in der Dokumentation
+<LS>MM - Einkauf</>.
+&FUNCTIONALITY&
+This method enables you to display release information.
+&EXAMPLE&
+
+&HINTS&
+The authorization object <DS:UO.M_EINK_FRG>M_EINK_FRG</> is checked.
+<ZH>Transfer</>
+The purchase requisition number must be passed on. If you wish to see
+the release information for one particular item only, pass on the item
+in the parameter <LS>Item</>. If you additionally pass on the release
+code, the release prerequisites will also be determined.
+<ZH>Return</>
+The following information is returned:
+General release information (e.g. the release group and release
+strategy)
+The release prerequisites (only if the release code was passed on)
+The release codes with which previous releases were effected
+All release codes involved in the approval procedure
+<ZH>Return messages</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+For further information, refer to the <LS>MM Purchasing</>
+documentation (section entitled Release Procedure).

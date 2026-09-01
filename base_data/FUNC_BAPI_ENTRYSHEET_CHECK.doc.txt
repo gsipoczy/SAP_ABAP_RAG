@@ -1,0 +1,15 @@
+&FUNCTIONALITY&
+This method allows the data of service entry sheets to be checked.
+&EXAMPLE&
+
+&HINTS&
+<ZH>Transfer</>
+The entry sheet header data is passed on in the parameter
+<LS>EntrySheetHeader</>. The account assignments are passed on in the
+table <LS>EntrySheetAccountAssignment</>. Service data relating to the
+PO item can be passed on in the tables <LS>EntrySheetServices</> and
+<LS>EntrySheetSrvAccAssValues</>.
+<ZH>Return messages</>
+Messages are returned in the table <LS>Return</>.
+&FURTHER_SOURCES_OF_INF&
+

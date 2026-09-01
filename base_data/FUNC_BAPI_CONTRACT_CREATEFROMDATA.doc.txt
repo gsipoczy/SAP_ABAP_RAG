@@ -1,0 +1,34 @@
+&FUNCTIONALITY&
+You can create customer contracts using this method.
+You must enter at least header data (using the CONTRACT_HEADER_IN
+structure) and partner data (using the CONTRACT_PARTNERS table) as
+input parameters.
+You enter the item data in the CONTRACT_ITEMS_IN table. The item
+numbers can be assigned manually, by filling in the relevant fields, or
+automatically in accordance with Customizing,  by leaving the relevant
+fields blank or 0.
+In the case of configurable items, you must enter the configuration
+data in the CONTRACT_CFGS_INST, CONTRACT_CFGS_PART_OF and
+CONTRACT_CFGS_VALUE tables.
+Once the customer contract has been created successfully, you will
+receive the document number (SALES DOCUMENT field). The RETURN
+parameter informs you of any problems that may have occurred.
+&EXAMPLE&
+&HINTS&
+Required entries:
+ORDER_HEADER_IN :  DOC_TYPE        Sales document type
+                   SALES_ORG       Sales organisation
+                   DISTR_CHAN      Distribution channel
+                   DIVISION        Division
+ORDER_PARTNERS..:  PARTN_ROLE      Partner function, SP sold-to
+                                   party
+                   PARTN_NUMB      Customer number
+ORDER_ITEMS_IN..:  MATERIAL        Material number
+
+Ship-to party:
+If no ship-to party is specified, the ship-to party is the same as the
+sold-to party.
+Commitment Control:
+The BAPI does not carry out a database commit. This means that the
+calling application must leave the commit in order to have changes made
+to the database. BAPI_TRANSACTION_COMMIT is available for this purpose.

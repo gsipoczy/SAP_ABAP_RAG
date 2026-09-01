@@ -1,0 +1,13 @@
+&FUNCTIONALITY&
+The invoice (I_BELNR, I_GJAHR) is deleted.
+All data that was created during invoice verification is deleted. The
+following records are deleted:
+relevant record in RBKP
+relevant record in RBKPB
+relevant records in RBSELBEST/FRBR/LIFS/WERK
+relevant records in RBVD
+relevant records in RBVDMAT
+relevant records in RBDRSEG
+If the parameter I_LOCK is set, the invoice is protected with a logical
+block during processing. If the invoice is blocked by another user, the
+exception INVOICE_LOCKED is raised.

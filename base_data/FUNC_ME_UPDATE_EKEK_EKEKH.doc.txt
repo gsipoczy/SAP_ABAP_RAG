@@ -1,0 +1,25 @@
+&FUNCTIONALITY&
+
+Removal of scheduling agreement releases to tables EKEKH and EKEHH
+
+
+
+
+
+
+
+&FUNCTIONALITY&
+Saves the removed releases to tables EKEKH and EKEHH, then deletes them
+from tables EKEK and EKEH.
+
+
+
+
+
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

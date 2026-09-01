@@ -1,0 +1,38 @@
+&FUNCTIONALITY&
+Mit Hilfe dieses Funktionsbausteins werden Komponenteninformationen aus
+den BAPIs <LS>CreateFromData1</> und <LS>Change</> temporär in der
+globalen Variable <ZH>GT_COMP gesichtert</>.
+Es stehen als Importparameter folgende zur Verfügung:
+IM_COMP_EXT vom Type ANY
+IM_MODE vom Type C
+IM_EBELP vom Type mepoitem-ebelp
+Es steht als Exportparameter folgender zur Verfügung:
+EX_COMP_EXT vom Type any Table
+Über den Parameter IM_COMP_EXT werden die erweiterten Komponentendaten
+an den Funktionsbaustein übergeben. Typischer Weise besteht dieser aus
+den folgenden Daten:
+Positionsnummer im Einkaufsbeleg (EBELP)
+Einteilungsnummer der Positionsnummer (ETENR)
+Objektreferenz auf die Bestellposition (ITEM)
+Objektreferenz auf die Einteilung (SCH)
+Kennzeichen ob es sich um eine Neuanlage handelt (NEW)
+Zeiger auf die Komponentendaten (RSNUM)
+Daten aus der MDBA, MDPA und MDPL in einer tiefen Struktur (MD_DATA)
+die hinzuzufügenden Komponentendaten (MDPM)
+die zu löschenden Komponentendaten (MDPM_DEL)
+die persistierten Komponentendaten (PERS_MDPM)
+Der Parameter IM_MODE kann den Zustand R oder W annehmen. Im Modus R
+werden die Daten aus der globalen Tabelle GT_COMP gelesen. Im Modus W
+werden die Daten in die Tabelle GT_COMP geschrieben.
+Über den Parameter IM_EBELP kann ein spezifischer Bereich innerhalb der
+Tabelle GT_COMP abgefragt beziehungsweise überschrieben werden.
+Der Parameter EX_COMP_EXT werden die aus der Tabelle GT_COMP
+extrahierten Daten an den Aufrufer wieder zurückgegeben.
+&EXAMPLE&
+
+&HINTS&
+Das implementierte Makro MERGE_DATA holt sich das System zur Laufzeit
+die Definition der Übergabestruktur IM_COMP_EXT
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

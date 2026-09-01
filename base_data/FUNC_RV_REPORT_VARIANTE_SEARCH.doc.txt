@@ -1,0 +1,14 @@
+The function module works as follows:
+Input:  report name
+Output: variant name and variant text
+Procedure:
+Check whether the specified report exists
+no  --> RAISE
+yes --> 2.
+The function module was called up using variant <> blank
+yes --> variant exists --> return variant text
+        variant does not exist --> RAISE
+no  --> read and list variants and variant text for the report
+Variant was selected from list
+Return name and text
+End

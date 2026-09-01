@@ -1,0 +1,17 @@
+&FUNCTIONALITY&
+Abstract method.
+Implementation takes place in the subtypes.
+&FUNCTIONALITY&
+Abstract method.
+Implementation takes place in the subtypes.
+&FUNCTIONALITY&
+Abstract method
+Implementation is carried out in the subtypes as the exact object type
+is only known there.
+The function module selects partner sales activities and sends them
+asynchronously via ALE. The receiving system calls the following
+method:
+<ZH>SaveReplicaMultiple</>
+&FUNCTIONALITY&
+Abstract method
+Implementation is carried out in the subtypes.

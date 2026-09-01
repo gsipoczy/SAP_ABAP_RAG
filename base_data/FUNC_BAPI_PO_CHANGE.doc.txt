@@ -1,0 +1,212 @@
+&FUNCTIONALITY&
+MM_PO_GET_COMPONENTS ist dafür konzipiert, im Anschluss an
+BAPI_PO_GETDETAIL1 gerufen zu werden. Die Komponenten-Tabelle, die
+BAPI_PO_GETDETAIL1 zurückgibt, wird MM_PO_GET_COMPONENTS als Import
+Parameter mitgegeben.
+MM_PO_GET_COMPONENTS ergänzt nur die Daten, die ihm in der Import-
+Tabelle IM_COMPONENTS mitgegeben werden. Die ergänzten Daten werden in
+der Tabelle EX_COMPONENTS zurückgegeben.
+Es wird nicht auf archivierte Daten zugegriffen, sondern nur auf Daten
+von der Datenbank.
+Ergänzt werden diese zusätzlichen Felder, die sich in der Export-Tabelle
+EX_COMPONENTS finden:
+ITEM_CAT (Positionstyp (Stückliste)
+REQ_QUAN (Bedarfsmenge)
+BASE_UOM (Basismengeneinheit)
+BASE_UOM_ISO (Basismengeneinheit im ISO-Code)
+PHANT_ITEM (Dummy-Positionskennzeichen)
+BATCH (Chargennummer)
+
+WICHTIG:
+MM_PO_GET_COMPONENTS führt keine Berechtigungsprüfungen aus! Es wird
+davon ausgegangen, dass nur Daten mitgegeben werden, für die die
+Berechtigungsprüfungen bereits erfolgt sind, da BAPI_PO_GETDETAIL1 alle
+erforderlichen Prüfungen durchführt.
+&EXAMPLE&
+
+&HINTS&
+ACHTUNG:
+MM_PO_GET_COMPONENTS nur im Anschluss an BAPI_PO_GETDETAIL1 aufrufen!
+Er darf nur mit Import-Daten aufgerufen werden, für die alle
+erforderlichen Prüfungen bereits gelaufen sind (für Daten, die von
+BAPI_PO_GETDETAIL1  zurückgegeben werden, trifft dies zu).
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2012</> and method <LS>CHANGE</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_PO_CHANGE</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2012</> and method <LS>CREATEFROMDATA1</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_PO_CREATE1</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2012</> and method <LS>GETDETAIL1</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_PO_GETDETAIL1</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+The function module BAPI_PO_GETDETAIL1 enables you to display detailed
+information on a purchase order. The BAPI uses the technology available
+in the Enjoy purchase order (transaction ME23N).
+The import field PONUMBER must be populated.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+<LB><ZH>Authorization</></>
+When an Enjoy purchase order is created (activity 03), the following
+authorization objects are checked:
+<DS:UO.M_BEST_BSA>M_BEST_BSA</> Document type in purchase order
+<DS:UO.M_BEST_EKG>M_BEST_EKG</> Purchasing group in purchase order
+<DS:UO.M_BEST_EKO>M_BEST_EKO</> Purchasing organization in purchase
+order
+<DS:UO.M_BEST_WRK>M_BEST_WRK</> Plant in purchase order
+
+<ZH>Import parameters</>
+The BAPI can return specific detailed information at header and item
+level. For this purpose, the following import parameters are available:
+<ZH>AccountAssignment</> (account assignment data)
+<ZH>ItemText</> (item texts)
+<ZH>HeaderText</> (header texts)
+<ZH>DeliveryAddress</> (delivery address)
+<ZH>Version</> (version data)
+<ZH>Services</> (service data)
+
+<ZH>Export parameters</>
+POHeader (header information)
+POExpImpHeader (foreign trade data at header level)
+
+Table parameters
+PoItem (item data)
+PoAddrDelivery (delivery address)
+PoSchedule (schedule line data)
+PoAccount (account assignment data)
+PoCondHeader (header conditions)
+PoCond (item conditions)
+PoLimits (limit data)
+PoContractLimits (contract limit data)
+PoServices (service data)
+PoSrvAccEssValues (account assignment specification for services and/or
+limits)
+PoTextHeader (header texts)
+PoTextItem (item texts)
+&FUNCTIONALITY&
+INCLUDE MMPUR_BAPI_OVERVIEW_CHANGE OBJECT DOKU ID TX LANGUAGE EN
+Functions in Detail
+INCLUDE MMPUR_BAPI_ME22N_TABLES OBJECT DOKU ID TX LANGUAGE EN
+Park and hold (<ZK>Public Sector Management</>; PSM)
+If you have activated the <ZK>PSM, US Federal Government - General
+Functions</> <ZK>2</> (PSM_USFED_CI_2) business function, park is
+available as well as hold, providing a further option for saving
+documents temporarily.
+You can use this function module to control the conditions under which
+purchase orders can be put on hold, parked, or saved. First, the system
+checks whether the changed document contains errors. In documents with
+errors, the MEMORY_UNCOMPLETE and PARK_UNCOMPLETE parameters are
+evaluated. You control the system's behavior in documents that contain
+no errors in the MEMORY_COMPLETE and PARK_COMPLETE parameters.
+The following points apply to the saving of changed purchase orders:
+If you change documents that are on hold, you can put them on hold
+again, park them, or save them.
+If you change parked documents, you can park them again or save them.
+Changes to parked documents cannot be put on hold:
+If you change documents that have already been saved, you cannot put
+them on hold or park them.
+For more information, see the parameter documentation.
+INCLUDE MMPUR_BAPI_ME22N_FUNC OBJECT DOKU ID TX LANGUAGE EN
+&EXAMPLE&
+INCLUDE MMPUR_BAPI_ME22N_EXAMPLE OBJECT DOKU ID TX LANGUAGE EN
+Help with Problems
+RESET N1
+INCLUDE MMPUR_BAPI_TROUBLESHOOTING OBJECT DOKU ID TX LANGUAGE EN
+Customer Enhancements
+INCLUDE MMPUR_BAPI_CUSTOMEREXTENSION OBJECT DOKU ID TX LANGUAGE EN
+&FURTHER_SOURCES_OF_INF&
+RESET N1
+INCLUDE MMPUR_BAPI_ADD_INFO OBJECT DOKU ID TX LANGUAGE EN

@@ -1,0 +1,25 @@
+&FUNCTIONALITY&
+With the exporting parameter ev_pdf this BAPI returns the printout for a
+billing document which has been passed to the BAPI with the importing
+parameter iv_vbeln.
+&FUNCTIONALITY&
+You can use this method to cancel a billing document.
+As an input parameter, you are expected to enter a billing document
+number in the field BILLINGDOC_NUMBER. This corresponds to the document
+to be canceled.
+This method can be used not only in the simulation run (TESTRUN = 'X')
+but also in an update run including update (TESTRUN = ' '). Both
+execution variants send back any errors that have occurred to the
+output table RETURN. If the document to be canceled has been correctly
+processed, information on successful processing is sent back in the
+SUCCESS table. This ouptut table delivers in particular the document
+number of the cancellation billing document in the update run.
+&EXAMPLE&
+
+&HINTS&
+Required entries     :
+  BILLINGDOC         Number of the billing document to be canceled
+COMMIT Control :
+  In the update (TESTRUN = ' ') the update is carried out by COMMIT
+  WORK using the methods available.
+&FURTHER_SOURCES_OF_INF&

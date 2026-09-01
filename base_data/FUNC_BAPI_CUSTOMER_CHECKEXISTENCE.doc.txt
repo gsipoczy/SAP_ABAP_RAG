@@ -1,0 +1,13 @@
+&FUNCTIONALITY&
+OBSOLETE! DO NOT USE!
+
+The CheckExistence method in the Customer business object is obsolete.
+Intead you should use the ExistenceCheck. The detailed data about the
+customer that was returned to the CheckExistence method is now
+available in the GetDetail2 method.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

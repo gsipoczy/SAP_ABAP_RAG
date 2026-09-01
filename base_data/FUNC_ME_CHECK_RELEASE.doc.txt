@@ -1,0 +1,4 @@
+Dieser Funktionsbaustein prüft, ob für den übergebenen Freigabecode die
+Freigabe durchgeführt werden kann. Wenn dies nicht der Fall ist, ergeht
+Exception NO_RELEASE.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

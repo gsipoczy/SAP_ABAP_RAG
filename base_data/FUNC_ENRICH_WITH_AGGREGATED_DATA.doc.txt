@@ -1,0 +1,13 @@
+&FUNCTIONALITY&
+Erlaubt das Abmischen der Bestellentwicklungsdaten mit bereits
+verdichteten Daten pro Referenzschlüssel. Der Funktionsbaustein sucht
+für den übergebenen Referenzschlüssel nach bereits verdichteten
+Bestellentwicklungssätzen und mischt diese mit den bereits gefundenen
+Daten aus der Bestellentwicklung ab.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

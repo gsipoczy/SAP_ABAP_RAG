@@ -1,0 +1,11 @@
+&FUNCTIONALITY&
+This function module determines an update date for a LIS structure
+provided that the update data day (SPTAG), month (SPMON), week (SPWOC),
+posting period (SPBUC) and fiscal year variant (PERIV) corresponding to
+the period category are known.
+This is thus exactly the reverse function to sub-program
+PERIDODE_ERMITTELN in report RMCS1000, which is executed during the
+updating of a key figure.
+It is thus possible, for example, to update key figures in such a way
+that they are assigned to an already known dataset (characteristics).
+The earliest valid date is determined.

@@ -1,0 +1,12 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein schreibt die Abrufdokumentation von verteilten
+Kontrakten im zentralen System im zentralen Kontrakt fort. Er wird nur
+in Zusammenhang mit verteilten System und verteilten Kontrakten
+aufgerufen.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

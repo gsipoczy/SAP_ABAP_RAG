@@ -1,0 +1,12 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein löst für eine Bestellanforderung, die der
+Gesamtfreigabe unterliegt und für welche die Freigabe mit einem
+workflowrelevanten Freigabecode erforderlich ist, ein Ereignis 'Create'
+des Objekttyps 'EBAN' aus
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

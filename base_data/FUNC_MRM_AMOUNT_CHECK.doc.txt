@@ -1,0 +1,6 @@
+Invoice quantity is checked
+Messages are issued, the blocking reason 'Preis'  returned if necessary
+and the quantity adjusted when necessary
+Details see coding
+Note: the signature of delivery items and return items are opposite
+

@@ -1,0 +1,24 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein bietet die Möglichkeit, eine F4-Eingabehilfe
+mit den Einheiten, die für ein gegebenes Material existieren,
+anzuzeigen.
+Als Eingabeparameter werden benötigt:
+PROGRAM:,,Name des ABAP-Programms
+DYNNR:,,,,Nummer des Dynpros, auf dem sich die Felder befinden
+FELDNAME_MATNR:,,Feldname des Feldes, in dem die MATNR steht
+FELDNAME_MEINS:,,Feldname des Feldes, in den die Einheit geschrieben
+werden soll
+
+&EXAMPLE&
+        CALL FUNCTION 'ME_VALUES_MEINS'
+             EXPORTING
+                  program = prog
+                  dynnr   = dynpro
+                  fieldname_matnr = 'MEPO1211-EMATN'
+                  fieldname_meins = 'MEPO1211-MEINS'.
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

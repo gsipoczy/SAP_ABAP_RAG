@@ -1,0 +1,18 @@
+&FUNCTIONALITY&
+Der Funktionsbaustein RV_MESSAGE_DIALOG zeigt in einer Liste druckbare
+Nachrichten zu einem Beleg an. Angezeigt werden jeweils die
+unverarbeiteten Nachrichten einer Nachrichtenart. Liegen keine
+unverarbeiteten Nachrichten für eine Nachrichtenart vor, so wird die
+letzte schon verarbeitete Nachricht angezeigt.
+Der Benutzer hat die Möglichkeit eine Nachricht zu drucken oder sie als
+Preview am Bildschirm anzeigen zu lassen.
+&EXAMPLE&
+
+&HINTS&
+Nach der Verwendung des Funktionsbausteines sollte die Anwendung ein
+COMMIT absetzen, damit die Nachrichtensätze in der Tabelle NAST
+aktualisiert werden. Ein COMMIT ist notwendig nachdem eine Nachricht
+gedruckt wurde (Exportparameter MESSAGE_PRINTED = 'X') und im Falle
+einer fehlerhaften Verarbeitung (Ausnahme PRINT_ERROR wurde augelöst).
+&FURTHER_SOURCES_OF_INF&
+DE-EN-LANG-SWITCH-NO-TRANSLATION

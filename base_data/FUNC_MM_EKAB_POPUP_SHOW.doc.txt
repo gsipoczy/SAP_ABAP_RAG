@@ -1,0 +1,30 @@
+&Kurztext&
+
+&Functionality&
+Prüft, ob der angegebene Rechnungsstatus (IM_STATUS) in der angegebenen
+Rechnungsstatus-Struktur (IM_IVD_STATUS) gesetzt ist.
+&Parameter&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Prüft, ob der angegebene Rechnungstyp (IM_TYPE) in der angegebenen
+Rechnungstyp-Struktur (IM_IVD_TYPE) gesetzt ist.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Aufruf eines Popup zur Anzeige der Bestellentwicklung in einem ALV-Grid
+Control
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

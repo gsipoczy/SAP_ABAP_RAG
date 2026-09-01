@@ -1,0 +1,27 @@
+Invoice quantity is checked
+Messages are issued, the blocking reason 'Preis'  returned if necessary
+and the quantity adjusted when necessary
+Details see coding
+Note: the signature of delivery items and return items are opposite
+
+The function module checks the invoice differences
+Check of global small differences
+When for a supplier no specific tolerances are defined, the check uses
+the tolerance values for small diferences per company code
+Invoice reduction is not possible here.
+Check of supplier specifc tolerances
+When supplier specific tolerances are defined, these checks are
+performend:
+If the invoice check difference is positive and invoice reduction is
+ agreed with the supplier, the system checks, if the difference is below
+the invoice reduction limit. If this is true, the invoice is "correct"
+and invoice reduction is possible. In the other case the invoice is
+"erroneoust".
+If no invoice reduction is agreed with the supplier and the invoice
+check difference is positive the system checks, whether the positive
+invoice check tolerance is exceeded. If this is the case the invoice is
+"erroneous" Otherwise the invoice is "correct".
+If the invoice check difference is negative the system checks, whether
+the difference is below negative invoice check tolerance. If this is the
+case the invoice is "erroneous" Otherwise the invoice is "correct".
+

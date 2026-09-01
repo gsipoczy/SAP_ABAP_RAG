@@ -1,0 +1,11 @@
+&FUNCTIONALITY&
+Der Funktionsbaustein ermittelt zur Versandvorschrift den als
+Defaultwert im Customizing definierten Schlüssel zur Einhaltung der
+Versandvorschrift gemäß Tabelle t027c.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

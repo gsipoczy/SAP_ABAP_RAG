@@ -1,0 +1,38 @@
+Implementation of the <ZH>Customer.getAllRoots()</> Instance Method
+The highest-level customer is determined for a certain time and a
+specified hierarchy type.
+Implementation of Instance Method: Customer.getChildren()
+The system determines the customers subordinated to the <ZH>ValidOn</>
+business transaction event, up to the level indicated, for the customer
+in the hierarchy of the specified hierarchy type. The system issues the
+direct predecessor to each node.
+Implementation of the <ZH>Customer.getRoot()</> Instance Method
+The system determines the highest-level customer for the customer in
+the hierarchy of the specified type for a specific time.
+&FUNCTIONALITY&
+Delete and save assignments of SD customer hierarchy.
+<ZK>NodeList</>, list of assignments for deletion
+<ZK>Return</>, processing log
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+This Function implicitly saves the assignment. The working memory is
+deleted each time the function module is called up as new.
+
+&FUNCTIONALITY&
+The function module inserts assignments into the customer hierarchy.
+These are imported with table <ZK>NODE_LIST</>. The result log is in
+the table <ZK>Return</>. The assignment can only be carried out for
+existing customers.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+This function implicitly saves the assignment. The working memory is
+deleted each time the function module is called up as new.
+,,
+

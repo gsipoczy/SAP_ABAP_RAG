@@ -1,0 +1,44 @@
+&FUNCTIONALITY&
+This function module is used as an extractor for the 0MM_PUR_PO_CGR
+(Produced Activity: Delivery of Confirmations) DataSource. The
+parameters in this DataSource are data-extraction-framework specific and
+therefore cannot be used by other applications.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used as an extractor for the Purchasing Data:
+Header Level<ZK> (0MM_PUR_PO_HDR) </>DataSource. The parameters in this
+DataSource are data-extraction-framework specific and therefore cannot
+be used by other applications.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used as an extractor for the Purchasing Data:
+Item Level (0MM_PUR_PO_ITM) DataSource. The parameters in this
+DataSource are data-extraction-framework specific and therefore cannot
+be used by other applications.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used as an extractor for the Purchasing Data:
+Schedule Line Level (0MM_PUR_PO_SCL) DataSource. The parameters in this
+DataSource are data-extraction-framework specific and therefore cannot
+be used by other applications.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

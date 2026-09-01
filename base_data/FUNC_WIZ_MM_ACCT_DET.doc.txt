@@ -1,0 +1,2 @@
+This module is the main function that controls the processing of the
+MM Account Determination Wizard.

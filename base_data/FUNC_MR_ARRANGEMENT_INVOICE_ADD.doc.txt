@@ -1,0 +1,7 @@
+&FUNCTIONALITY&
+In function module MR_ARRANGEMENT_INVOICE_CREATE you "prepare"
+invoices. Used exclusively by "Subsequent Settlement".
+The system notes the invoice documents created in T_ARRANG_VAL. If an
+invoice cannot be posted, the error messages of the function module
+called (MR_CREATE_INVOICE) are attached to T_ARRANG_ERR. T_ARRANG_VAL_W
+is required for updating statistic records for Subsequent Settlement.

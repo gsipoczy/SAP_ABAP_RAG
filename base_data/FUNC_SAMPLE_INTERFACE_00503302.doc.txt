@@ -1,0 +1,46 @@
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DEFINE &TEXT& = 'Updating conditions (Pricing)'
+DEFINE &EVENT& = '00503301'
+DEFINE &TYPE& = 'INTERFACE'
+INCLUDE FI_OPEN_FI_DOCUMENTATION_1 OBJECT DOKU ID TX
+&FUNCTIONALITY&
+You can use this function module (User-Exit) when the system is
+updating condition records to transfer this data to another
+application. No changes can be made to the condition records.
+This user exit can be used for pricing condition records. Event
+00503302 can be used for condition records from other condition
+applications.
+
+The following parameters are available:
+
+T_COND_RECS,,Condition records table
+
+T_XKONH    ,,Table of KONH entries (new status)
+
+T_YKONH    ,,Table of KONH entries (old status)
+
+T_XKONP    ,,Table of KONP entries (new status)
+
+T_YKONP    ,,Table of KONP entries (old status)
+
+T_XKONM    ,,Table of KONM entries (quantity scales)
+
+T_XKONW    ,,Table of KONW entries (value scales)
+
+DEFINE &TEXT& = 'Updating conditions (general)'
+DEFINE &EVENT& = '00503302'
+DEFINE &TYPE& = 'INTERFACE'
+INCLUDE FI_OPEN_FI_DOCUMENTATION_1 OBJECT DOKU ID TX
+&FUNCTIONALITY&
+You can use this function module (User Exit) when the system updates
+condition records to make data available to another application. No
+changes can be made to the condition records.
+This user exit can be used for the following condition applications:
+material determination, listing/exclusion, batch determination, profile
+determination. You should use event 00503301 for condition records for
+pricing.
+
+The following parameters are available:
+
+T_COND_RECS    ,,Condition records table
+

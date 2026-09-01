@@ -1,0 +1,78 @@
+&FUNCTIONALITY&
+Dieser Baustein dient nur als Beispiel für die Schnittstelle und die
+Gestaltung von <DS:TX.DDDOK_SHLP_EXIT>Suchhilfe-Exits</> in
+<DS:TX.DDDOK_SHLP_SEARCHHELP>Suchhilfen</>.
+Alle hier definierten Schnittstellenparameter sind für einen
+Funktionsbaustein, der als Suchhilfe-Exit dienen soll, obligatorisch,
+weil der Rufer des Bausteins nicht weiß, welche Parameter intern
+wirklich benutzt werden.
+Ein Suchhilfe-Exit wird zu mehreren
+<DS:TX.DDDOK_SHLP_STEP>Zeitpunkten</> während des F4-Ablaufs
+aufgerufen. In CALLCONTROL-STEP wird der jeweilige Schritt des Ablaufs
+mitgegeben. Wenn der Baustein nur einige Modifikationen vor dem Schritt
+durchführen möchte, sollte CALLCONTROL-STEP unverändert bleiben.
+Wenn der Schritt dagegen vollständig von dem Baustein übernommen wird,
+muß in CALLCONTROL-STEP der Folgeschritt zurückgegeben werden.
+Beachten Sie hierzu bitte die ausführliche Dokumentation zum Konzept
+der Suchhilfe-Exits.
+Der Baustein muß auf alle Schritte, die er nicht kennt, bzw. die er
+nicht behandeln will, mit einem sofortigen EXIT reagieren.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Dieser Baustein dient nur als Beispiel für die Schnittstelle und die
+Gestaltung von <DS:TX.DDDOK_SHLP_EXIT>Suchhilfe-Exits</> in
+<DS:TX.DDDOK_SHLP_SEARCHHELP>Suchhilfen</>.
+Alle hier definierten Schnittstellenparameter sind für einen
+Funktionsbaustein, der als Suchhilfe-Exit dienen soll, obligatorisch,
+weil der Rufer des Bausteins nicht weiß, welche Parameter intern
+wirklich benutzt werden.
+Ein Suchhilfe-Exit wird zu mehreren
+<DS:TX.DDDOK_SHLP_STEP>Zeitpunkten</> während des F4-Ablaufs
+aufgerufen. In CALLCONTROL-STEP wird der jeweilige Schritt des Ablaufs
+mitgegeben. Wenn der Baustein nur einige Modifikationen vor dem Schritt
+durchführen möchte, sollte CALLCONTROL-STEP unverändert bleiben.
+Wenn der Schritt dagegen vollständig von dem Baustein übernommen wird,
+muß in CALLCONTROL-STEP der Folgeschritt zurückgegeben werden.
+Beachten Sie hierzu bitte die ausführliche Dokumentation zum Konzept
+der Suchhilfe-Exits.
+Der Baustein muß auf alle Schritte, die er nicht kennt, bzw. die er
+nicht behandeln will, mit einem sofortigen EXIT reagieren.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Dieser Baustein dient nur als Beispiel für die Schnittstelle und die
+Gestaltung von <DS:TX.DDDOK_SHLP_EXIT>Suchhilfe-Exits</> in
+<DS:TX.DDDOK_SHLP_SEARCHHELP>Suchhilfen</>.
+Alle hier definierten Schnittstellenparameter sind für einen
+Funktionsbaustein, der als Suchhilfe-Exit dienen soll, obligatorisch,
+weil der Rufer des Bausteins nicht weiß, welche Parameter intern
+wirklich benutzt werden.
+Ein Suchhilfe-Exit wird zu mehreren
+<DS:TX.DDDOK_SHLP_STEP>Zeitpunkten</> während des F4-Ablaufs
+aufgerufen. In CALLCONTROL-STEP wird der jeweilige Schritt des Ablaufs
+mitgegeben. Wenn der Baustein nur einige Modifikationen vor dem Schritt
+durchführen möchte, sollte CALLCONTROL-STEP unverändert bleiben.
+Wenn der Schritt dagegen vollständig von dem Baustein übernommen wird,
+muß in CALLCONTROL-STEP der Folgeschritt zurückgegeben werden.
+Beachten Sie hierzu bitte die ausführliche Dokumentation zum Konzept
+der Suchhilfe-Exits.
+Der Baustein muß auf alle Schritte, die er nicht kennt, bzw. die er
+nicht behandeln will, mit einem sofortigen EXIT reagieren.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

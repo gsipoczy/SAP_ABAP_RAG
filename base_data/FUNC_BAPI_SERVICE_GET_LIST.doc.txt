@@ -1,0 +1,21 @@
+&FUNCTIONALITY&
+This method delivers a selection of detailed data pertaining to a
+specified external service. This data is valid client-wide.
+&EXAMPLE&
+&HINTS&
+&FURTHER_SOURCES_OF_INF&
+To enable the data to be read successfully, you need the authorization
+to display service master data.
+Messages are returned in the parameter RETURN. The parameter
+documentation lists the return values and their meaning.
+&FUNCTIONALITY&
+This method allows you to generate a list of service master records.
+You can enter two specific selection criteria: e.g. a short text, an
+interval of service categories, or certain material groups.
+The entry of all parameters is optional. If you do not make any
+restrictions, all services will be found.
+&EXAMPLE&
+&HINTS&
+Only those service master records for which you have the authorization
+to display are found.
+&FURTHER_SOURCES_OF_INF&

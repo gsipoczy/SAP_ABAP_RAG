@@ -1,0 +1,47 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein löst für alle Banfpositionen, für die eine
+Freigabe mit einem workflowrelevantem Freigabecode erforderlich ist,
+das Ereignis 'Create' des Objekttyps 'EBAN' aus.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Dieser Funktionsbaustein löst für alle Banfpositionen, für die eine
+Freigabe mit einem workflowrelevantem Freigabecode erforderlich ist,
+das Ereignis 'Create' des Objekttyps 'EBAN' aus.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Dieser Funktionsbaustein löst für eine Bestellanforderung, die der
+Gesamtfreigabe unterliegt und für welche die Freigabe mit einem
+workflowrelevanten Freigabecode erforderlich ist, ein Ereignis 'Create'
+des Objekttyps 'EBAN' aus
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein prüft, ob für den übergebenen Freigabecode die
+Rücknahme der Freigabe durchgeführt werden kann. Wenn dies der Fall
+ist, wird die Freigabe zurückgesetzt. Falls gewünscht, wird ein
+Dialogfenster gesendet, was den daraus resultierenden Freigabezustand
+anzeigt.
+Anderenfalls werden entsprechende Meldungen gesendet.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein prüft, ob für den übergebenen Freigabecode die
+Freigabe durchgeführt werden kann. Wenn dies der Fall ist, wird die
+Freigabe gesetzt und, falls gewünscht, ein Dialogfenster gesendet, was
+den daraus resultierenden Freigabezustand anzeigt.
+Anderenfalls werden entsprechende Meldungen gesendet.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

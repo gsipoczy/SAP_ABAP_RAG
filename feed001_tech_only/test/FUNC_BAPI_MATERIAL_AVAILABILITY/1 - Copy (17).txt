@@ -1,0 +1,56 @@
+&FUNCTIONALITY&
+Using this function module, you can determine the receipt quantity still
+available for a particular material in a certain plant according to ATP
+logic (MRPII).
+The availability check is performed when the material number, the plant,
+and the input table (WMDVSX) are transferred. The combination of check
+group (material master) and check rule define the scope of the check,
+meaning which stock, receipts, and issues are to be included in the
+check. In the function module, the system uses the check rule defined in
+Sales and Distribution (A). You can override the check rule using the
+interface or a user exit (exit_saplw61v_001). The plant parameter can
+also be overridden  by using the customer number in the user exit for
+selecting the plant.
+The special stock check is enabled by transferring the special stock
+indicator and any other relevant parameters. These can include the
+following special stock attributes:
+o,,,,E,,Sales Order Stock
+,,,,,,In this case, the document number and item number must also be
+transferred to the check.
+o,,,,Q,,Project Stock
+,,,,,,In this case, the specified WBS element must also be transferred
+to the check.
+o,,,,V,,Returnable Packaging Stock at Customer
+,,,,,,In this case, the customer number must also be transferred to the
+check.
+o,,,,W,,Consignment Stock
+,,,,,,In this case, the customer number must also be transferred to the
+check.
+The results of the check are recorded in the output table (WMDVEX). This
+table contains the dates and available receipt quantities (ATP
+quantities). The results of the check depend on the input:
+If no dates or quantities are transferred, the system displays the
+future ATP situation starting today as the result.
+If only a date but no quantities are transferred, the system displays
+the ATP situation starting on that date as the result.
+If both a date and a quantity are transferred, the system displays the
+availability information about the specified quantity.
+In the latter two cases, the parameter 'DIALOGFLAG' is filled. This
+parameter can have the following values:
+' ' (initial) <(><<)>=> The entire quantity is available
+'X'           <(><<)>=> The quantity is either partially available or
+not available at all
+'N'           <(><<)>=> The material is not included in the availability
+check (it is not relevant for the check)
+The system also displays the end of the replenishment lead time
+(ENDLEADTME).
+
+&EXAMPLE&
+
+&HINTS&
+1. The dates that are determined are material availability dates.
+Shipment scheduling is not connected.
+2. The function module provides information about the ATP situation. No
+requirement quantities are reserved.
+&FURTHER_SOURCES_OF_INF&
+

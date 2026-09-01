@@ -1,0 +1,10 @@
+&FUNCTIONALITY&
+When you perform a potential analysis with reference to sales
+activities, the number of the sales support document is updated into
+the info structure.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

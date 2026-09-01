@@ -1,0 +1,59 @@
+&FUNCTIONALITY&
+This method allows the data of service entry sheets to be checked.
+&EXAMPLE&
+
+&HINTS&
+<ZH>Transfer</>
+The entry sheet header data is passed on in the parameter
+<LS>EntrySheetHeader</>. The account assignments are passed on in the
+table <LS>EntrySheetAccountAssignment</>. Service data relating to the
+PO item can be passed on in the tables <LS>EntrySheetServices</> and
+<LS>EntrySheetSrvAccAssValues</>.
+<ZH>Return messages</>
+Messages are returned in the table <LS>Return</>.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+You can use this method to output the detailed data on a service entry
+sheet.
+&EXAMPLE&
+
+&HINTS&
+The following authorization objects are checked with the activity 03
+(Display):
+
+<DS:UO.M_BEST_BSA>M_BEST_BSA</>,,Document type in purchase order
+<DS:UO.M_BEST_EKG>M_BEST_EKG</>,,Purchasing group in purchase order
+<DS:UO.M_BEST_EKO>M_BEST_EKO</>,,Purchasing organization in purchase
+order
+<DS:UO.M_BEST_WRK>M_BEST_WRK</>,,Plant in purchase order
+
+<ZH>Error handling</>
+If error messages are issued during the processing, they are returned
+in the table 'Return'. This table also logs information messages.
+&FUNCTIONALITY&
+This method allows you to list service entry sheets. You pass on the
+desired selection criteria (e.g. purchasing group, plant, supplier) in
+the import parameters. For more information, refer to the relevant
+parameter documentation.
+&EXAMPLE&
+
+&HINTS&
+The following authorization objects are checked with the activity 03
+(Display):
+
+
+<DS:UO.M_BEST_BSA>M_BEST_BSA</>,,Document type in purchase order
+
+<DS:UO.M_BEST_EKG>M_BEST_EKG</>,,Purchasing group in purchase order
+
+<DS:UO.M_BEST_EKO>M_BEST_EKO</>,,Purchasing organization in purchase
+order
+
+<DS:UO.M_BEST_WRK>M_BEST_WRK</>,,Plant in purchase order
+<ZH>Return</>
+The entry sheets that satisfy the selection criteria are returned in the
+table 'ENTRYSHEET_HEADER'.
+<ZH>Error handling</>
+If error messages are issued during the processing, they are returned in
+the table 'Return'. This table also logs information messages.

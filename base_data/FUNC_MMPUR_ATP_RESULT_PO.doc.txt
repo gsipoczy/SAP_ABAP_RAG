@@ -1,0 +1,54 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein löscht Einteilungen in Parametertabelle P_ETT.
+Dabei handelt es sich um Einteilungen, in denen weder Einteilungsmenge
+noch bestätigte Menge vorhanden ist und die Mengen der Folgeprozesse
+leer sind.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Füllen des Aufrufparameters ATPCA für die Prüfung der Verfügbarkeit mit
+dem ATP-Controller.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Füllen des Aufrufparameters ATPDIA und des Parameterfeldes ATPCS-SCHIND
+für die Prüfung der Verfügbarkeit mit dem ATP-Controller.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Dieser Funktionsbaustein löscht Einteilungen in Parametertabelle P_ETT.
+Dabei handelt es sich um Einteilungen, in denen weder Einteilungsmenge
+noch bestätigte Menge vorhanden ist und die Mengen der Folgeprozesse
+leer sind.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Dieser Funktionsbaustein überträgt das Ergebnis der ATP-Prüfung zu einer
+Wunscheinteilung in die Parametertabelle der Einteilungen P_ETT.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

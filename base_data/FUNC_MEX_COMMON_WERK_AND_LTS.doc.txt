@@ -1,0 +1,46 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein prüft, ob die zu liefernde Ware spätestens bis
+zum Ende der Mindestrestlaufzeit verfügbar ist.
+Das Datum der Verfügbarkeit wird auf der Basis des Lieferdatums durch
+addieren der WE-Bearbeitungszeit berechnet. Dabei werden nur die
+Arbeitstage im aktuellen Fabrikkalender berücksichtigt.
+Das Mindesthaltbarkeits-/Verfallsdatum wird auf der Basis des
+Lieferdatums durch addieren der Mindestrestlaufzeit berechnet. Dabei
+werden alle Tage berücksichtigt, auch solche die im aktuellen
+Fabrikkalender keine Arbeitstage sind.
+Ist das Mindesthaltbarkeits-/Verfallsdatum später als das
+Verfügbarkeitsdatum, dann wird eine diesbezügliche Fehlermeldung
+ausgegeben.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Prüfung, ob eine variable Bestellmengeneinheit z.B. bei manueller
+Eingabe auf dem Positionsbild in der Bestellung erlaubt ist.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Die interne Tabelle I_MAWE (ohne Kopfzeile) enthält die Materialnummer
+und Werke aller Bestellpositionen bezüglich eines Lieferanten
+(I_LIFNR). Sind die Werke auf allen Positionen gleich, so liefert der
+Funktionsbaustein das Werk zurück (ansonsten bleibt es initial). Sind
+zusätzlich auf allen Positionen noch dieselben
+Lieferantenteilsortimente vorhanden, so liefert der Funktionsbaustein
+auch das gefundene Lieferantenteilsortiment zurück (ansonsten bleibt es
+initial).
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

@@ -1,0 +1,253 @@
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2013</> and method <LS>CHANGE</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_SAG_CHANGE</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2013</> and method <LS>CREATE</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_SAG_CREATE</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2013</> and method <LS>GETDETAIL</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_SAG_GETDETAIL</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2013</> and method <LS>MAINTAIN</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_SCHEDULE_MAINTAIN</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+Call of the BAPI functionality using ABAP OO interface methods.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+BAPI to change a scheduling agreement.
+&EXAMPLE&
+
+&HINTS&
+<ZH>Restrictions</> on the BAPIs for outline agreements
+<ZH>Master conditions</>:
+When new items are created, only one period can be specified per
+variable key. This means that one period can be specified for the
+document header (i.e. condition table A019), for each item (i.e.
+condition table A016), and for each item/plant combination (i.e. table
+A068).
+When changes are made to outline agreements, any periods can be used.
+The periods may not overlap for a variable key.
+When conditions are changed, new condition records are nevertheless
+created.
+<ZH>Document conditions</> are not supported.
+Since <ZH>volume rebate conditions</> are not taken into account in
+outline agreements, they are not processed.
+No <ZH>subitems</> (e.g. inclusive/exclusive bonus quantity, display,
+etc.) are taken into account.
+The <ZH>control key for quality management in procurement</>
+(EKPO-SSQSS) and the <ZH>certificate category</> (EKPO-ZGTYP) are only
+taken into account to a certain extent: these two items of information
+are copied from the reference contract or from the material master but
+cannot be changed and no checks are carried out for these two fields.
+The <ZH>revision level</> (EKPO-REVLV) is not changeable because various
+quality management routines have not been implemented.
+<ZH>Version management</> is not supported.
+<ZH>External services management</> is not supported (neither planned
+nor unplanned services).
+The creation of <ZH>configurations</> is not supported.
+When a scheduling agreement is changed (activity 02), the following
+<ZH>authorization objects</> are checked:
+<DS:UO.M_RAHM_BSA>M_RAHM_BSA</> Document type in outline agreement
+<DS:UO.M_RAHM_EKG>M_RAHM_EKG</> Purchasing group in outline agreement
+<DS:UO.M_RAHM_EKO>M_RAHM_EKO</> Purchasing organization in outline
+agreement
+<DS:UO.M_RAHM_WRK>M_RAHM_WRK</> Plant in outline agreement
+&FURTHER_SOURCES_OF_INF&
+The following Business Add-Ins are available:
+<DS:SIMG.MEOUT_BAPI_CUST>MEOUT_BAPI_CUST</> for customer enhancements
+(the BAdI can be implemented multiple times).
+<LS>MEOUT_BAPI_IBS</> for SAP-internal enhancements (the BAdI can be
+implemented multiple times).
+&FUNCTIONALITY&
+BAPI to create a scheduling agreement.
+&EXAMPLE&
+<DS:TX.MMPUR_BAPI_MEOUT_TEST_SINGLE>Sample Code</>
+&HINTS&
+<ZH>Restrictions</> on the BAPIs for outline agreements
+<ZH>Master conditions</>:
+When new items are created, only one period can be specified per
+variable key. This means that one period can be specified for the
+document header (i.e. condition table A019), for each item (i.e.
+condition table A016), and for each item/plant combination (i.e. table
+A068).
+Scales are not supported during the creation of outline agreements.
+The creation of scheduling agreements with <ZH>document conditions</> is
+not supported.
+Since <ZH>volume rebate conditions</> are not taken into account in
+outline agreements, they are not processed.
+No <ZH>subitems</> (e.g. inclusive/exclusive bonus quantity, display,
+etc.) are taken into account.
+The <ZH>control key for quality management in procurement</>
+(EKPO-SSQSS) and the <ZH>certificate category</> (EKPO-ZGTYP) are only
+taken into account to a certain extent: these two items of information
+are copied from the reference contract or from the material master but
+cannot be changed and no checks are carried out for these two fields.
+The <ZH>revision level</> (EKPO-REVLV) is not changeable because various
+quality management routines have not been implemented.
+<ZH>Version management</> is not supported.
+<ZH>External services management</> is not supported (neither planned
+nor unplanned services).
+The creation of <ZH>configurations</> is not supported.
+&FURTHER_SOURCES_OF_INF&
+When a scheduling agreement is created (activity 01), the following
+<ZH>authorization objects</> are checked:
+<DS:UO.M_RAHM_BSA>M_RAHM_BSA</> Document type of scheduling agreement
+<DS:UO.M_RAHM_EKG>M_RAHM_EKG</> Purchasing group in scheduling agreement
+<DS:UO.M_RAHM_EKO>M_RAHM_EKO</> Purchasing organization in scheduling
+agreement
+<DS:UO.M_RAHM_WRK>M_RAHM_WRK</> Plant in scheduling agreement
+The following <ZH>Business Add-Ins</> are available:
+<DS:SIMG.MEOUT_BAPI_CUST>MEOUT_BAPI_CUST</> for customer enhancements
+(the BAdI can be implemented multiple times).
+<LS>MEOUT_BAPI_IBS</> for SAP-internal enhancements (the BAdI can be
+implemented multiple times).
+&FUNCTIONALITY&
+BAPI to read out details from a scheduling agreement.
+&EXAMPLE&
+<DS:TX.MMPUR_BAPI_MEOUT_TEST_SINGLE>Sample Code</>
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+The following authorization objects are checked when the function module
+is invoked with activity 03:
+<DS:UO.M_RAHM_BSA>M_RAHM_BSA</> Document type of scheduling agreement
+<DS:UO.M_RAHM_EKO>M_RAHM_EKO</> Purchasing organization in scheduling
+agreement
+<DS:UO.M_RAHM_EKG>M_RAHM_EKG</> Purchasing group in scheduling agreement
+<DS:UO.M_RAHM_WRK>M_RAHM_WRK</> Plant in scheduling agreement
+The following <DS:TRAN.SE18>Business Add-Ins</>, which can be
+implemented multiple times, are available:
+<DS:SIMG.MEOUT_BAPI_CUST>MEOUT_BAPI_CUST</> for customer implementations
+<LS>MEOUT_BAPI_IBS</> for internal SAP implementations
+&FUNCTIONALITY&
+The BAPI_SCHEDULE_MAINTAIN is used to create or change scheduling
+agreement delivery schedule lines.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+The parameter PURCHASEDOCUMENT and the scheduling (delivery schedule
+line) data in POSCHEDULE and POSCHEDULEX are to be passed on to the
+interface. These three parameters are defined as mandatory.

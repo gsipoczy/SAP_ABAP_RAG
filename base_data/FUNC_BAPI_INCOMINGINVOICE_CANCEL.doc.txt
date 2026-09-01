@@ -1,0 +1,155 @@
+&FUNCTIONALITY&
+You can use this method to display complaints data for a reduced
+incoming invoice.
+For automatically reduced invoices, only the invoice header is displayed
+with the reduction amount at header level. For reduced invoice items,
+the invoice header and the reduced items are displayed.
+The data displayed is the same as the data of a complaints letter in
+logistics invoice verification.
+&EXAMPLE&
+
+&HINTS&
+The following authorization object is checked for all reduced invoice
+items with activity <ZK>03</>:
+
+<DS:UO.M_RECH_WRK>M_RECH_WRK</> Plant authorization for entering
+incoming invoices
+
+<DS:UO.M_RECH_BUK>M_RECH_BUK</> Company Code authorization for entering
+incoming invoices
+
+
+In Customizing for Logistics Invoice Verification, message types REKL
+and REK6 are defined for automatic printing of complaints letters and
+sending of IDocs in case of an invoice reduction. BAPI COMPLAIN can be
+called for any reduced invoice, whether or not a message record of
+message type REKL or REK6 exists for it. BAPI COMPLAIN does not change
+the status of the message record. The message record is only updated by
+the <ZK>Output Messages</> function in Logistics Invoice Verification
+(transaction MR90) - for example, set to <ZK>Processed Successfully</>.
+Input parameters
+The key fields of the incoming invoice (InvoiceDocNumber and FiscalYear)
+must be transferred to the method as import parameters.
+Output parameters
+The header data of the incoming invoice is returned in structure
+Headerdata.
+The Addressdata structure contains the address data and tax number(s) of
+the supplier.
+The data for individual reduced invoice items is exported to table
+Itemdata.  The Taxdata table contains the tax information for the
+invoice reduction.
+Return messages
+INCLUDE BAPI_RET OBJECT DOKU ID TX LANGUAGE EN
+&FURTHER_SOURCES_OF_INF&
+This method can only perform its function if no error messages are
+generated in table Return. This is the case if both the header data and
+all the reduced items can be processed correctly.
+For more information, see the parameter documentation.
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2081</> and method <LS>CREATEFORMDATA1</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+>>>>DOCULINK<(><<)><(><<)><(><<)><(><<)>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2081</> and method <LS>CREATEFORMDATA1</>
+, for BAPI calls using ALE.
+The interface of the module was defined as a standard API in ALE. The
+data is provided by the ALE layer.
+The function module is executed in the inbound system by the ALE layer.
+It converts the data from the IDoc into BAPI parameters and calls the
+BAPI in the inbound system. For more information about this BAPI, see
+>>>>DOCULINK<(><<)><(><<)><(><<)><(><<)>.
+When this module is executed, a new IDoc status is written. This status
+indicates either that the BAPI was called successfully in this system
+(status 53) or that errors occurred (status 51).
+BAPI return parameters specify how the ALE layer writes the IDoc status.
+If errors occur, the ALE layer is responsible. How the BAPI return
+parameters work:
+
+If the BAPI return parameter is an EXPORTING parameter, one single IDoc
+status record is written. If the message has type A or E, the IDoc is
+given status 51 (application document not posted). Otherwise (for
+message types W, I, or S), the IDoc is given status 53 (application
+document posted).
+
+If the return parameter is a tables parameter, multiple IDoc status
+records can be written. Message types determine the IDoc status. If a
+message has type A or E in the table, status 51 is written for the IDoc
+(application document not posted) for all entries except those with the
+type S (entries with types A, E, W, or I). For messages with type 'S',
+no IDoc status appears. If a message in the table has type 'A' or 'E',
+status '53' (application document posted) is written for 'W', 'I' or
+'S'. The status records are written to the database in the same sequence
+as the messages in the return parameter.
+
+If the return parameter is empty, the BAPI call was successful. In this
+case, an IDoc status record with status 53 (application document posted)
+is written by the ALE layer.
+If errors occur, the application must ensure that the data is
+consistent, for example by rolling back unwanted changes.
+You can use the ALE error handling functions (create a work item) to
+process any errors.
+&FUNCTIONALITY&
+With this method, you can create a reversal document by entering the
+original document.
+&EXAMPLE&
+
+&HINTS&
+The system checks the following authorization object with activity 01:
+
+<DS:UO.M_RECH_WRK>M_RECH_WRK</> Plant Authorization for Entering
+Invoices
+
+<DS:UO.M_RECH_BUK>M_RECH_BUK</> Company Code Authorization for Entering
+Invoices
+<ZH>Transfer</>
+You have to pass on to the method the key fields of the invoice
+(InvoiceDocNumber and FiscalYear) and the reversal reason as import
+parameters. You have the option of entering the posting date for the
+reversal.
+<ZH>Return</>
+The document number and the document year of the reversal document are
+returned in the export parameters <LS>InvoiceDocNumber</> and
+<LS>FiscalYear</>.
+<ZH>Return messages</>
+INCLUDE BAPI_RETURN
+&FURTHER_SOURCES_OF_INF&
+The methods can only perform their function if no error messages are
+created in the <LS>Return</> table. This is the case if the system was
+able to process the header data and all items without any errors.
+No transaction control is implemented. That means that the caller has to
+perform the 'Commit Work' itself after successfully invoking this method
+(that is, if no errors are reported to the caller in the <LS>Return</>
+parameter).

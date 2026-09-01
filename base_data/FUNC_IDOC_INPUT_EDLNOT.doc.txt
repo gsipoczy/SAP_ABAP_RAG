@@ -1,0 +1,174 @@
+The output category for processing forecast delivery schedules / JIT
+delivery schedules is DELINS. The corresponding IDoc structure is
+DELFOR01. When creating an IDoc from standard output using a converter,
+make sure that an IDoc is created for a customer material number in
+each delivery schedule.
+<ZH>Example:</> VDA4905 - an IDOc for every record type 513
+Copy / process the following fields in the IDoc:
+Segment E1EDK09
+
+vtrnr  - Closing number / purchase order number of the customer
+abrvw  - Usage indicator (e.g S = Serial, E = Replacement, etc.)
+labnk  - Delivery schedule number, new
+bstdk  - Delivery schedule date, new for field labnk
+abnra  - Scheduling agreement release number - old
+abnrd  - Release date - old for field abnra
+cydat  - Date at which cumulative quantity received by customer
+         is set to zero
+cyefz  - Cumulative quantity reached at date it is set to zero
+mflauf - Runtime for material go-ahead
+mfein  - Period indicator for material go-ahead (1->day, 2->week,
+         3->month)
+fflauf - Runtime for production go-ahead
+ffein  - Period indicator for production go-ahead (period length see
+         above)
+bstzd  - Account assignment
+zeich  - Reference for component supplier (your reference)
+kstat  - If an error has occured in translation, enter a status here
+ktext  - If you have maintained kstat, enter a status description here
+If you have maintained the last two fields, the system terminates
+scheduling and an error message with the content of the field ktext is
+sent to the relevant SAP user.
+Segment E1EDKA1
+The each of the following partner functions to an E1EDKA1 record:
+
+LF with field partn = Vendor number of receiver at customer
+AG with field partn = Customer number
+WE with field partn = Ship-to party
+AB with field partn = Unloading point
+Partner functions AG and WE do not necessarily need to be specified,
+because the internal numbers are determined using LF, and AB. The
+customer plant number is determined from segment E1EDP10.
+Segment E1EDP10
+
+idnkd - Customer material number
+kwerk - Customer plant number
+belnr - Last delivery note number of customer
+screl - Description for scheduling agreement release
+Allowed values: 02 = JIT dlvy sched., 03 = Dlvy sched., 04 = Dlvy
+sched.
+abhor - Date of JIT horizon
+lidtl - Last delivery date for field belnr
+akuem - Entry cumulative qty of customer for last delivery
+lfimg - Last delivery quantity for field belnr
+sollfz - Planned cumulative quantity to be targeted
+solldt - Date for field sollfz
+fzdif - Cumulative quantity difference between actual cumulative
+received quantity and the cumulative received quantity expected by the
+customer (for JIT - AUDI)
+abfde - Production release end as date
+abmde - Material release end date
+For the last two fields, the translator calculates a period (e.g. a
+month ) or determines a date via table entries for the release periods
+in the customer/material record.
+
+abrab - Scheduling agreement release valid from date
+abrbi - Scheduling agreement release valid to date
+labky - Scheduling agreement key. The following schedule lines are
+transferred:
+1 = All schedule lines in abrab and abrbi AND schedule lines from the
+old scheduling agreement release which lie outside of this time frame.
+2 = The old scheduling agreement release is replaced completely by the
+new schedule lines.
+vbrst - Customer point of consumption
+kritb - Critical stock indicator
+dfabl - If the unloading point is not transferred in segment E1EDKA1,
+enter it here.
+Segment E1EDK11 and/or E1EDP15
+
+tdname - Text name. This field must agree with the settings in SAP
+Customizing. For example, if an item text in the SAP system is defined
+as '0001' and is to be transferred, the translator must use '0001' as
+tdname.
+spras - Language key. Must agree with setting in SAP Customizing.
+txtlf - Cumulative number if several text segments from the same field
+tdname are to be transferred.
+Segment E1EDP14
+
+pcknr - Customer packing / material number
+anzpk - Number of shipping units
+anzar - Number of articles/materials per shipping unit
+gdatv - Validity date for shipping unit
+Segment E1EDP16
+
+ettyp - Schedule line type. Relevant values:
+1 = Fixed deadline, 2 = Backlog, 3 = Immediate req., 4 = preview, 9 =
+JIT
+prgrs - Date cat. Relevant values:
+D or blank = day, W = week, M = month, I = interval
+edatuv - Schedule line date from
+edatub - Schedule line date to
+For daily schedule lines, edatuv and edatub must be identical.
+For weekly schedule lines, enter the first day of the week in the
+schedule line from-date field.
+For monthly schedule lines, enter the first day of the month.
+For intervals, enter the beginning of the interval as the schedule line
+from-date and the end of the interval as the schedule line to-date.
+ezeit - Time of scheduling agreement release
+etvtf - Distribution function. The contents of this field  must
+correspond to the settings made in Customizing in the SAP system. When
+transporting this field, be aware that the weekly dates or intervals
+may be distributed linearly over individual days.
+wmeng - Schedule line quantity
+The output category for processing external service agent delivery
+notes is EDLNOT. The IDoc linked to the output category is
+DESADV01. When constructing an IDoc from standard output using a
+converter, you must make sure that an IDoc is created for each
+delivery item.
+<ZH>Example</>
+
+Delivery 4711 has item 1 with material number ABC
+                  item 2 with material number ABCD
+                  item 3 with material number ABCDE
+
+In this case, 3 separate IDocs DESADV01 must be created and
+transferred.
+
+The following fields must be transferred or processed in the IDoc:
+Segment E1EDKA2
+The following partner functions must each be transferred to an E1EDKA2
+record:
+
+LF with field partn = Vendor number of receiver at customer
+AG with field partn = Customer number
+WE with field partn = Ship-to party
+AB with field partn = Unloading point
+WK with field partn = Plant number at customer
+Partner functions AG and WE do not necessarily need to be specified,
+because the internal numbers are determined using LF, WK and AB
+Segment E1EDP07
+
+bstnk - Closing number / purchasing order number of customer
+Segment E1EDP09
+
+kdmat - Material number of customer
+abrvw - Call usage indicator (e.g. S = Serial, E = replacement  etc.)
+vbeln - Delivery note number
+posnr - Item number for vbeln
+lfimg - Delivery quantity
+Segment E1EDK06
+
+iddat - 001
+datum - Delivery date
+Segment E1EDP06 (one E1EDP06 segment per shipping unit)
+
+pcknr - Shipping unit number of customer
+anzpa - Number of shipping units
+Segment E1EDKT3
+
+tdid - Text number. This number must agree with the settings in SAP
+Customizing.
+tsspras - Language key. This must also agree with values in SAP
+Customizing.
+Segment E1EDKT4
+
+Text line - Text for segment E1EDKT3
+Segment E1EDPT1
+
+tdid - Text number. This number must agree with the settings in SAP
+Customizing.
+tsspras - Language key. This must also agree with values in SAP
+Customizing.
+Segment E1EDPT2
+
+Text line - Text for segment E1EDPT1

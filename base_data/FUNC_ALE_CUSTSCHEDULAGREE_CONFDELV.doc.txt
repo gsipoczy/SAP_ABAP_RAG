@@ -1,0 +1,23 @@
+&FUNCTIONALITY&
+You can use this method to make a delivery confrmation in the SD
+scheduling agreement.
+&EXAMPLE&
+1. Generating delivery for a scheduling agreement item.
+2. Changing a delivery item.
+3. Posting of goods issue for delivery.
+4. Deleting a delivery item or a delivery.
+&HINTS&
+1. Required information
+
+The order number must be entered in the structure SALESDOCUMENT.
+The structure DLVITEM must be filled for every order item. If the
+deletion indicator DELETEFLAG is not set here, the structure
+DLVITEMDATA must also be filled for these items.
+2. Database Commit Control
+
+The BAPI does not execute a database commit. Therefore the running
+application must initiate the commit so that changes to the database
+can be made. The BAPI BAPI_TRANSACTION_COMMIT is available for this.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

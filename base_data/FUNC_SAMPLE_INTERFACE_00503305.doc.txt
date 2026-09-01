@@ -1,0 +1,135 @@
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DEFINE &TEXT& = 'Maintain conditions: Transitions'
+DEFINE &EVENT& = '00503303'
+DEFINE &TYPE& = 'INTERFACE'
+INCLUDE FI_OPEN_FI_DOCUMENTATION_1 OBJECT DOKU ID TX
+&FUNCTIONALITY&
+This function module (user-exit) allows you to decide which field
+contents are permitted in condition maintenance when creating or
+changing condition records.
+
+The following import parameters are available:
+
+KOMG_OLD             ,,old status of KOMG structure
+
+KOMG_NEW             ,,new status of KOMG structure
+
+VAKE_OLD             ,,old status of VAKE structure
+
+VAKE_NEW             ,,new status of VAKE structure
+
+You can set the export parameter TRANSITION_FORBIDDEN to either
+SPACE or 'X':
+
+If you set it to SPACE, you can continue with condition maintenance.
+
+However, if it is set to 'X', then you will receive an error message.
+
+&EXAMPLE&
+To display your workflow, you can use the processing status for the
+condition records, for example. This functionality is available from
+Release 4.6A for newly created condition tables, as long as the setting
+was made accordingly in the condition table.
+
+If your workflow does not allow, for example, the transition from
+processing status from 'A' to 'C' (as only 'A' to 'B' or 'B' to 'C' is
+permitted), you can compare the two fields
+KOMG_OLD-KBSTAT
+KOMG_NEW-KBSTAT
+in this user exit.
+
+&HINTS&
+SAP cannot ensure that all fields in the KOMG and VAKE structures have
+been completed with the appropriate values. To implement this user
+exit, we urgently recommend that you check the current content of the
+fields that you are using.
+DEFINE &TEXT& = 'Condition Maintenance: Field Check'
+DEFINE &EVENT& = '00503305'
+DEFINE &TYPE& = 'INTERFACE'
+INCLUDE FI_OPEN_FI_DOCUMENTATION_1 OBJECT DOCU ID TX
+&FUNCTIONALITY&
+
+In condition maintenance for pricing, prices, surcharges or discounts
+are created depending on characteristics, such as the material number.
+A check is made for characteristics on the eligibility of the value.
+Using this function module (user exit), you can influence the check,
+and also carry out your own check.
+
+The following parameters are available:
+
+FIELDNAME
+Name of characteristic field for which a check is carried out. The
+field is contained in structure KOMG
+
+VALUE
+Contents of character field.
+
+KOMG_I
+Contents of communication structure KOMG. It contains the values of
+individual characteristics for the condition record being processed.
+KONP_I
+Condition information (item) KONP. Contents of this structure can be
+used for the selection.
+T681E_I
+Structure with information for condition record. This information (for
+example, the number of the condition table) can be used for the
+selection.
+
+CHECK_FIELD
+(Changeable) By deleting this field, the standard check for the
+characteristic can be switched off.
+
+RETURNCODE
+(Changeable) Return value to transfer the result of an own field check
+to the calling program.
+Return code 0: value correct, 1: errors
+
+<ZH>Note</>: If you implement your own check, you should not issue an
+own error message. The function module is also called during background
+runs, these are interrupted abruptly by error messages. The calling
+program treats the RETURNCODE correspondingly, and creates either an
+error message, or transfers an error code to the calling program. If
+several USER-Exits are being used, the output of a RETURNCODE not equal
+to 0 surpresses the processing of subsequently assigned USER-Exits.
+
+Summary of standard functions:
+
+Switch off standard field check for a specific characteristic (delete
+CHECK_FIELD)
+
+Carry out own check. When an own check is carried out, the standard
+check is not switched off. If you want to surpress this, CHECK_FIELD
+must be deleted.
+
+&EXAMPLE&
+
+You wish to permit condition type ZPR0 in VKORG 0003 to create
+condition records for materials. The materials do not yet exist in the
+material master.
+
+FUNCTION BTE_INTERFACE_00503305.
+
+*"-----------------------------------------------------
+*"*"Local interface:
+*"       IMPORTING
+*"             VALUE(FIELDNAME) TYPE  SEFELD
+*"             VALUE(VALUE)
+*"             VALUE(KOMG_I) TYPE  KOMG
+*"             VALUE(KONP_I) TYPE  KONP
+*"             VALUE(T681E_I) TYPE  T681E
+*"       CHANGING
+*"             REFERENCE(CHECK_FIELD) TYPE  CHAR1
+*"             REFERENCE(RETURNCODE) TYPE  SUBRC
+*"-----------------------------------------------------
+
+IF KONP_I-KSCHL = 'ZPR0' AND KOMG_I-VKORG = '0003'.
+      IF FIELDNAME = 'MATNR'.
+         CLEAR CHECK_FIELD.
+      ENDIF.
+ENDIF.
+
+ENDFUNCTION. ,,
+

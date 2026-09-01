@@ -1,0 +1,6 @@
+Der Funktionsbaustein liest zu den angegebenen Schlüsselfeldern die
+LIS-Statistiksätze (Tabelle S012) in dem vorgegebenen Zeitraum und
+sendet zwei Bilder, in denen die Daten dargestellt werden. Es können
+zwei Vergleichsperioden vorgegeben werden, die über eine entsprechende
+Funktion noch feiner differenziert werden können.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

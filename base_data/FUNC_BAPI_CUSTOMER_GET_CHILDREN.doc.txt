@@ -1,0 +1,8 @@
+Implementation of the <ZH>Customer.getAllRoots()</> Instance Method
+The highest-level customer is determined for a certain time and a
+specified hierarchy type.
+Implementation of Instance Method: Customer.getChildren()
+The system determines the customers subordinated to the <ZH>ValidOn</>
+business transaction event, up to the level indicated, for the customer
+in the hierarchy of the specified hierarchy type. The system issues the
+direct predecessor to each node.

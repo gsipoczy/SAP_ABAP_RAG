@@ -1,0 +1,16 @@
+&FUNCTIONALITY&
+This BAPI function module is used to create object references for a
+partner sales activity in order to assign objects to a partner sales
+activity subsequently.
+The data base change will only be initiated by the method
+BapiService.TransactionCommit.
+The relevant method has been implemented as a class method. The return
+parameter contains the processing log. It contains all messages (error,
+warning, information) from the consistency check.
+
+&EXAMPLE&
+
+&HINTS&
+,,The update is ist encapsulated in a PERFORM ... ON COMMIT.
+&FURTHER_SOURCES_OF_INF&
+

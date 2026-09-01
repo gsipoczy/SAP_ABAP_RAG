@@ -1,0 +1,101 @@
+&FUNCTIONALITY&
+This RFC enabled function module offers the possibility to perform a
+call to SD pricing for a given set of customers (KUNNR's) and materials
+(MATNR's). For each combination of those, pricing will be done using the
+performance optimized price inquiry API which indeed does a mass-access
+onto the condition records.
+&EXAMPLE&
+If you want to create your own price list (e.g. for a product catalogue)
+or want to do pricing for your own web shop, you can use this function
+module.
+&HINTS&
+This RFC enabled function module supports the BasXML feature. For
+details, please see the documentation of the according checkbox in the
+'attribute' tab of the function module.
+&PARAMETERS&
+<ZH>IV_CALLER_ID</> (importing)
+Different callers can identify themselves by a caller ID which needs to
+be registrated in the table PIQC_API_CALLER (additional customizing is
+necessary for a registration). You can also use the standard caller with
+the ID 'STD'.
+<ZH>IS_CONTROL</> (importing)
+The control structure offers additional possibilities to influence the
+result of the pricing call:
+EXTERNAL_FORMAT
+If this flag is set, the result will be offered in the parameter
+ET_RESULT_EXT which contains string fields for the numerical values like
+item net value (NETWR) or condition value (KWERT). If this flag is not
+set, the result will be offered in the parameter ET_RESULT which
+contains packed fields (DDIC type NUMC) for the numerical values.
+GROUP_PROCESSING
+If this flag is set then pricing group processing logic would be
+processed for each head entry with the all the item entries considered
+in the group. However please note the restriction that the group
+processing flag must not be used together with the flag for getting
+scale information or pricing details (KALSM_VARIANT).
+PRICE_DETAILS
+If you are interested in the price details, you can set this flag. If
+so, the found pricing conditions are available in the nested internal
+table COND of the pricing result.
+PRICING_CONTROL
+This substructure controls whether scales shall be determined
+automatically (all scales found a runtime from different condition
+records for a certain pricing item will be merged and displayed as one
+"overall" scale). Moreover, you can specify a pricing procedure variant
+for limiting the number of lines you get in the price details (see
+above; additional customizing is necessary for this).
+KALSM_VARIANT
+Here, you can specify a pricing procedure variant for skipping certain
+lines of the pricing procedure during pricing call (additional
+customizing is necessary for this). By excluding pricing procedure steps
+which do you not need for your scenario (like freights, taxes or
+rebates), you can improve the performance significantly.
+<ZH>IS_GLOBAL</> (importing)
+This structure specifies overall parameters like pricing date, sales
+order type or the sales area.
+<ZH>IT_HEAD</> (importing)
+Here, a list of customers can be provided for which the pricing shall be
+done. For each customer, you should provide a unique pseudo document
+number e.g. by counting up. Note that the first character of VBELN
+should be a '$' sign. If you are interested in the description of the
+pricing result (parameter ES_DESCRIPTION), you shall provide a language
+for each customer.
+<ZH>IT_ITEM</> (importing)
+Here, a list of materials can be provided for which the pricing shall
+bedone. For each material, you should provide a unique pseudo item
+number e.g. by counting up. Moreover, you shall provide a quantity and a
+unit of measure for each material.
+<ZH>ET_RESULT</> (exporting)
+For each customer and each material you provide, you will get an entry
+in the result table (so-called cartesian product); if you switch on
+scale determination, you might get several lines for each customer and
+material.
+The result table contains a set of nested internal tables on different
+levels:
+On header level, you will find the pricing procedure name and the
+document currency.
+On item level, you get many fields of the KOMP structure like PRSOK (a
+flag which says whether pricing was processed successfully), NETPR (net
+price) and NETWR (net value). Moreover, you get the subtotal values
+KZWI1 up to KZWI6 whose meaning is defined in the customizing of the
+affected pricing procedures.
+On condition level, you get many fields of the XKOMV structure like
+KSCHL (condition type name), KBETR (condition rate) and KWERT (condition
+value).
+<ZH>ET_RESULT_EXT</> (exporting)
+The same information is returned in ET_RESULT_EXT as in ET_RESULT. The
+only difference is the format of the numerical fields contained (see the
+parameter EXTERNAL_FORMAT above).
+<ZH>ET_MESSAGE</> (exporting)
+Here, the resulting messages are available
+<ZH>ES_DESCRIPTION</> (exporting)
+If you specify the language in the parameter IT_HEAD (see above), you
+can fetch the texts of the condition types and subtotal lines in this
+parameter.
+Dynamic caller data
+In the importing parameters IS_GLOBAL, IT_HEAD and ITEM_ITEM, the nested
+internal table <ZH>CALLER_DATA</> is available which can be filled by an
+arbitrary number of name-value pairs. The allowed NAME's can be fetched
+from the constant attribute <ZH>GS_CO_CALC_DATA_REF_FIELD_NAME</> of the
+ABAP interface IF_PIQ_API (on each level separately).
+

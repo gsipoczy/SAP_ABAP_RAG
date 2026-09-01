@@ -1,0 +1,41 @@
+&FUNCTIONALITY&
+Der Funktionsbaustein liefert die Daten eines Leistungsverzeichnisses.
+Hierfür wird die Paketnummer benötigt (Feld PACKNO).
+Rückgabewerte sind:
+SERVICE_TAB: Leistungsverzeichnis mit Gliederung und Leistungen
+Die Tabelle ist schon so sortiert, wie sie ausgegeben werden muss. Die
+Entscheidung, ob eine Zeile eine Gliederung ist oder eine Leistung, wird
+mit dem Feld RANG gemacht. Wenn RANG nicht initial ist, dann handelt es
+sich um eine Leistung, ansonsten um eine Gliederung.
+<ZH>Gliederungszeilen</>
+wichtige Felder:
+EXTGROUP - Gliederungsbezeichnung
+KTEXT1 - Kurztext
+RANG - Gliederungstiefe
+<ZH>Leistungszeilen</>
+wichtige Felder:
+EXTROW - Zeilennummer
+SRVPOS - Leistungsnummer
+KTEXT1 - Kurztext
+MENGE - Menge
+MEINS - Mengeneinheit
+LIMIT: Wertlimits
+wichtige Felder:
+SUMLIMIT - Gesamtlimit
+SUMNOLIM - unbegrenztes Gesamtlimit
+COMMITMENT - erwarteter Wert
+WAERS - Währung
+LIMIT_TAB: Kontraktlimits
+wichtige Felder:
+EBELN - Kontraktnummer
+EBELP - Kontraktposition
+LIMIT - Limit des Kontrakts
+NOLIMIT - unbegrenztes Kontraktlimit
+KTEXT1 - Kurztext des Kontrakts
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

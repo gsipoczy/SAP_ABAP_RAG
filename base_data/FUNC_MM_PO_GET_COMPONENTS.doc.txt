@@ -1,0 +1,35 @@
+&FUNCTIONALITY&
+MM_PO_GET_COMPONENTS ist dafür konzipiert, im Anschluss an
+BAPI_PO_GETDETAIL1 gerufen zu werden. Die Komponenten-Tabelle, die
+BAPI_PO_GETDETAIL1 zurückgibt, wird MM_PO_GET_COMPONENTS als Import
+Parameter mitgegeben.
+MM_PO_GET_COMPONENTS ergänzt nur die Daten, die ihm in der Import-
+Tabelle IM_COMPONENTS mitgegeben werden. Die ergänzten Daten werden in
+der Tabelle EX_COMPONENTS zurückgegeben.
+Es wird nicht auf archivierte Daten zugegriffen, sondern nur auf Daten
+von der Datenbank.
+Ergänzt werden diese zusätzlichen Felder, die sich in der Export-Tabelle
+EX_COMPONENTS finden:
+ITEM_CAT (Positionstyp (Stückliste)
+REQ_QUAN (Bedarfsmenge)
+BASE_UOM (Basismengeneinheit)
+BASE_UOM_ISO (Basismengeneinheit im ISO-Code)
+PHANT_ITEM (Dummy-Positionskennzeichen)
+BATCH (Chargennummer)
+
+WICHTIG:
+MM_PO_GET_COMPONENTS führt keine Berechtigungsprüfungen aus! Es wird
+davon ausgegangen, dass nur Daten mitgegeben werden, für die die
+Berechtigungsprüfungen bereits erfolgt sind, da BAPI_PO_GETDETAIL1 alle
+erforderlichen Prüfungen durchführt.
+&EXAMPLE&
+
+&HINTS&
+ACHTUNG:
+MM_PO_GET_COMPONENTS nur im Anschluss an BAPI_PO_GETDETAIL1 aufrufen!
+Er darf nur mit Import-Daten aufgerufen werden, für die alle
+erforderlichen Prüfungen bereits gelaufen sind (für Daten, die von
+BAPI_PO_GETDETAIL1  zurückgegeben werden, trifft dies zu).
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

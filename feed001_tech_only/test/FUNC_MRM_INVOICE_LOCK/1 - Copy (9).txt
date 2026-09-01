@@ -1,0 +1,86 @@
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+The function module MRM_DISTRIBUTION_BNK distributes unplanned delivery
+costs among the items in an invoice. The unplanned delivery costs are
+stored in field "BNKAN_FW". The system only takes into account items
+that meet the following conditions:
+The item is allocated to the invoice
+The item concerned is not a planned delivery costs item such as customs
+duty or freight costs
+The item is relevant for unplanned delivery costs
+Parameters:
+Import parameters:
+I_BEZNK: Unplanned delivery costs
+I_BUKRS: Company code
+I_BUDAT: Posting date (of the invoice document)
+I_WAERS: Currency key (in the invoice)
+I_XRECH: Indicator: post invoice
+I_UMRECHNEN: Indicates whether conversion to local currency is
+necessary
+Characteristic = SPACE (Default): No
+Characteristic = 'X': Yes
+Export parameters: None
+Changing parameters: None
+Table parameters:
+T_DRSEG: Table containing the invoice items
+In this function module, the system distributes unplanned delivery
+costs among all material items that meet the conditions listed above.
+Distribution of unplanned delivery costs is not applicable if the
+indicator "BNK" is set in Table T169P (Parameters, Invoice
+Verification). In this case, the system posts unplanned delivery costs
+to a separate account.
+The amount of the unplanned delivery costs that the system distributes
+to the line items on the debit or credit side is calculated using the
+following formulae. The variables used have the following meaning:
+wrbtr_s: Value of goods in the line items posted on the debit side
+bnk_index_s: Number of line items to be posted on the debit side that
+contain unplanned delivery costs
+bnk_s: Unplanned costs to be invoiced that are distributed among the
+line items to be posted on the debit side
+wrbtr_h: Value of goods in the line items posted on the credit side
+bnk_index_h: Number of line items to be posted on the credit side that
+contain unplanned delivery costs
+bnk_h: Unplanned costs to be invoiced that are distributed among the
+line items to be posted on the credit side
+bnk_erf: The unplanned delivery costs entered
+Formulae:
+bnk_index_s <> 0 and bnk_index_h <> 0:
+Invoice:
+bnk_h = (wrbtr_h / wrbtr_s) * bnk_erf
+bnk_s = bnk_h + bnk_erf
+Credit memo:
+bnk_s = (wrbtr_s / wrbtr_h) * bnk_erf
+bnk_h = bnk_s + bnk_erf
+bnk_index_s <> 0 and bnk_index_h = 0:
+Invoice:
+bnk_s = bnk_erf
+bnk_h = 0
+Credit memo:
+bnk_s = bnk_erf * (-1)
+bnk_h = 0
+bnk_index_s = 0 and bnk_index_h <> 0:
+Invoice:
+bnk_h = bnk_erf * (-1)
+bnk_s = 0
+Credit memo:
+bnk_h = bnk_erf
+bnk_s = 0
+bnk_index_s = 0 and bnk_index_h = 0:
+bnk_s = 0
+bnk_h = 0
+Exceptions:
+The exception "no_entry_found" is triggered when the system finds no
+record when it reads the parameters for invoice verification.
+The exception "currency_error" is triggered when an error occurs during
+conversion of an amount from a foreign currency to the local currency.
+&EXAMPLE&
+&HINTS&
+If the system should convert the amount to the local currency, the
+converted value is stored in table field "bnkan_hw". If the system
+should not convert the amount, the field contains the value 0.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

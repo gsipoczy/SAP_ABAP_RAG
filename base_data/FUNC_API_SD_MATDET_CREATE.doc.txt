@@ -1,0 +1,44 @@
+&FUNCTIONALITY&
+This function module can be used to import <LS>Sales</> material
+determination data into an SAP S/4HANA system. Material determination is
+typically created using transaction
+ <DS:TRAN.VB11>VB11</> and is commonly referred to as
+ <DS:GLOS.3526C7AAAFAB52B9E10000009B38F974>material substitution.</>
+The function module currently only supports the following:
+<LS>Key Combination</>: <LB>Material Entered</> (Material determination
+condition table 001)
+
+<DS:DE.KAPPL>Application</>: <LB>V</> (<LS>Sales/Distribution</>).
+The function module validates the material determination data imported
+as a table, saves the rows that did not generate validation errors, and
+returns error messages, indicating the row numbers where errors
+occurred. Error-free rows are saved even if the input table contains
+unsuccessful rows.
+The function module does not commit the imported material determination
+data to the database, regardless of the setting of the <NP>IV_TEST_MODE
+</>parameter. If you would like to persist the imported data in the
+database, you must commit the changes following the call to this
+function module.
+The necessary authorizations to execute this function module are managed
+using authorization object: <NP>V_KOND_VEA </>(<LS>Maintain Condition:
+Auth. for Use/Appl./Cond.Type/Table</>), and must be set as follows:
+<AB>ACTVT = 01</> (Activity = Create)<(>,<)>
+<AB>KAPPL = V</> (Application = V: Sales/Distribution)<(>,<)>
+<AB>KVEWE = D</> (Condition Table Usage = D: Material Determination)<(>
+,<)>
+<AB>KOTABNR = 001</> (Condition Table = 001: Material Entered)
+<AB>KSCHL </>(Condition Type: taken from the input records
+IT_MATDET_001-MaterialDeterminationType)
+&EXAMPLE&
+This function module is called by the <LS>Material Determination</>
+migration object found under <LS>Migrate Your Data</> in the <LS>Manage
+Your Solution </>app. The migration object requires an upload of
+material determination data in a *.csv file.
+The migration object parses the material determination data included in
+the *.csv file according to the parameters of the <NP>API_S
+D_MATDET_CREATE </>function module.
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

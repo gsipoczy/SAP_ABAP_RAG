@@ -1,0 +1,34 @@
+&FUNCTIONALITY&
+Using this method, you can change or delete sales documents.
+You can change header data, item data, schedule line data and
+configuration data.
+This is a general rule:
+1. You only need to enter the fields you wish to change.
+2. Select these with an X in the relevant checkboxes.
+3. Fill in the UPDATE field with a U.
+4. You must always enter key fields if you make a change, inculding in
+the checkbox.
+5. The configuration is an exception. If you change it, you must
+fill it in completely.
+Maintain the quantities and dates via schedule line data.
+7. Possible UPDATEFLAGS:
+U = Change
+D = Delete
+I = Insert
+&EXAMPLE&
+1.Completely delete sales document
+2.Delete sales document item
+3.Changes to sales documents
+4.Change configuration
+
+&HINTS&
+1.Miminum entries:
+The sales document number must definitely be created in the structure
+SALESDOCUMENT.
+Key fields must always be entered when making a change.
+The Update indicator in ORDER_HEADER_INX must always be entered.
+2.Commit control The BAPI does not do a database Commit. As a result,
+the application being used must call up Commit, so that changes can be
+carried out on the database. The BAPI BAPI_TRANSACTION_COMMIT is
+available for this.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

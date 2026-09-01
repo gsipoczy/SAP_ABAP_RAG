@@ -1,0 +1,363 @@
+&FUNCTIONALITY&
+Als Vorlage für den neuen Funktionsbaustein dient der existierende
+Funktionsbaustein IDOC_INPUT_ORDRSP.
+Von der Logik des neu zu erstellenden Funktionsbausteins ändert sich im
+Vergleich zum bisher existierenden Funktionsbaustein IDOC_INPUT_ORDRSP
+lediglich die Programmlogik, dass die Fehlermeldungen, welche aus den
+Toleranzprüfungen stammen durch Warnmeldungen ersetzt werden. Diese
+Warnmeldungen betreffen die Termintoleranzprüfung, Mengentoleranzprüfung
+und die Preistoleranzprüfung. Wird eine dieser Warnmeldungen
+prozessiert, so wird ein Workflow ausgelöst. Dieser Workflow wird die
+Standardaufgabe TS00008075 sein, welche derzeit auch vom
+Funktionsbaustein IDOC_INPUT_ORDRSP aufgerufen ist.
+Alle anderen Prüfungen werden wie im Baustein IDOC_INPUT_ORDRSP
+behandelt. Fehler die bei dem Mappen der Daten auftreten führen zum
+Abbruch der IDoc-Verarbeitung. Das Fehlerhandling erfolgt über die
+Standardaufgabe TS00008075 des SAP Business Workflow.
+Das IDoc (ORDRSP) wird nur verbucht, wenn kein Fehler aufgetreten ist.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+Innerhalb des Funktionsbausteins werden die Übergabetabellen
+IDOC_CONTROL und IDOC_DATA an die Methode LCL_INPUT_ORDRSP->Constructor(
+) übergeben. Nachdem die Instanz der Klasse LCL_INPUT_ORDRSP erzeugt
+worden ist, wird die Hauptverarbeitungsmethode
+LCL_INPUT_ORDRSP->PROCESS( ) aufgerufen.
+Für den Fall dass eine dynamische Ausnahme ausgelöst worden ist (siehe
+Abschnitt Methode SET_MESSAGE), wird diese über eine Catch Anweisung
+abgefangen. Hinterher werden über die Methode
+LCL_SUS_ORDRSP->POST_PROCESSING( ) die Rückgabeinformation extrahiert
+und an den Eingangsfunktionsbaustein übergeben.
+<ZH>1.1,,Geschäftslogik der lokalen Klasse LCL_INPUT_ORDRSP</>
+<ZH>1.1.1,,Attribute der Public Section</>
+<ZH>1.1.1.1,,Attribut MY_IDOC_DATA</>
+Dieses Attribut enthält die kompletten Datensegmente des ORDRSP-IDoc.
+<ZH>1.1.1.2,,Attribut MY_RET_VALUE</>
+Dieses Attribut enthält die Informationen über einen eventuell
+anzustoßenden Workflow.
+<ZH>1.1.1.3,,Klassenattribut MY_MESSAGE_LOG</>
+In diesem Attribut werden alle Nachrichten gesammelt, die während der
+Prozessierung aufgetreten sind.
+<ZH>1.1.2,,Attribute der Private Section</>
+<ZH>1.1.2.1,,Attribut MY_IDOC_NUMBER</>
+Dieses Attribut speichert die Nummer des aktuell prozessierten IDoc.
+<ZH>1.1.2.2,,Attribut MY_MASS_DATA</>
+Dieses Attribut widerspiegelt den an den Funktionsbaustein übergebenen
+Parameter MASS_PROCESSING.
+<ZH>1.1.2.3,,Attribut MY_PO_NUMBER</>
+Enthält die Bestellnummer der zu bestätigenden Bestellung im SAP-System.
+<ZH>1.1.2.4,,Attribut MY_CURRENCY</>
+Dieses Attribut enthält die Kopfwährung
+<ZH>1.1.2.5,,Attribut MY_EX_RATE</>
+Enthält den Umrechnungsfaktor zwischen Buchungskreiswährung und
+Kopfwährung (MY_CURRENCY).
+<ZH>1.1.2.6,,Attribut MY_CONF_DATE</>
+Enthält die Information über das Bestätigungsdatum
+<ZH>1.1.2.7,,Attribut MY_HEAD_CONF</>
+Enthält die Information der Bestätigungsnummer auf Kopfebene
+<ZH>1.1.2.8,,Attribut MY_ITEM_TABLE</>
+Diese Tabelle enthält alle Positionsobjekte mit zugeordneten
+E1EDP01-Daten.
+<ZH>1.1.2.9,,Attribut MY_PO_REF</>
+Dieses Attribut beinhaltet die Instanz/Referenz auf das Bestellobjekt.
+<ZH>1.1.2.10,,Attribut MY_WORKFLOW</>
+Dieses Attribut beinhaltet die Information ob ein Workflow ausgelöst
+werden soll oder nicht.
+<ZH>1.1.3,,Methode CONSTRUCTOR</>
+Der Constructor überprüft im ersten Schritt, ob es sich um ein IDoc vom
+Typ ORDRSP handelt. Sollte dem nicht so sein, wird eine Exception
+ausgelöst, die von der Exception WF_ERROR_PROCESSING des
+Eingangsfunktionsbausteins abgefangen wird. Weiterhin wird die Methode
+SET_MESSAGE für das Event-Handling registriert.
+<ZH>1.1.4,,Methode INITIALIZATION( )</>
+In dieser öffentlichen Methode werden alle Klassen-Attribute
+initialisiert.
+<ZH>1.1.5,,Methode PROCESS( )</>
+Diese öffentliche Methode ruft die privaten Methode PROCESS_SEGMENT( )
+auf. Im Anschluss wird die Methode PO_READ( ) prozessiert und hieran
+schließt sich die Positionsprozessierung an.
+Abschließend werden die prozessierten Daten an die Methode POST( )
+übergeben, wo diese dann den entsprechenden Funktionsbausteinen zur
+Verbuchung übergeben werden.
+<ZH>1.1.5.1,,Methode PROCESS_SEGMENTS( )</>
+Diese private Methode startet die Verarbeitung der IDoc Daten. Diese
+werden segmentabhängig aus der Tabelle IDOC_DATA gelesen und in die
+entsprechenden Attribute der Klasse gesichert. Jedes Segment hat seine
+eigene Prozessierungsmethode. Es werden die folgenden Segmente des
+Basistypes ORDERS05 in diesem Szenario unterstützt und prozessiert:
+E1EDK01 Kopfsegment ohne Aktionscode
+dieses Segment enthält den Währungscode und einen entsprechenden
+Umrechnungsfaktor
+E1EDK02 Kopfsegment mit Aktionscode
+Aktionscode 001
+über den Aktionscode 001 kann die Bestellnummer ermittelt werden
+Aktionscode 002
+ist Träger der Auftragsbestätigungsnummer, sowie des Erstellungsdatums
+E1EDP01 Positionssegment ohne Aktionscode
+es werden alle allgemeinen Positionsdaten gesichert und es wird eine
+Konvertierung der Mengeneinheit durchgeführt von ISO-Code zu SAP-Code
+(hierzu muss eine Primarverknüpfung vorliegen -> siehe
+<DS:TRAN.CUNI>Transaktion CUNI</>).
+Es können maximal 99,999 Positionen bestätigt werden. Diese Limitation
+ergibt sich durch die Eigenschaft des Feldes EKPO-EBELP (Belegposition)
+im Einkaufsbeleg.
+Pro Position wird eine eigene Instanz der Klasse LCL_ITEM erzeugt. In
+dieser Klasse sind die entsprechenden Werte als Attribute hinterlegt
+werden. Zugleich werden innerhalb des privaten Attributes my_item_table
+alle erzeugten Positionsobjekte abgelegt.
+E1EDP02 Positionssegment mit Aktionscode
+Aktionscode 001
+ist Träger der Bestellnummer und der Bestellposition, die bestätigt
+werden soll, diese Information sollte gegen E1EDK02 001 geprüft werden
+Aktionscode 002
+ist Träger der Auftragsbestätigungssnummer, diese kann 35 Zeichen lang
+sein, es werden jedoch nur die ersten 20 Zeichen übernommen (Limitation
+durch Bestellung EKPO-LABNR)
+E1EDP20 Positionssegment ohne Aktionscode
+dieses Segment enthält die Einteilungen, die der Lieferant bestätigt.
+Das übergebene Lieferdaten sollte einer Plausibilitätsprüfung unterzogen
+werden (DATE_CHECK_PLAUSIBILITY)
+E1EDPT1 Positionssegment ohne Aktionscode
+dieses Segment enthält die Textidentifikationen, die übergebenen
+Textcodes F0* sollten gegen das Customizing geprüft werden
+E1EDPT2 Positionssegment ohne Aktionscode
+dieses Segment enthält den eigentlichen Text
+Die Methodenaufrufe erfolgen dynamisch. Hierbei wird aus eine String und
+dem Namen des Segmentes der Name der Prozessierungsmethode aufgebaut.
+Sollten zusätzliche Segmente überliefert worden sein, für die es keine
+Verarbeitungsmethode gibt, wird die ausgelöste Ausnahme durch eine Catch
+System-Exception Anweisung abgefangen.
+Abschließend sollte eine BAdI Methode gerufen werden, die es erlaubt
+aller übergebenen Daten nochmals zu prüfen und eventuell anzureichen.
+Hierzu sollte ein intern und ein extern freigegebenes BAdI angeboten
+werden. Das intern freigegebene BAdI sollte mehrfach implementierbar
+sein und soll das extern freigegebene BAdI "deaktivieren" können.
+<ZH>1.1.5.2,,Methode PO_READ( )</>
+Diese private Methode erzeugt sich eine Instanz vom Typ
+CL_PO_HEADER_HANDLE_MM und ruft hiernach die öffentliche Methode
+PO_READ( ) auf, um die Bestellung zu lesen, dabei wird diese Methode so
+aufgerufen, dass das betreffende Bestellobjekt exklusiv gesperrt wird.
+Hiernach werden aus dem Customizing alle externen Auftragsbestätigungen
+nachgelesen und in einem Klassenattribut von dem Positionsobjekt
+LCL_ITEM hinterlegt.
+<ZH>1.1.5.3,,Methode LCL_ITEM->PROCESS_ITEM( )</>
+Diese öffentliche Methode stellt die Schnittstelle zwischen der Klasse
+LCL_SUS_ORDRSP und der Klasse LCL_ITEM her (siehe hierzu Kapitel 4.4.2).
+<ZH>1.1.5.4,,Methode POST( )</>
+Über diese Methode werden alle Verbuchungsbausteine angesprochen.
+Bei einer erfolgten Preisänderung wird der Baustein
+ME_PURCHASE_DOCUMENT_DATA_SAVE aufgerufen.
+Der Verbuchungsfunktionsbaustein ME_UPDATE_DOCUMENT_RESPONSE verbucht
+die veränderten Positionsdaten (EKPO).
+Die Verbuchung der Auftragsbestätigungen erfolgt über den
+Funktionsbaustein ME_CONFIRMATION_MAINTAIN_AVIS.
+Die Änderungsbelege vom Type Update (U) werden über den
+Funktionsbaustein ME_SET_CHANGE_POINTER_FLAG erzeugt und über den
+Baustein EINKBELEG_WRITE_DOCUMENT verbucht.
+Das Logistic Information System (LIS) wird über den Funktionsbaustein
+ME_STATISTICS_LIS angesprochen und verbucht hierüber auch die Daten.
+Für den Fall einer Streckenbestellung wird der Kundenauftrag über den
+Funktionsbaustein SD_PURCHASE_CHANGE_ORDER aktualisiert.
+<ZH>1.1.6,,Methode POST_PROCESSING( )</>
+Sollte es während der Verarbeitung des ORDRSP-IDoc zu einer
+Fehlermeldung kommen wird diese Methode über den Event Handler
+angesprochen. Hierbei werden die Tabellen IDOC_STATUS und
+RETURN_VARIABLES aufgebaut und für die Rückgabe an die
+Funktionsbausteinschnittstelle vorbereitet.
+Bei einer Prozessierung ohne Fehlermeldung wird diese Methode
+aufgerufen, um die Tabellen IDOC_STATUS und RETURN_VARIABLES aufzubauen.
+Zusätzlich wird ein Applikationsspezifischer Status für den Workflow im
+Feld WORKFLOW_RESULT zurückgegeben.
+Beide Tabellen werden als Exportparameter an den Funktionsbaustein
+übergeben.
+<ZH>1.1.7,,Methode SET_MESSAGE</>
+Diese Methode ist auf das Event LIF_EVENT_HANDLING~PANIC registriert. Es
+übernimmt die Parameter IM_IDOC_STAT (IDoc-Status), IM_SEGNUM
+(Segmentnummer), IM_FIELDNAM (Feldname), IM_WORKFLOW (Flag zum Auslösen
+eines Workflow) und IM_EXITFLAG (Flag zum Abbrechen der Verarbeitung)
+vom Event PANIC.
+Die Methode selbst erzeugt den Statussatz des IDoc über die Struktur
+MY_MESSAGE_LOG. Zusätzlich wird über den Parameter IM_WORKFLOW
+festgelegt, dass
+a),,ein Workflow ausgelöst werden soll
+b),,das IDoc ein spezifisches Workflow Event auslösen soll
+Für den Fall dass das übergebene Feld IM_EXITFLAG gesetzt wird, wird
+eine Ausnahme vom Typ LCL_EXCEPTION (siehe Klasse
+LCL_EXCEPTION)ausgelöst. Diese Exception sorgt dafür, dass die
+Bearbeitung des IDoc abgebrochen wird.
+<ZH>1.1.8,,Methode GET_PO_REF( )</>
+Diese Methode liefert als Returning Value( ) die Instanz auf das
+Bestellobjekt zurück. Zu diesem Zweck wird das Attribut MY_PO_REF
+ausgelesen.
+<ZH>1.1.9,,Methode GET_CONF_ID( )</>
+Diese Methode liest das Attribut MY_HEAD_CONF aus und gibt es als
+Returning Value( ) wieder zurück.
+<ZH>1.1.10,,Methode GET_CONF_CURRENCY( )</>
+Diese Methode liest das Attribut MY_CURRENCY aus und liefert es als
+RETURNING VALUE( ) wieder zurück
+
+<ZH>1.2,,Klasse LCL_ITEM</>
+<ZH>1.2.1,,Attribute der Public Section</>
+<ZH>1.2.1.1,,Klassenattribut MY_T163G</>
+Dieses Attribut enthält die Definition der
+Auftragsbestätigungssteuerschlüsselinformationen aus dem Customizing
+(Transaktion OMGZ).
+<ZH>1.2.1.2,,Klassenattribut MY_CONF_DATE</>
+Dieses Attribut speichert einen Tagesstempel ab, der als
+Bestätigungsdatum benutzt werden kann.
+<ZH>1.2.1.3,,Klassenattribut MY_CONF_TIME</>
+Dieses Attribut speichert einen Zeitstempel ab, der als Bestätigungszeit
+für alle Positionen benutzt wird.
+<ZH>1.2.1.4,,Attribut MY_EBELP</>
+Dieses Attribut repräsentiert die Nummer der Bestellposition im
+Einkaufsbeleg.
+<ZH>1.2.2,,Attribute der Private Section</>
+<ZH>1.2.2.1,,Attribut MY_CONF_DATA</>
+Dieses Attribut enthält die Daten aus dem Segment E1EDP02.
+<ZH>1.2.2.2,,Attribut MY_PERSISITENT_DATA</>
+Das Attribut enthält die Datenbankinformation für diese Belegposition.
+<ZH>1.2.2.3,,Attribut MY_PERSISTENT_CONF</>
+Dieses Attribut beinhaltet alle Bestätigungen die zu der aktuellen
+Position in der Tabelle EKES gespeichert worden sind.
+<ZH>1.2.2.4,,Attribut MY_CONF_SCHED</>
+Dieses Attribut speichert alle bestätigten Einteilungsinformationen, die
+aus dem Segment E1EDP20 des IDoc stammen.
+<ZH>1.2.2.5,,Attribut MY_CHECK_DATE_QUAN</>
+Dieses Attribut beinhaltet die Information welche Menge an welchem Tag
+zu welcher Uhrzeit geliefert werden soll.
+<ZH>1.2.2.6,,Attribut MY_CONF_QUANT</>
+Dieses Attribut beinhaltet die gesamt bestätigte Menge.
+<ZH>1.2.2.7,,Attribut MY_UPDATE_DATA</>
+Dieses tief strukturierte Attribut enthält alle Daten, die über die
+Verbuchungsbausteine auf die Datenbank geschrieben werden sollen.
+<ZH>1.2.2.8,,Attribut MY_ITEM</>
+Dieses Attribut beinhaltet die Instanz der Bestellbelegposition.
+<ZH>1.2.3,,Methode CONSTRUCTOR( )</>
+Über den Constructor( ) wird die Positionsnummer an das Positionsobjekt
+übergeben.
+<ZH>1.2.4,,Methode PROCESS_ITEM( )</>
+Diese öffentliche Methode startet die Prozessierung der
+positionsspezifischen Daten aus der lokalen Instanzmethode
+LCL_SUS_ORDRSP->PROCESS( ). Diese Methode ruft die Privaten Methoden
+dieser Klasse auf und führt die positionsspezifischen Prüfungen durch.
+Dies sind die folgenden Methoden
+GET_PERSISTENT_CONF( )
+CHECK_BASIS_DATA( )
+SUS_CHECKS( )
+SD_CHECK( )
+RESET N2
+<ZH>1.2.5,,Methode GET_PERSISTENT_CONF( )</>
+Über diese Methode werden alle vorhanden Bestätigungszeilen der
+aktuellen Instanz nachgelesen. Da es derzeit keinen Methodenaufruf aus
+der Klasse CL_PO_ITEM_HANDLE_MM gibt, muss dies über einen
+Datenbankzugriff erfolgen. Die gefunden Informationen werden in einem
+privaten Attribut gesichert.
+<ZH>1.2.6,,Methode CHECK_BASIC_DATA( )</>
+Diese Methode sucht sich einem ersten Schritt über die Methode LOOKUP( )
+der Klasse CL_PO_HEADER_HANDLE_MM die Instanz für die Bestellposition.
+Hieraus können dann die persistenten Daten extrahiert und in einem
+Attribut gespeichert werden.
+In einem nächsten Schritt kann überprüft werden, ob dem IDoc auf
+Positionsebene (Segment E1EDP02) eine Bestätigungsnummer übergeben
+worden ist. Sollte diese nicht vorhanden sein, wird der Wert vom
+Kopfsegment E1EDK02 übernommen.
+Anschließend werden rudimentäre Prüfungen vorgenommen, die auf die
+folgenden Werte abfragen:
+ist der Bestellposition das Löschkennzeichen gesetzt
+ist in der Bestellposition ein Absagegrund hinterlegt
+stimmt die bestätigte Materialnummer mit der Materialnummer aus der
+Bestellung überein
+stimmt die bestätigte Bestellmengeneinheit mit der Bestellmengeneinheit
+aus der Bestellung überein.
+RESET N2
+<ZH>1.2.7,,Methode SUS_CHECKS( )</>
+Über diese private Methode werden alle Toleranzprüfungen angestartet,
+für die laut SUS-Szenario kein Error-Workflow (im Vergleich zum ORDRSP)
+mehr angestartet werden soll.
+Erst einmal muss überprüft werden, ob der
+Bestätigungssteuerungsschlüssel aus den persistenten Best
+ellpositionsdaten ein Gegenstück im Klassenattribut, welches die
+Bestätigungssteuerungsdaten aus dem Customizing gespeichert hat,
+enthält. Nur in diesem Fall soll eine Prozessierung der nachgelagerten
+Prüf-Methoden erfolgen. Andernfalls wird eine Fehlermeldung prozessiert.
+<ZH>1.2.7.1,,Methode PRICING_UPDATE( )</>
+In Abhängigkeit von den übergebenen T163G Daten wird eine Preisänderung
+nur dann durchgeführt, wenn
+der Bestätigte Preis ungleich dem Preis in der Bestellung ist
+das Kennzeichen für Preisänderung in der T163g sitzt
+mindestens eine Preistoleranz ungleich Null ist.
+RESET N2
+Zu Ermittlung des minimalen Preises und des maximalen Preises sollte die
+BAdI-Methode Change_Price( ) aufgerufen werden.
+Ist der bestätigte Preis außerhalb der im Customizing hinterlegten
+Toleranzgrenzen, so wird eine Warnmeldung prozessiert (mit
+Workflowanbindung).
+<ZH>1.2.7.2,,Methode CHANGE_ VEND_MAT( )</>
+Wurde in der Tabelle T163G das Feld VMCHG gesetzt, kann die
+Lieferantenmaterialnummer ersetzt werden. Vor der Übernahme wird die
+BAdI-Methode Change_Vend_Mat( ) aufgerufen.
+<ZH>1.2.7.3,,Methode CHECK_QUANTITY( )</>
+Diese Methode überprüft anhand der in der Bestellposition hinterlegten
+Toleranzgrenzen für Unter- und Überlieferung, ob sich die bestätigte
+Menge in den entsprechenden Toleranzen bewegt. Bei einer Abweichung,
+sprich Unter- bzw. Überlieferung wird eine Warnmeldung prozessiert (mit
+Workflowanbindung).
+<ZH>1.2.7.4,,Methode CHECK_DELIVERY_DATE( )</>
+Mit Hilfe diese Methode soll überprüft werden, ob der bestätigte
+Liefertermin innerhalb der in Tabelle T163G definierten Toleranzen
+liegt. Bei der Prozessierung sind alle positionsspezifischen
+Einteilungen aus dem IDoc zu beachten.
+Bei einer Abweichen wird eine Warnmeldung prozessiert (mit
+Workflowanbindung).
+<ZH>1.2.8,,Methode SD_CHECK( )</>
+Diese Methode darf nur prozessiert werden, wenn die Bestellung über das
+Streckenszenario angelegt worden ist. Für diese Prüfung kann das
+positionsspezifische Statusfeld herangezogen werden (EKPO-STATU = V).
+Zur Ermittlung des zugehörigen Vertriebsbeleges kann die Instanz der
+Klasse CL_PO_ITEM_HANDLE_MM herangezogen werden. Über die Methode
+GET_ACCOUNTING( ) können alle Kontierungsobjekte der aktuellen
+Bestellung extrahiert werden.
+Anhand der Daten welche in den vorherigen Methoden abgeleitet und
+erstellt worden sind, kann die Kommunikationsstruktur VBEPEK erstellt
+werden, die im späteren Verlauf zum Update des Kundenauftrages genutzt
+wird.
+<ZH>1.3,,Interface LIF_EVENT_HANDLING</>
+Diese Methode übernimmt das Event Handling in den Klassen LCL_SUS_ORDRSP
+und LCL_ITEM. Hierzu wird ein Event PANIC zur Verfügung stehen, welche
+Parameter übergeben werden können, die dann in die lokale
+Meldungstabelle gespeichert werden.
+Dem Event können die folgenden Parameter übergeben werden:
+IM_IDOC_STAT (IDoc-Status)
+IM_SEGNUM (Segmentnummer im IDoc) als optionaler Parameter
+IM_FIELD_NAME (Feldname der der Fehlermeldung zugeordnet ist) als
+optionaler Parameter
+IM_WORKFLOW (Flag welches bestimmt, ob ein Workflow ausgelöst werden
+soll) als optionaler Parameter
+IM_EXITFLAG (Flag welches bestimmt ob die IDoc Verarbeitung abgebrochen
+werden soll) als optionaler Parameter
+RESET N2
+<ZH>1.4,,Klasse LCL_EXCEPTION</>
+Die Klasse LCL_EXCEPTION erbt von der globalen Klasse CX_STATIC_CHECK
+und übernimmt das Handling der Ausnahmen welches in der Methode
+LCL_SUS_ORDRSP->SET_MESSAGE( ), über die Anweisung RAISE EXCEPTION TYPE
+LCL_EXCEPTION ausgelöst wird.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Dieser Funktionsbaustein wird aufgerufen, wenn die Queue-Verarbeitung
+für IDoc-Nachrichten (ORDERS und ORDCHG) in der Partnervereinbarung
+<DS:TRAN.WE20>WE20</> gebildet. Das führt dazu, dass pro Beleg ein
+einheitlicher Queue-Name vergeben wird. Somit ist auch beim Versenden
+von IDoc Nachrichten über den IDoc-Adapter auf dem SAP XI 3.0 eine
+Serialisierung von Nachrichten möglich. Das führt dazu, dass IDocs genau
+in der gleichen Reihenfolge im Empfängersystem verbucht werden, wie sie
+im Sendesystem erzeugt worden sind.
+&EXAMPLE&
+Dieser Baustein muss in der Transaktion <DS:TRAN.WE85>WE85</>
+eingetragen werden.
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

@@ -1,0 +1,4 @@
+&FUNCTIONALITY&
+With the exporting parameter ev_pdf this BAPI returns the printout for a
+billing document which has been passed to the BAPI with the importing
+parameter iv_vbeln.

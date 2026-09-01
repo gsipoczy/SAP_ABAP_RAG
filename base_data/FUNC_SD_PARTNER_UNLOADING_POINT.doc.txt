@@ -1,0 +1,10 @@
+&FUNCTIONALITY&
+Die beiden internen Tabellen XVBPA und YVBPA der Partnerbearbeitung
+werden aufgrund der Abladestelleneingabe aktualisiert.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

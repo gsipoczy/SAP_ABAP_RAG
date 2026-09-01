@@ -1,0 +1,139 @@
+&FUNCTIONALITY&
+Exiting a condition maintenance session <ZH>without</> saving.
+The <DS:DE.COND_MNT_HANDLE>handle</> to be transferred must be valid,
+that is, it must be the handle of the session that is currently running.
+This module checks whether there would be a loss of data due to data not
+yet having been saved. This check is sometimes ignored, for example, if
+the parameter IV_IGNORE_DATALOSS is set. Otherwise, a resumable
+exception is triggered if there is a danger of data being lost.
+The following actions are performed to close the maintenance session:
+The blocks are released
+The internal data is reset
+&EXAMPLE&
+
+&HINTS&
+After this module is called, the session has the status <LS>closed</>.
+&FURTHER_SOURCES_OF_INF&
+<DS:RE.SAPLCOND_MNT_INTF>Function group COND_MNT_INTF</>
+&FUNCTIONALITY&
+Opening a new session for maintaining condition records.
+The following parameters are expected:
+IS_TASK (usage and application)
+IV_CONDTYPE
+IV_CONDTABLE
+In addition, you must specify which <DS:DE.AKTYP>activity category</>
+you want using IV_ACTIVITY. The following values are possible:
+<AB>H,,Create</>
+<AB>V,,Change</>
+<AB>A,,Display</>
+The module executes the <ZH>authorization checks</> for the
+<DS:UO.V_KOND_VEA>V_KOND_VEA</> authorization object.
+It calls the routine for the authorization check for the condition type
+in the maintenance program of the usage. This routine uses the
+authorization object <DS:UO.V_KONH_VKS>V_KONH_VKS</>, for example.
+If one of these checks fails, a class-based exception of type is
+CX_COND_MNT_SESSION triggered.
+A <DS:DE.COND_MNT_HANDLE>handle for the session</> and a selection table
+in which the selection options need to be entered for reading condition
+records are returned. The <DS:FU.COND_MNT_START>COND_MNT_START</> module
+must then be called with this selection table.
+&EXAMPLE&
+
+&HINTS&
+After this module is called, the session is in the <LS>initialized</>
+state.
+If the previous session was not ended, the module triggers a class-based
+exception of type CX_COND_MNT_SESSION.
+&FURTHER_SOURCES_OF_INF&
+<DS:RE.SAPLCOND_MNT_INTF>Function group COND_MNT_INTF</>
+
+&FUNCTIONALITY&
+Checking a condition record in the current maintenance session.
+This function module allows the condition record that can be identified
+by the <DS:DE.COND_REC_ID>condition record ID</> (parameter IV_REC_ID)
+to be checked. The record is checked independently of change operations.
+Parameter IV_CHECK_DATAPART can be used to determine whether or not the
+data part of the condition record is also checked.
+&EXAMPLE&
+
+&HINTS&
+Change operations implicitly involve a check. The data part is always
+checked.
+&FURTHER_SOURCES_OF_INF&
+<DS:RE.SAPLCOND_MNT_INTF>Function group COND_MNT_INTF</>
+
+&FUNCTIONALITY&
+Changing the data part of a condition record in the current maintenance
+session.
+This module allows you to change the data part of the identifiable
+condition record.
+The data part of the condition record is identified by the
+<DS:DE.COND_REC_ID>condition record ID</> (parameter IV_REC_ID). To do
+this, the reference to the entire data part must always be transferred
+using the parameter IR_DATAPART.
+The required operations, such as Create, Change, and Delete, are
+determined and carried out automatically by making a comparison with the
+status in the maintenance session.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+<DS:RE.SAPLCOND_MNT_INTF>Function group COND_MNT_INTF</>
+
+&FUNCTIONALITY&
+Removing a condition record in the current maintenance session.
+This function module allows you to delete the condition record.
+The condition record is identified by the <DS:DE.COND_REC_ID>condition
+record ID</> (parameter IV_REC_ID).
+&EXAMPLE&
+
+&HINTS&
+<ZH>Note</>
+In some cases, a deletion indicator is set but the the condition record
+is not actually physically deleted.
+&FURTHER_SOURCES_OF_INF&
+<DS:RE.SAPLCOND_MNT_INTF>Function group COND_MNT_INTF</>
+&FUNCTIONALITY&
+Reading a condition record in the current maintenance session.
+This module returns the condition record.
+The condition record is identified by the <DS:DE.COND_REC_ID>condition
+record ID</> (parameter IV_REC_ID).
+&EXAMPLE&
+
+&HINTS&
+The parameter RECORD_DATA contains the key and the reference to the data
+part of the condition record.
+&FURTHER_SOURCES_OF_INF&
+<DS:RE.SAPLCOND_MNT_INTF>Function group COND_MNT_INTF</>
+
+&FUNCTIONALITY&
+Changing a condition record in the current maintenance session.
+This module allows you to make changes to the condition record.
+The condition record is identified by the <DS:DE.COND_REC_ID>condition
+record ID</> (parameter IV_REC_ID).
+The changes (parameter IT_CHANGES) are used as value pairs for the table
+item. The following specifications must therefore be made for each
+change:
+<AB>TABNAME</>
+<AB>FIELDNAME</>
+<AB>TABINDEX</>
+<AB>VALUE</>
+To address the key part of the record, the table name must either be
+left empty, or the name of the condition table must be specified. Either
+the name of the data object or the name of the database table must be
+specified for the data part of the record. All other table names lead to
+an exception.
+The variable key of the condition record cannot be changed directly.
+Only the variable data part or the validity period of the condition
+record's key part can be changed. Any conflicts that occur are reported
+by messages (numbers 210 to 215 in message class COND_API). The table
+index (line number) is required for changes to the data part if the data
+object contains more than one entry.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+<DS:RE.SAPLCOND_MNT_INTF>Function group COND_MNT_INTF</>
+

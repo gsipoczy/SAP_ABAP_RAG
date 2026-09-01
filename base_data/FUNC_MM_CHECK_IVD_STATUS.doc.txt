@@ -1,0 +1,10 @@
+&Kurztext&
+
+&Functionality&
+Prüft, ob der angegebene Rechnungsstatus (IM_STATUS) in der angegebenen
+Rechnungsstatus-Struktur (IM_IVD_STATUS) gesetzt ist.
+&Parameter&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

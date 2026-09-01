@@ -1,0 +1,137 @@
+&FUNCTIONALITY&
+Updating of purchase order history from the delivery.
+&EXAMPLE&
+
+&HINTS&
+<ZH>Restrictions of invoker</>:
+The entries in the PO history table EKBE that are to be changed must be
+completely transferred to the BAPI structure BAPIEKBE. The function
+module FUNCTION MAP2E_EKBE_TO_BAPIEKBE is available for this purpose.
+The BAPI does not reread the records, i.e. all fields passed on by the
+invoker (including initial ones) are adopted.
+No data consistency checks at all are carried out.
+The control Insert, Update, and Delete is effected via EKBE-ELIKZ (=
+'I', 'U', 'D').
+The function module ME_UPDATE_DELIVERY was encapsulated only to enable
+asynchronous invocation via ALE. There is no functionality other than
+that provided by ME_UPDATE_DELIVERY.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+Updating of purchase order history from the delivery.
+&EXAMPLE&
+
+&HINTS&
+<ZH>Restrictions of invoker</>:
+The entries in the PO history table EKBE that are to be changed must be
+completely transferred to the BAPI structure BAPIEKBE. The function
+module FUNCTION MAP2E_EKBE_TO_BAPIEKBE is available for this purpose.
+The BAPI does not reread the records, i.e. all fields passed on by the
+invoker (including initial ones) are adopted.
+No data consistency checks at all are carried out.
+The control Insert, Update, and Delete is effected via EKBE-ELIKZ (=
+'I', 'U', 'D').
+The function module ME_UPDATE_DELIVERY was encapsulated only to enable
+asynchronous invocation via ALE. There is no functionality other than
+that provided by ME_UPDATE_DELIVERY.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+Dieser Funktionsbaustein wurde generiert aus
+dem Objekt <LS>BUS6050</> und der Methode <LS>EXECUTE</>
+für den BAPI-Aufruf durch ALE.
+Der Funktionsbaustein wird im Ausgangssystem ausgeführt. Er wandelt
+zunächst die Daten aus den BAPI-Parametern ins IDoc-Format um. Dann
+wird das IDoc an die entsprechenden Empfänger versendet. Dort erfolgt
+der BAPI-Aufruf.
+Die Schnittstelle des Funktionsbausteins enthält alle ausgehenden
+Parameter vom entsprechenden BAPI-Funktionsbaustein
+<DS:FU.BAPI_DELIVERYPROCESSING_EXEC>BAPI_DELIVERYPROCESSING_EXEC</>
+und zusätzlich die folgenden Parameter, die in der ALE-Schicht
+verwendet werden:
+
+<LS>SERIAL_ID</>
+Dieser Eingabeparameter enthält die <DS:DE.CHNUM>Kanalnumber</>, wird
+nur bei aktiver Serialisierung verwendet.
+<LS>RECEIVERS</>
+Der Parameter enthält die Namen von <DS:DE.LOGSYS>Logischen Systemen</>
+(Empfängern), bei denen der BAPI-Aufruf stattfindet.
+<LS>COMMUNICATION_DOCUMENTS</>
+Die Rückgabetabelle enthält den Namen vom logischen System im Feld
+LOGSYS, den Objekttyp im Feld OBJTYPE und den Objektschlüssel im Feld
+OBJKEY. Sie weist darauf hin, daß ein Objekt vom Typ <LS>IDOC</> mit
+diesem Schlüssel in diesem logischen System erzeugt wurde.
+<LS>APPLICATION_OBJECTS</>
+Die Eingabetabelle enthält die Objekte von Anwendungen, die beim
+BAPI-Aufruf verarbeitet werden. Im Feld LOGSYS geben Sie bitte den
+Namen des logischen Systems an, aus dem die Anwendungsobjekte stammen.
+Die Anwendungsobjekte werden durch Objekttyp OBJTYP und Objektschlüssel
+OBJKEY identifiziert.
+
+&EXAMPLE&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2012</> and method <LS>DELETEPOHISTORY</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_PO_DELETE_HISTORY</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2012</> and method <LS>UPDATEPOHISTORY</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_PO_UPDATE_HISTORY</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+

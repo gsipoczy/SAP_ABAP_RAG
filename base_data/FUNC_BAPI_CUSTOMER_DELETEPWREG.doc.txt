@@ -1,0 +1,88 @@
+&FUNCTIONALITY&
+OBSOLETE! DO NOT USE!
+
+The CheckExistence method in the Customer business object is obsolete.
+Intead you should use the ExistenceCheck. The detailed data about the
+customer that was returned to the CheckExistence method is now
+available in the GetDetail2 method.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+OBSOLETE! DO NOT USE!
+The CheckPassword method in the Customer business object is obsolete
+and you should now use the CheckPassword1 method. The detailed data
+about the customer that used to be returend to the CheckPassword method
+is now available in the GetDetail2 method.
+
+You can use this function module to check a customer's password.
+The password is stored as a key in the central BAPIUSW01 table.
+
+&EXAMPLE&
+call function 'BAPI_CUSTOMER_CHECKPASSWORD'
+     exporting
+         object_id     = customerid
+         password      = pass
+     importing
+         return        = rcode.
+
+&HINTS&
+Before you can call up the function module, you must check the customer
+number in the customer master record.
+You should not call up the function module if the customer number is
+not in the master record.
+&FUNCTIONALITY&
+In this function module, an entry for the customer is created in table
+BAPIUSW01.
+The system does not generate a password for the customer.
+
+The following are displayed as return codes:
+
+'00' = ok
+'11' = Entry in table BAPIUSW01 already exists
+
+
+&EXAMPLE&
+call function 'BAPI_CUSTOMER_CREATEPWREG'
+     exporting
+         object_id       = customerid
+     importing
+         return          = rcode.
+
+&HINTS&
+Before calling up the function module, check the customer number in the
+customer master record.
+If the customer number is not available in the master record, you can
+not call up the function module.
+
+
+&FURTHER_SOURCES_OF_INF&
+FB 'BAPI_CUSTOMER_INITPASSWORD'
+&FUNCTIONALITY&
+This function module deletes the customer entry in table BAPIUSW01.
+
+The following return codes are displayed:
+
+'00' = ok
+
+'10' = Entry is not available in table BAPIUSW01
+
+
+&EXAMPLE&
+call function 'BAPI_CUSTOMER_DELETEPWREG'
+     exporting
+         object_id       = customerid
+     importing
+         return          = rcode
+
+&HINTS&
+Before calling up the function module, you must check the customer
+number in the customer master record.
+If the customer number does not exist in the master record, you cannot
+call up the function module.
+
+&FURTHER_SOURCES_OF_INF&
+

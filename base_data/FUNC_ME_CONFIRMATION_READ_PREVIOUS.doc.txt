@@ -1,0 +1,27 @@
+Dieser Funktionsbaustein liest die Bestätigungen zu einer
+Bestellposition und merkt sich diese Daten für ein eventuelles Update
+im Funktionsbaustein ME_CONFIRMATION_UPDATE_GR.
+Die kumulierte Menge der wareneingangsrelevanten Bestätigungen (i.d.R.
+Lieferavise) wird zurückgegeben. Falls Lieferavis und Position als
+Import-Parameter übergeben wurden, wird die Menge aus diesem Lieferavis
+zurückgegeben.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein hat folgende Funktionen:
+liest einen Bestätigungsbeleg (Lieferavis) über die Belegnummer
+ermittelt die Positionen
+reichert mit Daten aus der zugrundeliegenden Bestellposition an
+übergibt die Daten an die Schnittstellenstruktur, damit eine Lieferung
+für die Folgebestätigung (Grob-WE) erzeugt wird
+
+Liest einen Bestätigungsbeleg (Lieferavis) über Belegnummer, Ermitteln
+der Positionen, Anreichern mit Daten aus der zugrundeliegenden
+Bestellposition und Übergabe in Schnittstellenstruktur zum Erzeugen
+einer Lieferung für die Folgebestätigung (Grob-WE)
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

@@ -1,0 +1,447 @@
+&FUNCTIONALITY&
+Funktionsbaustein zur Ermittlung der Abladestelle zu einem Debitor.
+Es werden die Abladestellen zum übergebenen Debitor gelesen. Sollte es
+mehr als eine Abladestelle geben, so wird die erste Abladestelle (laut
+Datenbestand) als Default markiert und die Liste aller verfügbaren
+Abladestellen alphabetisch zur Auswahl angeboten.
+Sollte nur eine Abladestelle verfügbar sein oder der Parameter
+FIF_NO_DIALOG = 'X' gesetzt sein oder der Aufruf im BATCH erfolgen, so
+wird die erste Abladestelle (laut Datenbestand) ausgewählt.
+Die gewählte Abladestelle wird zurückgeliefert.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+This function module displays the address of a partner you entered, so
+that you can make changes.  When you have changed the address, the
+system updates the internal data retention.
+The parameter FIF_FIRST_MAINTAINING is not currently in use.
+If you fill parameter FIS_VBUV by making an entry in the incompletion
+log, the address screen appears in full screen mode. If possible, the
+system places the cursor in the data field named in the entry.
+FIF_DISPLAY_ONLY = 'X' specifies that the address cannot be changed
+(display mode).
+FEF_ADDRESS_CHANGED tells you whether the partner's address has been
+changed.
+FEF_CANCEL indicates that the user terminated the dialog.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+Funktionsbaustein zur Ermittlung der Adresse eines Partners.
+Geliefert wird die Adresse zum angegebenen Partner, die im Beleg
+derzeitig gültig ist (Belegadresse). Dabei beinhaltet
+FES_OLD_ADDRESS_FORMAT die Adresse im bis 4.6A verwendeten Format der
+Tabelle SADR (Struktur VBADR). FES_ADDRESS_TYPE gibt den Adresstyp an,
+in abhängigkeit dessen die Parameter FES_ADDR1, FES_ADDR2 sowie
+FES_ADDR3 die jeweilige, zum Partner gehörende, Adresse liefern.
+&EXAMPLE&
+
+&HINTS&
+Die Adresse zu einem, auf der Partnerart "PE" (Personal) basierenden,
+Partner kann dabei nur im alten Adressformat (FES_OLD_ADDRESS_FORMAT)
+geliefert werden, da die HR Unterstützung für die ZAV (Zentrale
+Adressverwaltung) noch nicht eingeführt wurde.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Mit dem Funktionsbaustein kann die Adresse sowie die Attribute zu einem
+Partner gesetzt werden.
+Dabei beinhaltet FIS_ADDRESS die Adresse des Partners im Adressformat
+des ZAV Adresstyps 1 (Firmenadresse). FIS_ATTRIBUTES beinhaltet die
+Attribute zum Partner (Bitte die Hinweise bei SD_PARTNER_ATTRIBUTES_SET
+beachten). Beide Datenstrukturen können unabhängig voneinander
+angegeben werden.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Ermitteln des Adressschlüssels (EXTENDED_ADDR_KEY) eines Partners.
+
+Der Baustein verwendet hierzu das mit SD_PARTNER_DATA_PUT gesetzte
+globale Gedächtnis, welches ggf. mit SD_PARTNER_DATA_GET wieder
+ausgelesen werden kann. Zur Identifiezierung dient der Objekttyp sowie
+der Objektschlüssel.
+Der durch den Vertriebsbeleg, die Positionsnummer, Partnerrolle sowie
+Kundennummer (auch Partnernummer) spezifizierte Partner wird ermittelt
+und sein aktuell verwendeter Adressschlüssel in der Struktur
+EXTENDED_ADDR_KEY zurückgeleifert.
+Durch setzen des Parameters FIF_EXACT_POSITION kann ein standartmäßiges
+verwenden der Kopfpartner auf Positionsebene unterdrückt werden.
+Durch setzen des Parameters FIF_MASTER_DATA kann ein Nachlesen der in
+den Stammdaten gepflegten Adressschlüssel veranlaßt werden.
+&EXAMPLE&
+call function 'SD_PARTNER_ADDR_KEY_GET'
+     exporting
+          fif_objecttype         = 'X'
+          fif_objectkey          = 'Y'
+          fif_parvw              = 'WE'
+          fif_vbeln              = '          '
+          fif_posnr              = '000010'
+          fif_kunnr              = 'MEIER'
+          fif_exact_position     = 'X'
+          fif_master_data        = 'X'
+     importing
+          fes_extended_addr_key  = addr_key
+     tables
+          fet_extended_addr_keys = addr_keys
+     exceptions
+          parameter_incomplete   = 1
+          object_not_found       = 2
+          no_address             = 3
+          others                 = 4.
+          .
+
+Das Beispiel liefert den Adressschlüssel des Warenempfängers auf
+Position 10 mit der Kundennummer 'MEIER'. Sollte der angegebene Kunde
+nicht existieren, wird die Exception NO_ADDRESS ausgelöst.
+Der gesetzte Parameter FIF_EXACT_POSITION bewirkt, daß ein eventueller
+Warenempfänger auf Kopfebene nicht in Betracht gezogen wird.
+Der gesetzte Parameter FIF_MASTER_DATA bewirkt, daß sowohl der aktuell
+im Beleg verwendete Adressschlüssel als auch der/die in den Stammdaten
+hinterlegten Adressschlüssel verdichtet in der Tabelle
+FET_EXTENDED_ADDR_KEYS zurückgeliefert werden.
+&HINTS&
+Für Partner, die auf der Partnerart 'PE' (Personal) basieren wird kein
+Adressschlüssel geliefert.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Baustein führt für das angegebene Partnerobjekt sowie den
+angegebene Partner eine erneute Partnerermittlung anhand der aktuellen
+Partner durch und bietet eventuelle alternative Partnerbelegungen zur
+Auswahl an.
+Sofern mehr als ein Partner zur Auswahl vorhanden ist, wird ein
+Selektionsbild angeboten. Sollte der Benutzer hier eine alternative
+Belegung auswählen, so wird die Partnernummer zurückgeliefert und der
+Parameter FEF_SELECTION_DONE = "X" gesetzt.
+&EXAMPLE&
+
+&HINTS&
+Bei der Ermittlung der alternativen Partner wird eine komplette
+Partnerermittlung anhand der im Partnerobjekt bekannten Partnerrollen
+sowie deren Belegungen durchgeführt. Dies bedeutet, daß, sollte sich
+z.B. der Warenempfänger geändert haben, für den eventuell daraus
+abgeleitetet Spediteur andere Alternativen ergeben können, als wenn der
+Warenempfänger nicht geändert worden wäre.
+Sind keine Alternativen ermittelbar wird eine Informationsmeldung
+ausgegeben.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Mit dem Funktionsbaustein können die Attribute des angegebenen Partners
+des angegebenen Partnerobjektes ermittelt werden.
+Die Attribute werden in der Struktur SDPARTNER_ATTRIBUTES
+zurückgeliefert.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Mit dem Funktionsbaustein können die Attribute eines Partners des
+angegebenen Partnerobjektes gesetzt werden.
+&EXAMPLE&
+
+&HINTS&
+Die Attribute können nur ALLE oder KEINES gesetzt werden. Will man nur
+ein Attribut auf einen bestimmten Wert setzen/ändern, so muß man zuvor
+mit SD_PARTNER_ATTRIBUTES_GET die Attribute ermitteln, um die Änderung
+im Rahmen aller Attribute im Anschluß setzen zu können.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Entfernt alle registrierten Call-Back Aufrufe für das angegebene
+Partnerobjekt.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Mit aufruf dieses Funktionsbausteins werden die bis dahin registrierten
+CallBack Routinen des angegebenen Partnerobjektes zur Ausführung
+gebracht (sofern das Ereignis eingetroffen ist).
+Beim Aufruf wird angegeben, um welches Ereignis es sich handelt sowie
+welcher Partner (Rollentyp, Position, Partnernummer (alt/neu))
+betroffen ist. Entsprechend dessen werden die registrierten CallBack
+Routinen ausgeführt.
+Die Änderungstabelle enthält die Datenfelder, die sich bei dem
+angegebenen Partner verändert haben (basierend auf der Struktur
+SDPARTNER.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Mit diesem Funktionsbaustein kann man für ein bestehendes Partnerobjekt
+eine (oder mehrere) CallBack Routine(n) registrieren.
+Hierzu muß das Hauptprogramm sowie das Unterprogramm, welches als
+CallBack Routine dienen soll, angegeben werden.
+Zusätzlich kann man die Ausführung der Routine durch folgende Angaben
+einschränken:
+<ZH>1. Das Ereigniss</>
+Durch den Parameter FIF_EVENT kann festgelegt werden, ob die Routine
+nur beim Hinzufügen ("NEW"), Ändern ("CHANGE") oder Löschen ("DELETE")
+eines Partners ausgeführt werden soll.
+Initial bedeutet, daß die Routine immer ausgeführt werden soll.
+<ZH>2. Der Partnerrollentyp</>
+Durch setzen des Parameters FIF_ROLETYPE kann die Ausführung an einen
+bestimmen Partnerrollentyp (z.B. 0002 = Warenempfänger) gebunden
+werden. Die Routine wird dann bei Ereignissen, die andere
+Partnerrollentypen betreffen, nicht ausgeführt.
+<ZH>3. Das Datenfeld</>
+Durch Angabe eines Datenfeldes (aus der Struktur SDPARTNER) im
+Parameter FIF_FIELDNAME kann die Ausführung auf die Änderung eines
+einzelnen Datenfeldes des Partners eingeschränkt werden. Die Routine
+wird somit nur bei einer Änderung des angegebenen Datenfeldes zur
+Ausführung gebracht.
+Sollen mehrere Ereignisse registriert werden, so kann dies mittelt des
+Tabellenparameters erfolgen. Die Ereignisse innerhalb der Tabelle
+können sich auf jeweils ein eigenes Partnerobjekt beziehen.
+<ZH>Das Format der CallBack Routine</>
+<EX>form test_call_back</>
+<EX>                   tables prt_changes  type LV09A_CHANGED_VALUES</>
+<EX>                    using pif_event    type
+sd_partner_call_back_event</>
+<EX>                          pif_roletype type sd_partner_roletype</>
+<EX>                          pif_posnr    type posnr.</>
+<EX>  " CODING</>
+<EX>endform.</>
+
+Im Tabellenparameter PRT_CHANGES wird die Änderungstabelle übergeben,
+welche die Datenfelder inkl. ihrem alt/neu-Zustand enthält, die sich
+verändert haben.
+PIF_EVENT gibt es Ereigniss (CHANGE, NEW, DELETE) an, welches zur
+Auslösung der CallBack Routine geführt hat.
+PIF_ROLETYPE enthält den Rollentyp des Partners, der verändert wurde.
+PIF_POSNR enthält die Positionsnummer, auf der sich der geänderte
+Partner befindet (bzw. befunden hat).
+
+
+&EXAMPLE&
+
+&HINTS&
+<SE><NP><AB>Sollte eine einzelne Routine auf mehrere Datenfelder
+registriert worden </></></><SE><NP><AB>sein, so wird sie trotzdem nur
+EINMAL je Partner zur Ausführung gebracht, da </></></><SE><NP><AB>alle
+geänderten Felder der Routine mitgeteilt werden.</></></>
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein ermittelt einen Kreditsachbearbeiter anhand er
+übergebenen Daten und fügt ihn in das angegebenen Partnerobjekt auf der
+gegebenen Position ein. Sollte die Partnerrolle bereits besetzt sein,
+so wird die Belegung geändert.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Baustein liefert Tabelleninhalte des lokalen Gedächtnisses der
+Funktionsgruppe LV09A zu einem Objetktyp/Objektschlüssel zurück.
+Zurückgeliefert werden nur die in den Exportparametern mit 'X'
+gekennzeichneten Tabellen.
+&EXAMPLE&
+call function 'SD_PARTNER_DATA_GET'
+     exporting
+          fic_objecttype      = 'B'
+          fic_objectkey       = 'B'
+          fic_xvbpa           = 'X'
+          fic_yvbpa           = 'X'
+          fic_xvbuv           = ' '
+          fic_xvbuv_merged    = 'X'
+          fic_hvbuv           = ' '
+          fic_hvbuv_merged    = 'X'
+          fic_xvbadr          = 'X'
+          fic_yvbadr          = 'X'
+     tables
+          fet_xvbpa           = lvt_xvbpa
+          fet_yvbpa           = lvt_yvbpa
+          fet_xvbuv           = lvt_xvbuv
+          fet_hvbuv           = lvt_hvbuv
+          fet_xvbadr          = lvt_xvbadr
+          fet_yvbadr          = lvt_yvbadr
+     exceptions
+          no_object_specified = 1
+          no_object_found     = 2
+          others              = 3.
+&HINTS&
+Wurde beim Setzen der Partnerdaten (SD_PARTNER_DATA_PUT) ein
+qualifizierter Objektschlüssel (ungleich initial) verwendet, so
+enthalten die Partnertabellen nur Einträge des Beleges mit der
+Belegnummer, die dem Objektschlüssel entsprach.
+Die Unvollständigkeitsprotokolle (fet_xvbuv, fet_hvbuv) werden lokal
+nur für die Partnerverarbeitung gehalten. Dementsprechend werden auch
+nur diese Einträge zurückgeliefert. Es besteht jedoch die Möglichkeit,
+durch die Exportparameter fic_xvbuv_merged bzw. fic_hvbuv_merged und
+gleichzeitiger Übergabe eines allgemeinen Unvollständigkeitsprotokolls
+als Tabelle fet_xvbuv bzw. fet_hvbuv einen abgleich durchführen zu
+lassen.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Fills the local memory of function group LV09A with the tables entered.
+Previous table content in the local memory is overwritten. For
+identification of the caller/table content relationship, the system
+requires the object type and an object key.
+The module must be called <ZH>before</> you process partner data using a
+function module from the function group LV09A.
+&EXAMPLE&
+call function 'SD_PARTNER_DATA_PUT'
+     exporting
+          fic_objecttype      = 'A'
+          fic_objectkey       = ' '
+     tables
+          frt_xvbpa           = lvt_xvbpa
+          frt_yvbpa           = lvt_xvbpa
+          frt_xvbuv           = lvt_xvbuv
+          frt_hvbuv           = lvt_hvbuv
+          frt_xvbadr          = lvt_xvbadr
+          frt_yvbadr          = lvt_yvbadr
+     exceptions
+          no_object_specified = 1
+          others              = 2.
+&HINTS&
+This module is the only way to provide modules (or the local memory) in
+the function group LV09A with current partner data.
+If the object key is not initial, the system interprets it as a document
+number, and restricts the partner data entered to the document named in
+the key.
+The system only transfers entries from the incompletion log (frt_xvbuv,
+frt_hvbuv) to the local memory if they are relevant for partner
+processing. Other entries in the log are ignored.
+&FUNCTIONALITY&
+Der Baustein führt eine Partnerfindung von verschiedenen
+Startsituationen aus durch.
+
+Voraussetzung ist ein bereits vorhandenes Partnerobjekt, identifiziert
+durch den Objekttyp (FIF_OBJECTTYPE; BOR-Objekt) sowie den
+Objektschlüssel (FIF_OBJECTKEY; Belegnummer). In dieses Partnerobjekt
+muß für eine Erfolgreiche Partnerfindung mindestens EIN Partner
+vorhanden sein.
+Das der Partnerfindung zu Grunde liegende Partnerschema muß mit dem
+Parameter FIF_PARGR angegeben. Die Position, auf der die zu ermittelden
+Partner eingefügt bzw. die Partner geprüft werden sollen muß im
+Parameter FIF_DESTINATION_POSNR übergeben werden. Für die Ermittlung
+der Partnerdaten wird der Vertriebsbereich usw. benötigt, welcher im
+Parameter FIS_SDORGDATA übergeben werden muß.
+Der Baustein kann für verschiedene Zwecke verwendet werden:
+1. Komplette Partnerfindung
+Dieser Modus dient dazu, zu einem gegebenen Partner eine Partnerfindung
+durchzuführen. Voraussetzung ist, daß sich dieser Partner bereits im
+Partnerobjekt befindet (z.B. durch SD_PARTNER_SINGLE_MODIFY
+hinzugefügt). Der Modus wird (defaultmäßig) durch das Setzen des
+Parameters FIF_COMPLETE_DETERMINATION = 'X' aktiviert. Des weiteren muß
+der Partner, von dem die Partnerfindung ausgehen soll mit den
+Parametern FIF_PARVW, FIF_POSNR sowie FIF_PARTNER identifiziert werden.
+Soll die Kundenhierarchie ebenfalls gelesen werden, so muß der in
+FIF_PARVW übergebene Partner von der Partnerart 'KU' (Kunde) sein und
+der Kundenhierarchietyp im Parameter FIF_HITYP übergeben werden.
+2. Partielle Partnerfindung
+Dieser Modus ist noch nicht freigegeben
+Der Modus kann dazu verwendet werden, um auf einer Position bei der
+Änderung eines Partners alle abhängigen Partnerrollen neu ermitteln zu
+lassen. Dabei gelten dieselben Voraussetzungen wie zu Modus 1. Es
+werden alle vom (in FIF_PARVW) übergebenen Partner abhängigen
+Partnerrollen aus dem Partnerobjekt entfernt und, sofern möglich, neu
+ermittelt. Eine Steuerung der Art, ob z.B. ein Partner nur dann neu
+ermittelt werden soll, wenn er nicht manuell im Beleg verändert wurde,
+ist nicht möglich. Aktiviert wird dieser Modus mit dem Parameter
+FIF_PARTIAL_DETERMINATION = 'X'.
+3. Prüfung und evtl. Löschung sowie Neufindung von Partnern
+Bei diesem Modus werden die im Partnerobjekt vorhandenen Partner einer
+Position geprüft und, sofern es hierbei zu einem Fehler kam, aus dem
+Partnerobjekt entfernt. Anschließend wird ausgehend von dem (wie in
+Modus 1 beschrieben) angegebenen Partner aus eine Neuermittlung für
+eventuell noch nicht belegte Partnerrollen durchgeführt. Aktiviert wird
+dieser Modus durch den Parameter FIF_CHECK_REMOVE_AND_FIND = 'X'. Zu
+beachten ist, daß ein Quellpartner (wie in Modus 1) anzugeben ist.
+Als Option steht der Parameter FIF_NEW_TIMERELEVANT_PAR zur Verfügung,
+der bei gleichzeitigem setzen des Kundenhierarchietyps (FIF_HITYP )
+dafür sorgt, daß zeitabhängig Partner, wie die Kundenhierarchiepartner
+auf jedenfall gelöscht werden und, sofern möglich, neu ermittelt
+werden.
+4. Prüfung und evtl. Löschung vorhandener Partner
+In diesem Modus werden die im Partnerobjekt vorhandenen Partner EINER
+Position geprüft und, sofern es hierbei zu einem Fehler kam, aus dem
+Partnerobjekt entfernt. Um diesen Modus zu aktivieren, muß der
+Parameter FIF_JUST_CHECK_AND_REMOVE = 'X' gesetzt werden.
+5. Alternativen Ermittlung / Simulierte Nachermittlung
+Mit diesem Modus besteht die Möglichkeit, sich alle Partner einer
+Partnerrolle, die bei einer Partnerfindung (beruhend auf den gegebenen
+Partnern) gefunden werden würden, in der Struktur KUPAV (FET_KUPAV)
+zurückliefern zu lassen (z.B. Alle Spediteure, die sich aus dem
+derzeitigen WE ableiten lassen). Zu Aktivierung dieses Modus muß in dem
+Parameter FIF_PARTNERS_OF_PARVW_ONLY die gewünschte Partnerrolle
+übergeben werden (z.B. 'SP').
+Wenn dieser Modus aktiviert ist, MUß noch ein anderern Findungsmodus
+(1,2 oder 3) aktiviert sein. Es wird jedoch keine Änderung am
+eigentlichen Partnerobjekt durchgeführt.
+6. Reine Prüfung der vorhandenen Partner (einer Position)
+Dieser Modus wird durch den Parameter FIF_JUST_CHECK aktiviert. Es
+werden nur die Partner der angegebenen Position (in
+FIF_DESTINATION_PROCEDURE) geprüft, da nur dieses Partnerschema
+übergeben werden kann. Sollen so zum Beispiel die Partner einer
+Position geprüft werden, so sollte man ggf. auch die Kopfpartner
+prüfen, da diese auch auf Positionsebene Verwendung finden können. Die
+Anzahl der aufgetretenen Fehler wird im Parameter FEF_LOG_COUNT
+zurückgeliefert, die Fehlermeldungen selbst wurden im Application Log
+unter dem Object "SDBFPD", Unterobjekt "ERRORS" gesammelt.
+
+&EXAMPLE&
+
+&HINTS&
+Der Parameter FIF_COMPLETE_DETERMINATION ist defaultmäßig auf 'X'
+gesetzt. Sollte ein anderer Modus gewünscht sein, so MUß dieser
+Parameter auf SPACE gesetzt werden.
+Je Aufruf darf nur EIN Modus aktiviert sein.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Mit Hilfe des Bausteins kann dem Partnerfindungsprotokoll zum
+angegebenen Partnerobjekt ein Eintrag mit den übergebenen Werten
+hinzugefügt werden.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Baustein leert das Findungsprotokoll zum angegebenen Partnerobjekt.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

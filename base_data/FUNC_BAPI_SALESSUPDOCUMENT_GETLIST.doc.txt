@@ -1,0 +1,38 @@
+&FUNCTIONALITY&
+Abstract method.
+Implementation takes place in the subtypes.
+&FUNCTIONALITY&
+Abstract method.
+Implementation takes place in the subtypes.
+&FUNCTIONALITY&
+Abstract method
+Implementation is carried out in the subtypes as the exact object type
+is only known there.
+The function module selects partner sales activities and sends them
+asynchronously via ALE. The receiving system calls the following
+method:
+<ZH>SaveReplicaMultiple</>
+&FUNCTIONALITY&
+Abstract method
+Implementation is carried out in the subtypes.
+&FUNCTIONALITY&
+Abstract method.
+The implementation takes place in the subtypes.
+You can use one of the intervals of the organizational units or the
+<ZH>SDOrganizationalUnits</> parameter to select data.
+Priority rule:
+SDOrganizationalUnits
+Multiple selection
+If all selection parameters are filled, the resulting quantity is the
+cross product of these organizational units.
+For example, you have defined the following selection criteria:
+Sales organization:   0001
+Distribution channel: 01 - 04
+The system takes all possible combinations of these criteria into
+account:
+Sales organization 0001 Distribution channel 01
+Sales organization 0001 Distribution channel 02
+Sales organization 0001 Distribution channel 03
+Sales organization 0001 Distribution channel 04
+&FURTHER_SOURCES_OF_INF&
+SFA Interface (Specification and Design)

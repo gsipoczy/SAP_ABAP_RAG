@@ -1,0 +1,12 @@
+&FUNCTIONALITY&
+Während der Neuterminierugsverarbeitung werden programmintern für
+ATP-geprüfte Umlagerbestellungen, -Lieferpläne und
+-Bestellanforderungen in der globalen internen Tabelle g_atpcsx_cor_pur
+Korrektursätze gesichert.
+Sollte beim Sichern eines geprüften Beleges ein Fehler auftreten, so
+wird die Neuterminierungsverarbeitung fortgeführt, der programminterne
+alte Zustand muß aber für die Verarbeitung wieder hergestellt werden.
+Hierzu gehört, daß die angelegten Korrektursätze gelöscht werden (und
+mit den alten, nicht veränderten Daten wieder aufgebaut werden). Dieser
+Baustein übernimmt die Aufgabe des Löschens von Kiorrektursätzen.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

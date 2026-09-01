@@ -1,0 +1,23 @@
+&FUNCTIONALITY&
+The system uses function module API_PIQ_SDPRICELIST to create price
+lists similar to the
+ <DS:TRAN.V_NLN>Creation of Price Lists</> report (transaction V_NLN).
+Function module API_PIQ_SDPRICELIST can be used whenever a price list
+should be generated from within an ABAP program and a remote function
+call (RFC) is not required.
+<DS:GLOS.3526B543AFAB52B9E10000009B38F974>BAPI</> method
+BAPI_PIQ_SDPRICELIST (transaction se37) is defined like function module
+API_PIQ_SDPRICELIST. However, you can use BAPI method
+ BAPI_PIQ_SDPRICELIST when you want price list creation to be triggered
+from a remote system by RFC.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+SAP Library for SAP ERP on SAP Help Portal at http://help.sap.com/erp.
+Choose a release and then <LS>Application Help</>. In SAP Library,
+choose <LS>SAP ERP Central Component -> Logistics -> Sales and
+Distribution (SD) -> Pricing and Conditions (SD-BF-PR) -> Pricing and
+Conditions -> Pricing Information and Analysis -> Creation of Price
+Lists</>.

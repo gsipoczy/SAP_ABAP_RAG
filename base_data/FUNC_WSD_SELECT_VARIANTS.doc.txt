@@ -1,0 +1,30 @@
+&FUNCTIONALITY&
+This function module is used to fetch all the variants of a generic
+article (PRICAT) from the table<ZK> </><NP>PRICAT_K003</>.
+This function module needs following information to fetch the variants:
+1. PRICAT: Unique internal catalog number (PRINBR)
+2. Price Catalog Inbound Start of Validity Period (VALIDITY_BASE)
+3. PRICAT: EAN/UPC Code of Base Unit of Measure <ZK>(EAN_UPC_BASE) </>or
+4. Price Catalog: Grouping Field: Generic Article Assignment
+(VENDOR_SATNR)
+Note: Either EAN_UPC_BASE or VENDOR_SATNR should be passed.
+If VENDOR_SATNR is provided, then the variants are fetched from
+PRICAT_K003 table using this VENDOR_SATNR information. <ZK>(All variants
+of a same Generic Article will have same VENDOR_SATNR value).</>
+If only EAN_UPC_BASE is provided and VENDOR_SATNR is not provided, then
+VENDOR_SATNR is fetched using the EAN_UPC_BASE and then again all the
+Variants will be fetched using this VENDOR_SATNR information.
+Note: If for any variant WORKITEM exists (' *** WORKITEM *** '), then
+WORKITEM will be given more priority over the ORIGITEM (' *** ORIGITEM
+*** ') and therefore variant line item with PRODUCTGROUP = ' ***
+ORIGITEM *** ' will be deleted.
+Whereas if for any Variant only ORIGITEM exisits and there is no
+WORKITEM, then the ORIGITEM will be considered.
+&EXAMPLE&
+
+This funtion module is used in class  CL_WSD_CREATE_FROM_CAT to create a
+new material using the Catalog (PRICAT).
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

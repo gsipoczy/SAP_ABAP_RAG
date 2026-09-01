@@ -1,0 +1,24 @@
+&FUNCTIONALITY&
+Der Funktionsbaustein ändert Zuordnungen der Kundenhierarchie. Die zur
+Änderung vorgesehenen Zuordnungen werden mit denTabellen
+FIT_KNVH_BEFORE und FIT_KNVH_AFTER importiert. Tabelle FIT_KNVH_BEFORE
+beinhaltet den alten Stand der Zuordnungen, Tabelle FIT_KNVH_AFTER den
+neuen. Das Ergebnisprotokoll in Anlehnung an das 'Application Log'
+steht in Tabelle FET_BAL_T_MSG. Die Export-Tabellen FET_XKNVH_DELTA,
+FET_YKNVH_DELTA  sind für die Verbuchung aufbereitet.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Reads the global buffer gvt_xknvh_delta und gvt_yknvh_delta.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

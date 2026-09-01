@@ -1,0 +1,43 @@
+&FUNCTIONALITY&
+This method enables you to create reservations.
+&EXAMPLE&
+
+&HINTS&
+The following authorization objects are checked with activity 01
+(Create):
+
+<DS:UO.M_MRES_BWA>M_RES_BWA</>,,Reservations: movement type
+<DS:UO.M_MRES_WWA>M_MRES_WWA</>,,Reservations: plant
+The header data of the reservation is passed on in the parameter
+<ZH>ReservationHeader</>. At least the following data is necessary:
+Movement type (MOVE_TYPE field)
+If account assignment is defined for the movement type, the account
+assignment object (e.g. the cost center in the field COST_CTR)
+Base date (RES_DATE field)
+The item data is passed on in the table <LS>ReservationItems</>. At
+least the following data is necessary:
+Plant (PLANT field)
+Material number (MATERIAL field)
+Storage location (STORE_LOC field)
+Quantity (QUANTITY field)
+The reservation number is returned in the parameter <LS>Reservation</>.
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF LANGUAGE EN
+&FUNCTIONALITY&
+This method enables you to list detailed data pertaining to a
+reservation.
+&EXAMPLE&
+
+&HINTS&
+The following authorization objects are checked with activity 03
+(Display):
+
+<DS:UO.M_MRES_BWA>M_RES_BWA</>,,Reservations: movement type
+<DS:UO.M_MRES_WWA>M_MRES_WWA</>,,Reservations: plant
+The header and item data for the reservation number that is passed on
+is returned in the tables <LS>ReservationHeader</> and
+<LS>ReservationItems</> respectively.
+INCLUDE BAPI_RET LANGUAGE EN
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF LANGUAGE EN

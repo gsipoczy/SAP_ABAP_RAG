@@ -1,0 +1,33 @@
+&FUNCTIONALITY&
+Using this method, you can create sales inquiries.
+You must enter at least header data (via structure INQUIRY_HEADER_IN)
+and partner data (via the table INQUIRY_PARTNERS) as input parameters
+for this.
+Enter the item data via the table INQUIRY_ITEMS_IN. Item numbers can be
+assigned manually, by filling in the relevant fields, or automatically,
+according to Customizing, by leaving the relevant fields blank.
+If you are dealing with configurable items, you must enter the
+configuration data in the INQUIRY_CFGS_REF, INQUIRY_CFGS_INST,
+INQUIRY_CFGS_PART_OF and INQUIRY_CFGS_VALUE tables.
+When you have created the sales inquiry successfully, you will receive
+the document number (SALESDOCUMENT field). Any errors that may occur
+will be announed via the RETURN parameter.
+&EXAMPLE&
+&HINTS&
+Required entries:
+ORDER_HEADER_IN : DOC_TYPE     Sales document type
+                  SALES_ORG    sales organiZation
+                  DISTR_CHAN   Distribution channel
+                  DIVISION     Division
+ORDER_PARTNERS..: PARTN_ROLE   Partner role, SP sold-to party
+                  PARTN_NUMB   Customer number
+ORDER_ITEMS_IN..: MATERIAL     Material number
+
+Ship-to party:
+If no ship-to party is entered , use the following: Ship-to party =
+sold-to party.
+Commit control:
+The BAPI does not have a database commit. This means that the relevant
+application must leave the commit, in order that changes can be carried
+out on the database. The BAPI BAPI_TRANSACTION_COMMIT is available for
+this.

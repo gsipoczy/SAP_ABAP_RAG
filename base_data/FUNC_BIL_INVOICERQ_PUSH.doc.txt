@@ -1,0 +1,10 @@
+&FUNCTIONALITY&
+This function module can be used to map the billing document provided
+and generate its payload.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

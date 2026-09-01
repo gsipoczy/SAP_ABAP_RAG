@@ -1,0 +1,13 @@
+&FUNCTIONALITY&
+Der Funktionsbaustein ermittelt ein Fortschreibungsdatum zu einer
+LIS-Struktur, wenn entsprechend des Periodentyps der Struktur die
+Fortschreibungsdaten Tag (SPTAG), Monat (SPMON), Woche (SPWOC),
+Buchungsperiode (SPBUC) und Geschäftsjahresvariante (PERIV) bekannt
+sind.
+Es handelt sich damit genau um die Umkehrfunktion zum Unterprogramm
+PERIDODE_ERMITTELN im Report RMCS1000, das bei der Fortschreibung einer
+Kennzahl ausgeführt wird.
+Damit ist es z.B. möglich Kennzahlen so fortzuschreiben, daß Sie einem
+bereits bekannten Datensatz (Merkmalen) zu geordnet werden.
+Es wird das kleinste gültige Datum ermittelt.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

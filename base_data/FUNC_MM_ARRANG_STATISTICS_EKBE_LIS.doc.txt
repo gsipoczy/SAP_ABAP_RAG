@@ -1,0 +1,6 @@
+&FUNCTIONALITY&
+Der Funktionsbaustein stößt die Statistikfortschreibungen im
+Logistik-Informationssystem und RK-Obligo an. Der Anstoss erfolgt über
+die Erzeugung eines Bestellentwicklungssatzes aus Wareneingang oder
+Rechnungseingang.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

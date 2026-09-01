@@ -1,0 +1,4 @@
+Implementation of class method getProductHierarchy()
+All subordinate nodes and pages are read for a product hierarchy. If
+the parameter <ZH>Product hierarchy</> is not set, all product
+hierarchies are read.

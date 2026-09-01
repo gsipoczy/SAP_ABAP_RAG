@@ -1,0 +1,50 @@
+&FUNCTIONALITY&
+In function module MR_ARRANGEMENT_INVOICE_CREATE you "prepare"
+invoices. Used exclusively by "Subsequent Settlement".
+The system notes the invoice documents created in T_ARRANG_VAL. If an
+invoice cannot be posted, the error messages of the function module
+called (MR_CREATE_INVOICE) are attached to T_ARRANG_ERR. T_ARRANG_VAL_W
+is required for updating statistic records for Subsequent Settlement.
+&FUNCTIONALITY&
+Invoices ("settlements") are prepared for posting. Actual posting occurs
+in the function module MR_ARRANGEMENT_INVOICE_ADD. This is used
+exclusively by the Subsequent Settlement module (previously volume
+rebate processing).
+The invoices contain document types which are set in table T169F as
+document types for transaction MEB4. This may make is easier to cancel
+all invoices (in the settlement). If the entry in table T169F has not
+been maintained, the message DOCUMENT_TYPE_NOT_FOUND is issued by the
+system.
+In MR...ADD invoices are posted to supplier I_LIFNR; they only contain
+G/L account lines. The relevant G/L account is determined for every
+invoice via the internal processing key KTOSL contained in T_EK08ARRANG.
+The currency used is passed on via I_WAERS; if a foreign currency is
+involved (that is, if it is not the same as that in I_BUKRS) the system
+uses the exchange rate I_WWERT. The taxes calculated per invoice item
+are added to T_ARRANG_TAX.
+These invoice items are contained in T_EK08ARRANG: KNUMH and KOPOS
+represent the "keys" of the table and have no further significance
+within the function module. WRBTR contains the net revenue, MWSKZ the
+relevant tax codes. The gross value clears the provision (accruals)
+account: The account balance is contained in RUWRT. Any negative
+differences are posted to the revenue account. This is determined by the
+account key KTOSL, the provision account by the key KVSL2.
+Example: WRBTR=100, MWSKZ=V1 (=15%), RUWRT=80. The invoice generated (in
+this case a credit memo) is:
+  Supplier     115  (V1)
+  Revenue     100  (V1)
+  Revenue      80- (no tax code)
+  Provisions   80  (no tax code)
+If an error occurs, the status is set in T_ARRANG_VAL. An error results
+in an entry being made in T_ARRANG_ERR or to an exception message being
+issued.
+&HINTS&
+The account posted to is determined by I_KTOSL. When the system accesses
+T030 the valuation class, valuation grouping code and the account
+grouping are set to SPACE, the credit/debit indocator is determined in
+calcualting the invoice amount (= the total of the amounts in
+T_EK08ARRANG plus tax). The chart of accounts is determined via the
+company code (T001).
+The invoice data calculated is stored globally in the function group,
+allowing MR...ADD to retrieve it. If MR...CREATE is called up a second
+time before MR...ADD, all data is deleted from the first call.

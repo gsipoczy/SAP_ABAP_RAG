@@ -1,0 +1,11 @@
+Über diesen Funktionsbaustein wird ein Bild zur Pflege von Komponenten
+zur Lohnbearbeitungsbestellung oder -Bestellanforderung aufgerufen.
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein vergibt eine Reservierungsnummer. Diese Nummer
+wird für die spätere Verbuchung der Reservierungen gemerkt.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein stößt die Verbuchung für die Komponenten
+einer Lohnbearbeitungsbestellung oder -bestellanforderung an.
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

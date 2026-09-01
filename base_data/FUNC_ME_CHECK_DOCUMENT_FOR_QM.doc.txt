@@ -1,0 +1,6 @@
+Dieser Funktionsbaustein sucht für ein bestimmtes Material und Werk
+offene Bestellungen. Sobald die erste gefunden wurde, wird nicht mehr
+weitergesucht, sondern ein entsprechendes Flag zurückgegeben. Offen ist
+eine Bestellung dann, wenn entweder die WE-Menge oder die RE-Menge
+kleiner der Bestellmenge ist.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

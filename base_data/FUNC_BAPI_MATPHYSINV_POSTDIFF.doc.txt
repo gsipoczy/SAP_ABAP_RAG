@@ -1,0 +1,206 @@
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2028</> and method <LS>COUNT</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_MATPHYSINV_COUNT</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2028</> and method <LS>CREATEMULTIPLE</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_MATPHYSINV_CREATE_MULT</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+The ChangeCount method allows you to change the count for physical
+inventory document items that have already been counted in a physical
+inventory document.
+&HINTS&
+INCLUDE BAPI_BERECHTIGUNG
+<DS:UO.M_ISEG_WZL>M_ISEG_WZL</>,,Physical inventory: Count in plant
+<ZH>Transfer</>
+The key fields of the physical inventory document ((PhysInventory and
+FiscalYear) have to be transferred as import parameters to the method.
+You can also transfer a variance in percentage (parameter
+PercentageVariance).
+The data for each item is imported in the Items table.
+<ZH>Confirmations</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF
+Ensure that you transfer the unit of entry to the method as an import
+parameter (ITEMS), otherwise the method issues an error message.
+&FUNCTIONALITY&
+The Count method allows you to enter the count for items in a physical
+inventory document that have not yet been counted.
+&HINTS&
+INCLUDE BAPI_BERECHTIGUNG
+<DS:UO.M_ISEG_WZL>M_ISEG_WZL</>,,Physical inventory: Count in plant
+<ZH>Transfer</>
+The key fields of the physical inventor document (PhysInventory and
+FiscalYear) have to be transferred to the method as import parameters.
+The count date (CountDate parameter) and a percentage variance
+(PercentageVariance parameter) can also be transferred.
+The data for each item is imported in the Items table.
+Ensure that you transfer the unit of entry as an import parameter
+(ITEMS) to the method, otherwise the method issues an error message.
+<ZH>Confirmations</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF
+&FUNCTIONALITY&
+The Create method is used to create one or more physical inventory
+documents.
+<ZH>Caution</>
+This method is obsolete. It is replaced by the method CreateMultiple
+(function module BAPI_MATPHYSINV_CREATE_MULT).
+In the next two releases you can still use this method. After that, you
+will only be able to use the new method to create physical inventory
+documents.
+&HINTS&
+INCLUDE BAPI_BERECHTIGUNG
+<DS:UO.M_ISEG_WIB>M_ISEG_WIB</>,,Plant authorization for physical
+inventory
+<ZH>Transfer</>
+The Head structure is used to transfer the physical inventory document
+header data. The data for each item is imported in the Items table. You
+can also use the MaxItems parameter to define the maximum number of
+items for each physical inventory document.
+<ZH>Confirmations</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF
+&FUNCTIONALITY&
+The GetDetail method uses the key fields of a physical inventory
+document to read a whole document (header and items). The system does
+not block the document during this process.
+&HINTS&
+INCLUDE BAPI_BERECHTIGUNG
+<DS:UO.M_ISEG_WIB>M_ISEG_WIB</>,,Plant authorization for physical
+inventory
+<ZH>Transfer</>
+The key fields of the physical inventory document (PhysInventory and
+FiscalYear) have to be transferred to the method as import parameters.
+The data for each item is imported in the Items table.
+<ZH>Confirmations</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF
+&FUNCTIONALITY&
+The GetItems method uses the selection criteria below to read the
+header and item data for all physical inventory documents that meet the
+criteria.
+&HINTS&
+INCLUDE BAPI_BERECHTIGUNG
+<DS:UO.M_ISEG_WIB>M_ISEG_WIB</>,,Plant authorization for physical
+inventory
+<ZH>Transfer</>
+The following criteria can be used to select the physical inventory
+documents:
+Plant                             (PlantRa structure)
+Storage location                  (StgeLocRa structure)
+Physical inv. no.                 (PhysInvNoRa structure)
+Physical inv. doc.                (PhysinventoryRa structure)
+Fiscal year                       (FiscalyearRa structure)
+Planned count date                (PlanDateRa structure)
+Count status                      (CountStatusRa structure)
+Status of adjustment posting      (AdjustStatusRa structure
+Grouping criterion                (GroupingCritRa structure)
+Material                          (MaterialRa structure)
+Batch                             (BatchRa structure)
+<ZH>Confirmations</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF
+&FUNCTIONALITY&
+The GetList method uses the selection criteria below to read the header
+data for all physical inventory documents that meet the criteria.
+&HINTS&
+INCLUDE BAPI_BERECHTIGUNG
+<DS:UO.M_ISEG_WIB>M_ISEG_WIB</>,,Plant authorization for physical
+inventory
+<ZH>Transfer</>
+The following criteria can be used to select the physical inventory
+documents:
+Plant                             (PlantRa structure)
+Storage location                  (StgeLocRa structure)
+Phys. inv. no.                    (PhysInvNoRa structure)
+Phys. inv. doc.                   (PhysinventoryRa structure)
+Fiscal year                       (FiscalyearRa structure)
+Planned count date                (PlanDateRa structure)
+Count status                      (CountStatusRa structure)
+Status of adjustment posting      (AdjustStatusRa structure)
+Grouping criterion                (GroupingCritRa structure)
+<ZH>Confirmations</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF
+&FUNCTIONALITY&
+The PostDifferences method allows you to post differences for physical
+inventory documents that have been counted.
+&HINTS&
+INCLUDE BAPI_BERECHTIGUNG
+<DS:UO.M_ISEG_WDB>M_ISEG_WDB</>,,Plant authorization for inventory
+difference posting
+&FURTHER_SOURCES_OF_INF&
+<ZH>Transfer</>
+The key fields of the physical inventory document (PhysInventory and
+FiscalYear) must be transferred to the method as import parameters. You
+can also transfer a threshold value for physical inventory differences
+(ThresholdValue parameter) and the posting date (Pstng date field). The
+data for each item is imported in the Items table.
+<ZH>Confirmations</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF

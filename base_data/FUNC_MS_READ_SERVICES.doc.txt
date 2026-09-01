@@ -1,0 +1,7 @@
+Die Tabelle ESLL wird gepuffert gelesen.
+Es kann sowohl auf eine komplettes Paket (mit hpackno) als auch auf ein
+Teilpaket (mit packno) zugegriffen werden. Die Pufferung erfolgt immer
+auf  Ebene des kompletten Paketes.
+Optional kann eine Tabelle von Paketnummern mitgegeben werden, auf
+deren Ebene gepuffert wird.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

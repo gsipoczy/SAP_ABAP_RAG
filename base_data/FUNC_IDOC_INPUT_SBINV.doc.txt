@@ -1,0 +1,760 @@
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+General
+This function module complements the function module
+<DS:FU.IDOC_INPUT_SBINV>IDOC_INPUT_SBINV</> for self-billing with
+invoice creation, in which you create external documents in the system
+exactly as you receive them.
+In the standard self-billing procedure, the customer prices deliveries
+from you based on:
+
+Prices from the customer's Purchasing department
+Differences between the delivery note and goods receipt
+Differences due to the quality of the material, for example
+Retroactive price adjustments
+The customer uses these prices to prepare a credit advice that they send
+to you by Electronic Data Interchange (EDI). The system converts this
+advice into intermediate document (IDoc) GSVERF.
+The system then determines the corresponding internal delivery, and from
+it the internal invoice, based on:
+
+The internal delivery number sent in the credit advice (table LIKP)
+The internal delivery number determined from external agent deliveries
+(consignment issues) using the customer purchase order number
+The external delivery number sent in the credit advice
+Once the system has determined the corresponding delivery and invoice,
+it compares items in the credit advice, in IDoc form, with items in the
+corresponding internal delivery and invoice.
+The system compares the following condition values for each item:
+
+Net value
+Cash discount
+Surcharges/Discounts
+Value-added tax (VAT)
+If the values in the credit advice match the values in your invoice, the
+system assigns the credit advice number as a reference to the open items
+in the journal entry.
+If the system finds any differences in the values, it terminates
+processing of the IDoc and sends a mail to the employee responsible. The
+employee can then correct the problem manually, or inform the customer
+to send one of the following correction or retro-billing documents:
+
+Credit memo requests for quantity corrections
+Credit and debit memo requests for retroactive billing
+The system determines the invoices and the related deliveries for these
+documents in the same way as for a credit advice.
+If the values in the customer credit memo request (quantity correction)
+match the values in your delivery, invoice, and the existing credit
+memo, the system automatically creates the corresponding credit memo
+request, then the credit memo. The system always enters "EDI" as the
+order reason, no matter what the reason is for creating a credit or
+debit memo request. It also copies the related credit advice number to
+the purchase order number field in the purchase order section, and to
+the assignment field in the accounting section.
+Credit or debit memo requests based on return deliveries, are treated
+just as credit memo requests for quantity corrections, except that the
+system carries out pricing only for those materials that are returned.
+Also, instead of comparing each condition value, the system determines
+an overall difference per item and compares it to the overall correction
+value.
+In the case of retro-billing, the system reprices all documents in the
+transaction before comparing the condition values of the items. It
+calculates the difference between the old and new prices in the
+delivery, invoice, and existing credit or debit memos, and compares it
+to the difference calculated by the customer in the credit or debit memo
+request. The difference calculated by the customer is copied to
+condition type EDI2, and the one that you calculate to condition type
+PDIF.If these values match, the system automatically creates a credit or
+debit memo request, then a credit or debit memo.
+If these values do not match, the system sends a mail to the employee
+responsible, but creates the document anyway. If you do not want this,
+make the appropriate settings in Customizing for the sales document
+type.
+The customer sends a payment advice note based on their credit advice.
+The credit advice number that they include with the payment advice note
+indicates whether there are several deliveries per credit advice number
+or only one:
+
+The customer sends payment for a number of deliveries. These deliveries
+are covered by one credit advice, the number of which is sent with the
+payment.
+
+The customer sends payment for a number of deliveries. There is,
+however, only one delivery per credit advice. In this case, the customer
+groups the advice numbers and assigns a collective number, such as the
+EDI sequential number or vendor posting number. Payment, then, is for
+the total of the credit advices represented by this collective number.
+To compare open items, you must refer to the individual credit advice
+numbers.
+Customizing
+To use the self-billing procedure, you must first make general
+Customizing settings for incoming EDI documents, such as for the process
+code and partner profile. You must also make settings particular to
+self-billing in <DS:SIMG.SIMG_CFMENUOLSDOVD1X>Customizing</> for
+incoming EDI.
+IDoc structure
+When converting external documents, note that you must create an IDoc
+for each delivery (for example, VDA4908: an IDoc must be created for
+each record type 823).
+IDoc structure GSVERF01 contains the following relevant segments and
+fields:
+Segment E1EDK01 - General header data
+
+action - Action code
+
+This field controls how a document is processed by the system:
+
+0 = credit advice
+
+1 = correction or retro-billing document
+
+belnr - Self-billing document number
+
+This field contains the external document number.
+
+curcy - currency
+
+This field contains the document currency. All currencies must be sent
+in ISO format.
+Segment E1EDKA1 - Header data: Partner information
+
+parvw - Partner function
+
+The partner function defines which partner number appears in field
+partn:
+
+"LF" Vendor number assigned by the customer
+"WK" Customer plant
+"AB" Customer unloading point
+
+partn - Partner number
+
+The system uses the above functions to determine the sold-to party
+according to settings in Customizing for incoming EDI for the activities
+"Assigning a sold-to party", and "Special billing features".
+Segment E1EDK02 - Document header: Reference data (one record per
+qualifier)
+
+qualf - Qualifier reference document
+
+The system uses this field to determine what type of document is being
+used as reference. It recognizes the following qualifiers:
+
+001 Closing number / Purchase order number
+012 Delivery note number
+
+Or, to reduce processing time, you can enter the following documents
+directly:
+
+061 Internal delivery note
+063 External delivery note
+064 Goods receipt/issue slip
+
+014 EDI sequential number or vendor posting number
+Segment E1EDK03 - Header data: Date segment (one record per qualifier)
+
+iddat - Qualifier date segment
+
+This field specifies what type of date is used in the field datum:
+
+010  Shipping date
+030  Goods receipt date
+
+datum - Date
+
+This field contains the date based on qualifier IDDAT.
+Segment E1EDK04 - Document header: Taxes
+
+mwskz - Value added tax code
+Segment E1EDP01 - Document item: General data
+
+action - Posting key according to VDA 4908 - 09/04
+menge  - Delivery quantity
+pmene  - Price unit of measure
+vprei  - Individual price
+Segment E1EDP19 - Document item: Object ID (one record per qualifier)
+
+qualf - Object identification
+
+The system uses this qualifier to determine which materials the customer
+is sending, usually:
+
+001 Customer material
+
+This qualifier indicates that field idtnr contains the material number
+assigned by the customer, and field ktext the customer material short
+description. The customer must always send in a customer material
+number.
+
+ktext - Short text
+
+This field contains a short description of the material.
+Segment E1EDP26: Document item - Amounts (one record per qualifier)
+The system recognizes the following qualifiers:
+
+001 Gross price
+003 Net value
+007 Discount amount
+Segment E1EDP04 - Document item: Taxes
+
+mwbst - Value-added tax amount
+mwskz - Value-added tax code
+Segment E1EDP05
+
+alckz - '+' for surcharges, '-' for discounts
+betrg - Surcharge amount / Discount amount
+User exits
+The following customer functions are available for the standard
+self-billing procedure:
+
+EXIT_SAPLVED5_001
+
+With this customer function, you can perform fine checks on internal and
+external condition values for credit advices (action 0 in E1EDK01).
+
+When you receive an advice, the system determines internal condition
+values and compares these to the external values sent in by the
+customer. If they differ, the system transfers delivery items from the
+credit advice one by one.
+
+For each item, the system transfers two characteristics each for the net
+value, cash discount, surcharges/discounts, and value-added tax:
+
+xxx_INTERN
+
+This is the value calculated based on internal conditions.
+
+xxx_EXTERN
+
+This is the corresponding value from the intermediate document (IDoc).
+
+Based on your program in the user exit, the system compares these values
+to determine if the difference is relevant. If so, it terminates
+processing of the IDoc.
+
+If you do not want a difference to be relevant, set the parameter
+WERT_DIFFERENZ to "N" or leave it blank. The system then ignores any
+difference that it finds.
+
+
+Use the related standard function, which you set in Customizing for
+incoming EDI, for general tolerance checks.
+
+EXIT_SAPLVED5_005
+The system collects warnings in table XVBFS that occur when processing
+self-billing documents. For each entry in this table, the system creates
+a status record in the IDoc, and notifies the employee responsible by
+electronic mail.
+With this customer function, you enhance the workflow parameters. You
+can:
+
+Add a warning to table XVBFS
+
+In this way, you can set the system to send a mail to a recipient for a
+particular warning.
+
+Remove a warning
+
+In this case, the system does not create a status record or workflow
+item.
+
+EXIT_SAPLVED5_006
+In EDI processing for incoming self-billing documents, the system
+transfers sets of data to screens in the system by batch input.
+With this customer function, you can include billing or other data not
+covered by the standard transfer program, for example.
+&FUNCTIONALITY&
+General
+This function module complements the function module
+<DS:FU.IDOC_INPUT_GSVERF>IDOC_INPUT_GSVERF</> for the standard
+self-billing procedure in which your customers send credit advices, by
+Electronic Data Interchange (EDI), that you compare to your internal
+invoices.
+In the self-billing procedure with invoice creation, the customer
+prices deliveries from you based on:
+
+Prices from the customer's Purchasing department
+Differences between the delivery note and goods receipt
+Differences due to the quality of the material, for example
+Retroactive price adjustments
+The customer uses these prices to prepare an invoice on your behalf
+that they send to you by Electronic Data Interchange (EDI). The system
+receives and converts this invoice into intermediate document (IDoc)
+GSVERF. It then forwards it to this function module, which determines
+the reference delivery and items based on the internal delivery number,
+or external delivery number, sent in the external invoice.
+In this procedure, you cannot create an invoice for the delivery: no
+original invoice exists. However, the system simulates invoice creation
+to determine internal prices and their conditions.
+Once the system has determined the reference delivery and simulated an
+invoice, it compares condition values in these documents to those in
+the external invoice, in IDoc form. The system compares only those
+conditions specified in the IDoc and entered in
+<DS:SIMG.SIMG_CFMENUOLSDOVD1X>Customizing</>.
+If the values in the external invoice match the values in the simulated
+invoice, and the delivery, the system creates an invoice in the R/3
+System exactly as the customer has prepared it. Note that the system
+does not use the standard billing transaction here, but rather a
+special billing interface (GN_INVOICE_CREATE).
+If the system finds any differences in the values, it updates the IDoc
+status records, and sends a mail to the employee responsible. It
+creates the document anyway.
+Self-Billing Document Types
+The customer can send in the following documents for the self-billing
+procedure with invoice creation:
+
+Invoice
+
+The customer must submit invoices with reference to one or more
+internal or external deliveries. Several invoices can be sent for one
+delivery item. The system will continue to create invoices as the
+customer sends them until the delivery has been fully billed.
+
+Credit memos for quantity corrections
+
+The customer sends in a credit memo when they have billed a larger
+quantity of material in the invoice than what was actually delivered.
+The customer must submit credit memos of this type with reference to
+the invoice.
+
+Credit and debit memos for retroactive billing
+
+The customer sends in a credit or debit memo to balance out retroactive
+price adjustments. The customer must submit credit and debit memos of
+this type with reference to one or more invoices.
+
+In the case of credit memos, the system calculates the difference
+between the old and new prices in the invoice and delivery, and enters
+it into condition PDIF to use in the pricing procedure.
+
+Cancellation documents
+
+The customer sends in a cancellation document to cancel existing
+invoices, credit memos, or debit memos. The customer must submit
+documents of this type with reference to the document they wish to
+cancel.
+When the invoice needs to be adjusted, the employee informs the
+customer to send one of the above correction or retro-billing
+documents:
+The system determines the invoices for these documents, along with the
+related deliveries, credit and debit memos, and cancellation documents.
+If the values in the external credit memo (quantity correction) match
+the values in the invoice, and delivery, the system automatically
+creates a credit memo exactly as the customer has prepared it.
+Credit or debit memo requests based on return deliveries, are treated
+just as credit memo requests for quantity corrections, except that the
+system carries out pricing only for those materials that are returned.
+Also, instead of comparing each condition value, the system determines
+an overall difference per item and compares it to the overall
+correction value.
+In the case of retro-billing, the system reprices all documents in the
+transaction before comparing the condition values of the items. It
+calculates the difference between the old and new prices in the invoice
+and delivery, and enters it into condition PDIF to use in the pricing
+procedure. The difference calculated by the customer in the credit or
+debit memo is entered in the internal condition that you have assigned
+in Customizing. If these values match, the system automatically creates
+the credit or debit memo.
+If these values do not match, the system sends a mail to the employee
+responsible, but creates the document anyway. If you do not want this,
+make the appropriate settings in Customizing for the sales document
+type.
+Troubleshooting
+The system may sometimes end processing of the IDoc for an invoice sent
+in by the customer. In this case, no invoice is created in the R/3
+System. This may happen because:
+
+You have not made the appropriate Customizing settings for
+self-billing, or the necessary general Customizing settings.
+
+There are different values for the internal and external conditions
+that you have assigned in Customizing (V4 177).
+
+There are different value-added tax indicators (V4 180).
+
+The order referred to in the external invoice is different from the
+order determined by the system from the delivery.
+
+There are different sales units (V4 174).
+
+The customer did not specify a material (V4 173).
+
+There are different sales organizations (V4 165).
+
+There are different currencies (V4 185).
+
+The invoice referred to in the correction document does not exist or
+has been cancelled (V4 181).
+
+The simulated invoice has no value (V4 191).
+
+The external invoice contains items that the system normally would not
+copy to a billing document in the R/3 System (V4 198).
+
+The external invoice requires an invoice split.
+
+General errors in billing document creation have occurred.
+Customizing
+To use the self-billing procedure with invoice creation, you must first
+make general Customizing settings for incoming EDI documents, such as
+for the process code and partner profile. You must then make settings
+particular to self-billing in
+<DS:SIMG.SIMG_CFMENUOLSDOVD1X>Customizing</> for incoming EDI.
+IDoc Structure
+IDoc GSVERF01 contains the following segments and fields:
+E1EDK01 - General header data
+
+action - Action code
+
+This field controls how a document is processed by the system. Use one
+of the following values:
+
+0 - Invoice
+
+The system creates an invoice with the billing category specified for
+invoices in Customizing.
+
+1 - Credit memo for retro-billing
+
+The system creates a credit memo with the billing category specified in
+Customizing for credit memos for retro-billing.
+
+2 - Debit memo for retro-billing
+
+The system creates a debit memo with the billing category specified in
+Customizing for debit memos for retro-billing.
+
+3 - Cancellation
+
+The system creates a cancellation billing document with the billing
+category specified in Customizing for the document being cancelled.
+
+4 - Credit memo for quantity corrections
+
+The system creates a credit memo with the billing category specified in
+Customizing for credit memos for quantity corrections.
+
+belnr - Document number
+
+This field contains the external invoice number. It is used in
+reference field XBLNR for settling payment.
+
+curcy  - Currency
+
+This field contains the document currency. All currencies must be sent
+in ISO format.
+
+zterm - Term of payment key
+
+This field contains the terms of payment. The system copies these to
+the billing document.
+
+kundeuinr - VAT registration number (customer)
+
+This field contains the customer VAT registration number. The system
+checks the number in this field against the customer master.
+
+eigenuinr - VAT registration number (vendor)
+
+This field contains the vendor VAT registration number. The system
+checks the number in this field against the number in your records.
+
+augru - Order reason
+
+This field contains the billing reason. The system copies it to field
+AUGRU in the billing document. Although it does not appear online, you
+can use this field in print programs, for example.
+E1EDKA1 - Header data: Partner information
+
+parvw - Partner function
+
+The partner function defines which partner number appears in field
+PARTN:
+
+"LF" Vendor number assigned by the customer
+"WK" Customer plant
+"AB" Customer unloading point
+
+partn - Partner number
+
+The system uses the above functions to determine the sold-to party
+according to settings in Customizing for incoming EDI for the
+activities "Assigning a sold-to party", and "Special billing features".
+E1EDK05 - Document header conditions
+
+kschl - Condition type
+
+This field contains the condition type defined in
+<DS:SIMG.SIMG_CFMENUOLSDVOK0>Customizing</>.
+
+betrg - Amount
+
+This field contains the total amount, or a percent value of the
+condition.
+
+uprbs - Price unit
+
+This field contains the number of units, to which the field BETRG
+refers.
+
+meaun - Unit of measurement
+
+This field contains the unit of measure for field UPRBS.
+E1EDK03 - Header data: Date segment
+
+iddat - Qualifier date segment
+
+This field specifies what type of date is used in field DATUM. There
+are two types:
+
+012 Document date
+
+This date is used for the billing date (FKDAT).
+
+024  Fixed value date
+
+This date is used for the terms of payment (VALDT).
+
+datum - Date
+
+This field contains the date based on qualifier IDDAT.
+E1EDKT1 - Header data: Text identification
+
+tdid - Text ID
+
+This field contains the text ID defined in
+<DS:SIMGSIMG_XXMENUOLSDVOTX2>Customizing</>.
+
+tsspras_iso - Language
+
+This field contains the text language in ISO format.
+E1EDKT2 - Document header: Texts
+
+tdline - Text lines
+
+This field contains a line of text.
+
+tdformat - Tag column
+
+You enter a format for the text lines in this field.
+E1EDP01 - Document item: General data
+
+posex - Item number
+
+This field contains the external item number.
+
+The item number of the related item in the billing document is assigned
+by the system according to your settings in Customizing. This number
+has nothing to do with the external item number sent in by the
+customer.
+
+menge - Quantity
+
+This field contains the quantity to be billed. Quantities must be
+specified in sales units.
+
+menee - Unit of measure
+
+This field specifies the sales unit.
+
+netwr - Net value
+
+This field contains the net value. Although the system copies this
+data, it does not use it in any calculations. Rather, the system uses
+values in the condition segment (see below) in its pricing
+calculations.
+
+ntgew - Net weight
+
+This field contains the weight for the item. The system copies this
+data, but does not use it in any calculations. You can include this
+field in any of the customer functions.
+
+gewei - Weight unit
+
+This field contains the unit of weight. The system copies this data,
+but does not use it in any calculations. You can include this field in
+any of the customer functions.
+E1EDP02 - Document item: Reference data
+
+qualf - Qualifier reference document
+
+The system uses this field to determine what type of document is being
+used as reference. It recognizes the following qualifiers:
+
+001 Sales order
+
+You can enter an order number, if required. When you do, the system
+compares it to the order in the document flow to make sure they match.
+
+When the customer sends this qualifier, use the purchase order number
+from the order (field BSTKD) for the document number.
+
+009 Billing document
+
+If the IDoc is for a credit or debit memo, or a cancellation, you must
+enter a billing document number as reference.
+
+When the customer sends this qualifier, use the external billing
+document number (XBLNR) for the document number.
+
+012 Delivery
+
+You must always enter a delivery number.
+
+When the customer sends this qualifier, you can use the internal or
+external delivery number (VBELN or LIFEX, respectively) for the
+document number. To reduce processing time, you can also enter the
+following documents directly:
+
+- 061 Internal delivery note
+- 062 Purchase order (customer) for the external agent delivery note
+- 063 External delivery note
+
+belnr - Document number
+
+This field contains the document number based on the qualifier sent in
+by the customer.
+E1EDP03 - Document item: Date segment
+
+iddat - Qualifier date segment
+
+The system uses this qualifier to determine which date the customer
+sent in field DATUM. There are two types:
+
+001 Delivery date
+030 Goods receipt date
+
+These dates are for information only. You can, however, include them in
+any of the customer functions.
+
+datum - Date
+
+This field contains the date, based on the qualifer sent in by the
+customer.
+E1EDP05 - Document item: Conditions
+
+kschl - Condition type
+
+This field contains the condition type defined in
+<DS:SIMGSIMG_CFMENUOLSDVOK0>Customizing</>.
+
+betrg - Amount
+
+This field contains the total amount, or a percent value of the
+condition.
+
+uprbs - Price unit
+
+This field contains the number of units, to which the field BETRG
+refers.
+
+meaun - Unit of measurement
+
+This field contains the unit of measure for field UPRBS.
+
+mwskz - Value-added tax indicator
+
+This field is for a value-added tax indicator. If one is sent, the
+system compares it to the tax indicator for the corresponding condition
+that you have specified for comparison.
+E1EDP19 - Document item: Object identification
+
+qualf - Object identification
+
+The system uses this qualifier to determine which materials are in
+fields IDTRN and KTEXT. There are two types:
+
+001 Customer material
+
+This qualifier indicates that field IDTNR contains the material number
+assigned by the customer, and field KTEXT the customer material short
+description. The customer must send in a customer material number.
+
+002 Material
+
+When the customer sends in this qualifier, the field IDTNR contains
+your material number.
+
+idtnr - Material identification
+
+This field contains the material number based on the qualifier sent in
+by the customer.
+
+ktext - Short text
+
+This field contains a short description of the material. The system
+uses this description only when it cannot find the material and you
+create a billing document with external reference.
+E1EDPT1 - Document item: Text identification
+
+tdid - Text ID
+
+This field contains the text ID defined in
+<DS:SIMGSIMG_XXMENUOLSDVOTX2>Customizing</>.
+
+tsspras_iso - Language
+
+This field contains the text language in ISO format.
+E1EDPT2 - Document item: Texts
+
+tdline - Text lines
+
+This field contains a line of text.
+
+tdformat - Tag column
+
+You enter a format for the text lines in this field.
+Customer functions
+The following customer functions are available for self-billing with
+invoice creation:
+
+EXIT_SAPLVED5_002
+
+With this customer function, you can analyze and process warnings that
+the system collects when processing self-billing documents. You can,
+for example:
+
+Create a special message for a particular recipient
+
+Design a workflow that is different from the standard
+
+Create a message to send to the customer
+
+If your customer forgets to include a tax indicator in the IDoc, for
+instance, the system issues a warning. In this case, you can set the
+system to automatically notify the customer of the problem.
+
+Additionally, you can process general data sent in the external billing
+document. For example, you can include this data in messages to give
+the recipient/customer more detailed information about the problem.
+
+EXIT_SAPLVED5_003
+
+With this customer function, you can program your own tolerance checks
+on internal and external conditions. You can, for example:
+
+Design condition value tolerance checks for a specific customer
+
+Perform tolerance checks based on quantities, for instance, a larger
+tolerance for larger quantities
+
+The system always transfers header data and conditions from the billing
+document IDoc. Item data, on the other hand, is transferred only when
+there are conditions to be taken into account for the item.
+
+If required, you can set the system to ignore any differences between
+condition values. If you want to continue processing even if there are
+differences in the values, leave the DIFFREL indicator blank.
+
+The system sets the WERTDIF indicator when there is a difference in
+condition values. Unmark this field if you want the system to ignore
+the difference.
+
+EXIT_SAPLVED5_004
+
+With this customer function, you can review and change data in the
+external billing document IDoc and data for the billing document
+interface before creating the document in the R/3 System.
+
+For example, you can replace a currency with only two decimal places
+with a currency with four decimal places recognized by the R/3 System.

@@ -1,0 +1,19 @@
+&FUNCTIONALITY&
+This function module is used to filter the fixed values of the domain
+<NP>WSD_PLANTS_DISPLAY</><ZK> </>depending upon the calling application:
+If the calling application is <ZK>01 - Sales Order</>, the
+<ZK>Purchasing Organization </>option is not displayed in the <ZK>
+Related Plants </>field.
+If the calling application is <ZK>02 - Purchase Order, 03 - Seasonal
+Procurement,</> or <ZK>04 - Allocation Table</>, the <ZK>Sales
+Organization </>option is not displayed in the <ZK>Related Plants
+</>field.
+This function module also explicitly controls the display of the <ZK>Own
+Plant </>value for domain <NP>WSD_PLANTS_DISPLAY.</>
+&EXAMPLE&
+This function module controls the options for the <ZK>Related Plants
+</>field used in the Enhanced Material Search function, as well as the
+screen to store the personal settings.
+&HINTS&
+&FURTHER_SOURCES_OF_INF&
+

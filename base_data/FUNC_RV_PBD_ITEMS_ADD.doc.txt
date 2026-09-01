@@ -1,0 +1,74 @@
+&FUNCTIONALITY&
+This function module adds the billing relevant item identified by
+IV_DOCUMENT_ID and IV_DOCUMENT_ITEM_ID to a billing document if
+possible. The billing document is identified by IV_BILLING_DOCUMENT.
+&EXAMPLE&
+
+&HINTS&
+The interface of this function module includes table definitions. This
+table definition is only needed as global data. The caller of the
+function module has to define the according tables but does not have to
+fill the tables with values. The tables will be refreshed anyway before
+the logic of this function module is processes.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module adds the billing relevant item identified by
+IV_DOCUMENT_ID and IV_DOCUMENT_ITEM_ID to a billing document if
+possible. The billing document is identified by IV_BILLING_DOCUMENT.
+&EXAMPLE&
+
+&HINTS&
+The interface of this function module includes table definitions. This
+table definition is only needed as global data. The caller of the
+function module has to define the according tables but does not have to
+fill the tables with values. The tables will be refreshed anyway before
+the logic of this function module is processes.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+The function module RV_INV'OICE_ITEM_FITS_TO determines to which
+existing billing documents in the import list IT_BILLING_DOCUMENT a
+billing relevant item fits. The result set ET_BILLING_DOCUMENT could be
+empty or have one or multiple entries. If the result set is empty then
+the billing relevant item does not fit (relative to the imported list
+IT_BILLING_DOCUMENT).
+&EXAMPLE&
+
+&HINTS&
+The interface of this function module includes tables definitions. This
+table definition is only needed as global data. The caller of the
+function module has to define the according tables but does not have to
+fill the tables with values. The tables will be refreshed anyway before
+the logic of this function module is processes.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+This function module adds the billing relevant item identified by
+IV_DOCUMENT_ID and IV_DOCUMENT_ITEM_ID to a billing document if
+possible. The billing document is identified by IV_BILLING_DOCUMENT.
+&EXAMPLE&
+
+&HINTS&
+The interface of this function module includes table definitions. This
+table definition is only needed as global data. The caller of the
+function module has to define the according tables but does not have to
+fill the tables with values. The tables will be refreshed anyway before
+the logic of this function module is processes.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module adds the billing relevant item identified by
+IV_DOCUMENT_ID and IV_DOCUMENT_ITEM_ID to a billing document if
+possible. The billing document is identified by IV_BILLING_DOCUMENT.
+&EXAMPLE&
+
+&HINTS&
+The interface of this function module includes table definitions. This
+table definition is only needed as global data. The caller of the
+function module has to define the according tables but does not have to
+fill the tables with values. The tables will be refreshed anyway before
+the logic of this function module is processes.
+&FURTHER_SOURCES_OF_INF&
+

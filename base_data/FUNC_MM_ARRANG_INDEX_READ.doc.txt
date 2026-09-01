@@ -1,0 +1,16 @@
+&FUNCTIONALITY&
+Determination of all documents for the time records. All relevant
+documents matching up to the variable key, the application, the
+condition table, and the validity period of the time records are
+determined from LIS table S111. This data is collected in a
+communication structure and made available for subsequent processing.
+In addition, all documents relating to the conditions are collected and
+checked for uniqueness to ensure that no double database accessing
+occurs during the reading of the document headers and items.
+&EXAMPLE&
+
+&HINTS&
+A separate category is used as communication structure.
+&FURTHER_SOURCES_OF_INF&
+This module is the basis for the subsequent, or retrospective,
+compilation of statistics for "subsequent settlement" in Purchasing.

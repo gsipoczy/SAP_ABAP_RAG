@@ -1,0 +1,5 @@
+In order to adapt to intercompany demands, create a new search help
+'F4_ALLOWED_PLANT_PER_SALES_ORG'.
+The search help exit 'F4IF_SHLP_EXIT_SLS_ORG_PLANT' copied from
+'F4IF_SHLP_EXIT_TVKWZ_WERKS' and remove the restriction of same
+organization for field plant.

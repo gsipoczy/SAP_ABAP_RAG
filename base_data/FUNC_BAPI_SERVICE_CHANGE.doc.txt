@@ -1,0 +1,66 @@
+&FUNCTIONALITY&
+This method delivers a selection of detailed data pertaining to a
+specified external service. This data is valid client-wide.
+&EXAMPLE&
+&HINTS&
+&FURTHER_SOURCES_OF_INF&
+To enable the data to be read successfully, you need the authorization
+to display service master data.
+Messages are returned in the parameter RETURN. The parameter
+documentation lists the return values and their meaning.
+&FUNCTIONALITY&
+This method allows you to generate a list of service master records.
+You can enter two specific selection criteria: e.g. a short text, an
+interval of service categories, or certain material groups.
+The entry of all parameters is optional. If you do not make any
+restrictions, all services will be found.
+&EXAMPLE&
+&HINTS&
+Only those service master records for which you have the authorization
+to display are found.
+&FURTHER_SOURCES_OF_INF&
+&FUNCTIONALITY&
+This Business Application Programming Interface (BAPI) is used in the
+component <ZK>External Services Management (MM-SRV)</>.
+The BAPI enables you to change service master records.
+&EXAMPLE&
+
+&HINTS&
+<ZH>Authorization</>
+To be able to change service master records, you need the relevant
+authorization.
+Authorization objekt <ZK>Service Master</> (<NP>M_SRV_LS</>) is checked
+for the activity <NP>02 (Change)</>.
+<ZH>Transfer</>
+The service master data is transferred in the parameter
+<NP>IM_SERVICE_DATA</>.
+The change parameters are transferred in the parameter
+<NP>IM_SERVICE_DATAX</>.
+The short texts are transferred in the table <NP>SERVICE_DESCRIPTION
+</>.
+The long texts are transferred in the table <NP>SERVICE_LONG_TEXTS</>.
+<ZH>Return messages</>
+During the entire service master processing, success and error messages
+are returned in addition to customers' own messages in the parameter
+<NP>RETURN</>. Thus, the RETURN table contains information as to whether
+interface data has been processed incorrectly and issues success and
+error messages during the creation of service master records.
+<ZH>Restrictions</>
+With this BAPI, it is not possible to:
+Create several service master records at a time. If you want to create
+several service master records, reinvoke the method before creating each
+additional master record.
+Create a new service master record on the basis of an already-existing
+one using the <ZK>Create with Reference</> function.
+Specify the displayable fields in the service master via the field
+selection in Customizing. The field selection is not taken into account.
+Create data for classication (configuration).
+<ZH>Customer enhancements</>
+The following BAdIs are available for the BAPI BAPI_SERVICE_CHANGE:
+<DS:SIMG.MMSRV_SM_BAPI_CUST>Service Master: Modification of BAPI
+Interfaces (MMSRV_SM_BAPI_CUST)</>
+<DS:SIMG.MMSRV_SM_MAIN>Enhancement to Service Master (MMSRV_SM_MAIN)</>
+<DS:SIMG.MMSRV_SM_NOTIFY>Notification Create/Change Service Master
+Record (MMSRV_SM_NOTIFY)</>
+&FURTHER_SOURCES_OF_INF&
+

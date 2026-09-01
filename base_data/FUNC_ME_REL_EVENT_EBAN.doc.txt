@@ -1,0 +1,11 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein löst für alle Banfpositionen, für die eine
+Freigabe mit einem workflowrelevantem Freigabecode erforderlich ist,
+das Ereignis 'Create' des Objekttyps 'EBAN' aus.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

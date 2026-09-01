@@ -1,0 +1,48 @@
+&FUNCTIONALITY&
+Establish communication structures for price determination from order
+documents.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+Determination of the required price determination data for the
+retrospective compilation of statistics for subsequent (end-of-period)
+settlement in Purchasing. This module makes available the KOMV data
+from the header and item data as well as from the condition and
+condition type to be processed.
+&EXAMPLE&
+
+&HINTS&
+If the calculation rule of the condition is "percentage", the amount
+value of the condition is not set here in price determination. The
+determination of the amount value for subsequent settlement is carried
+out in the module 'MM_ARRANG_BONUSBASIS'. Thus, only "quantities" are
+set in the structure KOMV.
+&FURTHER_SOURCES_OF_INF&
+The simulated price data is only set in the header of the price
+determination table KOMV. The price data set in this way is not stored
+in the database at any time.
+&FUNCTIONALITY&
+Check whether the current condition exists in KOMV.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+Internally, an index that notes already processed conditions is
+maintained so that it is unnecessary to loop over all price
+determination data in the event of a new call.
+&FUNCTIONALITY&
+Prüfen, ob die aktuelle Kondition in der KOMV vorhanden ist
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+Es wird intern ein Index mitgeführt, der die bereits bearbeiteten
+Konditionen merkt, um beim erneuten Aufruf nicht noch einaml über alle
+Preisfindungsdaten loopen zu müssen.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

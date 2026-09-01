@@ -1,0 +1,6 @@
+&FUNCTIONALITY&
+Abstract method.
+Implementation takes place in the subtypes.
+&FUNCTIONALITY&
+Abstract method.
+Implementation takes place in the subtypes.

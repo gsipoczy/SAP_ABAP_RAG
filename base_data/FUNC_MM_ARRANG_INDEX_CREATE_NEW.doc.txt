@@ -1,0 +1,48 @@
+&FUNCTIONALITY&
+Erzeugt zu gegebenen Kopfdaten, abgelegt in der Kommunikationsstruktur
+KOMK, und den dazugehörigen Positionsdaten, abgelegt in der
+Kommunikationsstruktur KOMP, die LIS-Struktur für die
+Indexfortschreibung der nachträglichen Abrechnung gemäß
+Customizingeinstellungen in der Konditionsartenpflege und den
+dazugehörigen Zugriffsfolgen, bzw. Konditionstabellen. Es werden die zu
+den Konditionsarten der nachträglchen Abrechnung Zugriffsfolgen
+ausgewertet und auf Gültigkeit und Vollständigkeit überprüft, weiterhin
+werden die Bedingungen der Zugriffsfolgen geprüft. Sind die Felder der
+jeweiligen Zugriffsfolgen füllbar und die Bedingung des jeweiligen
+Zugriffs erfüllt, werden diese Informationen zur Forschreibung des
+Index der nachträglichen Abrechnung herangezogen und die
+Fortschreibungsstruktur aufgebaut.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Creates the LIS structure of index updating for subsequent settlement
+in Purchasing, for communication structure TKOMK (header data of
+purchasing document) and the related item data TKOMP. The LIS structure
+is only ever created if the vendor has the indicator "Subsequent
+settlement index" at purchasing organization level in the vendor
+master, i.e. the "Subsequent settlement" indicator is maintained in the
+vendor master. In addition, index updating is only carried out for the
+new items in a purchase order.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+Erzeugt aus dem Bestellkopf und den dazugehörigen Positionen die
+Kommunikationsstruktur für die Indexfortschreibung der nachträglichen
+Abrechnung im Rahmen des Statistikneuaufbaus im Einkauf.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+Weiterführende Informationen finden Sie zum Funktionsbaustein
+<DS:FU.MM_ARRANG_INDEX_CREATE>MM_ARRANG_INDEX_CREATE</>.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

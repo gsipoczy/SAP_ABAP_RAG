@@ -1,0 +1,163 @@
+&FUNCTIONALITY&
+With the exporting parameter ev_pdf this BAPI returns the printout for a
+billing document which has been passed to the BAPI with the importing
+parameter iv_vbeln.
+&FUNCTIONALITY&
+You can use this method to cancel a billing document.
+As an input parameter, you are expected to enter a billing document
+number in the field BILLINGDOC_NUMBER. This corresponds to the document
+to be canceled.
+This method can be used not only in the simulation run (TESTRUN = 'X')
+but also in an update run including update (TESTRUN = ' '). Both
+execution variants send back any errors that have occurred to the
+output table RETURN. If the document to be canceled has been correctly
+processed, information on successful processing is sent back in the
+SUCCESS table. This ouptut table delivers in particular the document
+number of the cancellation billing document in the update run.
+&EXAMPLE&
+
+&HINTS&
+Required entries     :
+  BILLINGDOC         Number of the billing document to be canceled
+COMMIT Control :
+  In the update (TESTRUN = ' ') the update is carried out by COMMIT
+  WORK using the methods available.
+&FURTHER_SOURCES_OF_INF&
+&FUNCTIONALITY&
+This method can be used to create billing documents.
+As input parameters, you are expected to enter information on the items
+to be processed in the table BILLING_DATA_IN. This data is processed
+and produces a batch of billing documents. You also have the option of
+transferring information for entry in the input structure
+CREATOR_DATA_IN. If this information is already determined, this is
+transferred into each billing document header. You can also enter
+optional conditions for the individual items to be processed in the
+input table CONDITION_DATA_IN, as well as means of payment information
+in the table CCARD_DATA_IN.
+This method can be used in the simulation run (TESTRUN = 'X') and also
+in the update run including the update (TESTRUN = ' '). Both execution
+variants deliver errors that may have occurred back to the output table
+RETURN. Information on successful processing is sent back in the output
+table SUCCESS. This output table delivers the document numbers of the
+billing documents created in particular.
+&EXAMPLE&
+&HINTS&
+Required entries     :
+  BILLING_DATA_IN-SALESORG
+  BILLING_DATA_IN-DISTR_CHAN
+  BILLING_DATA_IN-DIVISION
+  BILLING_DATA_IN-DOC_TYPE
+  BILLING_DATA_IN-ORDBILLTYP
+  BILLING_DATA_IN-SOLD_TO
+  BILLING_DATA_IN-ITEM_CATEG
+  BILLING_DATA_IN-REQ_QTY
+  BILLING_DATA_IN-SALES_UNIT
+  BILLING_DATA_IN-CURRENCY
+  If a material is billed for which a material master needs to be
+  determined (BILLING_DATA_IN-NO_MATMAST = ' '), you must make the
+  following entries :
+  BILLING_DATA_IN-PLANT
+  BILLING_DATA_IN-MATERIAL
+  If, on the other hand, a material is billed for which no material
+  master is to be determined (BILLING_DATA_IN_NO_MATMAST = 'X'), you
+  must make the following entries :
+  BILLING_DATA_IN-COUNTRY
+  BILLING_DATA_IN-MATERIAL
+  BILLING_DATA_IN-TAXCL_1MAT
+COMMIT control :
+  In the update run (TESTRUN = ' ')  the update is carried out by
+COMMIT
+  WORK as part of the method available.
+&FURTHER_SOURCES_OF_INF&
+&FUNCTIONALITY&
+You can use this method to check if a billing document exists.
+As an input parameter, you are expected to enter a billing document
+number in the field BILLINGDOC_NUMBER. This corresponds to the document
+to be checked. If an error scenario occurs during processing, this is
+sent back in the output structure RETURN. If, on the other hand, the
+output structure RETURN is empty, then processing has been successful
+and the number transferred in the field BILLINGDOC_NUMBER exists.
+&HINTS&
+Required entries     :
+  BILLINGDOC         Number of the billing document to be processed.
+&FURTHER_SOURCES_OF_INF&
+&FUNCTIONALITY&
+You can use this method to confirm a billing document.
+You should enter a billing document number in the BILLINGDOC_NUMBER
+field as an input parameter. This corresponds to the document to be
+confirmed.
+If the document to be confirmed can be determined, information on the
+sales and distribution area, the creator, the net value and the payer
+is issued in the form of a popup. Any errors are sent back in the
+output structure RETURN.
+&EXAMPLE&
+&HINTS&
+Required inputs    :
+  BILLINGDOC_NUMBER         Number of the billing document to be
+processed
+&FURTHER_SOURCES_OF_INF&
+&FUNCTIONALITY&
+You can use this method to create billing documents online.
+As the documents to be billed are entered online, this method does not
+contain any input parameters. Any processing messages are returned in
+the output table RETURN.
+&EXAMPLE&
+&HINTS&
+COMMIT control :
+  Calling up this method starts COMMIT WORK regardless of whether any
+  billing documents to be created should be saved in online processing
+  or not.
+&FURTHER_SOURCES_OF_INF&
+&FUNCTIONALITY&
+You can use this method to display a billing document online.
+You must enter a billing document number in the BILLINGDOC_NUMBER field
+as an input parameter. This corresponds to the document to be
+displayed.
+&EXAMPLE&
+&HINTS&
+COMMIT control :
+  Calling up this method starts COMMIT WORK.
+&FURTHER_SOURCES_OF_INF&
+&FUNCTIONALITY&
+You can use this method to change a billing document online.
+A billing document number must be entered in the field
+BILLINGDOC_NUMBER as an input parameter. This corresponds to the
+document to be changed.
+&EXAMPLE&
+&HINTS&
+Required input     :
+  BILLINGDOC_NUMBER  Number of the billing document to be cancelled
+COMMIT control :
+  Calling up this method starts COMMIT WORK, regardless of whether
+  changed data should be saved during online processing or not.
+&FURTHER_SOURCES_OF_INF&
+&FUNCTIONALITY&
+You can use this method to obtain detailed information on a billing
+document.
+As an input parameter for this method, you are expected to enter a
+billing document number in the field BILLINGDOC_NUMBER. This
+corresponds to the document to be processed.
+If an error scenario occurs during processing, this information is sent
+back via the output structure RETURN. If processing is successful,
+detailed information is sent back via the output structure
+BILLINGDOC_DETAIL.
+&EXAMPLE&
+&HINTS&
+Required entries     :
+    BILLINGDOC_NUMBER  Number of the billing document to be processed
+&FURTHER_SOURCES_OF_INF&
+&FUNCTIONALITY&
+You can use this list to deliver back a list of those billing documents
+that meet the required selection criteria.
+As input parameters for this method, you are expected to enter a
+from-to selection of preceding documents from the input structure
+REF_DOC_RANGE. If an error scenario is detected during processing, this
+information is sent back via the output structure RETURN. If processing
+is successful, item information is sent back in the ouput table
+SUCCESS_ITEM and header information in the output table
+BILLINGDOC_DETAIL.
+&EXAMPLE&
+&HINTS&
+Required entries     :
+    REF_DOC_RANGE      From-to selection of preceding documents
+&FURTHER_SOURCES_OF_INF&

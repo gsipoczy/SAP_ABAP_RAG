@@ -1,0 +1,26 @@
+&FUNCTIONALITY&
+Der Funktionsbaustein <LS>ME_SEARCH_SOURCE_OF_SUPPLY_EXP</> führt eine
+erweiterte Bezugsquellenfindung für eine bestimmmte
+Material/Werk-Kombination durch.
+Im ersten Schritt werden die Lieferanten bestimmt, die das in der
+Struktur <LS>COMIM</> bezeichnete Werk direkt beliefern.
+In einem zweiten Schritt wird geprüft, ob es Lieferwerke gibt, die
+dieses Werk per Umlagerungsbestellung beliefern können. Wenn dies der
+Fall ist, dann werden zusätzlich noch die Lieferanten bestimmt, welche
+diese Lieferwerke beliefern.
+<ZH>Hinweis</>
+Im zweiten Schritt wird außerdem geprüft, ob das Material im Lieferwerk
+angelegt ist.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein liest alle Infosätze zu einem Material bzw.
+einer Warengruppe und liefert eine interne Tabelle mit allen
+Lieferanten/Einkaufsorganisationen zurück (verdichtet, da nicht alle
+Infosätze zurückgegeben werden, sondern nur die Lieferanten).
+DE-EN-LANG-SWITCH-NO-TRANSLATION

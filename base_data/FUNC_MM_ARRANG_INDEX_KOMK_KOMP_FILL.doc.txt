@@ -1,0 +1,9 @@
+&FUNCTIONALITY&
+Establish communication structures for price determination from order
+documents.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

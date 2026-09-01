@@ -1,0 +1,97 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein kann von internen SAP Applikationen benutzt
+werden, um ohne Mappingaufwand eine Bestellanforderung anlegen, ändern
+und anzeigen zu können.
+Der Baustein liefert als Exportingparameter eine Instanz der lokalen
+Klasse LCL_BAPI_REQUISITION_EXTERNAL zurück. Über diese Instanz können
+die Methode <DS:IO.IF_PURCHASE_REQ_BAPI          SET_DATA>SET_DATA</>,
+<DS:IO.IF_PURCHASE_REQ_BAPI          PROCESS>PROCESS</> und
+<DS:IO.IF_PURCHASE_REQ_BAPI          GET_DATA>GET_DATA</><ZH> </>des
+globalen Interfaces <DS:IF.IF_PURCHASE_REQ_BAPI>IF_PURCHASE_REQ_BAPI</>
+aufgerufen werden.
+&EXAMPLE&
+<EX>DATA: l_ref   TYPE REF TO if_purchase_req_bapi,</>
+<EX>      l_head  TYPE mereqbapiheader,</>
+<EX>      lt_item TYPE mereqbapi_t_itemdata,</>
+<EX>      l_item  TYPE mereqbapiitemdata.</>
+
+<EX>* create instance in function group 2105, for each PR object</>
+<EX>  CALL FUNCTION '2105_GET_INSTANCE'</>
+<EX>    IMPORTING</>
+<EX>      ex_bapi_ref = l_ref.</>
+
+<EX>* fill header information</>
+<EX>  l_head-aktyp       = if_bapi_mereq=>hin. "activity type ADD ->
+BAPI_PR_CREATE</>
+<EX>  l_head-testrun     = 'X'.                "run in test mode</>
+<EX>  l_head-data-bsart  = 'NB'.               "document type NB</>
+<EX>  l_head-datax-bsart = 'X'.                "set X flag for manual
+input</>
+
+<EX>* fill item information</>
+<EX>  l_item-bnfpo = '00010'.  "initial value will cause exception</>
+<EX>  l_item-item-data-matnr  = '100-100'. </>
+<EX>  l_item-item-datax-matnr = 'X'. "material number</>
+<EX>  l_item-item-data-werks  = '1000'.    </>
+<EX>  l_item-item-datax-werks = 'X'. "plant</>
+<EX>  l_item-item-data-menge  = '5'.       </>
+<EX>  l_item-item-datax-menge = 'X'. "quantity</>
+<EX>  l_item-item-data-ekorg  = '1000'.    </>
+<EX>  l_item-item-datax-ekorg = 'X'. "purchase organization</>
+<EX>  l_item-item-data-ekgrp  = '001'.     </>
+<EX>  l_item-item-datax-ekgrp = 'X'. "purchasing group</>
+<EX>  APPEND l_item TO lt_item.</>
+<EX>* transfer data to object (exceptions no_data, failure, panic)</>
+<EX>  TRY.</>
+<EX>      CALL METHOD l_ref->set_data( im_header = l_head im_item =
+lt_item ).</>
+<EX>    CATCH cx_root_mmpur.</>
+<EX>      MESSAGE i000(zz).</>
+<EX>  ENDTRY.</>
+<EX>* start processing</>
+<EX>  CALL METHOD l_ref->process( ).</>
+<EX>* extract data from current object</>
+<EX>  CALL METHOD l_ref->get_data</>
+<EX>    IMPORTING</>
+<EX>      ex_header = l_head</>
+<EX>      ex_item   = lt_item.</>
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+Weiterführende Informationen finden Sie im <DS:TRAN.BAPI>BAPI Browser</>
+zum den Methoden CreateFromData1, Change1 und GetDetail1 des Objektes
+PurchaseRequisition.
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2105</> and method <LS>CHANGE1</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_PR_CHANGE</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+

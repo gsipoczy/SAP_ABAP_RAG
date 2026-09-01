@@ -1,0 +1,7 @@
+DEFINE &TEXT& = 'BTE 00550002: Knowledge Base Version Changed'
+DEFINE &EVENT& = '00550002'
+DEFINE &TYPE& = 'INTERFACE'
+INCLUDE FI_OPEN_FI_DOCUMENTATION_1 OBJECT DOKU ID TX
+EVENT
+This callup point is reached whenever the knowledge base version has
+been saved with a new screen counter reading.

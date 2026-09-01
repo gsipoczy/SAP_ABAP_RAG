@@ -1,0 +1,12 @@
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Der Funktionsbaustein prüft, ob eine Belegnummer als Kontierung als
+Autragsnummer im Einkauf zulässig ist.
+Wenn ein Fehler festgestellt wird, erfolgt eine Fehlermeldung. Die
+Fehlermeldungen können über EXCEPTIONS abgefangen werden.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION

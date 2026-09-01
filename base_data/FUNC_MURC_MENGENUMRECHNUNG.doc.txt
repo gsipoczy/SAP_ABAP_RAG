@@ -1,0 +1,111 @@
+&FUNCTIONALITY&
+This module reads the conversion factor for each material between the
+stockkeeping unit and all other units defined for this material on
+batch and plant level. To do this, it reads the factors from
+classification for units of measure with variable converstion on
+material level and with fixed conversion on batch level.
+In addition, the module also calculates the conversion for all units of
+measure that were not defined by the user as alternative units of
+measure but that can be converted using standard conversion (kg <-> g,
+for example). The MARM table contains alternative units of measure
+only.
+the result is returned as an internal table. The older function module
+<ZH>Material_Unit_Find30</> reads the conversion on the material level
+only.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+For further information, see the documentation for the function module
+<ZH>Batch_Conversion_Factor</>.
+&FUNCTIONALITY&
+You should check, depending on the KZWSO from the material master,
+whether the base quantity can be converted to its independent secondary
+quantities (variable alternative UoM) to the correct decimal place.
+(batch consistency). In case of error, the system automatically
+processes the quantities screen in order to correct the relevant
+quantity.
+You should be able to display and change all dependent variable units
+of measure with their quantites, according to the KZWSO from the
+material master, on request. A variable alternative unit of measure is
+an alternative unit of measure that indicates a characteristic in the
+classification. This characteristic is used to define the conversion
+factor that allows the conversion from the base unit of measure to
+variable alternative quantities and vice versa. These units of measure
+are maintained via an additional screen in the user-specific material
+master.
+A material can have as many variable quantities as you like.
+You can call it up with
+<ZH>the base unit of measure;</> from the base quantity, the system
+converts into all 'variable' alternative quantities. The leading UoM
+according to table MARM is ready for input first. When this is changed
+to a different alternative UoM, the system returns the leading UoM to
+the calling program as the unit of entry.
+<ZH>a variable alternative unit of measure;</> the system firstly
+converts into the base quantity and then into all corresponding
+variable alternative quantities. This is then ready for input first. If
+the system changes to a different variable alternative unit of measure,
+the base unit of entry is returned to the calling program.
+<ZH>an alternative unit of measure without reference to character</>.
+As with point 2, you can then also enter using the alternative
+quantity. This is then returned to the calling program independently of
+an entry in alternative unit of measure.
+<ZH>a variable alternative UoM + base UoM and defined conversion factor
+only important in case of no-batch-case. The transferred base quantity
+and the quantity of the variable alternative UoM are ready for input at
+the same time. Due to the quantity input/s the system determines an
+UMREZ/UMREN which is returned to the calling program. In the correction
+mode, the person calling up the program has to transfer the
+UMREZ/UMREN. You cannot switch to a different variable alternative UoM.
+Whether the quantity fields on the quantity screen are ready for input
+depends on the number of values of the KZWSO that has been transferred
+from the material master:
+              KZWSO = 'A' --> Display only (for pure active ingredient)
+              KZWSO = 'B' --> Ready for input (e.g. steel)
+Calling environment:
+At present, the functions described above can be used for:
+1. Goods movements
+1.1 Receipts/outward movements in general
+1.2 GR for purchase order
+1.3 GR for production order
+1.4 GR for reservation
+
+2. Reservations
+
+3. Physical inventory (planned)
+
+Flow:
+Until now, the central module for quantity conversion in the standard
+system has been the FB MATERIAL_UNIT_CONVERSION module. The calling
+environment for this function module has not changed. For batch
+postings with characteristic-related units of measure (variable
+alternative unit of measure) the function module BATCH_UNIT_CONVERSION
+is now called. This function module determines a conversion factor from
+the batch classification. The conversion factor is used as the basis
+for calculations for the MATERIAL_UNIT_CONVERSION and therefore
+overrides the UMREZ/UMREN determined from the MARM.
+The function module MURC_MENGENUMRECHNUNG is then run in the background
+(KZWSM = 'B'), depending on the KZWSM from the MARA. The system
+calculates all the variable alternative units of measure belonging to
+the base quantity and checks that they are rounded to the correct
+decimal place. In case of error, the quantity screen is displayed so
+that the quantity can be corrected.
+Otherwise you can go to the quantity screen  from the GOTO menu option
+from the item detail screen.
+Special features:
+For reservations not handled in batches, in the case of  KZWSO = 'B'
+and units of entry in variable alternative units of measure, the system
+displays the quantity screen with 2 quantity fields that are ready for
+input (see above, point 4). (Parallel entry). If these conditions do
+not apply, the procedure is the same as that of points 1 to 3 (see
+above).
+At goods receipt with creation of a new batch, parallel entry is also
+possible, whereby the conversion factor is written directly in the
+batch classification.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

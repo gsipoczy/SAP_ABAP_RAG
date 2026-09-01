@@ -1,0 +1,3 @@
+Implementation of the <ZH>Customer.getAllRoots()</> Instance Method
+The highest-level customer is determined for a certain time and a
+specified hierarchy type.

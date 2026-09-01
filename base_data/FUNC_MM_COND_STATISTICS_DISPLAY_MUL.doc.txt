@@ -1,0 +1,82 @@
+Konvention:  TRUE  := 'X'
+             FALSE := ' '
+
+I M P O R T - P A R A M E T E R
+
+  P_DISPLAY_FIRST    erster Anzeigemodus:
+                      'A' gdw.  Summen aus Umsatzstatistiken
+                      'B' gdw.  Summen aus Abrechnungsbelegen
+                     Default: 'A'
+  P_NEXT_EXISTS      TRUE  gdw. Fcode 'NEXT' auswählbar ist,
+                     FALSE sonst
+                     Default: FALSE
+  P_PREVIOUS_EXISTS  TRUE  gdw. Fcode 'PREVIOUS' auswählbar ist,
+                     FALSE sonst
+  P_DISPLAY_SECOND   TRUE falls 'A' und 'B' auswälbar sein soll
+                     FALSE sonst, es wird nur P_DISPLAY_FIRST
+                     ausgegeben
+  P_DISPLAY_DATA     Struktur, die alle relevanten Daten zur
+                     Datenaufbereitung und Anzeigefunktion enthält
+
+E X P O R T - P A R A M E T E R
+
+   P_DISPLAY_LAST    letzter Anzeigemodus (s. P_DISPLAY_LAST)
+   P_FCODE_LAST      letzter Funktionscode
+
+
+W I R K U N G
+
+Anzeige kumulierter Daten aus der Analyse zu Konditionen im Einkauf
+für die nachträgliche Abrechnung
+
+Es werden zwei verschiedene Anzeigen generiert, zwischen welchen
+umgeschaltet werden kann:
+
+1. "Bestellungen Summen":
+  Pro Konditionssatz werden Konditionswert und Staffelbasis
+  aus der Anzeigestruktur wmb03 angezeigt.
+
+1. "Abrechnung Summen":
+  Pro Konditionssatz wird der abgerechnete Wert
+  aus der Anzeigestruktur wmb03 angezeigt.
+
+ Der zuletzt gewählte Anzeigemodus wird in P_DISPLAY_LAST
+zurückgeliefert Ist P_PREVIOUS_EXISTS = TRUE, so kann der FCODE
+'PREVIOUS' ausgewählt werden, bei P_PREVIOUS_EXISTS = FALSE ist dies
+nicht möglich. Dies gilt analog für P_NEXT_EXISTS.
+
+Der zuletzt gewählte Funktionscode wird in P_FCODE_LAST
+zurückgeliefert.
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Konvention:  TRUE  := 'X'
+             FALSE := ' '
+
+I M P O R T - P A R A M E T E R
+
+  P_DISPLAY_FIRST    erster Anzeigemodus:
+                     'A' gdw.  Summen aus Umsatzstatistiken
+                     'B' gdw.  Summen aus Abrechnungsbelegen
+                     Default: 'A'
+
+  P_NEXT_EXISTS      TRUE  gdw. Fcode 'NEXT' auswählbar ist,
+                     FALSE sonst
+
+                     Default: FALSE
+
+  P_DISPLAY_DATA     Struktur, die alle relevanten Daten zur
+                     Datenaufbereitung und Anzeigefunktion enthält
+
+
+E X P O R T - P A R A M E T E R
+
+  keine
+
+
+W I R K U N G
+
+Anzeige kumulierter Daten aus der Analyse zu Konditionen
+
+Steuerung der Einzelanzeige zu Datensätzen durch
+MM_COND_STATISTICS_DISPLAY   (weitere Info siehe dort!)
+DE-EN-LANG-SWITCH-NO-TRANSLATION

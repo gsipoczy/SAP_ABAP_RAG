@@ -1,0 +1,169 @@
+&FUNCTIONALITY&
+Funktionsbaustein zur Ermittlung der Abladestelle zu einem Debitor.
+Es werden die Abladestellen zum übergebenen Debitor gelesen. Sollte es
+mehr als eine Abladestelle geben, so wird die erste Abladestelle (laut
+Datenbestand) als Default markiert und die Liste aller verfügbaren
+Abladestellen alphabetisch zur Auswahl angeboten.
+Sollte nur eine Abladestelle verfügbar sein oder der Parameter
+FIF_NO_DIALOG = 'X' gesetzt sein oder der Aufruf im BATCH erfolgen, so
+wird die erste Abladestelle (laut Datenbestand) ausgewählt.
+Die gewählte Abladestelle wird zurückgeliefert.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+This function module displays the address of a partner you entered, so
+that you can make changes.  When you have changed the address, the
+system updates the internal data retention.
+The parameter FIF_FIRST_MAINTAINING is not currently in use.
+If you fill parameter FIS_VBUV by making an entry in the incompletion
+log, the address screen appears in full screen mode. If possible, the
+system places the cursor in the data field named in the entry.
+FIF_DISPLAY_ONLY = 'X' specifies that the address cannot be changed
+(display mode).
+FEF_ADDRESS_CHANGED tells you whether the partner's address has been
+changed.
+FEF_CANCEL indicates that the user terminated the dialog.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+Funktionsbaustein zur Ermittlung der Adresse eines Partners.
+Geliefert wird die Adresse zum angegebenen Partner, die im Beleg
+derzeitig gültig ist (Belegadresse). Dabei beinhaltet
+FES_OLD_ADDRESS_FORMAT die Adresse im bis 4.6A verwendeten Format der
+Tabelle SADR (Struktur VBADR). FES_ADDRESS_TYPE gibt den Adresstyp an,
+in abhängigkeit dessen die Parameter FES_ADDR1, FES_ADDR2 sowie
+FES_ADDR3 die jeweilige, zum Partner gehörende, Adresse liefern.
+&EXAMPLE&
+
+&HINTS&
+Die Adresse zu einem, auf der Partnerart "PE" (Personal) basierenden,
+Partner kann dabei nur im alten Adressformat (FES_OLD_ADDRESS_FORMAT)
+geliefert werden, da die HR Unterstützung für die ZAV (Zentrale
+Adressverwaltung) noch nicht eingeführt wurde.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Mit dem Funktionsbaustein kann die Adresse sowie die Attribute zu einem
+Partner gesetzt werden.
+Dabei beinhaltet FIS_ADDRESS die Adresse des Partners im Adressformat
+des ZAV Adresstyps 1 (Firmenadresse). FIS_ATTRIBUTES beinhaltet die
+Attribute zum Partner (Bitte die Hinweise bei SD_PARTNER_ATTRIBUTES_SET
+beachten). Beide Datenstrukturen können unabhängig voneinander
+angegeben werden.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Ermitteln des Adressschlüssels (EXTENDED_ADDR_KEY) eines Partners.
+
+Der Baustein verwendet hierzu das mit SD_PARTNER_DATA_PUT gesetzte
+globale Gedächtnis, welches ggf. mit SD_PARTNER_DATA_GET wieder
+ausgelesen werden kann. Zur Identifiezierung dient der Objekttyp sowie
+der Objektschlüssel.
+Der durch den Vertriebsbeleg, die Positionsnummer, Partnerrolle sowie
+Kundennummer (auch Partnernummer) spezifizierte Partner wird ermittelt
+und sein aktuell verwendeter Adressschlüssel in der Struktur
+EXTENDED_ADDR_KEY zurückgeleifert.
+Durch setzen des Parameters FIF_EXACT_POSITION kann ein standartmäßiges
+verwenden der Kopfpartner auf Positionsebene unterdrückt werden.
+Durch setzen des Parameters FIF_MASTER_DATA kann ein Nachlesen der in
+den Stammdaten gepflegten Adressschlüssel veranlaßt werden.
+&EXAMPLE&
+call function 'SD_PARTNER_ADDR_KEY_GET'
+     exporting
+          fif_objecttype         = 'X'
+          fif_objectkey          = 'Y'
+          fif_parvw              = 'WE'
+          fif_vbeln              = '          '
+          fif_posnr              = '000010'
+          fif_kunnr              = 'MEIER'
+          fif_exact_position     = 'X'
+          fif_master_data        = 'X'
+     importing
+          fes_extended_addr_key  = addr_key
+     tables
+          fet_extended_addr_keys = addr_keys
+     exceptions
+          parameter_incomplete   = 1
+          object_not_found       = 2
+          no_address             = 3
+          others                 = 4.
+          .
+
+Das Beispiel liefert den Adressschlüssel des Warenempfängers auf
+Position 10 mit der Kundennummer 'MEIER'. Sollte der angegebene Kunde
+nicht existieren, wird die Exception NO_ADDRESS ausgelöst.
+Der gesetzte Parameter FIF_EXACT_POSITION bewirkt, daß ein eventueller
+Warenempfänger auf Kopfebene nicht in Betracht gezogen wird.
+Der gesetzte Parameter FIF_MASTER_DATA bewirkt, daß sowohl der aktuell
+im Beleg verwendete Adressschlüssel als auch der/die in den Stammdaten
+hinterlegten Adressschlüssel verdichtet in der Tabelle
+FET_EXTENDED_ADDR_KEYS zurückgeliefert werden.
+&HINTS&
+Für Partner, die auf der Partnerart 'PE' (Personal) basieren wird kein
+Adressschlüssel geliefert.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Baustein führt für das angegebene Partnerobjekt sowie den
+angegebene Partner eine erneute Partnerermittlung anhand der aktuellen
+Partner durch und bietet eventuelle alternative Partnerbelegungen zur
+Auswahl an.
+Sofern mehr als ein Partner zur Auswahl vorhanden ist, wird ein
+Selektionsbild angeboten. Sollte der Benutzer hier eine alternative
+Belegung auswählen, so wird die Partnernummer zurückgeliefert und der
+Parameter FEF_SELECTION_DONE = "X" gesetzt.
+&EXAMPLE&
+
+&HINTS&
+Bei der Ermittlung der alternativen Partner wird eine komplette
+Partnerermittlung anhand der im Partnerobjekt bekannten Partnerrollen
+sowie deren Belegungen durchgeführt. Dies bedeutet, daß, sollte sich
+z.B. der Warenempfänger geändert haben, für den eventuell daraus
+abgeleitetet Spediteur andere Alternativen ergeben können, als wenn der
+Warenempfänger nicht geändert worden wäre.
+Sind keine Alternativen ermittelbar wird eine Informationsmeldung
+ausgegeben.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Mit dem Funktionsbaustein können die Attribute des angegebenen Partners
+des angegebenen Partnerobjektes ermittelt werden.
+Die Attribute werden in der Struktur SDPARTNER_ATTRIBUTES
+zurückgeliefert.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Mit dem Funktionsbaustein können die Attribute eines Partners des
+angegebenen Partnerobjektes gesetzt werden.
+&EXAMPLE&
+
+&HINTS&
+Die Attribute können nur ALLE oder KEINES gesetzt werden. Will man nur
+ein Attribut auf einen bestimmten Wert setzen/ändern, so muß man zuvor
+mit SD_PARTNER_ATTRIBUTES_GET die Attribute ermitteln, um die Änderung
+im Rahmen aller Attribute im Anschluß setzen zu können.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

@@ -1,0 +1,212 @@
+
+Functionality
+This function module enables you to create and maintain data for
+Multiple Info Records.
+
+Notes
+The following authorization objects are checked:
+M_EINF_EKO - Purchasing organization in Info Record
+M_EINF_EKG - Purchasing group in Info Record
+M_EINF_WRK - Plant in Info Record
+V_KONH_VKS - Condition Type in Info Record
+
+Controlling adoption of field values via X parameter
+For most tables, you can determine via your own parameters in the
+associated X parameter in each case (e.g. T_EINAX) whether fields are to
+be set initial, values inserted via the interface, or default values
+adopted (e.g. from Customizing or master records) (for example, it is
+not mandatory to adopt the material group from an underlying Info
+record- you can change it with the function module).
+T_EINAX-INFO_REC should be set ONLY if external info record number is
+passed in T_EINA-INFO_REC
+
+Transfer
+General data related to Info Record are passed in the parameter T_EINA
+and purchasing organization data are passed in the parameter T_EINE.
+Info Memo or Purchase order text are passed in the parameter TXT_LINES.
+Condition validity details are passed in the table parameter
+COND_VALIDITY.
+Basic condition details are passed in the table parameter CONDITION.
+Condition scales based on value and quantity are passed in the table
+parameter COND_SCALE_VALUE and COND_SCALE_QUAN respectively.
+
+Return
+Updated General data and Purchase organization data of Info Record are
+returned in the parameter ET_EINA and ET_EINE along with messages in
+RETURN parameter raised during the process. Field RETURN-ROW refers to
+record index of table T_EINA.
+
+Restrictions:
+With this function module, it is not possible to:
+          Custom fields in EINA and EINE tables are not supported.
+
+Parameters
+T_EINA:
+This table parameter contains General data for Info Records.
+T_EINAX:
+This table parameter contains X-structure for General data where fields
+of General data which are marked as 'X' only taken into consideration
+for updating.
+T_EINE:
+This table parameter contains Purchasing organization data for Info
+Record.
+T_EINEX:
+This table parameter contains X-structure for Purchasing organization
+data where fields of Purchasing organization data which are marked as
+'X' only taken into consideration for updating.
+TESTRUN:
+If 'X' is passed in this parameter then database update will not happen.
+TXT_LINES:
+This table parameter contains data for Info Memo and Purchase order
+text. Here<(>,<)> value of text object is EINA for info memo text and
+EINE for purchase order text. TDFORMAT field value * indicated new line
+and space indicates continuous line.
+COND_VALIDITY:
+This table parameter contains condition record validity data.
+CONDITION:
+This table parameter contains master data for condition records. This
+values are considered ONLY when COND_VALIDITY are maintained.
+COND_SCALE_VALUE:
+This table parameter contains value based scales for conditions provided
+in parameter CONDITION.
+COND_SCALE_QUAN:
+This parameter contains quantity based scales for conditions provided in
+parameter CONDITION.
+RETURN:
+This parameter contains message details raised.
+ET_EINA:
+This return parameter contains the General data for Info Record updated
+in database.
+ET_EINE:
+This return parameter contains the Purchase org data for Info Record
+updated in database.
+
+Help with Problems
+SAP Note 430543 lists answer to frequently asked questions(FAQs).
+If the problem persists, create a customer incident for the component
+MM-PUR-VM-REC and document the reproducible example where appropriate.
+
+Customer Enhancements
+Enhancement spot ES_BADI_ME_BAPI is added with new BAdI
+MEWI_INFOREC_PROCESS to allow customers to manipulate interface data of
+function module ME_INFORECORD_MAINTAIN_MULTI and to determine gross
+price condition if more than one gross price condition is determined for
+the given data.
+
+
+
+
+Functionality
+This function module enables you to create and maintain the Info Record
+data.
+
+Notes
+The following authorization objects are checked:
+M_EINF_EKO - Purchasing organization in Info Record
+M_EINF_EKG - Purchasing group in Info Record
+M_EINF_WRK - Plant in Info Record
+V_KONH_VKS - Condition Type in Info Record
+
+Controlling adoption of field values via X parameter
+For most tables, you can determine via your own parameters in the
+associated X parameter in each case (e.g. I_EINAX) whether fields are to
+be set initial, values inserted via the interface, or default values
+adopted (e.g. from Customizing or master records) (for example, it is
+not mandatory to adopt the material group from an underlying Info
+record- you can change it with the function module).
+
+Transfer
+General data related to Info Record are passed in the parameter I_EINA
+and purchasing organization data are passed in the parameter I_EINE.
+Info Memo or Purchase order text are passed in the parameter TXT_LINES.
+Condition validity details are passed in the table parameter
+COND_VALIDITY.
+Basic condition details are passed in the table parameter CONDITION.
+Condition scales based on value and quantity are passed in the table
+parameter COND_SCALE_VALUE and COND_SCALE_QUAN respectively.
+
+Return
+Updated General data and Purchase organization data of Info Record are
+returned in the parameter E_EINA and E_EINE along with messages in
+RETURN parameter raised during the process.
+
+Restrictions:
+With this function module, it is not possible to:
+Multiple levels of Purchasing Org data for the Info Record.
+Custom fields in EINA and EINE tables are not supported.
+
+Parameters
+I_EINA:
+This parameter contains General data for Info Record.
+I_EINAX:
+This parameter contains X-structure for General data where fields of
+General data which are marked as 'X' only taken into consideration for
+updating.
+I_EINE:
+This parameter contains Purchasing organization data for Info Record.
+I_EINEX:
+This parameter contains X-structure for Purchasing organization data
+where fields of Purchasing organization data which are marked as 'X'
+only taken into consideration for updating.
+TESTRUN:
+If 'X' is passed in this parameter then actual update will not happen to
+database.
+TXT_LINES:
+This parameter contains data for Info Memo and Purchase order text. Here
+value of text object is EINA for info memo and EINE for purchase order
+text. TDFORMAT field value * indicated new line and space indicates
+continuous line.
+COND_VALIDITY:
+This parameter contains condition record validity data.
+CONDITION:
+This parameter contains master data for condition records. This values
+are considered when ONLY COND_VALIDITY are maintained.
+COND_SCALE_VALUE:
+This parameter contains value based scales for conditions provided in
+parameter CONDITION.
+COND_SCALE_QUAN:
+This parameter contains quantity based scales for conditions provided in
+parameter CONDITION.
+RETURN:
+This parameter contains message details raised.
+E_EINA:
+This return parameter contains the General data for Info Record updated
+in database.
+E_EINE:
+This return parameter contains the Purchase org data for Info Record
+updated in database.
+
+Help with Problems
+SAP Note 430543 lists answer to frequently asked questions(FAQs).
+If the problem persists, create a customer incident for the component
+MM-PUR-VM-REC and document the reproducible example where appropriate.
+
+Customer Enhancements
+Enhancement spot ES_BADI_ME_BAPI is added with new BAdI
+MEWI_INFOREC_PROCESS to allow customers to manipulate interface data of
+function module ME_INFORECORD_MAINTAIN and to determine gross price
+condition if more than one gross price condition is determined for the
+given data.
+
+
+&FUNCTIONALITY&
+This method enables you to list purchasing info records. You pass on
+the desired selection criteria (e.g. vendor, material, plant) in the
+import parameters. For more information, refer to the relevant
+parameter documentation.
+&EXAMPLE&
+
+&HINTS&
+The following authorization objects are checked with activity 03
+(Display):
+<DS:UO.M_EINF_EKG>M_EINF_EKG</>,,Purchasing group in info record
+<DS:UO.M_EINF_WRK>M_EINF_WRK</>,,Plant in info record
+<DS:UO.M_EINF_EKO>M_EINF_EKO</>,,Purchasing organization in info record
+<ZH>Return</>
+The purchasing info records that satisfy the selection criteria are
+returned in the tables <LS>InforecordGeneral</> and
+<LS>InforecordPurchorg</>.
+<ZH>Return messages</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+

@@ -1,0 +1,40 @@
+&FUNCTIONALITY&
+This function module is used to extract query data for the 0OPS_VE_Q0001
+query for a given material, plant, and purchasing organization
+combination. These query results are needed for the analytics
+application in SPPR (single processing of purchase requisition) and CPPR
+(collective processing of purchase requisitions).
+The import and export parameters are:
+IV_QUERY
+IV_MATNR
+IV_EKORG
+IV_WEKRS
+ER_T_DATA
+EO_STR_DESCR
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used to extract query data for the 0OPS_VE_Q0001
+query for a given material, plant, and purchasing organization
+combination. These query results are needed for the analytics
+application in SPPR (single processing of purchase requisition) and CPPR
+(collective processing of purchase requisitions).
+The import and export parameters are:
+IV_QUERY
+IV_MATNR
+IV_EKORG
+IV_WEKRS
+ER_T_DATA
+EO_STR_DESCR
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

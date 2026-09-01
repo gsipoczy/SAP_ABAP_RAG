@@ -1,0 +1,37 @@
+&FUNCTIONALITY&
+The function module MB_POST_GOODS_MOVEMENT has to run after the function
+module <DS:FU.MB_CREATE_GOODS_MOVEMENT>MB_CREATE_GOODS_MOVEMENT</>.
+It calls form routine BUCHEN_AUSFUEHREN in program SAPMM07M, which then
+uses <ZH>IN UPDATE TASK</> to call the posting function modules in the
+relevant application. You must ensure that function module
+MB_CREATE_GOODS_MOVEMENT has been processed and that there is at least
+one item to be posted. This is checked internally. If this is not the
+case, the system displays a termination message.
+After you call MB_CREATE_GOODS_MOVEMENT, the EMKPF-SUBRC field is filled
+with the value 1 if items exist. If this is not the case, EMKPF-SUBRC
+contains a value greater than 5, and the relevant messages are noted in
+EMKPF or EMSEG, depending on where the error occurred.
+Table EMSEG contains all required information relating to the items. If
+error messages have been triggered, they are also stored here. After you
+have called MB_CREATE_GOODS_MOVEMENT, error handling must be run in the
+calling application (and, if items are to be corrected or added,
+MB_CREATE_GOODS_MOVEMENT must be called again).
+When all items in the application being used have been processed, the
+system calls function module MB_POST_GOODS_MOVEMENT. If errors occur
+within this function module, the system displays a termination message.
+If there are no more errors, the field EMKPF-SUBRC is initialized.
+After MB_POST_GOODS_MOVEMENT is called, COMMIT WORK is set in the
+program being used.
+The following processing sequence must be guaranteed:
+MB_CREATE_GOODS_MOVEMENT
+MB_POST_GOODS_MOVEMENT
+COMMIT WORK
+If you try to call the function module MB_CREATE_GOODS_MOVEMENT several
+times to generate several material documents without COMMIT WORK, the
+system displays a termination message.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

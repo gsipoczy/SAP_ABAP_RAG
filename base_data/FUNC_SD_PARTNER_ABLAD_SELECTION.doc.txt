@@ -1,0 +1,17 @@
+&FUNCTIONALITY&
+Funktionsbaustein zur Ermittlung der Abladestelle zu einem Debitor.
+Es werden die Abladestellen zum übergebenen Debitor gelesen. Sollte es
+mehr als eine Abladestelle geben, so wird die erste Abladestelle (laut
+Datenbestand) als Default markiert und die Liste aller verfügbaren
+Abladestellen alphabetisch zur Auswahl angeboten.
+Sollte nur eine Abladestelle verfügbar sein oder der Parameter
+FIF_NO_DIALOG = 'X' gesetzt sein oder der Aufruf im BATCH erfolgen, so
+wird die erste Abladestelle (laut Datenbestand) ausgewählt.
+Die gewählte Abladestelle wird zurückgeliefert.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

@@ -1,0 +1,99 @@
+&FUNCTIONALITY&
+This function module is used as an extractor for the 0MM_PUR_PO_CGR
+(Produced Activity: Delivery of Confirmations) DataSource. The
+parameters in this DataSource are data-extraction-framework specific and
+therefore cannot be used by other applications.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used as an extractor for the Purchasing Data:
+Header Level<ZK> (0MM_PUR_PO_HDR) </>DataSource. The parameters in this
+DataSource are data-extraction-framework specific and therefore cannot
+be used by other applications.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used as an extractor for the Purchasing Data:
+Item Level (0MM_PUR_PO_ITM) DataSource. The parameters in this
+DataSource are data-extraction-framework specific and therefore cannot
+be used by other applications.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used as an extractor for the Purchasing Data:
+Schedule Line Level (0MM_PUR_PO_SCL) DataSource. The parameters in this
+DataSource are data-extraction-framework specific and therefore cannot
+be used by other applications.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used as an extractor for the Produced Activity:
+Confirmation of Schedule Lines (0MM_PUR_PO_SCN) DataSource. The
+parameters in this DataSource are data-extraction-framework specific and
+therefore cannot be used by other applications.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used as an extractor for the Produced Activity:
+Delivery of Schedule Lines (<ZK>0MM_PUR_PO_SGR</>) DataSource. The
+parameters in this DataSource are data-extraction-framework specific and
+therefore cannot be used by other applications.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is an extractor function module used only by the
+<ZK>0MM_PUR_PURCH_DATA </>DataSource. This function module uses the
+standard DataSource framework, that is one initialization call and
+subsequent data transfer calls.
+Data from this function module allows you to analyze material group,
+vendor, and materials information.
+&EXAMPLE&
+You can use this function module to find out what materials and how much
+of each have been ordered from a certain vendor, or how many Purchase
+Order (PO) items there are for a certain material group.
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is an extractor function module used only by the
+<ZK>0MM_PUR_PURCH_GROUPS </>DataSource. This function module uses the
+standard DataSource framework, that is one initialization call and
+subsequent data transfer calls.
+Data from this function module allows you to analyze the buying
+activities of your purchasing (buyer) groups, using data on effective
+order values, invoiced amounts, and number of deliveries.
+
+&EXAMPLE&
+You can use this function module to get an overview of how many
+documents, document items, and (if applicable) document schedule lines
+have been created by the purchasing group.
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

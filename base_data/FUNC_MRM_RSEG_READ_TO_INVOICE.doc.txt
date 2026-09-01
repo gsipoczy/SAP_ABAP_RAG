@@ -1,0 +1,43 @@
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+&EXAMPLE&
+&HINTS&
+&FURTHER_SOURCES_OF_INF&
+Die gemeinsame Doku für alle Bausteine MRM_DBTAB_..._READ steht in der
+Doku zur Funktionsgruppe MRT0.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein ermittelt die Rechnungsbelegdaten zu einer
+Rechnungsbelegnummer und einem Geschäftsjahr in verschiedenen
+Verdichtungsformen. Die Daten werden beim ersten Aufruf von der
+Datenbank gelesen und in internen Tabellen gepuffert.
+Folgende drei Verdichtungsdaten stehen zur Verfügung und werden bei
+Bedarf in den folgenden internen Tabellen zurückgegeben:
+Verdichtung pro Lieferschein/Bestellung/Werke in Tabelle T_RBVD
+Verdichtung pro Materialnummer in interner Tabelle T_RBVDMAT
+Positionsdaten in interner Tabelle T_RBDRSEG
+Mit Hilfe der optionalen Parameter I_XRBVD, I_XRBVDMAT und I_XRBDRSEG
+wird dem Funktionsbaustein mitgeteilt, welche der Verdichtungstabellen
+benötigt werden.
+Es werden immer nur die Daten von der Datenbank gelesen, die auch
+wirklich benötigt werden.
+Die Rechnungsbelegkopfdaten werden in der internen Tabelle IT_RBKP
+gespeichert und als Ergebnisparameter in den Strukturen E_RBKPB und
+E_RBKP übergeben.
+Der Modus I_MODUS legt fest, wie die zu lesenden Daten verarbeitet
+werden sollen. Hierdurch wird auch bestimmt, ob eine Sperre für den
+angegebenen Rechnungsbeleg gesetzt werden soll.
+Im Ergebnisparameter E_MODUS wird übergeben, welcher Modus aufgrund der
+Datenkonstellation erlaubt ist.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION

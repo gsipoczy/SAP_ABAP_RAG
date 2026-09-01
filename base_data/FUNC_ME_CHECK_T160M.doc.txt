@@ -1,0 +1,22 @@
+&FUNCTIONALITY&
+Der Funktionsbaustein ermittelt zur Versandvorschrift den als
+Defaultwert im Customizing definierten Schlüssel zur Einhaltung der
+Versandvorschrift gemäß Tabelle t027c.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein liest die Tabelle T160M und gibt in Form von
+Exeptions die Information zurück, ob eine Fehlermeldung überhaupt
+nicht, als Warnung oder als Error gesendet werden soll. Wird kein
+Eintrag in der Tabelle T160M gefunden, so wird die Meldung in jedem
+Fall als Warnung gesendet.
+Wird ein Eintrag mit der übergebenen Messagenummer und dem
+Arbeitsgebiet gefunden, entscheidet der Messagetyp:
+Messagetyp ' ': Die Meldung soll nicht gesendet werden
+Messagetyp 'W': Die Meldung soll als Warnung gesendet werden
+Messagetyp 'E': Die Meldung soll als Error gesendet werden
+DE-EN-LANG-SWITCH-NO-TRANSLATION

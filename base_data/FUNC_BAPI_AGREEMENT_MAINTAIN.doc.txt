@@ -1,0 +1,59 @@
+&FUNCTIONALITY&
+This method enables you to create Enjoy purchase orders.
+&EXAMPLE&
+
+&HINTS&
+<ZH>Authorizations</>
+The following authorization objects are checked when you create an Enjoy
+purchase order (PO) (activity 01):
+
+<DS:UO.M_BEST_BSA>M_BEST_BSA</> Document type in PO
+
+<DS:UO.M_BEST_EKG>M_BEST_EKG</> Purchasing group in PO
+
+<DS:UO.M_BEST_EKO>M_BEST_EKO</> Purchasing organization in PO
+
+<DS:UO.M_BEST_WRK>M_BEST_WRK</> Plant in PO
+<ZH>Data transfer</>
+The header data of the Enjoy PO is passed on in the table <ZH>PoHeader
+</> and the item data in the table <ZH>PoItem</>.
+If an item has been assigned to one or more accounts, the account
+assignment data for each item can be passed on in the table <ZH>P
+oAccount</>. The account assignment category determines which objects
+relevant to cost accounting have to be passed on. If the account
+assignment category is <LS>K</>, for example, a cost center must be
+passed on.
+Delivery schedule lines are passed on for each item in the table
+<ZH>PoSchedule</>.
+Conditions are passed on in the table <ZH>PoCond</>.
+The supplier's address is passed on in the table <ZH>PoAddrVendor</>,
+the delivery address in the table <ZH>PoAddrDelivery</>. The fields of
+the central address management facility are used in the process.
+<ZK>Note</>
+The following restrictions regarding addresses must be taken into
+account with this method:
+Addresses can be <ZH>created</> but <ZH>not changed</>. You can only
+change address data using the method <ZH>BAPI_ADDRESSORG_CHANGE</>.
+When you create addresses, they are not checked. An Enjoy PO may
+therefore contain faulty address data.
+You pass on service items in the table <ZH>PoServices</>. The following
+data can also be passed on: account assignments (table <ZH>
+PoSrvAccessValues</>), texts (table <ZH>PoServicesText</>), limits
+(table <ZH>PoLimits</>) and limits referencing a contract (table
+<ZH>PoContractLimits</>).
+<ZK>Note</>
+With this method, service items can be <ZH>created</>, but <ZH>not
+changed</>.
+<ZH>Return</>
+The PO number is returned in the parameter <ZH>ExpPurchaseOrder</>.
+<ZH>Return messages</>
+Messages are returned in the parameter <ZH>Return</>.
+<ZH>Restrictions</>
+Texts, partners, import data, subcontracting components, and customers'
+own fields cannot be passed on via these BAPIs.
+It is not possible to put faulty or incomplete purchase orders
+ <DS:GLOS.3EEF130430F5D211BDF10004ACE6148F>on hold</>.
+&FURTHER_SOURCES_OF_INF&
+More information on POs is available in the SAP library under <ZH>MM
+Purchasing -> Purchase Orders</> and in the Help for the Enjoy purchase
+order.

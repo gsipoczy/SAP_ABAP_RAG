@@ -1,0 +1,2 @@
+&FUNCTIONALITY&
+Check a number on Luhn modulo 10:

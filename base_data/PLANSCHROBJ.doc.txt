@@ -1,0 +1,22 @@
+&FUNCTIONALITY&
+The function module contains the determination and the call of the
+program for printing a letter with the corresponding output media.
+Furthermore, the request data are stored in the ABAP memory. The called
+program can store an error code in the ABAP-Memory, which will then be
+processed.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+The function module contains the determination and the call of the
+program for printing a letter for the request data. Furthermore, the
+request data are stored in the ABAP memory. The called program can
+store an error code in the ABAP-Memory, which will then be processed.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&

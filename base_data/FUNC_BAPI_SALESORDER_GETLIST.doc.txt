@@ -1,0 +1,243 @@
+&FUNCTIONALITY&
+You can use this method to make a delivery confirmation in the SD
+scheduling agreement.
+&EXAMPLE&
+1. Generating delivery for a scheduling agreement item.
+2. Changing of a delivery item.
+3. Posting a goods issue for delivery.
+4. Deleting a delivery item or a delivery.
+&HINTS&
+1. Required information
+
+The order number must be entered in the structure SALESDOCUMENT.
+The structure DLVITEM must be filled for every order item. If the
+deletion indicator DELETEFLAG is not set, the structure DLVITEMDATA
+must also be filled for these items.
+2. Database Commit Control
+
+The BAPI does not execute a database commit. Therefore, the running
+application must initiate the commit so that changes to the database
+can be made. The BAPI BAPI_TRANSACTION_COMMIT is available for this.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+Using this method, you can create sales documents.
+Sales document type is checked with sales and distribtion document
+type.
+You must at least enter order header data (using the structure
+ORDER_HEADER_IN) and partner data (using the table ORDER_PARTNERS).
+Furthermore, you must enter the business object for which the sales
+document is to be created:
+               - BUS2030 for inquiries
+               - BUS2031 for quotations
+               - BUS2032 for sales orders
+Enter the item data in the table ORDER_ITEMS_IN. The item numbers can
+be assigned manually, by filling in the relevant fields, or
+automatically, according to Customizing, by leaving the relevant fields
+blank.
+In the case of configurable data, you must enter this in the
+ORDER_CFGS_REF, ORDER_CFGS_INST, ORDER_CFGS_PART_OF and
+ORDER_CFGS_VALUE tables.
+Credit card data can be transferred, using the BAPICARD structure, on
+the one hand, data for card identification, on the other, data for an
+authorization which has taken place in an external system.
+Once you have created the sales documents successfully, you will
+receive the document number (SALESDOCUMENT field) and detailed data for
+the partners involved will also be sent back (via the SOLD_TO_PARTY,
+SHIP_TO_PARTY and BILLING_PARTY). Any errors that may occur will be
+announced via the RETURN parameter. In order to make a statement
+regarding price and availability situation, you will receive detailed
+information in the ORDER_ITEMS_OUT table.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+You can use this method to create sales orders.
+You must enter at least the order header data (from the ORDER_HEADER_IN
+structure) as well as partner data (using the ORDER_PARTNERS table) as
+input parameters.
+Enter item data using the ORDER_ITEMS_IN table.  You can allocate the
+item number by filling in the relevant fields manually, or the system
+does it according to the settings in Customizing, whereby the relevant
+fields remain blank.
+If the item is configurable, you need to enter the configuration data
+in the ORDER_CFGS_REF, ORDER_CFGS_INST, ORDER_CFGS_PART_OF and
+ORDER_CFGS_VALUE tables.
+You can use the BAPICCARD structure to enter credit card data. You can
+either enter data for identifying the card or, you can enter data for
+an authorization in an external system.
+Once you have successfully created the sales order, the system displays
+the document number (in the SALESDOCUMENT field), as well as detailed
+data about the other parties (in the OLD_TO_PARTY,  SHIP_TO_PARTY and
+BILLING_PARTY structures). The RETURN parameter displays any errors
+that may have occured.
+The ORDER_ITEMS_OUT table contains more detailed information that will
+enable you to judge the pricing and availability of an item.
+&EXAMPLE&
+
+&HINTS&
+Mandatory entries:
+ORDER_HEADER_IN : DOC_TYPE     Sales document type
+                  SALES_ORG    Sales organization
+                  DISTR_CHAN   Distribution channel
+                  DIVISION     Division
+ORDER_PARTNERS..: PARTN_ROLE   Partner functions, SP sold-to party
+                  PARTN_NUMB   Customer number
+
+ORDER_ITEMS_IN..: MATERIAL     Material number
+                  REQ_QTY      Order quantity in sales unit
+
+Ship-to party
+
+
+If a ship-to party hasn't been entered, the ship-to party = sold-to
+party
+COMMIT control:Parameter WITHOUT_COMMIT
+If this switch is activated, the system does not process any Commit
+Work and the application that has called it up must trigger the Commit
+itself. To do this, useBAPI_TRANSACTION_COMMIT.
+German keywords:
+The following keywords must be entered in German, regardless of the
+logon language:
+DOC_TYPE       Sales document type, for example TA for standard order
+PARTN_ROLE     Partner function, for example, WE for ship-to party
+&FURTHER_SOURCES_OF_INF&
+You can see further notes in OSS. Note 93091 contains general
+information about the SD BAPIs.
+&FUNCTIONALITY&
+You can use this method to create sales orders.
+This BAPI is no longer maintained.
+Use one of the following BAPIs to create sales documents:
+- BAPI_INQUIRY_CREATEFROMDATA      Create sales inquiries
+- BAPI_QUOTATION_CREATEFROMDATA    Create quotation
+- BAPI_SALESORDER_CREATEFROMDAT1   Create sales orders
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2032</> and method <LS>CONFIRMDELIVERY</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_SALESORDER_CONFIRMDELVRY</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2032</> and method <LS>CREATEFROMDAT2</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_SALESORDER_CREATEFROMDAT2</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2032</> and method <LS>CONFIRMDELIVERY</>
+, for BAPI calls using ALE.
+The interface of the module was defined as a standard API in ALE. The
+data is provided by the ALE layer.
+The function module is executed in the inbound system by the ALE layer.
+It converts the data from the IDoc into BAPI parameters and calls the
+BAPI in the inbound system. For more information about this BAPI, see
+<DS:FU.&3>BAPI_SALESORDER_CONFIRMDELVRY</>.
+When this module is executed, a new IDoc status is written. This status
+indicates either that the BAPI was called successfully in this system
+(status 53) or that errors occurred (status 51).
+BAPI return parameters specify how the ALE layer writes the IDoc status.
+If errors occur, the ALE layer is responsible. How the BAPI return
+parameters work:
+
+If the BAPI return parameter is an EXPORTING parameter, one single IDoc
+status record is written. If the message has type A or E, the IDoc is
+given status 51 (application document not posted). Otherwise (for
+message types W, I, or S), the IDoc is given status 53 (application
+document posted).
+
+If the return parameter is a tables parameter, multiple IDoc status
+records can be written. Message types determine the IDoc status. If a
+message has type A or E in the table, status 51 is written for the IDoc
+(application document not posted) for all entries except those with the
+type S (entries with types A, E, W, or I). For messages with type 'S',
+no IDoc status appears. If a message in the table has type 'A' or 'E',
+status '53' (application document posted) is written for 'W', 'I' or
+'S'. The status records are written to the database in the same sequence
+as the messages in the return parameter.
+
+If the return parameter is empty, the BAPI call was successful. In this
+case, an IDoc status record with status 53 (application document posted)
+is written by the ALE layer.
+If errors occur, the application must ensure that the data is
+consistent, for example by rolling back unwanted changes.
+You can use the ALE error handling functions (create a work item) to
+process any errors.
+&FUNCTIONALITY&
+You can use this method to display the sales orders for a customer.
+&EXAMPLE&
+
+&HINTS&
+Mandatory entries:
+You must enter the relevant customer number in the SALESDOCUMENT
+parameter and the requested sales organization in the
+SALES_ORGANIZATION parameter.
+Optional entries:
+You can restrict the selection by entering certain criteria. For
+example you can display all the orders for a certain material or orders
+from a particular time period (MATERIAL or DOCUMENT_DATE and
+DOCUMENT_DATE TO paramters). You can also find a certain sales order
+using the customer's purchase order number (PURCHASE_ORDER parameter).
+&FURTHER_SOURCES_OF_INF&
+

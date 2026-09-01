@@ -1,0 +1,36 @@
+&FUNCTIONALITY&
+The function module checks whether:
+The card type is valid
+The card number is correct
+Data carried over from customer master data is correct
+Date is correct
+
+&EXAMPLE&
+
+&HINTS&
+The BAPI returns the following error messages, among others:
+1. E V/  041  Payment card is blocked
+2. W V/  121  Card &1 &2 has not been assigned to customer &3
+3. E V/  005  Payment card &1 &2 is already assigned to customer &3
+
+4. E V/  107  Enter the expiration date of the payment card
+5. E V/  114  The payment card has expired
+6. E V/  101  Payment card type XXX is not defined
+7. E V/  102  The card number is not valid
+8. E V/  200  Internal error - Routine: & Reason: &
+
+&FURTHER_SOURCES_OF_INF&
+
+
+&FUNCTIONALITY&
+The function module checks for the:
+- valid card type
+- correct card number
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+

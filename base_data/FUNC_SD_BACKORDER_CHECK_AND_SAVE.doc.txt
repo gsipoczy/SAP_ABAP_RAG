@@ -1,0 +1,12 @@
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein dient zur Steuerung der Neuterminierung nachdem
+alle zu verarbeitenden Belege (Umlagerungs- und Vertriebsbelege) vom
+aufrufenden Programm eingelesen wurden.
+Die Belege werden sequentiell in der Reihenfolge der übergebenen
+Tabelle INPUT abgearbeitet. Je nach Belegtyp werden Unterroutinen
+aufgerufen, welche die Positionen der Belege (Einteilungen nur bei
+Umlagerungsbestellungen und -Lieferplänen) für die ATP-Prüfung
+aufbereiten, die Prüfung durchführen und auch das Sichern der Belege
+und die Aufbereitung der Ergebnisliste steuern.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

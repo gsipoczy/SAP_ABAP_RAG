@@ -1,0 +1,24 @@
+&FUNCTIONALITY&
+You can use this BAPI function module to read customer-material info
+records. You should enter the info record's identification number in
+the parameter field.
+&FUNCTIONALITY&
+The user can use all intervals for the selected attributes of the
+<ZH>CustomerMaterialInfo</> business object to select data.
+If all the selection parameters are complete, the resulting quantity is
+a cross-product of these organizational units.
+You have defined the following selection criteria, for example:
+Sales organization: 0001
+Distribution channel: 01 - 04
+The system includes all possible combinations of these criteria:
+Sales organization 0001 Distribution channel 01
+Sales organization 0001 Distribution channel 02
+Sales organization 0001 Distribution channel 03
+Sales organization 0001 Distribution channel 04
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+See the Specification and Design for the Sales Force Automation
+Interface

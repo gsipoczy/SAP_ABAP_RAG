@@ -1,0 +1,18 @@
+&FUNCTIONALITY&
+This function module can be used to import
+ <DS:GLOS.3526C72AAFAB52B9E10000009B38F974>customer material</> data
+created externally into an SAP S/4HANA system.
+The function module validates the imported customer material data, saves
+the records to the database, and returns any messages.
+&EXAMPLE&
+This function module is called by the <LS>Customer Material</> migration
+object found under <LS>Migrate Your Data</> in the <LS>Manage Your
+Solution </>app. The migration object requires an upload of customer
+material data in a *.csv file.
+The migration object parses the customer material data included in the
+*.csv file according to the parameters of the <NP>API_SD_CUSTMAT_CREATE
+</>function module.
+
+
+
+

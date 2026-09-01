@@ -1,0 +1,28 @@
+Ist das Kennzeichen <ls>SINGLE</> gesetzt, so wird der Baustein aus der
+CL20/CL21 heraus aufgerufen. In der Tabelle <ls>OTAB</> steht genau die
+Einstiegscharge der Transaktion. Es wird auf Existenz der Charge
+geprüft und der Kurztext in der Sprache <ls>LANGUAGE</>
+zurückgeliefert. Ist <ls>SINGLE</> nicht gesetzt, so werden nur die
+Texte zu den Chargen der Tabelle <ls>OTAB</> gelesen.
+
+<zh>Exportparameter</>
+LANGUAGE,,,,,,Sprachenschlüssel Default SYST-LANGU
+LOCK,,,,,,Kennzeichen: X = Charge sperren
+SINGLE,,,,,,X = eine Charge von CL20/CL21 übergeben ' ' Tabelle gefüllt
+CALLED_FROM,,,,,,1 Baustein wird von DVS gerufen (Default) 2 Aufruf aus
+Klassifizierung
+
+<zh>Importparameter</>
+MESSAGE_TYPE,,,,,,Nachrichtentyp: E=Error, W=Warning, I=Information,
+S=Sucess
+FAULT_TEXT,,,,,,Nachrichtentext
+NO_AUTH,,,,,,Keine Berechtigung für die/eine Charge
+
+<zh>Tables</>
+OTAB,,,,,,Tabelle mit den Objekten aus der Klassifizierung
+
+<zh>Ausnahmen</>
+FOREIGN_LOCK,,,,,,Satz von anderem Benutzer bereits gesperrt
+SYSTEM_FAILURE,,,,,,Allgemeiner Sperrfehler
+OBJECT_NOT_FOUND,,,,,,Charge nicht vorhanden
+DE-EN-LANG-SWITCH-NO-TRANSLATION

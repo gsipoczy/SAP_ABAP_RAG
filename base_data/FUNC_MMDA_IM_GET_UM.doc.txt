@@ -1,0 +1,68 @@
+&FUNCTIONALITY&
+This function module selects material stocks from different plant
+storage locations based on selected import parameters. It then exports
+the information to different tables. This function module does not
+support stocks related to industry sector, it only supports core
+functionality.
+
+There are no dependencies on other function modules. This function
+module can be called several times if there is a requirement to retrieve
+current stocks of a material in a plant frequently.
+When the function module is called by the system, the following import
+parameters are by default selected:
+IV_MARC
+IV_MARD
+IV_MCHA
+IV_MCHB
+IV_MSKU
+IV_MSLB
+IV_MSKA
+IV_MSPR
+IV_MBEW
+IV_NULL_STOCKS
+IT_MATERIAL
+IT_PLANT
+The null stocks for plant materials are selected if the import parameter
+<LS>IV_NULL_STOCKS </>is selected. The export variables
+<LS>EV_KZ_BEW_KAUFT_BEST </>and <LS>EV_KZ_BEW_PAUFT_BEST </>are included
+if special valuated stock in customer orders on hand and project stock
+exists respectively.
+
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This extractor function module selects different goods movements from
+plant storage locations. It then exports the information to the
+<LS>E_T_MMDA_IM_S_BX_BF_UM </>table. This function module does not
+support stocks related to industry sectors, it only supports stocks
+related to core functionality.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module is used as an extractor in the <LS>0MM_IM_BX
+</>DataSource. This function module selects different stocks of a
+material placed in different storage locations of a plant. It then
+exports the information to the <LS>E_T_MMDA_IM_S_BX_BF_UM </>table.
+This function module does not support stocks related to industry sector,
+it only supports core functionality
+&HINTS&
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This extractor function module is used to retrieve revaluation (price
+change) data. The extract structure for this FM is <LS>MMDA_I
+M_S_BX_BF_UM</>. The data retrieved from the <LS>BKPF</> and <LS>BSEG</>
+tables is stored in the <LS>E_T_MMDA_IM_S_BX_BF_UM </>table.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

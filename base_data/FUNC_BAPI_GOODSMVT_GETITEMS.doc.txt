@@ -1,0 +1,635 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein wurde generiert aus
+dem Objekt <LS>BUS2017</> und der Methode <LS>CANCEL</>
+für den BAPI-Aufruf durch ALE.
+Der Funktionsbaustein wird im Ausgangssystem ausgeführt. Er wandelt
+zunächst die Daten aus den BAPI-Parametern ins IDoc-Format um. Dann
+wird das IDoc an die entsprechenden Empfänger versendet. Dort erfolgt
+der BAPI-Aufruf.
+Die Schnittstelle des Funktionsbausteins enthält alle ausgehenden
+Parameter vom entsprechenden BAPI-Funktionsbaustein
+<DS:FU.BAPI_GOODSMVT_CANCEL>BAPI_GOODSMVT_CANCEL</>
+und zusätzlich die folgenden Parameter, die in der ALE-Schicht
+verwendet werden:
+
+<LS>SERIAL_ID</>
+Dieser Eingabeparameter enthält die <DS:DE.CHNUM>Kanalnumber</>, wird
+nur bei aktiver Serialisierung verwendet.
+<LS>RECEIVERS</>
+Der Parameter enthält die Namen von <DS:DE.LOGSYS>Logischen Systemen</>
+(Empfängern), bei denen der BAPI-Aufruf stattfindet.
+<LS>COMMUNICATION_DOCUMENTS</>
+Die Rückgabetabelle enthält den Namen vom logischen System im Feld
+LOGSYS, den Objekttyp im Feld OBJTYPE und den Objektschlüssel im Feld
+OBJKEY. Sie weist darauf hin, daß ein Objekt vom Typ <LS>IDOC</> mit
+diesem Schlüssel in diesem logischen System erzeugt wurde.
+<LS>APPLICATION_OBJECTS</>
+Die Eingabetabelle enthält die Objekte von Anwendungen, die beim
+BAPI-Aufruf verarbeitet werden. Im Feld LOGSYS geben Sie bitte den
+Namen des logischen Systems an, aus dem die Anwendungsobjekte stammen.
+Die Anwendungsobjekte werden durch Objekttyp OBJTYP und Objektschlüssel
+OBJKEY identifiziert.
+
+&EXAMPLE&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Dieser Funktionsbaustein wurde generiert aus
+dem Objekt <LS>BUS2017</> und der Methode <LS>CANCEL</>
+für den BAPI-Aufruf durch ALE.
+Die Schnittstelle des Bausteins wurde als Standard-API in ALE
+definiert. Die Daten werden von der ALE-Schicht versorgt.
+Der Funktionsbaustein wird im Eingangssystem von der ALE-Schicht
+gestartet. Er wandelt die Daten aus dem IDoc in BAPI-Parameter um und
+ruft das BAPI im Eingangssystem auf. Mehr zu diesem BAPI finden Sie
+unter <DS:FU.BAPI_GOODSMVT_CANCEL>BAPI_GOODSMVT_CANCEL</>
+Durch die Ausführung dieses Bausteins wird ein neuer IDoc-Status
+geschrieben. Er besagt, ob der BAPI-Aufruf in diesem System erfolgreich
+ausgeführt wurde (Status '53') oder fehlerhaft ist (Status '51').
+Die ALE-Schicht schreibt den IDoc-Status abhängig von
+BAPI-Return-Parameter bzw. im Fehlerfall in der ALE-Schicht.
+Auswirkungen der BAPI-Return-Parameters:
+
+Ist der BAPI-Return-Parameter ein Exporting-Parameter, so wird ein
+IDoc-Status-Satz geschrieben. Das IDoc bekommt den Status '51'
+(Anwendungsbeleg nicht gebucht), wenn die Meldung den Typ 'A' oder 'E'
+hat. Ansonsten bekommt das IDoc den Status '53'(Anwendungsbeleg
+gebucht) für Meldungstypen von 'W', 'I' oder 'S'.
+
+Ist der Return-Parameter ein Tables-Parameter, so können mehrere
+IDoc-Status-Sätze geschrieben werden. Meldungstypen bestimmen den
+IDoc-Status. Hat eine Meldung in der Tabelle den Typ 'A' oder 'E', dann
+wird für alle Einträge, bis auf die mit dem Typ 'S' (d.h., mit Typen
+'A', 'E', 'W' oder 'I') für das IDoc der Status '51' (Anwendungsbeleg
+nicht gebucht) geschrieben. Für die Meldungen mit dem Typ 'S' erscheint
+kein IDoc-Status. Hat keine Meldung in der Tabelle den Typ 'A' oder
+'E', dann wird für 'W', 'I' oder 'S' der Status '53' (Anwendungsbeleg
+gebucht) geschrieben. Die Status-Sätze werden in der Reihenfolge
+geschrieben wie die Meldungen im Return-Parameter.
+
+Wurde der Return-Parameter nicht ausgefüllt, bedeutet dies, daß das
+BAPI erfolgreich aufgerufen wurde. In diesem Fall wird ein
+IDoc-Status-Satz mit dem Status '53' (Anwendungsbeleg gebucht) von der
+ALE-Schicht geschrieben.
+Im Fehlerfall muß die Anwendung dafür sorgen, daß die Daten in
+konsistentem Zustand sind, z.B. indem sie ungewünschte Änderungen durch
+Rollback zurücknimmt.
+Für den Fehlerfall steht die ALE-Fehler-Behandlung zur Verfügung
+(Erstellung eines Workitems).
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2017</> and method <LS>CREATEFROMDATA</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_GOODSMVT_CREATE</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2017</> and method <LS>CREATEFROMDATA</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+<DS:FU.&3>BAPI_GOODSMVT_CREATE</>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+the object <LS>BUS2017</> and the method <LS>CREATEFROMDATA</>
+for the BAPI  call through ALE.
+The interface of the module was defined as a standard API in ALE. The
+data is supplied by the ALE layer.
+The function module is started in the inbound system by the ALE system.
+It converts the data from the IDoc into BAPI parameters and calls the
+BAPI in the incoming system. For more information on this BAPI, refer to
+<DS><DS:FU.BAPI_GOODSMVT_CREATE>BAPI_GOODSMVT_CREATE</></>
+When this module is executed, a new IDoc status is written. It states
+whether the BAPI cal in this system has been executed successfully
+(status '53') or has errors (status '51').
+The ALE layer writes the IDoc status in connection with the BAPI return
+parameter, and, in the case of an error, in connection with the ALE
+layer. Effects of the BAPI return parameters:
+
+If the BAPI return parameter is an exporting parameter, an IDoc status
+record is written. The IDoc gets the status '51' (application document
+not posted) if the message has the type 'A' or 'E' . Otherwise the IDoc
+gets the status '53'(application document posted) for message types 'W',
+'I' , or 'S'.
+
+If the return parameter is a tables parameter, several IDoc status
+records are written. The message types determine the IDoc status. If a
+message in the table has type 'A' or 'E', then the status '51'
+(application document not posted) is written for the IDoc for all
+entries, except for those with type 'S' (that is, with types 'A', 'E',
+'W' , or 'I'). For messages with type 'S' , no IDoc status appears. If
+no message in the table has type 'A' or 'E', status '53' is written for
+'W', 'I' , or 'S' . The status records are written in the sequence of
+the messages in the return parameter.
+
+If the return parameter was not filled, this means that the BAPI was
+called successfully. In this case, an IDoc status record with the status
+'53' (application document posted) is written from the ALE layer.
+If there is an error, the application must ensue that the data is in a
+consistent state - that is, it resets undesired changes through a
+rollback.
+For all errors, the ALE error handling function is at your disposal
+(creation of a work item).
+&FUNCTIONALITY&
+Using the Cancel method, material documents can be cancelled by calling
+up the function module MB_CANCEL_GOODS_MOVEMENT. You can only cancel
+one material document each time you call up the transaction. Note that
+the system does not delete the original document, but creates a new
+material document (reversal document).
+&EXAMPLE&
+
+&HINTS&
+INCLUDE BAPI_BERECHTIGUNGEN
+INCLUDE MMIM_BAPI_AUTHOR_GOODSMVT OBJECT DOKU ID TX LANGUAGE EN
+<ZH>Transfer</>
+The key fields for the material document, MATERIALDOCUMENT and
+MATDOCUMENTYEAR have to be transferred to the method as import
+parameters.
+The posting date with the field GOODSMVT_PSTNG_DATE und the user name
+with the field GOODSMVT_PR_UNAME are also imported.
+In table GOODSMVT_MATDOCITEM, you have the option of transferring the
+material document items that are to be cancelled. If no items are
+transferred, all the items in the material document are cancelled.
+<ZH>Confirmations</>
+Once the system has successfully cancelled a material document, it
+returns the material document number and material document year key
+fields in the GOODSMVT_HEADRET parameter to the initiator.
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF
+&FUNCTIONALITY&
+You can use this method to create a material document for a goods
+movement.
+You can only create one material document each time you call up the
+method.
+You can use a simulation function before posting the goods movement to
+check how the data is updated in the database. The standard system is
+configured so that the goods movement is posted immediately, without
+prior simulation.
+Ensure that you transfer the data in the same way as it is managed in
+the database. For example:
+Material number 18-character with leading zeros
+Batches with uppercase letters
+Ensure that the header data of the material document includes the
+posting date for all transactions/events listed below. Populate the
+<LS>PSTNG_DATE</> field (import structure <LS>GOODSMVT_HEADER</>) in the
+interface <LS>BAPI2017_GM_HEAD_01</> for this purpose.
+&EXAMPLE&
+
+&HINTS&
+<ZH>It is possible to populate customers' own fields in database tables
+using the BAPI, without carrying out a modification.</>
+The enhancements are passed on to the BAPI in a container and can be
+processed within the BAPI function module.
+Technically, this is realized via an extension parameter (ExtensionIn)
+(see below or tab page 'Tables -> Long Text') .
+
+
+<ZH>Authorization check</>
+In the MM Inventory Management component, the method does not perform
+any authorization checks.
+Note that the system can also check authorization objects of other
+applications during the posting of a goods movement, depending on the
+business transaction.
+<ZH>Transfer</>
+The following information about the material document that is to be
+created is passed on to the method:
+A structure with the header data
+A structure with the code for the movement
+A table with the item data
+A table with the serial numbers
+The posting is made by the function module MB_CREATE_GOODS_MOVEMENT.
+<ZH>Confirmations</>
+INCLUDE BAPI_RET LANGUAGE EN
+
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF LANGUAGE EN
+<ZH>Which fields must be populated during the various
+transactions/events?</>
+The following example scenarios illustrate which fields have to be
+populated for which business transactions/events (code).
+There are the following types of transactions/events:
+GM_Code 01: Goods receipt for purchase order
+GM_Code 02: Goods receipt for production order
+GM_Code 03: Goods issue
+GM_Code 04: Transfer posting
+GM_Code 05: Other goods receipt
+GM_Code 06: Reversal of goods movements
+GM_Code 07: Subsequent adjustment with regard to a subcontract order
+<ZH>Entering the movement indicator</>
+Depending on the transaction, you must enter the following in the
+movement indicator field:
+GM_Code 01 (Goods receipt for purchase order): <LB>B</>
+GM_Code 02 (Goods receipt for production order): <LB>F</>
+For all other transactions, leave the field blank.
+<ZH>For 1</>: GM_Code 01: Goods receipt for purchase order
+Purchase order known
+The following fields must be populated:
+Purchase order
+Purchase order item
+Movement type
+Movement indicator
+Quantity in unit of entry
+ISO code unit of measurement for unit of entry <ZH>or</>
+quantity proposal
+The following fields may have to be populated (this is not a complete
+list):
+Minimum shelf life expiration date (if set up in the system)
+Reason for movement (if set up in the system)
+Batch (if the material is handled in batches and no automatic batch
+assignment has been set up)
+Storage location (if no storage location us specified in the purchase
+order item)
+The following fields can be populated (this is not a complete list):
+Stock type
+Item text
+Unloading point
+Delivery completed indicator
+The following fields must not be populated (this is not a complete
+list):
+Account assignment fields (the account assignment is adopted from the
+purchase order)
+Reservation
+Receiving/issuing material
+Receiving/issuing plant
+Receiving/issuing storage location
+In the case of a purchase order item with the item category
+"subcontracting", only the GR item is to be passed on in the interface.
+The GI items are determined automatically in the system.
+Purchase order unknown: Shipping notification known
+The following fields must be populated:
+Delivery
+Delivery item
+Movement type
+Other fields as under "Purchase order known". The system determines the
+relevant purchase order item via the delivery/delivery item.
+Purchase order unknown: Purchase order is to be created automatically
+The following fields must be populated:
+Material number
+Plant
+Storage location
+Vendor
+Movement type
+Movement indicator
+Quantity in unit of entry
+ISO code unit of measurement for unit of entry
+The following fields may have to be populated (this is not a complete
+list):
+Minimum shelf life expiration date (if set up in the system)
+Reason for movement (if set up in the system)
+Batch (if the material is handled in batches and batches are not
+assigned automatically)
+The following fields can be populated (this is not a complete list):
+Stock type
+Item text
+Unloading point
+You cannot populate the following fields (this is not a complete list):
+Account assignment fields (automatic creation of purchase order items
+with account assignment is not supported)
+Reservation
+Receiving/issuing material
+Receiving/issuing plant
+Receiving/issuing storage location
+Purchase order unknown: A purchase order is not to be created
+The following fields must be populated:
+Material number
+Plant
+Storage location
+Vendor
+Movement type
+Movement indicator
+Quantity in unit of entry
+ISO code unit of measurement for unit of entry
+The following fields may have to be populated in some cases (this is not
+a complete list)
+Minimum shelf life expiration date (if set up in the system)
+Reason for movement (if set up in the system)
+Batch (if the material is handled in batches and automatic assignment of
+batch numbers is not set)
+The following fields can be populated (this is not a complete list)
+Special stock indicator
+Item text
+Unloading point
+Goods recipient
+The following fields cannot be populated (this is not a complete list)
+Account assignment fields (automatic creation of purchase order items
+with account assignment is not supported)
+Reservation
+Receiving/issuing material
+Receiving/issuing plant
+Receiving/issuing storage location
+Receiving/issuing batch
+The input combinations listed above for the GM_CODE 01 can be combined
+within an input table so that they can be posted in a material document.
+Items can also be posted for different purchase orders, provided that
+all the purchase orders relate to the same vendor.
+Transfer of subcontracting components
+When the end product (ordered material of a subcontract order) is posted
+using movement type 101, the populated unique identification of the
+document line (LINE_ID) is additionally needed for the transfer of the
+subcontracting components.
+<DS:TX.BAPI_GOODSMVT_CREATE_LB_INFO>More information on LINE_ID and
+PARENT_ID</>
+
+The following fields must be populated for the components:
+Unique identification of the document line
+Identification of the immediately superordinate line
+Material number
+Plant
+Storage location
+Quantity in unit of entry
+The following fields can be filled for the components:
+All other fields in the method that are included in this
+ <DS:TX.BAPI_GOODSMVT_CREATE_GOCOMB>list</>.
+The following fields cannot be populated for the components:
+All fields that are not included in the list above. The movement
+indicator must be initial.
+Additional fields in goods-receipt-based invoice verification
+When you post a goods receipt to purchase order with movement type
+<LS>102</>, an issue with reference to a previously posted goods issue,
+the following fields must also be transferred:
+REF_DOC_IT (LFPOS): Item of a reference document
+REF_DOC (LFBNR): Document number of a reference document
+REF_DOC_YR (LFBJA): Fiscal year of a reference document
+Only if you transfer these fields can you be sure that the link to the
+original goods movement is retained.
+<ZH>For 2</> GM_Code 02: Goods receipt for production order
+The following fields have to be populated:
+Order
+Movement type
+Movement indicator
+Quantity in unit of entry
+ISO code unit of measurement for unit of entry <ZH>or</>
+quantity proposal
+The following fields may have to be populated in some cases (this is not
+a complete list):
+Minimum shelf life expiration date (if set up in the system)
+Reason for movement (if set up in the system)
+Batch (if the material is handled in batches and automatic batch number
+assignment is not set)
+Storage location (if storage location has not been specified in the
+order)
+The following fields can be populated (this is not a complete list):
+Order item (co-product)
+Stock type
+Item text
+Unloading point
+"Delivery completed" indicator
+The following fields cannot be populated (this is not a complete list):
+Account assignment fields (the account assignments are adopted from the
+purchase order)
+Reservation
+Receiving/issuing material
+Receiving/issuing plant
+Receiving/issuing storage location
+Receiving/issuing batch
+<ZH>For 3</> GM_Code 03: Goods issue
+Goods issue without reference to a reservation
+The following fields must be populated:
+Material number
+Plant
+Storage location
+Movement type
+Movement indicator
+Quantity in unit of entry
+ISO code unit of measurement for unit of entry
+The following fields may have to be populated in some cases (this is not
+a complete list):
+Special stock (e.g. sales order, project, vendor etc.)
+Minimum shelf life expiration date (if set up in the system)
+Reason for movement (if set up in the system)
+Batch (if the material is handled in batches and automatic batch number
+assignment is not set)
+Account assignment fields
+The following fields can be populated (this is not a complete list):
+Special stock indicator
+Item text
+Unloading point
+Goods recipient
+The following fields cannot be populated (this is not a complete list):
+Reservation
+Receiving/issuing material
+Receiving/issuing plant
+Receiving/issuing storage location
+Receiving/issuing batch
+Goods issue with reference to a reservation
+The following fields must to be populated:
+Reservation number
+Reservation item
+Record type of the reservation
+Movement indicator
+Quantity in unit of entry
+ISO code unit of measurement for unit of entry
+The following fields may have to be populated in some cases (this is not
+a complete list):
+Minimum shelf life expiration date (if set up in the system)
+Reason for movement (if set up in the system)
+Batch (if the material is handled in batches and automatic batch number
+assignment is not set)
+Storage location (if not planned in the reservation)
+XSTOR Only supported in movement type 262 or 262 equivalent if XSTOR=1
+for the return of a reservation.
+The following fields can be populated (this is not a complete list):
+Special stock indicator
+Item text
+Unloading point
+Goods recipient
+The following fields cannot be populated (this is not a complete list):
+Movement type
+Material
+Plant
+Account assignment fields
+<ZH>For 4</> GM_Code 04: Transfer posting
+Transfer posting without reference to a reservation
+The following fields must be populated:
+Material number
+Plant
+Storage location
+Movement type
+Movement indicator
+Quantity in unit of entry
+ISO code unit of measurement for unit of entry
+The following fields may have to be populated in some cases (this is not
+a complete list):
+Receiving material
+Receiving plant
+Receiving storage location
+Receiving batch (if material is handled in batches and you want to
+change batches)
+Receiving/issuing special stock (e.g. sales order, project, vendor etc.)
+Minimum shelf life expiration date (if set up in the system)
+Reason for movement (if set up in the system)
+Batch (if the material is handled in batches and automatic batch number
+assignment is not set)
+The following fields can be populated (this is not a complete list):
+Special stock indicator
+Item text
+Account assignment fields (for automatic posting lines: expense/income
+from stock transfer)
+The following fields cannot be populated (this is not a complete list):
+Reservation
+Transfer posting with reference to a reservation
+See goods issue with reference to a reservation
+<ZH>For 5</> GM_Code 05: Other goods receipts
+Other goods receipt without reference to a reservation
+See goods issue without reference to a reservation
+Other goods receipt with reference to a reservation
+See goods issue with reference to a reservation
+<ZH>For 6</> GM_Code 06: Reversal of goods movements
+You can use the <LS>Cancel</> method to reverse goods movements. But you
+may also want to cancel a goods movement without referring to a material
+document (see the <LS>Cancel</> method).
+If you want to work without referring to the document, you have to
+populate the <LS>BAPI_GM_ITEM_CREATE-XSTOB</> field in the interface
+(import table <LS>GOODSMVT_ITEM</>). In this case, the system converts
+the movement type assigned in the interface to the reversal movement
+type. Alternatively, you can set the reversal movement type in the
+interface. In this case, the <LS>BAPI_GM_ITEM_CREATE_XSTOB</> field must
+be transferred blank.
+If you want to cancel a goods movement with reference to a reservation
+(without using the <LS>Cancel</> method) you can only transfer the
+<LS>BAPI_GM_ITEM_CREATE_XSTOB</> field if it is populated. Movement
+types are not transferred when you post with reference to a reservation,
+as the movement type is contained in the reservation item.
+<ZH>For 7.</> GM_Code 07: Subsequent adjustment with regard to a
+subcontract order
+Ordered material of subcontract order
+The following fields must be populated:
+Unique identification of document line (can be freely assigned)
+Posting date in document header
+Document number of purchasing document
+Item number of purchasing document
+Material number,,,, <ZV>check</>
+Plant,,,,<ZV>check</>
+Movement type (select movement type <DS:CHAP.SIMG_OLMB_BWA_121>121</>)
+Movement indicator (must be <LS>O</>)
+Further entries are not allowed. The entry quantity for the ordered
+material of a subcontract order must be zero.
+Components
+The following fields must be populated:
+Unique identification of document line (can be freely assigned)
+Identification of the immediately superordinate line
+Plant
+Material number,,,, <ZV>check</>
+Quantity in unit of entry; can also be negative
+The following fields can be populated:
+Storage location
+All other fields in the method that are included in this
+ <DS:TX.BAPI_GOODSMVT_CREATE_GOCOMB>list</>.
+The following fields may not be populated:
+All fields that are not in the list above. The movement indicator must
+be blank.
+
+<DS:TX.BAPI_GOODSMVT_CREATE_LB_INFO>More information on LINE_ID and
+PARENT_ID</>
+Additional fields in goods-receipt-based invoice verification
+When you post a subsequent adjustment, the following fields must also be
+transferred:
+REF_DOC_IT (LFPOS): Item of a reference document
+REF_DOC (LFBNR): Document number of a reference document
+REF_DOC_YR (LFBJA): Fiscal year of a reference document
+Only if you transfer these fields can you be sure that the link to the
+original goods movement is retained.
+&FUNCTIONALITY&
+The GetDetail method enables you to read a whole document (header and
+items) using the material document's key fields. The document is not
+blocked during this procedure.
+&EXAMPLE&
+
+&HINTS&
+INCLUDE BAPI_BERECHTIGUNG
+<DS:UO.M_MSEG_WMB>M_MSEG_WMB</>,,Material documents: plant
+<DS:UO.M_MSEG_BMB>M_MSEG_BMB</>,,Material documents: movement type
+<ZH>Transfer</>
+The key fields of the material document (MATERIALDOCUMENT and
+MATDOCUMENTYEAR) have to be transferred to the method as import
+parameters.
+<ZH>Confirmations</>
+In the GOODSMVT_HEADER parameter, the initiator receives the header
+information for the document chosen.
+In the GOODSMVT_ITEMS table, the initiator receives data for each item
+in the material document chosen.
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF
+&FUNCTIONALITY&
+The GetItems method allows you to read the header and item data of all
+material documents that meet the selection criteria below:
+&EXAMPLE&
+
+&HINTS&
+INCLUDE BAPI_BERECHTIGUNGEN
+<DS:UO.M_MSEG_WMB>M_MSEG_WMB</>,,Material documents: Plant
+<DS:UO.M_MSEG_BMB>M_MSEG_BMB</>,,Material documents: Movement type
+<ZH>Input parameters</>
+You can use the following criteria to select the material documents:
+Material                      (structure MATERIAL_RA)
+Plant                         (structure PLANT_RA)
+Storage location              (structure STGE_LOC_RA)
+Batch                         (structure BATCH_RA)
+Movement type                 (structure MOVE_TYPE_RA)
+Special stock indicator       (structure SPEC_STOCK_RA)
+Transaction/event type        (structure TR_EV_TYPE_RA)
+Posting date                  (structure PSTNG_DATE_RA)
+Vendor                        (structure VENDOR_RA)
+User name                     (structure USERNAME_RA)
+Purchasing document                (Struktur PURCH_DOC_RA)
+<ZH>Confirmations</>
+The GOODSMVT_HEADER table contains the header data for the material
+documents chosen and the GOODSMVT_ITEMS table contains the item data for
+the material documents chosen.
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF LANGUAGE EN

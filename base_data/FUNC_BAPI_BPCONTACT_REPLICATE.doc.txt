@@ -1,0 +1,38 @@
+&FUNCTIONALITY&
+This BAPI function module is used to create object references for a
+partner sales activity in order to assign objects to a partner sales
+activity subsequently.
+The data base change will only be initiated by the method
+BapiService.TransactionCommit.
+The relevant method has been implemented as a class method. The return
+parameter contains the processing log. It contains all messages (error,
+warning, information) from the consistency check.
+
+&EXAMPLE&
+
+&HINTS&
+,,The update is ist encapsulated in a PERFORM ... ON COMMIT.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This BAPI function module is used to delete relationships of business
+objects with the type "Assigned". This method can be used to remove
+object references from a partner sales activity.
+The data base change will only be initiated by the method
+BapiService.TransactionCommit .
+The relevant method has been implemented as a class mehtod. The return
+parameter contains the processing log. It contains all messages (error,
+warning, information) from the consistency check.
+
+&EXAMPLE&
+
+&HINTS&
+,,The update is encapsulated in a PERFORM ... ON COMMIT.
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module selects sales activities and sends them
+asynchronously via ALE. The receiving system calls the
+<ZH>SaveReplicaMultiple</> method.
+The InitialDownload parameter has priority over the SalesActivityID
+parameter.

@@ -1,0 +1,231 @@
+&FUNCTIONALITY&
+Using this method, you can change or delete sales documents.
+You can change header data, item data, schedule line data and
+configuration data.
+This is a general rule:
+1. You only need to enter the fields you wish to change.
+2. Select these with an X in the relevant checkboxes.
+3. Fill in the UPDATE field with a U.
+4. You must always enter key fields if you make a change, inculding in
+the checkbox.
+5. The configuration is an exception. If you change it, you must
+fill it in completely.
+Maintain the quantities and dates via schedule line data.
+7. Possible UPDATEFLAGS:
+U = Change
+D = Delete
+I = Insert
+&EXAMPLE&
+1.Completely delete sales document
+2.Delete sales document item
+3.Changes to sales documents
+4.Change configuration
+
+&HINTS&
+1.Miminum entries:
+The sales document number must definitely be created in the structure
+SALESDOCUMENT.
+Key fields must always be entered when making a change.
+The Update indicator in ORDER_HEADER_INX must always be entered.
+2.Commit control The BAPI does not do a database Commit. As a result,
+the application being used must call up Commit, so that changes can be
+carried out on the database. The BAPI BAPI_TRANSACTION_COMMIT is
+available for this.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Using this method, you can create sales documents with items, schedule
+lines and item conditons.
+You must enter at least sales order header data (via structure ORDER_
+HEADER_IN), and partner data (via the table ORDER_PARTNERS) as input
+parameters.
+Enter the item data via the table ORDER_ITEMS_IN. You can enter the
+item number manually, by filling out the relevant fields, or
+automatically, corresponding to Customizing, by leaving the relevant
+fields blank. If you decide to enter the item number using R/3, you
+cannot enter any schedule lines or conditions, as these cannot be
+linked to the corresponding item. If you are dealing with configurable
+items, you must enter the configuration data in the tables
+ORDER_CFGS_REF, ORDER_CFGS_INST, ORDER_CFGS_PART_OF, ORDER_CFGS_VALUE
+and ORDER_CFGS_BLOB.
+Scheduling data can be published via the structure SALES_SCHEDULE_IN.
+Document conditions to be created can be entered via the structure
+SALES_CONDITIONS_IN .
+Credit card data can be published via the structure SALES_CCARD, card
+identification data on the one hand, and data regarding an
+authorization which has taken place in an external system, on the
+other.
+After you have created the sales document successfully, you will
+receive the document number (SALESDOCUMENT_EX field).
+Any errors that might occur are announced via the parameter RETURN.
+
+Using the checkbox:
+The individual components of a sales document can be generated with or
+without a checkbox. If you decide on the first possibility, only fields
+which have unmatching SPACE are copied. In the second case (field
+UPDATEFLAG for checkbox must be 1), only fields which have an 'X' in
+the box are copied. This allows fields which have been preassigned to
+default values to be set on SPACE again.
+
+
+&EXAMPLE&
+
+
+&HINTS&
+If no object references are to be written, the following fields
+(parameters) should be initialized:
+BINARY_RELATIONSHIPTYPE
+SALES_HEADER_IN-REFOBJECTTYPE
+SALES_HEADER_IN-REFOBJECTKEY
+SALES_HEADER_IN-REFDOCTYPE
+
+If item conditions (SALES_CONDITIONS_IN) are entered, then it is
+recommended that you enter a pricing date in the header
+SALES_HEADER_IN, PRICE_DATE), as the BAPI does not know whether a
+pricing date is automatically determined. In order to be able to read
+the condition record successfully, a date is necessary in certain
+cases.
+
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+You can use this method to change or delete sales documents.
+You can change header, item, schedule line and configuration data.
+Please note the following:
+Only enter the fields you want to change.
+Select these fields by entering X in the check bar.
+Enter U in the UPDATEFLAG field.
+If you want to change the document, always enter the key fields in the
+check bar.
+If you want to change configuration data, you must fill in all the
+fields.
+Maintain quantities and dates in the schedule line data.
+UPDATEFLAGS that you can use are:
+RESET N1
+U = change
+D = delete
+I = insert
+RESET B2
+&EXAMPLE&
+Delete complete sales document
+Delete sales document item
+Change sales document
+Change configuration
+RESET N1
+&HINTS&
+Minimum entries
+You must specify the sales document number in the SALESDOCUMENT
+structure.
+You must always enter key fields when you want to change documents.
+You must enter the update indicator in ORDER_HEADER_INX
+Commit control
+The BAPI doesnot run a database commit. This means that the application
+calling up the data must trigger the commit to write the changes to the
+database. To do this, use BAPI_TRANSACTION_COMMIT.
+&FUNCTIONALITY&
+You can use this method to create SD documents with items, schedule
+lines, and item conditions.
+You must specify order header data (using structure ORDER_HEADER_IN) and
+partner data (using table ORDER_PARTNERS) as input parameters.
+Use table ORDER_ITEMS_IN to specify item data. You can carry out the
+item number assignment manually by filling the appropriate fields, or
+the system executes it automatically based on the Customizing settings
+if you leave the corresponding fields initial. If you decide to use
+mySAP ERP for the item number assignment, no schedule lines or
+conditions can be specified since there is no recognizable correlation
+between them and the item.
+If the items are configurable, you must specify the configuration data
+in tables ORDER_CFGS_REF, ORDER_CFGS_INST, ORDER_CFGS_PART_OF,
+ORDER_CFGS_VALUE and ORDER_CFGS_BLOB.
+You can use structure SALES_SCHEDULE_IN to transfer the schedule line
+data.
+To specify document conditions for creation, you can use structure
+SALES_CONDITIONS_IN.
+You can use structure SALES_CCARD to transfer credit card data,
+including both data for card identification and data on an authorization
+that took place in an external system.
+Once the SD document has been created successfully, you receive the
+document number (field SALESDOCUMENT_EX).
+The system uses the RETURN parameter to notify you of any errors that
+occurred.
+
+Using checkboxes:
+Each component of an SD document can be created with or without
+checkboxes. If you want to use checkboxes, the system only copies fields
+with a value other than SPACE. If you do not want to use checkboxes (the
+UPDATEFLAG field must be I), the system only copies fields whose value
+is 'X'. This way, any fields that were assigned default values by the
+system can be reset to SPACE.
+
+
+&EXAMPLE&
+
+
+&HINTS&
+If you do not want object references to be written, you must initialize
+the following fields (parameters):
+      BINARY_RELATIONSHIPTYPE
+      SALES_HEADER_IN-REFOBJECTTYPE
+      SALES_HEADER_IN-REFOBJECTKEY
+      SALES_HEADER_IN-REFDOCTYPE
+
+If item conditions are specified (SALES_CONDITIONS_IN), we recommend
+specifying a price date in the header (SALES_HEADER_IN, PRICE_DATE),
+since the BAPI does not know whether or not the price date will be
+determined automatically. A date might be required so that the condition
+records can be read successfully.
+
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Using this method, you can create sales documents with items, schedule
+lines and item conditions.
+You must enter at least sales order header data (via the structure
+ORDER_HEADER_IN) and partner data (via the table ORDER_PARTNERS).
+Enter the item data via the table ORDER_ITEMS_IN. You can enter the item
+number manually, by filling in the relevant fields, or automatically,
+corresponding to Customizing, by leaving the relevant fields blank. If
+you decide to enter item numbers using mySAP ERP, no schedule lines or
+conditions can be entered, as these cannot be linked to the
+corresponding item.
+If you are dealing with configurable items, you must enter the
+configuration data in the tables ORDER_CFGS_REF, ORDER_CFGS_INST,
+ORDER_CFGS_PART_OF, ORDER_CFGS_VALUE and ORDER_CFGS_BLOB.
+The scheduling data can be published via the structure
+SALES_SCHEDULE_IN.
+Document condtions to be created can be entered via the structure
+SALES_CONDITIONS_IN.
+Credit card data can be published via the structure SALES_CCARD, card
+identification data on the one hand, data on an authorization that has
+taken place in an external system on the other.
+Once you have created the sales document successfully, you will receive
+the document number (field SALESDOCUMENT_EX).  (Feld SALESDOCUMENT_EX).
+Errors which might occur will be announced via the parameter RETURN.
+
+Using the checkbox:
+
+You can generate the individual components for a sales document with or
+without a checkbox. If you decide on the first possibility, only fields
+with unequal SPACE will be copied. In the second case (field
+UPDATEFLAG), only fields which have an 'X' in the box are copied. As a
+result, fields, which are preassigned to default values by the system,
+can be set on SPACE again.
+
+
+&EXAMPLE&
+
+
+&HINTS&
+If no object references are to be written, the following fields
+(parameters) should be initialized:
+
+      BINARY_RELATIONSHIPTYPE
+      SALES_HEADER_IN-REFOBJECTTYPE
+      SALES_HEADER_IN-REFOBJECTKEY
+      SALES_HEADER_IN-REFDOCTYPE
+
+
+&FURTHER_SOURCES_OF_INF&
+

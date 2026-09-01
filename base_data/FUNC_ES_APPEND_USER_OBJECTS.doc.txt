@@ -1,0 +1,26 @@
+&FUNCTIONALITY&
+Eingabe:  IUNAME      : Benutzername (optional)
+                  IOBJECT_TYP : verwendetes Objekt (siehe Tabelle
+TOJTB)
+                        z.B. 'BUS2091' für ServiceEntrySheet
+                  IOBJECT_ID  : Id des gerade verwendeten Objektes
+                        z.B. '1000000206' : LBLNI für Erfassungsblatt
+                 ISAVE       : Flag, ob Daten auf die Datenbank
+geschrieben
+                        werden sollen (default BLANK -> nicht
+speichern)
+                        (optional)
+
+Fügt das Objekt in die interne Tabelle mit ein. Ist es schon
+vorhanden wird es überschrieben mit aktuellem Zeitstempel,
+sonst wird es vorne angehängt. Es gibt beim Anhängen keine Obergrenze.
+Ist ISAVE = X werden die Daten mit MODIFY in die DB-Tabelle ESRUO ge-
+schrieben.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

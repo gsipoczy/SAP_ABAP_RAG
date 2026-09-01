@@ -1,0 +1,22 @@
+&FUNCTIONALITY&
+FARRIC_SD_REFFIELDS_UPDATE  is a remote enabled function module. It can
+be used to fill the reference fields (REFID and REFTYPE) of existing
+sales document items in the VBAP table. These reference fields will be
+used in Revenue Accounting to combine contract items delivered from
+different sender components in one revenue contract as a multiple
+element arrangement.
+&HINTS&
+The function module will import the following parameters:
+IT_SD_REFFIELDS_MAP: This parameter will contain a package (or table) of
+all the items which needs to be updated on the SD table along with the
+corresponding reference field values.
+The function module will export the following parameters:
+EV_PACKAGE_STATUS: This parameter will indicate if the database update
+for all the documents in the package sent to the FM was successful or
+not. (S: success, E: error, I: Information)
+ET_MESSAGES: This table will contain error or information messages. For
+example, if a document sent to the FM is not found in the SD tables an
+"information" type message will be added to this table. If a document
+sent to the FM could not be locked to make the updates on the database
+an "error" type message will be added to this table.
+

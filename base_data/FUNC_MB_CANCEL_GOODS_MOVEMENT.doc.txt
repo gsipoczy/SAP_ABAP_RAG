@@ -1,0 +1,61 @@
+&FUNCTIONALITY&
+The function module MB_POST_GOODS_MOVEMENT has to run after the function
+module <DS:FU.MB_CREATE_GOODS_MOVEMENT>MB_CREATE_GOODS_MOVEMENT</>.
+It calls form routine BUCHEN_AUSFUEHREN in program SAPMM07M, which then
+uses <ZH>IN UPDATE TASK</> to call the posting function modules in the
+relevant application. You must ensure that function module
+MB_CREATE_GOODS_MOVEMENT has been processed and that there is at least
+one item to be posted. This is checked internally. If this is not the
+case, the system displays a termination message.
+After you call MB_CREATE_GOODS_MOVEMENT, the EMKPF-SUBRC field is filled
+with the value 1 if items exist. If this is not the case, EMKPF-SUBRC
+contains a value greater than 5, and the relevant messages are noted in
+EMKPF or EMSEG, depending on where the error occurred.
+Table EMSEG contains all required information relating to the items. If
+error messages have been triggered, they are also stored here. After you
+have called MB_CREATE_GOODS_MOVEMENT, error handling must be run in the
+calling application (and, if items are to be corrected or added,
+MB_CREATE_GOODS_MOVEMENT must be called again).
+When all items in the application being used have been processed, the
+system calls function module MB_POST_GOODS_MOVEMENT. If errors occur
+within this function module, the system displays a termination message.
+If there are no more errors, the field EMKPF-SUBRC is initialized.
+After MB_POST_GOODS_MOVEMENT is called, COMMIT WORK is set in the
+program being used.
+The following processing sequence must be guaranteed:
+MB_CREATE_GOODS_MOVEMENT
+MB_POST_GOODS_MOVEMENT
+COMMIT WORK
+If you try to call the function module MB_CREATE_GOODS_MOVEMENT several
+times to generate several material documents without COMMIT WORK, the
+system displays a termination message.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+&FUNCTIONALITY&
+This function module provides the function that can be initiated from
+within the Inventory Management menu using "Cancel material document".
+A reversal with reference to a material document is carried out.
+The calling program must pass on the material document number, the
+material document year, and the posting date to the function module. If
+required, the material document item can also be included. Then only
+this item will be reversed. Specification of a transaction code is
+optional. If a transaction code is passed on, it must be ensured that
+it is included in table T158.
+The material document to be cancelled is read within the function
+module, and the reversal movement type is applied to it. Then the
+general function module used to post goods movements is called up:
+MB_CREATE_GOODS_MOVEMENT.
+The output of the function module contains the structure EMKPF where,
+for example, error codes are returned. Also, tables IMSEG and EMSEG are
+filled and returned to the calling program so that an error log can be
+created there, if required.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+

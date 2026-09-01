@@ -1,0 +1,11 @@
+&FUNCTIONALITY&
+Den Baustein <LS>ME_CCP_ACTIVE_CHECK</> sollten Sie nutzen, um
+festzustellen, ob die CCP-Funktionalität in einem System aktiviert ist
+oder nicht.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

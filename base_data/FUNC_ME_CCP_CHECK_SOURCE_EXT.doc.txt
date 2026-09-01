@@ -1,0 +1,22 @@
+&FUNCTIONALITY&
+Den Baustein <LS>ME_CCP_ACTIVE_CHECK</> sollten Sie nutzen, um
+festzustellen, ob die CCP-Funktionalität in einem System aktiviert ist
+oder nicht.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein prüft Bezugsquellen, ob sie im Rahmen der
+erweiterten Bezugsquellenfindung gültig sind. In diesem Falle werden
+die fehlenden Daten ergänzt, d.h. das beschaffende Werk wird gefüllt.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

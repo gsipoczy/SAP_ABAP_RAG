@@ -1,0 +1,92 @@
+&FUNCTIONALITY&
+This method allows you to release all the items of a purchase
+requisition at once (overall release).
+Release (approval) is necessary if a purchase requisition satisfies the
+conditions specified in a
+<DS:GLOS.release_strategy>release_strategy</>.
+Example: all purchase requisitions whose total value exceeds $10,000
+have to be released.
+The requisition number and the release code must be passed on. The new
+release status and the new release indicator are returned.
+INCLUDE BAPI_RET
+If you wish to release the individual items of a purchase requisition,
+use the method <LS>Release</> of the business object
+<LS>PurchaseReqItem</>.
+&EXAMPLE&
+
+&HINTS&
+The authorization object <DS:UO.M_EINK_FRG>M_EINK_FRG</> is checked.
+&FURTHER_SOURCES_OF_INF&
+For further information, refer to the documentation <LS>MM
+Purchasing</>, section "Release Procedure", and to the Implementation
+Guide (IMG) for Purchasing <DS:SIMG.OLMEOMGQ>Set up release procedure
+with classification</>.
+&FUNCTIONALITY&
+This method allows you to cancel the overall release of purchase
+requisitions. The purchase requisition number and the release code must
+be passed on. The release status and the release indicator valid prior
+to the release are returned.
+INCLUDE BAPI_RET
+If you wish to cancel the release of a purchase requisition item by
+item, use the method <LS>ResetRelease</> of the business object
+<LS>PurchaseReqItem</>.
+&EXAMPLE&
+
+&HINTS&
+The authorization object <DS:UO.M_EINK_FRG>M_EINK_FRG</> is checked.
+&FURTHER_SOURCES_OF_INF&
+For further informationen, refer to the <LS>MM Purchasing</>
+documentation.
+&FUNCTIONALITY&
+You can use this method to release (approve) purchase orders. The PO
+number and the release code must be passed on. The new release status
+and the new release indicator are returned.
+&HINTS&
+The authorization object <DS:UO.M_EINK_FRG>M_EINK_FRG</> is checked.
+&FURTHER_SOURCES_OF_INF&
+For further information, refer to the <LS>MM Purchasing </>
+documentation.
+&FUNCTIONALITY&
+You can use this method to cancel (revoke) already effected releases of
+purchase orders. The PO number and the release code must be passed on.
+The release status and release indicator valid prior to the release are
+returned.
+&HINTS&
+The authorization object <DS:UO.M_EINK_FRG>M_EINK_FRG</> is checked.
+&FURTHER_SOURCES_OF_INF&
+For further information, refer to the <LS>MM Purchasing </>
+documentation.
+&FUNCTIONALITY&
+This method enables you to release (signify approval of) purchase
+requisitions item by item.
+This is necessary if a purchase requisition item satisfies the
+conditions defined in a <DS:GLOS.release_strategy>release strategy</>
+Example: all purchase requisition items with a value exceeding $10,000
+must be released (approved) before they can be issued.
+The requisition number and item and the release code must be passed on.
+The new release status and the new release indicator are returned.
+INCLUDE BAPI_RET
+If you wish to release all the items of a purchase requisition at the
+same time, use the <LS>Release</> method for the business object
+<LS>PurchaseRequisition</>.
+&EXAMPLE&
+
+&HINTS&
+Authorization object <DS:UO.M_EINK_FRG>M_EINK_FRG</> is checked.
+&FURTHER_SOURCES_OF_INF&
+For further information, refer to the <LS>MM Purchasing</>
+documentation (section on release procedure) and the Implementation
+Guide (IMG) for Purchasing (under <DS:SIMG.OLMEOMGQ>Set up release
+procedure with classification</>).
+&FUNCTIONALITY&
+This method can be used to cancel the release (= revoke approval) of
+purchase requisitions. The requisition number/item and the release code
+must be passed on. The release status and the release indicator that
+were valid before the release are then returned.
+&EXAMPLE&
+
+&HINTS&
+Authorization object <DS:UO.M_EINK_FRG>M_EINK_FRG</> is checked.
+&FURTHER_SOURCES_OF_INF&
+For further information, refer to the <LS>MM Purchasing</>
+documentation.

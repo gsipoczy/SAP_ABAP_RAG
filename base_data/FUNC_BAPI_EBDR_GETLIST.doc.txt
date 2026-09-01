@@ -1,0 +1,48 @@
+&FUNCTIONALITY&
+This method enables you to delete external billing document requests
+(EBDRs).
+&HINTS&
+Restrictions
+It is not possible to delete an EBDR if one of the following conditions
+applies:
+It has already been billed
+It has already been billed and reopened for billing (by billing document
+cancellation)
+It has been billed, cancelled, and rejected
+Transfer
+You must transfer the document numbers of the external billing document
+requests that are to be deleted to the method as import parameters.
+Within the BAPI_EBDR_DELETEMULTIPLE, a COMMIT is performed.
+
+Return Messages
+Messages are returned in the exporting parameter ET_MESSAGE and in the
+exporting parameter RETURN.
+A list of EBDR IDs that have been deleted successfully is provided in
+the exporting parameter ET_DELETEDDOCNUMBER.
+A list of EBDR IDs that cannot be deleted is provided in the exporting
+parameter ET_DELETEFAILEDDOCNUMBER.
+
+FU BAPI_EBDR_GETLIST
+____________________________________________________
+Functionality
+This method expects you to provide a list of preceding document numbers
+and the corresponding sender system.
+For these preceding document numbers and the sender system, it will find
+the corresponding list of external billing document request (EBDR)
+document numbers and EBDR document item numbers.
+Notes
+The following authorization objects are checked with activity 03:
+V_VBRK_VKO Billing: Authorization for Sales Organizations
+V_VBRK_FKA Billing: Authorization for Billing Types
+
+Transfer
+You must transfer the document numbers of the preceding documents.
+
+Return Messages
+Messages are returned in the exporting parameter ET_MESSAGE and in the
+exporting parameter RETURN.
+The list of corresponding EBDR document numbers is provided in the
+exporting parameter ET_BDRHEADER.
+The list of corresponding EBDR document item numbers is provided in the
+exporting parameter ET_BDRITEM.
+

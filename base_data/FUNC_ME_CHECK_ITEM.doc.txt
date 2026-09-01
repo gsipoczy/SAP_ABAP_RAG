@@ -1,0 +1,15 @@
+&FUNCTIONALITY&
+Prüft, ob die Bestellposition erzeugt werden kann. Es wird noch nichts
+angelegt.
+
+&EXAMPLE&
+
+&HINTS&
+Es muß entweder genau ein Lieferant oder ein Lieferwerk eingegeben
+werden. Die Eingabe der Bestellart ist optional (Defaulwert: 'NB').
+Das Rücksetzen der internen Strukturen wird beim Lieferantenwechsel
+durchgeführt. Einkaufsorganisation und Buchungskreis werden nur beim
+Wechsel des empfangenden Werks neu ermittelt.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

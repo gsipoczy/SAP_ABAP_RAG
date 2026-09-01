@@ -1,0 +1,25 @@
+&FUNCTIONALITY&
+Die Tabelle der übergebenen Nachrichten wird um zusätzliche Daten
+angereichert: Name und Ort des Partners (bei Kunde, Lieferant und
+Ansprechpartner, bei einem logischem System nur der Name), Bezeichnung
+der Nachrichtenart, Standort bzw. Bezeichnung des Druckers.
+Mit den Parametern PI_NO_PARTNER, PI_NO_MESSAGE_TYPE und PI_NO_PRINTER
+können Teile des Selektion unterdrückt werden.
+Die Daten können für die Tabelle der Listanzeige verwendet werden, wie
+im Baustein WFMC_MESSAGES_PROCESS beschrieben. Zusätzlich gibt es in
+diesem Fall einen gewissen Performanzgewinn (siehe Hinweise).
+&EXAMPLE&
+
+&HINTS&
+Die Daten stehen in den Feldern PNAME, PCITY, MSGNA und PRILO zur
+Verfügung (siehe DDic-Struktur MSG0). Es wird empfohlen den Baustein
+vor Aufruf des Baustein WFMC_MESSAGES_PROCESS aufzurufen, da damit im
+Dialog bei Anzeige der Kommunikation und des Protokolls der Ablauf
+effizienter ist: Nachrichtenname und Druckerstandort müssen dann nicht
+extra gelesen werden.
+&FURTHER_SOURCES_OF_INF&
+Allgemeine Einführung zur Nachrichtensteuerung.
+Dokumentation der Funktionsbausteine WFMC_MESSAGES_SELECT und
+WFMC_MESSAGES_EXTEND.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION

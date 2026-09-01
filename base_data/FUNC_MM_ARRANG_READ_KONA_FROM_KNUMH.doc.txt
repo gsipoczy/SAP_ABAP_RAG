@@ -1,0 +1,132 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein gibt die in der Tabelle 'error_messages'
+gesammelten Fehlermeldungen über Standardbausteine des R/3-Systems als
+PopUP aus. Es besteht die Möglichkeit vorhandene Langtexte anzuwählen.
+Wahlweise kann die Ausgabe der Fehlermeldungen auf einen bestimmten
+Konditionssatz eingeschränkt werden, falls die Tabelle noch weitere
+Daten enthält (Parameter 'only_for_condition_number').
+Fehlermeldungen ohne Konditionssatznummer, d.h. Meldungen auf
+Abspracheebene, werden stets ausgegeben.
+Sollte überhaupt keine Fehlermeldung auszugeben sein, erfolgt keine
+Ausgabe des Bausteines.
+Die Ausgabe der Positionsnummer kann unterdrückt werden (Parameter
+'display_posnr').
+Der Parameter 'title' beeinflußt die Titelüberschrift des PopUp's, der
+Parameter 'variable_key' dient der Zuordnung der Zwischenüberschrift
+zum Konditionssatz.
+&HINTS&
+Bitte beachten:
+Von der sechstelligen Positionsnummer können leider nur die letzten
+drei Ziffern übernommen werden.
+&FURTHER_SOURCES_OF_INF&
+Allgemeine Information zur nachträglichen Abrechnung finden Sie in der
+Online-Dokumentation, in der Report-Dokumentation zu den Reports
+RWMBON01, RWMBON02, RWMBON03, usw., sowie in dem ausführlichen Handbuch
+'Nachträgliche Abrechnung von Konditionen', Bestellnummer 5001 2920.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Dieser Funktionsbaustein gibt die in der Tabelle 'error_messages'
+gesammelten Fehlermeldungen über Standardbausteine des R/3-Systems als
+PopUP aus. Es besteht die Möglichkeit vorhandene Langtexte anzuwählen.
+Wahlweise kann die Ausgabe der Fehlermeldungen auf einen bestimmten
+Konditionssatz eingeschränkt werden, falls die Tabelle noch weitere
+Daten enthält (Parameter 'only_for_condition_number').
+Fehlermeldungen ohne Konditionssatznummer, d.h. Meldungen auf
+Abspracheebene, werden stets ausgegeben.
+Sollte überhaupt keine Fehlermeldung auszugeben sein, erfolgt keine
+Ausgabe des Bausteines.
+Die Ausgabe der Positionsnummer kann unterdrückt werden (Parameter
+'display_posnr').
+Der Parameter 'title' beeinflußt die Titelüberschrift des PopUp's, der
+Parameter 'variable_key' dient der Zuordnung der Zwischenüberschrift
+zum Konditionssatz.
+&HINTS&
+Bitte beachten:
+Von der sechstelligen Positionsnummer können leider nur die letzten
+drei Ziffern übernommen werden.
+&FURTHER_SOURCES_OF_INF&
+Allgemeine Information zur nachträglichen Abrechnung finden Sie in der
+Online-Dokumentation, in der Report-Dokumentation zu den Reports
+RWMBON01, RWMBON02, RWMBON03, usw., sowie in dem ausführlichen Handbuch
+'Nachträgliche Abrechnung von Konditionen', Bestellnummer 5001 2920.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein bestimmt zu einer übergebenen
+Konditionssatznummer 'condition_number' und Positionsnummer
+'condition_kopos' (Default 01) die zugehörige Absprache (nachträgliche
+Abrechnung Einkauf).
+Die Daten der Absprache einschließlich der variablen Schlüssel und
+Konditionssätze (Positionsdaten) werden bereitgestellt Auf Wunsch
+werden auch die Konditionssatzdaten (Kopf) und die Staffeldaten
+bereitgestellt (Parameter header_read und scale_read, Default jeweils
+nein)
+
+arrangement:      Absprachedaten
+variable_key:     Variable Schlüssel
+condition_header: Konditionssätze (Kopfdaten), falls angefordert
+condition_record: Konditionssätze (Positionsdaten)
+condscale:        Staffeldaten, falls angefordert
+In der Kopfzeile des Parameters 'condition_record' steht der gewünschte
+Konditionssatz. Die Köpfe der anderen Tabellen, insbesondere des
+variablen Schlüssels 'variable_key' sind undefiniert.
+Optional können auch die Daten zu einer Absprache mitgegebenen werden.
+Der Baustein prüft dann zunächst, ob die richtigen Daten mitgebenen
+worden sind, d.h. ob der Konditionssatz zu der Absprache gehört.
+Ist dies nicht der Fall, werden die Daten gelöscht. Es wird geprüft, ob
+die zuletzt gelesene Absprache (gepuffert) zu der Konditionssatznummer
+passt (Konditionssatz wurde in der Tabelle 'condition_record'
+übergeben). Erst wenn dies nicht der Fall ist, werden die Absprachdaten
+von der Datenbank geladen.
+Somit ist sichergestellt, daß bei wiederholten Aufrufen mit
+Konditionssatznummern zur selben Absprache, keine unnötigen
+Datenbankzugriffe erfolgen.
+Bitte beachten:
+Werden die Daten aus dem Puffer bereitgestellt, so sind die Zusatzdaten
+Konditionssätze (Kopfdaten) und Staffeldaten nur dann verfügbar, wenn
+bei dem vorherigen Aufruf die beiden Parameter 'header_read' und
+'scale_read' ebenfalls gesetzt waren. Ein Änderung der beiden Parameter
+wird nicht erkannt.
+Exceptions:
+arrangement_not_found: Die Absprachedaten sind nicht in der
+Datenbanktablle vorhanden
+condition_record_not_found: Der Konditionssatz ist nicht in der
+Datenbanktabelle vorhanden
+arrangement_data_invalid: Der Konditionssatz besitzt einen Verweis auf
+die Absprachenummer. Die Daten der Absprache wurden geladen. Der
+Konditionssatz ist jedoch bei den geladenen Konditionssätzen zur
+Absprache nicht vorhanden. Die Absprachedaten sind fehlerhaft/
+inkonsistent.
+&EXAMPLE&
+   data: xkona like kona,
+         xvake like vake occurs 0 with header line,
+         xkonp like konp occurs 0 with header line,
+         condition_number_requested like konp-knumh.
+   call function 'MM_ARRANG_READ_KONA_FROM_KNUMH'
+     exporting
+       condition_number           = condition_number_requested
+       arrangement                = xkona
+     importing
+       arrangement                = xkona
+     tables
+       variable_key               = xvake
+       condition_record           = xkonp
+     exceptions
+       arrangement_not_found      = 01
+       condition_record_not_found = 02
+       arrangement_data_invalid   = 03.
+Zum Konditionssatz mit der Nummer 'condition_number_requested' und
+Position '01' (Default) werden die Absprachedaten gelesen, falls in den
+Strukturen/Tabellen xkona, xvake, xkonp nicht bereits die richtigen
+Daten stehen. Die Konditionssatzdaten (Kopf) und Staffeldaten werden
+nicht bereitgestellt.
+&HINTS&
+Die Tabellen sind nach Ihrem Schlüssel sortiert (binary search !). Die
+Tabelle 'variable_key' ist jedoch nur nach Verwendung (KVEWE, fix für
+die nachträgliche Abrechnung Einkauf) und Konditionstabellennummer
+(KOTABNR) sortiert!
+&FURTHER_SOURCES_OF_INF&
+Allgemeine Information zur nachträglichen Abrechnung finden Sie in der
+Online-Dokumentation, in der Report-Dokumentation zu den Reports
+RWMBON01, RWMBON02, RWMBON03, usw., sowie in dem ausführlichen Handbuch
+'Nachträgliche Abrechnung von Konditionen', Bestellnummer 5001 2920.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

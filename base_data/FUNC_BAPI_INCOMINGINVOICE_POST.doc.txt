@@ -1,0 +1,2216 @@
+&FUNCTIONALITY&
+You can use this method to display complaints data for a reduced
+incoming invoice.
+For automatically reduced invoices, only the invoice header is displayed
+with the reduction amount at header level. For reduced invoice items,
+the invoice header and the reduced items are displayed.
+The data displayed is the same as the data of a complaints letter in
+logistics invoice verification.
+&EXAMPLE&
+
+&HINTS&
+The following authorization object is checked for all reduced invoice
+items with activity <ZK>03</>:
+
+<DS:UO.M_RECH_WRK>M_RECH_WRK</> Plant authorization for entering
+incoming invoices
+
+<DS:UO.M_RECH_BUK>M_RECH_BUK</> Company Code authorization for entering
+incoming invoices
+
+
+In Customizing for Logistics Invoice Verification, message types REKL
+and REK6 are defined for automatic printing of complaints letters and
+sending of IDocs in case of an invoice reduction. BAPI COMPLAIN can be
+called for any reduced invoice, whether or not a message record of
+message type REKL or REK6 exists for it. BAPI COMPLAIN does not change
+the status of the message record. The message record is only updated by
+the <ZK>Output Messages</> function in Logistics Invoice Verification
+(transaction MR90) - for example, set to <ZK>Processed Successfully</>.
+Input parameters
+The key fields of the incoming invoice (InvoiceDocNumber and FiscalYear)
+must be transferred to the method as import parameters.
+Output parameters
+The header data of the incoming invoice is returned in structure
+Headerdata.
+The Addressdata structure contains the address data and tax number(s) of
+the supplier.
+The data for individual reduced invoice items is exported to table
+Itemdata.  The Taxdata table contains the tax information for the
+invoice reduction.
+Return messages
+INCLUDE BAPI_RET OBJECT DOKU ID TX LANGUAGE EN
+&FURTHER_SOURCES_OF_INF&
+This method can only perform its function if no error messages are
+generated in table Return. This is the case if both the header data and
+all the reduced items can be processed correctly.
+For more information, see the parameter documentation.
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2081</> and method <LS>CREATEFORMDATA1</>
+, for BAPI calls using ALE.
+This function module is executed in the source system. To begin with, it
+converts the data from the BAPI parameters into IDoc format. The IDoc is
+then sent to the relevant receivers. The BAPI is then called.
+The interface of this function module contains all output parameters
+from the corresponding BAPI function module
+>>>>DOCULINK<(><<)><(><<)><(><<)><(><<)>
+and also the following parameters, used in the ALE layer:
+
+<LS>SERIAL_ID</>
+This input parameter contains the <DS:DE.CHNUM>channel number</> and is
+used only if serialization is activated.
+<LS>RECEIVERS</>
+This parameter contains the names of <DS:DE.LOGSYS>logical systems</>
+(receivers), where the BAPI is called.
+<LS>COMMUNICATION_DOCUMENTS</>
+This return table contains the name of the logical system in the LOGSYS
+field, the object type in the OBJTYPE field and the object key in the
+OBJKEY field. The table indicates that an object of type <LS>IDOC</> has
+been created with this key and for this logical system.
+<LS>APPLICATION_OBJECTS</>
+This input table contains the objects of applications processed by the
+BAPI call. In the LOGSYS field, enter the name of the logical system
+that the application objects come from. The application objects are
+identified by object type OBJTYP and object key OBJKEY. They are linked
+to the outbound IDocs.
+
+&EXAMPLE&
+
+&FUNCTIONALITY&
+This function module was generated from
+object <LS>BUS2081</> and method <LS>CREATEFORMDATA1</>
+, for BAPI calls using ALE.
+The interface of the module was defined as a standard API in ALE. The
+data is provided by the ALE layer.
+The function module is executed in the inbound system by the ALE layer.
+It converts the data from the IDoc into BAPI parameters and calls the
+BAPI in the inbound system. For more information about this BAPI, see
+>>>>DOCULINK<(><<)><(><<)><(><<)><(><<)>.
+When this module is executed, a new IDoc status is written. This status
+indicates either that the BAPI was called successfully in this system
+(status 53) or that errors occurred (status 51).
+BAPI return parameters specify how the ALE layer writes the IDoc status.
+If errors occur, the ALE layer is responsible. How the BAPI return
+parameters work:
+
+If the BAPI return parameter is an EXPORTING parameter, one single IDoc
+status record is written. If the message has type A or E, the IDoc is
+given status 51 (application document not posted). Otherwise (for
+message types W, I, or S), the IDoc is given status 53 (application
+document posted).
+
+If the return parameter is a tables parameter, multiple IDoc status
+records can be written. Message types determine the IDoc status. If a
+message has type A or E in the table, status 51 is written for the IDoc
+(application document not posted) for all entries except those with the
+type S (entries with types A, E, W, or I). For messages with type 'S',
+no IDoc status appears. If a message in the table has type 'A' or 'E',
+status '53' (application document posted) is written for 'W', 'I' or
+'S'. The status records are written to the database in the same sequence
+as the messages in the return parameter.
+
+If the return parameter is empty, the BAPI call was successful. In this
+case, an IDoc status record with status 53 (application document posted)
+is written by the ALE layer.
+If errors occur, the application must ensure that the data is
+consistent, for example by rolling back unwanted changes.
+You can use the ALE error handling functions (create a work item) to
+process any errors.
+&FUNCTIONALITY&
+With this method, you can create a reversal document by entering the
+original document.
+&EXAMPLE&
+
+&HINTS&
+The system checks the following authorization object with activity 01:
+
+<DS:UO.M_RECH_WRK>M_RECH_WRK</> Plant Authorization for Entering
+Invoices
+
+<DS:UO.M_RECH_BUK>M_RECH_BUK</> Company Code Authorization for Entering
+Invoices
+<ZH>Transfer</>
+You have to pass on to the method the key fields of the invoice
+(InvoiceDocNumber and FiscalYear) and the reversal reason as import
+parameters. You have the option of entering the posting date for the
+reversal.
+<ZH>Return</>
+The document number and the document year of the reversal document are
+returned in the export parameters <LS>InvoiceDocNumber</> and
+<LS>FiscalYear</>.
+<ZH>Return messages</>
+INCLUDE BAPI_RETURN
+&FURTHER_SOURCES_OF_INF&
+The methods can only perform their function if no error messages are
+created in the <LS>Return</> table. This is the case if the system was
+able to process the header data and all items without any errors.
+No transaction control is implemented. That means that the caller has to
+perform the 'Commit Work' itself after successfully invoking this method
+(that is, if no errors are reported to the caller in the <LS>Return</>
+parameter).
+&FUNCTIONALITY&
+You can use this method to create and post incoming invoices.
+When passing on the header data, you use the <LS>INVOIC_IND</> field to
+determine whether the system posts a credit memo or an invoice. If you
+leave the field <LB>initial</>, the system posts a credit memo. If you
+enter an <LB>X</>, the system posts an invoice.
+If you want to enter an invoice for a returns order, you must leave the
+<LS>INVOICE_IND</> field initial.
+As in the online transaction, the system updates the purchase order
+history and stock valuation data in Materials Management. The system
+creates accounting documents in Accounting.
+You can use this method to:
+Enter and post invoices with multiple account assignment
+Change the account assignment of invoices, add account assignments, and
+post the invoices
+Enter invoices for blanket purchase orders
+Enter and post invoices for purchase orders containing planned delivery
+costs
+Enter and post invoices containing unplanned delivery costs
+Enter and post subsequent debits/credits
+Use document types with external number ranges
+Enter and post invoices with withholding tax
+Enter and post invoices with several vendor line items and different
+methods and terms of payment
+Enter and post invoices for returns orders
+Enter and post invoices for transportation service providers
+Enter and post invoices for external service orders
+Post to G/L accounts
+Post to assets
+Post to material accounts
+Enter and post invoices for a one-time supplier
+Create and post invoices with a different payee
+IF &[SWITCH]MM_SFWS_DINV_02& = 'X'.
+Create and post provisional/differential invoices and final invoices in
+the context of differential invoicing
+ENDIF.
+<ZH>Constraints</>
+The following fields in Financial Accounting are not passed on:
+ISR subscriber number (ISR = inpayment slip with reference number)
+Bank details
+Payment reference
+Short key for house bank
+&HINTS&
+The following authorization object is checked using activity 01:
+
+<DS:UO.M_RECH_WRK>M_RECH_WRK</>: Authorization to create invoices in
+certain plants
+
+<DS:UO.M_RECH_BUK>M_RECH_BUK</>: Authorization to create invoices in
+certain company codes
+<ZH>Input parameters</>
+You use the structure
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   HEADERDATA>HeaderData</> to pass
+on the header data of the incoming invoice.
+IF &[SWITCH]MM_SFWS_DINV_02& = 'X'.
+For differential invoicing, you use the header data to specify which
+transaction (<LS>Provisional/Differential Invoice</> or <LS>Final
+Invoice</> is created. You can either create an invoice item only, or,
+in accordance with the two-line concept, you can create an invoice item
+and a credit memo item. The system performs invoice verification in line
+with differential invoicing.
+ENDIF.
+You pass on the address data of a one-time supplier or a different
+invoice payee with the structure
+     <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ADDRESSDATA>AddressData</>.
+The tables
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ITEMDATA>ItemData</> and
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ACCOUNTINGDATA>AccountingData</>
+contain the item data of the incoming invoice. The
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   TAXDATA>TaxData</> table contains
+the tax information for the incoming invoice.
+IF &[SWITCH]MM_SFWS_DINV_02& = 'X'.
+If you use the two-line concept for differential invoicing, you define
+the relationship between the invoice item and the credit memo item in
+the <LS>ItemData</> table.
+ENDIF.
+The
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   GLACCOUNTDATA>GlAccountData</>
+table contains data for posting to a G/L account, the
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   MATERIALDATA>MaterialData</> table
+contains data for posting to a material account, and the
+   <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ASSETDATA>AssetData</> table
+contains data for posting to an asset.
+You can use the
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   WITHTAXDATA>WithTaxData</> table
+to pass on withholding tax information.
+You can use the
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   VENDORITEMSPLITDATA>VendorItemSpli
+tData</> table to distribute the gross amount among several vendor line
+items with different methods and terms of payment.
+<ZH>Output parameters</>
+The document number of the invoice document and the fiscal year are
+returned by the system as key fields of the incoming invoice.
+<ZH>Return messages</>
+INCLUDE BAPI_RET OBJECT DOKU ID TX LANGUAGE EN
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF OBJECT DOKU ID TX LANGUAGE EN
+Example: Incoming Invoice
+This example shows the header data that you need to enter in the
+<LS>HeaderData</> table, and the item data that you need to enter in the
+<LS>Itemdata</> table to post an invoice.
+Purchase Order: 10 pc of material A @ 10 USD
+Goods receipt: 10 pc of material A
+For this purchase order, you receive an incoming invoice referencing PO
+number 4500007491, PO item 10, for a quantity of 10 pc of material A and
+an amount of 116 USD incl. 16% VAT. You enter the following data:
+<ZH>HeaderData table</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_DATE (document date): 20.05.2000
+PSTNG_DATE (Posting date): 23.05.2000
+COMP_CODE (company code): 1000
+GROSS_AMOUNT (Gross amount): 116,00
+CURRENCY (currency key): USD
+CALC_TAX_IND (calculate tax): X
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500007491
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): VN
+ITEM_AMOUNT (Item amount): 100
+QUANTITY (Quantity): 10
+PO_UNIT (Unit of measure): pc
+For more information, see the parameter documentation for the
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   HEADERDATA>HeaderData</> and
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ITEMDATA>ItemData</> tables.
+Example: Incoming invoice with foreign currency, GR-based invoice
+verification, and tax information
+This example specifies the header data that you need to enter in the
+<LS>HeaderData</> table, the item data that you need to enter in the
+<LS>Itemdata</> table, and the tax information that you need to enter in
+the <LS>TaxData</>table, in order to post an invoice in a foreign
+currency.
+Purchase Order: 10 pc of material A @ 10.00 USD
+Goods receipt 1: 4 pc of material A
+Goods receipt 2: 6 pc of material A
+For this purchase order, you receive an incoming invoice referencing PO
+no. 4500007505, PO item 10, goods receipt document 50010095, 2000, item
+1. A quantity of 4 pc of material A and a gross amount of 46.60 USD and
+16% tax (6.60 USD) is invoiced. You enter the following data:
+<ZH>HeaderData table</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_DATE (document date): 20.05.2000
+PSTNG_DATE (Posting date): 23.05.2000
+COMP_CODE (company code): 1000
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 46,60
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500007505
+PO_ITEM (Purchase order item): 00010
+REF_DOC (GR document): 50010095
+REF_DOC_YEAR (fiscal year of current period): 2000
+REF_DOC_ITEM (Item in a GR document): 1
+TAX_CODE (Tax code): VN
+ITEM_AMOUNT (Item amount): 40,00
+QUANTITY (Quantity): 4
+PO_UNIT (Unit of measure): pc
+<ZH>TaxData table</>
+TAX_CODE (tax code): VN
+TAX_AMOUNT (tax amount in document currency): 6,60
+For more information, see the parameter documentation for the
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ITEMDATA>ItemData</>, and
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   TAXDATA>TaxData</> tables.
+Example: Incoming invoice for blanket purchase order
+This invoice shows which header data you need to enter in the
+<LS>HeaderData</> table, which item data you need to enter in the
+<LS>ItemData</> table, and which account assignment data you need to
+enter in the <LS>AccountingData</> table, in order to post an incoming
+invoice for a blanket purchase order.
+You receive an incoming invoice in respect of the blanket purchase order
+4500015172, item 10 for an amount of $110 including 10% VAT. You want to
+distribute the invoice amount between cost centers 1200 and 1500. Enter
+the following data:
+<ZH>HeaderData table</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_DATE (document date): 19.02.2001
+PSTNG_DATE (Posting date): 21.02.2001
+COMP_CODE (company code): 1000
+GROSS_AMOUNT (Gross amount): 110,00
+CURRENCY (currency key): USD
+CALC_TAX_IND (calculate tax): X
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500015172
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Item amount): 100
+<ZH>AccountingData table</>
+<ZH>Line 1: Change account assignment item</>
+INVOICE_DOC_ITEM (Document item in invoice document): 0001
+SERIAL_NO (Serial number for the account assignment): 01
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Amount in document currency): 30,00
+GL_ACCOUNT (G/L account number): 890000
+COSTCENTER (Cost center): 1200
+<ZH>Line 2: Add unplanned account assignment</>
+INVOICE_DOC_ITEM (Document item in invoice document): 0001
+XUNPL (Unplanned account assignment from Invoice Verification): X
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Amount in document currency): 70,00
+GL_ACCOUNT (G/L account number): 890000
+COSTCENTER (Cost center): 1500
+In the case of the blanket purchase order, the following fields for
+quantities and units of measure must not be populated in the
+<LS>ItemData</> and AccountingData<LS>AccountingData</> tables:
+Quantity (QUANTITY)
+PO_UNIT (PO unit of measure)
+PO_UNIT_ISO (PO unit of measure in ISO code)
+PO_PR_QNT (Quantity in PO price unit)
+PO_PR_UOM (PO price unit)
+PO_PR_UOM_ISO (PO price unit)
+More information is available in the parameter documentation for the
+HeaderData,
+     <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ITEMDATA>ItemData</>, and
+     <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ACCOUNTINGDATA>AccountingData
+</> tables.
+Example: Change account assignments and add unplanned ones
+This example shows the header data that you need to enter in the
+<LS>HeaderData</> table, the item data that you need to enter in the
+<LS>Itemdata</> table, and the account assignment information that you
+need to enter in the <LS>AccountingData</> table, in order to change,
+add, and post account assignments for an invoice. If you want to change
+or add account assignments, there must be a non-valuated goods receipt
+or no goods receipt in the system. GR-based invoice verification takes
+place.
+Purchase Order: 300 pc of material A @ 1.00 USD
+Goods receipt: 300 pc of material A
+For this purchase order with multiple account assignments, you receive
+an incoming invoice referencing PO number 4500006846, PO item 10, GR
+document 50008849, 2000, item 1. The quantity invoiced is 100 pc of
+material A, for a gross amount of 116.00 USD including 16% VAT. You want
+to change the planned account assignment for the second account
+assignment object and add an unplanned account assignment. You enter the
+following data:
+<ZH>HeaderData table</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_DATE (document date): 05.08.2000
+PSTNG_DATE (Posting date): 08.08.2000
+COMP_CODE (company code): 1000
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 17,40
+CALC_TAX_IND (Automatically calculate tax): X
+PMNTTRMS (Payment terms key): 0001
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500006846
+PO_ITEM (Purchase order item): 00010
+REF_DOC (GR document): 500008849
+REF_DOC_YEAR (fiscal year of current period): 2000
+REF_DOC_ITEM (Item in a GR document): 1
+TAX_CODE (Tax code): VN
+ITEM_AMOUNT (Item amount): 100
+QUANTITY (Quantity): 100
+PO_UNIT (Unit of measure): pc
+<ZH>AccountingData table</>
+<ZH>Line 1: Change second account assignment item</>
+INVOICE_DOC_ITEM (Document item in invoice document): 0001
+SERIAL_NO (Serial number for the account assignment): 02
+TAX_CODE (Tax code): VN
+ITEM_AMOUNT (Amount in document currency): 10,00
+QUANTITY (Quantity): 10
+PO_UNIT (purchase order unit): pc
+GL_ACCOUNT (G/L account number): 890000
+COSTCENTER (Cost center): 1200
+<ZH>Line 2: Add unplanned account assignment</>
+INVOICE_DOC_ITEM (Document item in invoice document): 0001
+XUNPL (Unplanned account assignment from Invoice Verification): X
+TAX_CODE (Tax code): VN
+ITEM_AMOUNT (Amount in document currency): 5,00
+QUANTITY (Quantity): 5
+PO_UNIT (purchase order unit): pc
+GL_ACCOUNT (G/L account number): 890000
+COSTCENTER (Cost center): 1200
+More information is available in the parameter documentation for the
+HeaderData,
+     <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ITEMDATA>ItemData</>, and
+     <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ACCOUNTINGDATA>AccountingData
+</> tables.
+Example: Incoming invoice with planned delivery costs
+This example shows the header data that you need to enter in the
+<LS>HeaderData</> table, the item data that you need to enter in the
+<LS>ItemData</> table, and the tax information that you need to enter in
+table <LS>TaxData</> to post an invoice containing planned delivery
+costs.
+Purchase Order: 100 pc of material A @ 1.00 USD
+Goods receipt: 100 pc of material A
+For this purchase order, you receive an incoming invoice referencing PO
+no. 4500006986, PO item 10, for a quantity of 100 pc of material A and
+an amount of 136.00 USD incl. 16% VAT and 20.00 USD planned delivery
+costs. You enter the following data:
+<ZH>HeaderData table</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_DATE (document date): 10.08.2000
+PSTNG_DATE (Posting date): 12.08.2000
+COMP_CODE (company code): 1000
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 136,00
+<ZH>ItemData table</>
+<ZH>Line 1: Posting the purchase order item</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500006986
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (tax code): VN
+ITEM_AMOUNT (Item amount): 100,00
+QUANTITY (Quantity): 100
+PO_UNIT (Unit of measure): pc
+<ZH>Line 2: Posting the planned delivery costs</>
+INVOICE_DOC_ITEM (Invoice document item): 00002
+PO_NUMBER (purchase order number): 4500006986
+PO_ITEM (Purchase order item): 00010
+ITEM_AMOUNT (Item amount): 20,00
+QUANTITY (Quantity): 100
+PO_UNIT (Unit of measure): pc
+COND_TYPE (condition type): FRB1
+<ZH>TaxData table</>
+TAX_CODE (tax code): VN
+TAX_AMOUNT (tax amount in document currency): 16,00
+For more information, see the parameter documentation for the
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ITEMDATA>ItemData</>, and
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   TAXDATA>TaxData</> tables.
+Example: Incoming invoice with withholding tax
+This example shows which header data you can enter in the <LS>HeaderData
+</> table, which item data you can enter in the <LS>Itemdata</> table,
+and which withholding tax information you can enter in the
+<LS>WithTaxData</> table, in order to park an incoming invoice with
+withholding tax.
+Purchase Order: 10 pc of material A @ 10.00 USD
+Goods receipt: 10 pc of material A
+For this purchase order, you receive an incoming invoice referencing PO
+no. 4500007505, PO item 10, goods receipt document 50010095, 2000, item
+1. A quantity of 10 pc and a gross amount of 100.00 USD is invoiced. You
+have to pay 10% withholding tax on the gross amount. Enter the following
+data:
+<ZH>HeaderData table</>
+INVOICE_IND (invoice/credit memo): X
+DOC_DATE (document date): 20.05.2000
+PSTNG_DATE (Posting date): 23.05.2000
+COMP_CODE (company code): WT01
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 100,00
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500007505
+PO_ITEM (Purchase order item): 00010
+REF_DOC (GR document): 50010095
+REF_DOC_YEAR (fiscal year of current period): 2000
+REF_DOC_ITEM (Item in a GR document): 1
+TAX_CODE (Tax code): V0
+ITEM_AMOUNT (Item amount): 100,00
+QUANTITY (Quantity): 10,00
+PO_UNIT (Unit of measure): pc
+<ZH>WithTaxData table</>
+SPLIT_KEY (grouping key for splitting withholding tax): 0001
+WI_TAX_TYPE (indicator for withholding tax type): R1
+WI_TAX_CODE (Withholding tax indicator): 01
+WI_TAX_BASE (Withholding tax base amount): 100
+WI_TAX_AMT (withholding tax amount in document currency): 10,00
+For more information, see the parameter documentation for the
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ITEMDATA>ItemData</> and
+<DS:FU.BAPI_INCOMINGINVOICE_CREATE   WITHTAXDATA>WithTaxData</> tables.
+Example: Incoming invoice with amount split
+This example shows which header data you enter in the <LS>HeaderData</>
+table, which item data you enter in the <LS>Itemdata</> table, and which
+information you enter in the <LS>VendorItemSplitData</> table, in order
+to generate an incoming invoice with an amount split.
+Purchase Order: 10 pc of material A @ 10.00 USD
+Goods receipt: 10 pc of material A
+For this purchase order, you receive an incoming invoice referencing PO
+no. 4500007505, PO item 10, goods receipt document 50010095, 2000, item
+1. A quantity of 10 pc and a gross amount of 100.00 USD is invoiced. You
+want to distribute the gross amount between two vendor line items. 40%
+of the gross amount is to be paid immediately by check, and 60% of the
+gross amount is to be paid within 14 days, taking into account a 3% cash
+discount. You enter the following data:
+<ZH>HeaderData table</>
+INVOICE_IND (invoice/credit memo): X
+DOC_DATE (document date): 20.05.2000
+PSTNG_DATE (Posting date): 23.05.2000
+COMP_CODE (company code): 0001
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 100,00
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500007505
+PO_ITEM (Purchase order item): 00010
+REF_DOC (GR document): 50010095
+REF_DOC_YEAR (fiscal year of current period): 2000
+REF_DOC_ITEM (Item in a GR document): 1
+TAX_CODE (Tax code): V0
+ITEM_AMOUNT (Item amount): 100,00
+QUANTITY (Quantity): 10,00
+PO_UNIT (Unit of measure): pc
+<ZH>VendorItemSplitData table</>
+<ZH>Vendor line item 1</>
+SPLIT_KEY (Grouping key for splitting of vendor line item): 0001
+SPLIT_AMOUNT (partial invoice amount in document currency): 40,00
+PYMT_METH (payment method): S
+TAX_CODE (tax code): V0
+PMNTTRMS (Payment terms key): 0001
+<ZH>Vendor line item 2</>
+SPLIT_KEY (Grouping key for splitting of vendor line item): 0002
+SPLIT_AMOUNT (partial invoice amount in document currency): 60,00
+PYMT_METH (payment method): U
+TAX_CODE (tax code): V0
+PMNTTRMS (Payment terms key): 0003
+For more information, see the parameter documentation for the
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ITEMDATA>ItemData</> and
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   VENDORITEMSPLITDATA>
+VendorItemSplitData</> tables.
+Example: Incoming invoice with G/L and material account posting.
+This example shows you which header data you have to provide in order to
+enter and post an incoming invoice (header data in the <LS>HeaderData</>
+table, item data in the <LS>ItemData</> table, G/L account information
+in the <LS>GlAccountData</> table, and material account information in
+the <LS>MaterialData</> table).
+You receive an invoice referencing PO no. 4500006846, PO item 10. A
+quantity of 100 pc of material A for a gross amount of 150.80 USD
+including 16% VAT is invoiced. This includes a G/L account posting of 10
+USD to account 400000 in company code 1, and a material account posting
+of 20 USD to the material MAT01. You enter the following data:
+<ZH>HeaderData table</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_DATE (document date): 05.08.2000
+PSTNG_DATE (Posting date): 08.08.2000
+COMP_CODE (company code): 1000
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 150,80
+CALC_TAX_IND (Automatically calculate tax): X
+PMNTTRMS (Payment terms key): 0001
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500006846
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): VN
+ITEM_AMOUNT (Item amount): 100
+QUANTITY (Quantity): 100
+PO_UNIT (Unit of measure): pc
+<ZH>GlAccountData table</>
+INVOICE_DOC_ITEM (Document item in invoice document): 00001
+GL_ACCOUNT (G/L account): 400000
+ITEM_AMOUNT (Item amount): 10,00
+DB_CR_IND (Debit/credit indicator): S
+COMP_CODE (company code): 0001
+TAX_CODE (Tax code): VN
+COSTCENTER (Cost center): 1
+<ZH>MaterialData table</>
+INVOICE_DOC_ITEM (Document item in invoice document): 0001
+MATERIAL (Material): MAT01
+PLANT (Valuation area): 0001
+DB_CR_INP (Debit/credit indicator): S
+ITEM_AMOUNT (Item amount): 10,00
+QUANTITY (MENGE_D): 1
+PO_UNIT (purchase order unit): pc
+TAX_CODE (Tax code): VN
+More information is available in the parameter documentation for the
+tables HeaderData,
+     <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ITEMDATA>ItemData</>,
+     <DS:FU.BAPI_INCOMINGINVOICE_CREATE   GLACCOUNTDATA>GlAccountData</>
+and
+     <DS:FU.BAPI_INCOMINGINVOICE_CREATE   MATERIALDATA>MaterialData</>.
+Example: Incoming invoice for a purchase order for external services and
+service-based invoice verification
+This example shows which header data you must enter in the
+<LS>HeaderData</> table, which item data you must enter in the <LS>ItemD
+ata</> table, and which account assignment data you must enter in the
+<LS>AccountingData</> table in order to enter and post an incoming
+invoice.
+You receive an invoice referencing PO no. 4500000191, PO item 10. The
+invoice is for two services A and B, each with a quantity of six service
+units. Service A has a gross amount of 580 USD incl. 16% VAT. Service B
+has 812 USD including 16% VAT. 50% of service A was assigned to each of
+the cost centers 1000 and 2000. 50% of service B was assigned to each of
+the cost centers 1000 and 3000. The service acceptance is performed
+jointly for both services with the service entry sheet number
+1000000022. The account assignments cannot be changed. You enter the
+following data:
+<ZH>HeaderData table</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_TYPE (Document type): RE
+DOC_DATE (document date): 10.01.2002
+PSTNG_DATE (Posting date): 10.01.2002
+COMP_CODE (company code): 0001
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 1392,00
+CALC_TAX_IND (Automatically calculate tax): X
+PMNTTRMS (Payment terms key): 0001
+<ZH>ItemData table</>
+<ZH>First entry for service A:</>
+INVOICE_DOC_ITEM (Invoice document item): 000001
+PO_NUMBER (purchase order number): 4500000191
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Item amount): 250,00
+QUANTITY (Quantity): 3
+PO_UNIT (Unit of measure): SU
+SHEET_NO (Entry sheet number): 1000000022
+SHEET_ITEM (Line number) : 10
+<ZH>Second entry for service A:</>
+INVOICE_DOC_ITEM (Invoice document item): 000002
+PO_NUMBER (purchase order number): 4500000191
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Item amount): 250,00
+QUANTITY (Quantity): 3
+PO_UNIT (Unit of measure): SU
+SHEET_NO (Entry sheet number): 1000000022
+SHEET_ITEM (Line number) : 10
+<ZH>First entry for service B:</>
+INVOICE_DOC_ITEM (Invoice document item): 000003
+PO_NUMBER (purchase order number): 4500000191
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Item amount): 350,00
+QUANTITY (Quantity): 3
+PO_UNIT (Unit of measure): SU
+SHEET_NO (Entry sheet number): 1000000022
+SHEET_ITEM (Line number) : 20
+<ZH>Second entry for service B:</>
+INVOICE_DOC_ITEM (Invoice document item): 000004
+PO_NUMBER (purchase order number): 4500000191
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Item amount): 350,00
+QUANTITY (Quantity): 3
+PO_UNIT (Unit of measure): SU
+SHEET_NO (Entry sheet number): 1000000022
+SHEET_ITEM (Line number) : 20
+<ZH>AccountingData table</>
+<ZH>First account assignment for service A:</>
+INVOICE_DOC_ITEM (Document item in invoice document): 000001
+SERIAL_NO (Serial number for the account assignment): 01
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Amount in document currency): 250,00
+QUANTITY (Quantity): 3
+PO_UNIT (purchase order unit): SU
+<ZH>Second account assignment for service A:</>
+INVOICE_DOC_ITEM (Document item in invoice document): 000002
+SERIAL_NO (Serial number for the account assignment): 02
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Amount in document currency): 250,00
+QUANTITY (Quantity): 3
+PO_UNIT (purchase order unit): SU
+<ZH>First account assignment for service B:</>
+INVOICE_DOC_ITEM (Document item in invoice document): 000003
+SERIAL_NO (Serial number for the account assignment): 01
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Amount in document currency): 350,00
+QUANTITY (Quantity): 3
+PO_UNIT (purchase order unit): SU
+<ZH>Second account assignment for service B:</>
+INVOICE_DOC_ITEM (Document item in invoice document): 000004
+SERIAL_NO (Serial number for the account assignment): 03
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Amount in document currency): 350,00
+QUANTITY (Quantity): 3
+PO_UNIT (purchase order unit): SU
+More information is available in the parameter documentation for the
+HeaderData,
+     <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ITEMDATA>ItemData</>, and
+     <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ACCOUNTINGDATA>AccountingData
+</> tables.
+Example: Incoming invoice for a one-time supplier
+This example shows you how to proceed in order to enter and post an
+invoice for a one-time supplier.
+It is not necessary to populate the <LS>AddressData</> table. If you do
+not enter data in the <LS>AddressData</> table, the address data for the
+one-time supplier is adopted into the invoice 1:1 from the purchase
+order.
+If you use table <LS>AddressData</> to transfer data, the address data
+for the one-time supplier is read from the purchase order into the
+invoice and is then either overwritten or supplemented by the fields of
+table <LS>AddressData</>.
+In the purchase order for the one-time supplier, the name is 'SAP AG',
+the postal code is '60000', and the street and building number are
+'Neurottstrasse 16'. You receive an invoice with the one-time supplier
+address as follows: Name 'SAP AG', postal code '69190', and place
+'Walldorf'. Enter the following data:
+<ZH>AddressData table</>
+ACC_1_TIME (Indicator for one-time supplier): X
+NAME (Name): SAP AG
+POSTL_CODE (Postal code): 69190
+CITY (Place): Walldorf
+The invoice is posted with the following one-time supplier address data:
+Name 'SAP AG', street and building number 'Neurottstrasse 16', postal
+code '69190', place 'Walldorf'.
+For more information, see the parameter documentation for the table
+AddressData.
+Example: Incoming invoice for different payee
+This example shows you which address data you must enter in the
+<LS>AddressData</> table in order to enter and post an invoice for a
+different payee.
+You receive an invoice for the different payee with the name 'SAP AG',
+postal code '69190', place 'Walldorf', bank number '38070724', and
+account number '4711'. Enter the following data:
+<ZH>AddressData table</>
+ACC_1_TIME (Indicator for one-time supplier): ' '
+NAME (Name): SAP AG
+POSTL_CODE (Postal code): 69190
+CITY (Place): Walldorf
+BANK_NO (Bank number): 38070724
+BANK_ACCT (Bank account number): 4711
+For more information, see the parameter documentation for table
+AddressData.
+IF &[SWITCH]MM_SFWS_DINV_02& = 'X'.
+Example: Provisional Invoice / Differential Invoice as Part of
+Differential Invoicing
+This example shows you which header data you must enter into the
+<LS>HeaderData</> table and which item data you must enter into the
+<LS>ItemData</> table to enter and post the first transaction first
+(provisional invoice / differential invoice) followed by the second
+transaction (provisional invoice / differential invoice).
+You receive an invoice item that contains a reference to purchase order
+number 4500000756 and to goods receipt document 5000000967 from year
+2012, item 0001.
+Note: If an item has multiple account assignment, enter each part of the
+related data into the <LS>AccountingData</> structure in the same way as
+for the standard incoming invoice.
+<ZH>Posting the first transaction: Provisional invoice / differential
+invoice</>
+<ZH>HeaderData table</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_DATE (document date): 11.01.2012
+PSTNG_DATE (Posting date): 11.01.2012
+COMP_CODE (company code): 0001
+CURRENCY_ISO (ISO code currency): USD
+GROSS_AMOUNT (Gross amount): 102.000,000
+INV_TRAN (Transaction in Logistics Invoice Verification): 8
+Note: If you enter 7 as the value, you create a final invoice instead of
+a provisional invoice / differential invoice. If you do not enter a
+value, you create an invoice.
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 000001
+PO_NUMBER (purchase order number): 4500000756
+PO_ITEM (Purchase order item): 00010
+REF_DOC (Document number of a reference document): 5000000967
+REF_DOC_YEAR (fiscal year of current period): 2012
+REF_DOC_IT (Item of a reference document): 0001
+TAX_CODE (tax code): V0
+ITEM_AMOUNT (Item amount): 102.000,0000
+QUANTITY (Quantity): 2,000
+PO_UNIT (purchase order unit): TO
+INV_RELATION: <Blank>
+<ZH>TaxData table</>
+TAX_CODE (tax code):
+Execute the BAPI method: The system creates an invoice item for the
+first transaction (provisional invoice / differential invoice).
+<ZH>Posting the second transaction: Provisional invoice / differential
+invoice</>
+<ZH>HeaderData table</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_DATE (document date): 11.01.2012
+PSTNG_DATE (Posting date): 11.01.2012
+COMP_CODE (company code): 0001
+CURRENCY_ISO (ISO code currency): USD
+GROSS_AMOUNT (Gross amount): 6,0000
+INV_TRAN (Transaction in Logistics Invoice Verification): 8
+<ZH>ItemData table</>
+<ZH>Line 1: Data in the invoice item</>
+INVOICE_DOC_ITEM (Invoice document item): 000001
+PO_NUMBER (purchase order number): 4500000756
+PO_ITEM (Purchase order item): 00010
+REF_DOC (Document number of a reference document): 5000000967
+REF_DOC_YEAR (fiscal year of current period): 2012
+REF_DOC_IT (Item of a reference document): 0001
+TAX_CODE (tax code): V0
+ITEM_AMOUNT (Item amount): 102.006,0000
+QUANTITY (Quantity): 2,000
+PO_UNIT (purchase order unit): TO
+INV_RELATION: <Blank>
+INV_ITM_ORIGIN: A
+If you only want to create one line for the invoice item, this first
+data record is sufficient.
+If you want to create an invoice item and a credit memo item in
+accordance with the two-line concept, enter a separate data record with
+a different item amount (ITEM_AMOUNT field):
+<ZH>Line 2: Data in the credit memo item</>
+INVOICE_DOC_ITEM (Invoice document item): 000002
+PO_NUMBER (purchase order number): 4500000756
+PO_ITEM (Purchase order item): 00010
+REF_DOC (Document number of a reference document): 5000000967
+REF_DOC_YEAR (fiscal year of current period): 2012
+REF_DOC_IT (Item of a reference document): 0001
+TAX_CODE (tax code): V0
+ITEM_AMOUNT (Item amount): 102.000,0000
+QUANTITY (Quantity): 2,000
+PO_UNIT (purchase order unit): TO
+INV_RELATION: 000001 (Value of INVOICE_DOC_ITEM of the invoice item)
+INV_ITM_ORIGIN: B
+<ZH>TaxData table</>
+TAX_CODE (tax code):
+Execute the BAPI method: The system creates an invoice item and a credit
+memo item for the second transaction (provisional invoice / differential
+invoice).
+Note: You can call the provisional invoice / differential invoice from
+the purchase order history of the related purchase order.
+ENDIF.
+&FUNCTIONALITY&
+You can use this method to display detail data from an incoming invoice.
+&EXAMPLE&
+
+&HINTS&
+The following authorization object is checked with activity 03:
+
+<DS:UO.M_RECH_WRK>M_RECH_WRK</> Plant authorization for entering
+incoming invoices
+
+<DS:UO.M_RECH_BUK>M_RECH_BUK</> Company Code authorization for entering
+incoming invoices
+
+Input parameters
+The key fields of the incoming invoice (<ZK>InvoiceDocNumber</> and
+<ZK>FiscalYear</>) must be transferred to the method as import
+parameters.
+Output parameters
+The header data for the incoming invoice is returned in the
+<LS>HeaderData</> structure.
+The <LS>AddressData</> structure contains the address data of a one-time
+supplier or a different payee.
+The data for the individual invoice items is exported in the
+<LS>ItemData</> and <LS>AccoutingData</> tables. The <LS>TaxData</>
+table contains the tax information in the invoice.
+The <LS>GlAccountData</> table contains data for posting to a G/L
+account, the <LS>MaterialData</> table contains the data for posting to
+a material account, and the <LS>AssetData</> table contains the data for
+posting to an asset.
+The <LS>WithTaxData</> table is used to return the withholding tax
+information.
+The <LS>VendorItemSplitData</> table contains data if you distribute the
+gross amount across several supplier lines with different payment
+methods and terms of payment
+
+IF &[SWITCH]MM_SFWS_TM& = 'X'.
+The BAPI_TM_DATA table allows you to transfer data from documents that
+come from a transportation management system to the corresponding
+incoming invoice document or to the relevant invoice item.
+ENDIF.
+Return messages
+INCLUDE BAPI_RET OBJECT DOKU ID TX LANGUAGE EN
+&FURTHER_SOURCES_OF_INF&
+The method can only perform its function if no error messages were
+generated in the <LS>Return</> table. This is the case if it was
+possible to process the header data and all items without errors.
+For more information, see the following parameter documentation:
+         <DS:FU.BAPI_INCOMINGINVOICE_GETDETAILADDRESSDATA>AddressData</>
+,
+        <DS:FU.BAPI_INCOMINGINVOICE_GETDETAILITEMDATA>ItemData</>,
+        <DS:FU.BAPI_INCOMINGINVOICE_GETDETAILGLACCOUNTDATA>GlAccountData
+</>,
+       <DS:FU.BAPI_INCOMINGINVOICE_GETDETAILMATERIALDATA>MaterialData</>
+,
+       <DS:FU.BAPI_INCOMINGINVOICE_GETDETAILASSETDATA>AssetData</>,
+       <DS:FU.BAPI_INCOMINGINVOICE_GETDETAILWITHTAXDATA>WithTaxData</>,
+and
+       <DS:FU.BAPI_INCOMINGINVOICE_GETDETAILVENDORITEMSPLITDATA>
+VendorItemSplitData</>.
+Further information is available in the method
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE>CreateFromData</> with the
+parameters
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   HEADERDATA>HeaderData</> and
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE   ADDRESSDATA>AddressData</>.
+&FUNCTIONALITY&
+This method allows you to find incoming invoices according to the
+selection criteria listed below.
+&EXAMPLE&
+
+&HINTS&
+The following authorization object is checked with activity 03:
+
+<DS:UO.M_RECH_WRK>M_RECH_WRK</> Plant authorization for entering
+incoming invoices
+
+<DS:UO.M_RECH_BUK>M_RECH_BUK</> Company code authorization for entering
+incoming invoices
+Input parameters
+You can use the following criteria to select invoices:
+Supplier (Structure VendorRa)
+Posting date (Structure PstngDateRa)
+Document date (Structure DocDateRa)
+Entry date (Structure CpuDateRa)
+External creator (Structure PersonExtRa)
+Invoice status (Structure StatusRa)
+Reference Document Number (Structure RefDocRa)
+If you do not enter many selection restrictions, performance may be
+affected.
+IF &[SWITCH]MM_SFWS_TM& = 'X'.
+Integration
+The TM_DOCUMENTS parameter allows you to specify that the system should
+only select invoice documents or header data that were created with
+reference to an external transport management system.
+ENDIF.
+Return messages
+INCLUDE BAPI_RETURN OBJECT DOKU ID TX
+&FURTHER_SOURCES_OF_INF&
+The method can only perform its function if no error messages were
+generated in the <LS>Return</> table. This is the case if it was
+possible to process the header data and all items without errors.
+&FUNCTIONALITY&
+You can use this method to release blocked invoices.
+&EXAMPLE&
+
+&HINTS&
+The system checks the following authorization object with activity 02:
+
+<DS:UO.M_RECH_EKG>M_RECH_EKG</>
+
+<DS:UO.M_RECH_BUK>M_RECH_BUK</>
+<ZH>Transfer</>
+You must pass on to the method the key fields of the invoice
+(InvoiceDocNumber and FiscalYear) as import parameters. You can choose
+whether the system moves the cash discount days when paying the invoice.
+<ZH>Return messages</>
+INCLUDE BAPI_RET OBJECT DOKU ID TX LANGUAGE EN
+&FURTHER_SOURCES_OF_INF&
+The method can only execute the function if no error messages have been
+created in the <LS>Return</> table. This is the case if the system was
+able to process the header data and all the items without any errors.
+No transaction control is implemented. That means that the invoker has
+to carry out the 'Commit Work' after successfully invoking this method
+ifno errors are reported to the invoker in the <LS>Return</> parameter.
+&FUNCTIONALITY&
+You can use this method to change provisional
+ <DS:GLOS.352AE80588E65CD5E10000009B38F974>invoice documents</>.
+Provisional invoice documents have the status:
+'On hold' or
+'On hold (from parking)' or
+'Parked' or
+'Parked as complete' or
+'Parked and released'
+With regard to the reference document categories referenced by an
+invoice, this method offers the following functionality:
+If you do not change any items in an invoice document, the system
+retains the originally chosen reference to a document category.
+If you change items in an invoice document, in other words if you supply
+the method with information via the <LS>Itemdata</> table, the system
+takes the purchase order as the reference document category.
+IF &[SWITCH]MM_SFWS_DINV_02& = 'X'.
+For the transactions <LS>Provisional Invoice/Differential Invoice</> and
+<LS>Final Invoice</>, you can use this method to change the invoice
+items. The transaction itself (INV_TRAN field) remains unchanged.
+ENDIF.
+Constraints
+It is not possible to use this method to change invoice documents
+flagged for invoice verification in the background. Nor is it possible
+to use this method to change invoice documents saved within the
+framework of the EDI process.
+&EXAMPLE&
+
+&HINTS&
+The system checks the authorization objects
+ <DS:UO.M_RECH_WRK>M_RECH_WRK</> and
+ <DS:UO.M_RECH_BUK>M_RECH_BUK</> for the invoice document to be changed.
+For documents from the parking environment the system checks Activity
+77; for documents on hold from the invoice entry environment the system
+checks Activity 02.
+If you add further items to an invoice, the system checks activity 77
+(documents from parking) or 01 (documents from invoice entry) for these
+items.
+Input parameters
+Invoice document
+Using the <ZK>Invoicedocnumber</> and <ZK>Fiscalyear</> parameters you
+specify which invoice document is to be changed.
+Status of the invoice document
+The <ZK>InvoiceDocStatus</> parameter contains the status of the changed
+document.
+Header data
+Using the <ZK>HeaderdataChange</> parameter you specify the invoice
+header data that you want to be changed. In the <ZK>HeaderdataChangex</>
+parameter, you specify which information is to be changed.
+Address data
+Using the <ZK>AdressdataChange</> parameter you specify the invoice
+address that you want to change. Using the <ZK>AdressdataChangex</>
+parameter, you specify which information in the address you want to
+change.
+Item data.
+The tables <ZK>Itemdata</> and <ZK>Accountingdata</> contain the item
+data of the changed invoice. Unlike with the header data, here you need
+to describe all the items of the changed document. It is not possible to
+only transfer the data that needs changing. Using the <ZK>TableChange</>
+parameter and the ITEMDATA field you indicate that item data has
+changed.
+IF &[SWITCH]MM_SFWS_TM& = 'X'.
+For invoices relating to a transportation management system, instead of
+the <ZK>Itemdata</> table, you can use the TM_ITEMDATA table (
+<LS>Transfer Structure Item Data Incoming Invoice for Transportation
+Management</>).
+ENDIF.
+Posting to G/L account, material account, or asset
+Using the <ZK>Glaccountdata</> table you can change the data for posting
+to a G/L account. The <ZK>Materialdata</> table contains data that
+displays changes when you post to material accounts. The <ZK>Assetdata
+</> table contains the data for posting changes to an asset. Here too,
+it is necessary to describe the postings of the changed documents in
+full. The fields GLACCOUNTDATA, MATERIALDATA, and ASSETDATA in the
+<ZK>Table_Change</> parameter show that data has changed.
+Tax information
+The <ZK>Taxdata</> table describes the tax information in the changed
+invoice. The data of the changed incoming invoice must be passed on in
+full. You can identify a change using the <ZK>TableChange</> parameter
+and the TAXDATA field.
+Withholding tax information
+To change the information regarding the withholding tax in an invoice
+document, you can use the parameter <ZK>Withtaxdata</>. Via this
+parameter, you must specify all data of the changed document. The
+<ZK>TableChange</> parameter, WITHTAXDATA field, enables you to display
+a change.
+Amount split
+Via the <ZK>Vendoritemsplitdata</> table, you can change the
+distribution of the gross amount across several creditor lines. As
+already described in the case of previous parameters, here too you must
+describe the data of the changed document in full. It is not enough to
+pass on only the information that has changed. The <ZK>TableChange</>
+parameter contains the VENDORITEMSPLIT field, which can be used to
+display changes.
+Output parameters
+If changing the posting date or the document type necessitates the
+assignment of a new document number, the provisional invoice document is
+created with the previous data under a new document number and - if the
+fiscal year is changed - under a new fiscal year. The previous invoice
+document is deleted.
+The method returns the new document number and the new fiscal year in
+the parameters <ZK>InvoicedocnumberNew</> and <ZK>FiscalyearNew</>.
+Return messages
+INCLUDE BAPI_RET OBJECT DOKU ID TX LANGUAGE EN
+&FURTHER_SOURCES_OF_INF&
+The method can only perform its function if no error messages were
+generated in the <LS>Return</> table. This is the case if it was
+possible to process the header data and all items without errors.
+No transaction control is implemented. This means that, if the method
+has been called successfully and no errors are shown in the <LS>Return
+</> parameter, the user calling the method must perform the 'Commit
+Work' him- or herself.
+INCLUDE BAPI_INCOMINGINVOICE_SPERRL OBJECT DOKU ID TX
+<ZH>Note</>:
+If an invoice document parked as complete is again to be parked as
+complete in a new fiscal year, or a change in the document type
+necessitates the assignment of a new document number, the system creates
+a new document and deletes the old one. In the process, a document
+parked as complete is simply parked in an initial step before finally
+being converted to the 'parked as complete' status in a second step. To
+be able to carry out the second step, the system uses a 'Commit Work'
+program-internally after the first step.
+Example: Change of posting date in a provisional invoice document
+This example shows which data you must enter in the parameters
+<ZK>InvoiceDocNumber</>, <ZK>FiscalYear</>, <ZK>HeaderdataChange</>, and
+<ZK>HeaderdataChangex</> in order to change the posting date of a
+provisional invoice document.
+In 2004 you parked invoice 5105601000/2004. This contains one item. You
+want to give the invoice a new posting date from the year 2005 without
+changing the item.
+<ZH>Parameter InvoiceDocNumber</>
+(invoice document number): 5105601000
+<ZH>Parameter FiscalYear</>
+(fiscal year): 2004
+<ZH>Parameter HeaderdataChange</>
+PSTNG_DATE (Posting date): 12.05.2005
+<ZH>Parameter HeaderdataChangex</>
+PSTNG_DATE (Posting date): X
+You do not have to transfer the <ZK>Itemdata</> table. In this case the
+system adopts the invoice items unchanged from the document to be
+changed.
+Due to the changed fiscal year, the old document is deleted and a new
+invoice document is created with the old data. The method returns the
+document number and the fiscal year in the fields
+<ZK>InvoicedocnumberNew</> and <ZK>FiscalyearNew</>.
+Example: Adding a further item to a provisional invoice document
+This example shows which data you  must enter in the parameters
+<ZK>InvoiceDocNumber</>, <ZK>FiscalYear</>, <ZK>HeaderdataChange</>, and
+<ZK>HeaderdataChangex</> in order to be able to add another item to a
+provisional invoice document. Furthermore, it describes which item data
+is entered in the <ZK>Itemdata</> table and which information you have
+to enter in the <ZK>TableChange</> parameter.
+You have parked the invoice document 5105600011/2005. This invoice
+contains one item referencing purchase order 4500000100, item 10. The
+invoice quantity amounts to 10 pc, the value is 100 EUR. You now want to
+add a second item referencing PO no. 4500000101, item 10. The quantity
+invoiced for this item is 5 pc, the value being 50 EUR. For both items,
+value-added tax of 16% applies.
+<ZH>Parameter InvoiceDocNumber</>
+(invoice document number): 5105600011
+<ZH>Parameter FiscalYear</>
+(fiscal year): 2005
+<ZH>Parameter HeaderdataChange</>
+GROSS_AMOUNT (Gross amount): 174,00
+<ZH>Parameter HeaderdataChangex</>
+GROSS_AMOUNT (Gross amount): X
+<ZH>Parameter TableChange</>
+ITEMDATA (item data): X
+<ZH>Parameter Itemdata</>
+<ZH>Line 1: Previous invoice item</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500000100
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Item amount): 100
+QUANTITY (Quantity): 10
+PO_UNIT (Unit of measure): pc
+<ZH>Line 2: Add further invoice item</>
+INVOICE_DOC_ITEM (Invoice document item): 00002
+PO_NUMBER (purchase order number): 4500000101
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Item amount): 50
+QUANTITY (quantity): 5
+PO_UNIT (Unit of measure): pc
+Further information is available in the parameter documentation for
+table
+<DS:FU.BAPI_INCOMINGINVOICE_CHANGE   ITEMDATA>ItemData</>.
+Example: Adding an unplanned account assignment to a provisional invoice
+document
+This example indicates which data you have to enter for the parameters
+<ZK>InvoiceDocNumber</> and <ZK>FiscalYear</>, which item data you have
+to enter for the <ZK>Itemdata</> table, and which account assignment
+data you have to enter for the table <ZK>Accountingdata</>. Furthermore,
+it describes which information you have to enter for the parameter
+<ZK>TableChange</> in order to be able to add unplanned account
+assignments to a provisional invoice document. In order for you to be
+able to add account assignments, provision must have been made for
+non-valuated or no goods receipt.
+You have parked the invoice document 5105600012/2005. This contains an
+item relating to purchase order 4500000110, item 10. The purchase order
+item has a single account assignment. You want to apportion the invoice
+amount of 100 EUR for 10 pc to the planned account assignment and one
+other account assignment. 16% VAT is payable.
+<ZH>Parameter InvoiceDocNumber</>
+(invoice document number): 5105600012
+<ZH>Parameter FiscalYear</>
+(fiscal year): 2005
+<ZH>Parameter TableChange</>
+ITEMDATA (item data): X
+<ZH>Parameter Itemdata</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500000110
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Item amount): 100
+QUANTITY (quantity): 10
+PO_UNIT (Unit of measure): pc
+<ZH>Parameter Accoutingdata</>
+<ZH>Line 1: Change planned account assignment item</>
+INVOICE_DOC_ITEM (Document item in invoice document): 0001
+SERIAL_NO (Serial number for the account assignment): 01
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Amount in document currency): 60,00
+QUANTITY (quantity): 6
+PO_UNIT (purchase order unit): pc
+GL_ACCOUNT (G/L account number): 890000
+COSTCENTER (Cost center): 1200
+<ZH>Line 2: Add unplanned account assignment</>
+INVOICE_DOC_ITEM (document item in invoice document): 0001
+XUNPL (Unplanned account assignment from Invoice Verification): X
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (amount in document currency): 40,00
+QUANTITY (quantity): 4
+PO_UNIT (purchase order unit): pc
+GL_ACCOUNT (G/L account number): 891000
+COSTCENTER (cost center): 1300
+Further information is available in the parameter documentation for the
+tables
+    <DS:FU.BAPI_INCOMINGINVOICE_CHANGE   ITEMDATA>ItemData</> and
+    <DS:FU.BAPI_INCOMINGINVOICE_CHANGE   ACCOUNTINGDATA>AccountingData
+</>.
+&FUNCTIONALITY&
+With this method you can hold, park, park as complete, or post incoming
+invoices.
+<LS>Hold Incoming Invoice</>
+The system saves an incomplete invoice document and carries out minimum
+checks to determine if there is a company code, for example. The
+purchase order history is not updated, nor is data posted to financial
+accounting. You also assign the incoming invoice to a document (Purchase
+Order, Delivery Note and Service Entry Sheet for Lean Services).
+<LS>Park Incoming Invoice</>
+The system creates an invoice document in document parking and saves the
+data to the database. Before the data is saved, the system carries out
+consistency checks. The following objects are updated:
+Informative purchase order history
+Data for advance tax returns
+Index for duplicate invoice check
+Open vendor items in parked documents
+Log of document changes
+
+You use the <LS>Park Incoming Invoice</> function in the following
+cases:
+Information required to post the invoice document is missing, and you do
+not want to have to enter data again that has already been entered.
+The balance is not zero.
+You want updates to take place (informative purchase order history, data
+for advance tax returns, index for checking for duplicate invoices and
+open vendor items).
+You also assign the incoming invoice to a document (Purchase Order,
+Delivery Note and Service Entry Sheet for Lean Services).
+You can still change, delete, and post parked invoice documents at a
+later data, or save them as complete.
+<LS>Park incoming invoice as complete</>
+The system does not expect any more changes to the invoice document. The
+balance is zero. The invoice document is flagged for posting but has not
+yet been posted. The same checks are used as for posting. The following
+follow-on documents are created:
+Informative purchase order history
+Data for advance tax returns
+Index for duplicate invoice check
+Open vendor items in parked documents
+Purchase order commitment
+Controlling documents
+Funds management documents
+Document changes
+<LS>Post Invoice</>
+The process is the same as for <LS>park as complete</> but the system
+posts the invoice at the end of the process.
+<ZH>Control</>
+The value you assign to the import parameter <LS>InvoiceStatus</>
+controls the invoice process:
+Value <LB>5</>: Invoice is <LS>posted</>
+Value <LB>A</>: Invoice is <LS>parked</>
+Value <LB>B</>: Invoice is <LS>parked as complete</>
+Value <LB>D</>: Invoice is put on <LS>hold</>
+If you do not enter a value, the system uses the default value <LB>5</>.
+When the header data is transferred, the INVOICE_IND field determines
+whether the system creates a credit memo or an invoice:
+Value <LB>INITIAL</>: System creates a credit memo
+Value <LB>X</>: System creates an invoice
+If you want to enter an incoming invoice for a return order, you must
+leave the INVOICE_IND field initial and enter the value <LB>5</> in the
+INVOICESTATUS field.
+<ZH>Objects</>
+You can use the functions of this method on the same objects as the
+<LS>create</> and <LS>post</> functions of method
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE>BAPI_INCOMINGINVOICE_CREATE</>. This
+means you can <LS>hold</>, <LS>park</>, <LS>park as complete</>, or
+<LS>post</> the following objects:
+Invoices with multiple account assignment
+Invoices with different account assignments
+Invoices for blanket purchase orders
+Invoices for purchase orders with planned delivery costs
+Invoices with unplanned delivery costs
+Subsequent debits and credits
+Invoices with withholding tax
+Invoices with multiple vendor line items and different payment methods
+and terms of payment
+Invoices with returns purchase orders
+Invoices for transportation service providers
+Invoices for purchase orders for external services
+Invoices with G/L account postings
+Invoices with asset postings
+Invoices with material account postings
+Invoices for a one-time vendor
+Invoices with a different payee
+IF &[SWITCH]MM_SFWS_DINV_02& = 'X'.
+Provisional/differential invoices and final invoices in the context of
+differential invoicing
+ENDIF.
+Note: You can use document types with external number assignment.
+<ZH>Constraints</>
+The following fields in Financial Accounting are not passed on:
+ISR subscriber number (ISR = Inpayment Slip with Reference number)
+Bank details
+Payment reference
+Short key for house bank
+Service indicator
+&HINTS&
+The following authorization object is checked with activity 77 or
+activity 01:
+
+<DS:UO.M_RECH_WRK>M_RECH_WRK</>: Authorization to create invoices in
+certain plants
+
+<DS:UO.M_RECH_BUK>M_RECH_BUK</>: Authorization to create invoices in
+certain company codes
+Reference documents such as Purchase Order, Delivery Note and Service
+Entry Sheet for Lean Services can be persisted only for “A- Parked” and
+“D-Entered and Held”.
+<ZH>Input parameters</>
+The following data is transferred:
+<LS>HeaderData</> table: header data from incoming invoice
+<LS>AddressData</> table: address data of a one-time vendor or different
+payee for the incoming invoice
+<LS>ItemData</> table: item data from the incoming invoice
+IF &[SWITCH]MM_SFWS_MAA& = 'X'.
+<LS>TM_ITEMDATA</> table: Transfer Structure Item Data Incoming Invoice
+(ext. TMS)
+ENDIF.
+<LS>AccountingData</> table: account assignment data for the incoming
+invoice of an item
+<LS>GlAccountData</> table: data for posting to the G/L account
+<LS>MaterialData</> table: data for posting to the material account
+<LS>AssetData</> table: data for posting to an asset
+<LS>TaxData</> table: tax information for the incoming invoice
+<LS>WithTaxData</> table: withholding tax information
+<LS>VendorItemSplitData</> table: distribution of the gross amount to
+multiple vendor line items with different payment methods and terms of
+payment
+<LS>AdditionalHeaderData</> table: structure for additional header data
+for incoming invoice
+<LS>SelectPO</> table: structure for purchasing documents for incoming
+invoice
+<LS>SelectDelivery</> table: structure for delivery notes for incoming
+invoice
+<LS>SelectService_Lean</> table: structure for service entry sheet for
+incoming invoice
+<ZH>Output parameters</>
+The document number of the invoice document and the fiscal year are
+returned as key fields of the incoming invoice.
+<ZH>Return Messages</>
+INCLUDE BAPI_RET OBJECT DOKU ID TX LANGUAGE EN
+INCLUDE BAPI_INVENTUR_WEITERINF OBJECT DOKU ID TX LANGUAGE EN
+<ZH>Customer Enhancements</>
+The BAPI customer enhancement concept allows customers to take account
+of additional data that is not considered at interface level.
+The <LS>ExtensionIn</> and <LS>ExtensionOut</> parameters serve as data
+containers in which the additional values are transferred at import and
+export.
+In addition to the extension parameters in the interface, the BAPI
+function module provides BAdIs (Business Add-Ins) that check the data
+transferred to the method by the customer and carry out further
+processing.
+Example: Hold invoice without goods receipt
+This example shows which header data you must enter in the
+<LS>HeaderData</> table and which item data in the <LS>ItemData</> table
+ if you want to hold an incoming invoice without a goods receipt.
+Purchase order (transaction ME21N): 100 pieces, material A (purchase
+order item 10)
+Item details on <LS>Invoice</> tab page in field WE-BEZ.RP (
+<LS>indicator for goods receipt-based invoice verification</>):
+Indicator NOT set
+Goods receipt (transaction MIGO): 100 pieces, material A
+To get an incoming invoice for this purchase order with reference to the
+purchase order number (such as 4500000018), purchase order item 10, for
+a quantity of 100 pieces of material A, enter the following data:
+<ZH>Import structure </><LS>HeaderData</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_DATE (document number in document): 27.10.2008
+PSTNG_DATE (posting date in document):  27.10.2008
+COMP_CODE (company code): 0001
+DIFF_INV (different invoicing party): VENDOR1
+CURRENCY (currency key): USD
+GROSS_AMOUNT (gross invoice amount in document currency): 100
+BLINE_DATE (baseline date for due date calculation): 27.10.2008
+<ZH>Import parameter </><LS>InvoiceStatus</>
+INVOICESTATUS (invoice document status): D
+<LS>ItemData</><ZH> table </>
+INVOICE_DOC_ITEM (document item in invoice document): 000001
+PO_NUMBER (purchase order number): 4500000018
+PO_ITEM (item number of purchasing document): 00010
+ITEM_AMOUNT (amount in document currency): 100
+QUANTITY (quantity): 100
+PO_UNIT (purchase order unit): pc
+You get the document number of an invoice document (INVOICEDOCNUMBER
+field, for example 5105600788) and the fiscal year (FISCALYEAR field,
+for example 2008). 2008).
+Example: Hold goods receipt-based invoice with account assignment
+This example shows which header data you must enter in the
+<LS>HeaderData</> table, which item data in the <LS>ItemData</> table,
+and which account assignment data in the <LS>AccountingData</> table if
+you want to hold a goods receipt-based invoice with account assignment.
+Purchase order (transaction ME21N): 100 pieces of material A with
+account assignment category K (purchase order item 10) and 50 pieces of
+material B with account assignment category K (purchase order item 20)
+Item details:
+Item overview
+Purchase order item 10, <LS>Invoice</> tab page; WE-BEZ.RP field (
+<LS>indicator for goods receipt-based invoice verification</>):
+Indicator set
+Purchase order item 10, <LS>Account Assignment</> tab page; percentage
+distribution: 50 percent, cost center KOST1, G/L account 892000 and 50
+percent, cost center KOST2, G/L account 892000
+Goods receipt for purchase order (transaction MIGO): partial delivery,
+50 pieces of material A (material document number: 5000000052).
+To get an incoming invoice for this purchase order with reference to
+purchase order number 4500000020 and the posted goods receipt
+5000000052, enter the following data:
+<ZH>Import structure </><LS>HeaderData</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_DATE (document number in document): 27.10.2008
+PSTNG_DATE (posting date in document): 27.10.2008
+COMP_CODE (company code): 0001
+DIFF_INV (different invoicing party): STANDARD
+CURRENCY (currency key): USD
+GROSS_AMOUNT (gross invoice amount in document currency): 50
+BLINE_DATE (baseline date for due date calculation): 27.10.2008
+<ZH>Import parameter </><LS>InvoiceStatus</>
+INVOICESTATUS (invoice document status): D
+<LS>ItemData</><ZH> table </>
+INVOICE_DOC_ITEM (document item in invoice document): 000001
+PO_NUMBER (purchase order number): 4500000020
+PO_ITEM (item number of purchasing document): 00010
+REF_DOC (document number of a reference document): 5000000052
+REF_DOC_YEAR (fiscal year of current period): 2008
+REF_DOC_IT (reference document item): 0001
+ITEM_AMOUNT (amount in document currency): 50
+QUANTITY (quantity): 50
+PO_UNIT (purchase order unit):
+<LS>AccountingData</><ZH> table</>
+<LS>AccountingData</> table - row 1
+INVOICE_DOC_ITEM (document item in invoice document): 000001
+SERIAL_NO (account assignment sequence number): 01
+ITEM_AMOUNT (amount in document currency): 25
+QUANTITY (quantity): 25
+PO_UNIT (purchase order unit): pc
+GL_ACCOUNT (G/L account number): 892000
+COSTCENTER (cost center): KOST1
+<LS>AccountingData</> table - row 2
+INVOICE_DOC_ITEM: 000001
+SERIAL_NO: 02
+ITEM_AMOUNT: 25
+QUANTITY: 25
+PO_UNIT: pc
+GL_ACCOUNT: 892000
+COSTCENTER: KOST2
+You get the document number of an invoice document (INVOICEDOCNUMBER
+field, for example 5105600789) and the fiscal year (FISCALYEAR field,
+for example 2008). 2008).
+Example: Assignment to purchase order
+If your invoice references a purchasing document or scheduling agreement
+and you wish to enter goods items, you must populate the following
+fields:
+<ZH>HeaderData table</>
+INVOICE_IND (Invoice=X/Credit memo=blank): X
+DOC_DATE (Document number in document): 11.05.2000
+PSTNG_DATE (Posting date in document : 11.06.2000
+COMP_CODE (Company code): 0001
+CURRENCY (Currency key): EUR
+<ZH>AdditionalHeaderData table</>
+ASSIGN_DELIV (Indicator: Delivery item assignment): X
+DELIV_POSTING (Posting logic for delivery items (Invoice=S/Credit
+memo=H): S
+SEL_GOODS (Indicator: Goods invoice/Service): X
+<ZH>SelectPo table</>
+PO_NUMBER (Document number of purchasing document): 4500000679
+For more information, see the parameter documentation for the tables
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE1  HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE1  ADDITIONALHEADERDATA>
+AdditionalHeaderData</>, and
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE1  SELECTPO>SelectPo</>.
+Example: Assignment to delivery note
+If your invoice references an external delivery note and you want to
+enter goods items you must populate the following fields:
+<ZH>HeaderData table</>
+INVOICE_IND (Invoice=X/Credit memo=blank): X
+DOC_DATE (Document date in document): 11.05.2000
+PSTNG_DATE (Posting date in document): 11.06.2000
+COMP_CODE (Company code): 0001
+CURRENCY (Currency key): EUR
+<ZH>AdditionalHeaderData table</>
+ASSIGN_DELIV (Indicator: Delivery item assignment): X
+DELIV_POSTING (Posting logic for delivery items (Invoice=S/Credit
+memo=H): S
+SEL_GOODS (Indicator: Goods invoice/Service): X
+SEL_ VENDOR (Number of selection supplier): SPENCER
+<ZH>SelectDelivery table</>
+DELIVERY_NOTE (Number of external delivery note): 11/00-256
+For more information, see the parameter documentation for the tables
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE1  HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE1  ADDITIONALHEADERDATA>
+AdditionalHeaderData</>, and
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE1  SELECTDELIVERY>SelectDelivery</>.
+Example: Assignment to service entry sheet (lean services)
+If your invoice references a service entry sheet for lean services you
+must populate the following fields:
+<ZH>HeaderData table</>
+INVOICE_IND (Invoice=X/Credit memo=blank): X
+DOC_DATE (Document date in document): 11.05.2000
+PSTNG_DATE (Posting date in document): 11.06.2000
+COMP_CODE (Company code): 0001
+CURRENCY (Currency key): EUR
+<ZH>AdditionalHeaderData table</>
+ASSIGN_DELIV (Indicator: Delivery item assignment): X
+DELIV_POSTING (Posting logic for delivery items (Invoice=S/Credit
+memo=H): S
+SEL_GOODS (Indicator: Goods invoice/Service): X
+SEL_ VENDOR (Number of selection supplier): SPENCER
+<ZH>SelectService table</>
+SHEET_NO (Number of the service entry sheet): 1000000245
+SHEET_ITEM (Item number of service entry sheet): 00001 (optional)
+For more information, see the parameter documentation for the tables
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE1  HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE1  ADDITIONALHEADERDATA>
+AdditionalHeaderData</>, and
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE1  SELECTSERVICE_LEAN>
+SelectService_Lean.</>
+&FUNCTIONALITY&
+This method enables you to delete provisional invoice documents.
+Provisional invoice documents have the status 'on hold', 'on hold (from
+parking)', 'parked', 'parked as complete', 'parked and released', 'with
+errors' (EDI process or background verification) or 'defined for
+background verification'.
+&HINTS&
+The authorization objects
+ <DS:UO.M_RECH_BUK>M_RECH_BUK</> and
+  <DS:UO.M_RECH_WRK>M_RECH_WRK</> are checked with activity 77 for
+invoice documents put on hold, parked, parked as complete, and parked
+and released from within the parking function.
+For on-hold invoice documents, invoices defined for background
+verification and invoices with errors the activity 01 is checked.
+<ZH>Transfer</>
+You must transfer the key fields of the incoming invoice
+(InvoiceDocNumber and FiscalYear) to the method as import parameters.
+<ZH>Return messages</>
+INCLUDE BAPI_RET OBJECT DOKU ID TX LANGUAGE EN
+&FURTHER_SOURCES_OF_INF&
+The method can only perform its function if no error messages have been
+generated in the <LS>Return</> table. This is the case if it was
+possible to process the header data and all items without errors.
+No transaction control is implemented. This means that the invoker must
+perform the 'Commit Work' itself after successful invocation of this
+method if no errors have been notified to the invoker in the <LS>Return
+</> parameter.
+INCLUDE BAPI_INCOMINGINVOICE_SPERRL OBJECT DOKU ID TX
+<LS>&FUNCTIONALITY&</>
+You can use this method to park incoming invoices.
+When header data is transferred, you use the field <LS>INVOICE_IND</> to
+determine whether the system generates a credit memo or an invoice. If
+you leave the field <LB>initial</>, the system generates a credit memo.
+If you enter <LB>X</>, the system generates an invoice.
+You use this method if information on posting an invoice document is
+missing in the invoice document. The balance can be a value other than
+zero. As in the online transaction, the following updates take place:
+for example, informative PO history, advance tax return, index for
+checks re duplicate invoices, open creditor items from parked documents,
+log of document changes.
+You can use this method to:
+Park invoices with multiple account assignment
+Change and park invoice account assignments
+Park invoices for blanket purchase orders (see also the documentation
+for the function module
+      <DS:FU.BAPI_INCOMINGINVOICE_CREATE>BAPI_INCOMINGINVOICE_CREATE</>)
+Park invoices for purchase orders with planned delivery costs
+Park invoices with unplanned delivery costs
+Park subsequent credits and debits
+Use document types with external number ranges
+Park invoices with withholding tax
+Park invoices with several creditor lines and different methods and
+terms of payment
+Park invoices for purchase orders for external services
+Park invoices with G/L account postings
+Park invoices with material account postings
+Park invoices with asset postings
+Park invoices for a one-time supplier
+Park invoices with a different payee
+IF &[SWITCH]MM_SFWS_DINV_02& = 'X'.
+Create and post provisional/differential invoices and final invoices in
+the context of differential invoicing
+(See also documentation for function module
+ <DS:FU.BAPI_INCOMINGINVOICE_CREATE>BAPI_INCOMINGINVOICE_CREATE</>
+(Invoice Verification: Post Incoming Invoice))
+Assign the incoming invoice to a document (Purchase Order, Delivery Note
+and Service Entry Sheet for Lean Services).
+ENDIF.
+<ZH>Constraints</>
+You cannot post invoices for returns orders
+The following fields in Financial Accounting are not passed on:
+ISR subscriber number (ISR = inpayment slip with reference number)
+Bank details
+Payment reference
+Short key for house bank
+Service indicator
+&HINTS&
+The following authorization object is checked with activity 77:
+
+<DS:UO.M_RECH_WRK>M_RECH_WRK</> Plant authorization for entering
+incoming invoices
+
+<DS:UO.M_RECH_BUK>M_RECH_BUK</> Company code authorization for entering
+incoming invoices
+Reference documents such as Purchase Order, Delivery Note and Service
+Entry Sheet for Lean Services can be persisted only for “A- Parked” and
+“D-Entered and Held”.
+<ZH>Input parameters</>
+You transfer the header data of the incoming invoice using the structure
+<LS>HeaderData</>.
+The tables <LS>ItemData</> and <LS>AccountingData</> contain the item
+data of the incoming invoice. The <LS>TaxData</> table contains the tax
+information for the incoming invoice.
+The <LS>GlAccountData</> table contains data for posting to G/L
+accounts, and the <LS>MaterialData</> table contains data for posting to
+material accounts.
+You can use the <LS>WithTaxData</> table to pass on withholding tax
+information.
+You can use the <LS>VendorItemSplitData</> table to distribute the gross
+amount among several vendor line items with different methods and terms
+of payment.
+You can use <LS>AdditionalHeaderData</> table to transfer structure for
+additional header data for incoming invoice.
+You can use <LS>SelectPO</> table to transfer structure for purchasing
+documents for incoming invoice.
+You can use <LS>SelectDelivery</> table to transfer structure for
+delivery notes for incoming invoice.
+You can use <LS>SelectService_Lean</> table to transfer structure for
+service entry sheet for incoming invoice.
+<ZH>Output parameters</>
+The document number of the invoice document and the fiscal year are
+returned as key fields of the incoming invoice.
+<ZH>Return messages</>
+INCLUDE BAPI_RET OBJECT DOKU ID TX LANGUAGE EN
+&FURTHER_SOURCES_OF_INF&
+INCLUDE BAPI_INVENTUR_WEITERINF OBJECT DOKU ID TX LANGUAGE EN
+Example: Incoming Invoice
+This example shows which header data you can park in the table
+<LS>HeaderData</> and which item data you can park in the table <LS>
+ItemData</>.
+Purchase Order: 10 pc of material A @ 10 USD
+Goods receipt: 10 pc of material A
+For this purchase order, you receive an incoming invoice referencing PO
+number 4500007491, PO item 10, for a quantity of 10 pc of material A and
+an amount of 116 USD incl. 16% VAT. You enter the following data:
+<ZH>HeaderData table</>
+INVOICE_IND (invoice/credit memo): X
+DOC_DATE (document date): 20.05.2000
+PSTNG_DATE (Posting date): 23.05.2000
+COMP_CODE (company code): 1000
+GROSS_AMOUNT (Gross amount): 116,00
+CURRENCY (currency key): USD
+CALC_TAX_IND (calculate tax): X
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500007491
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): VN
+ITEM_AMOUNT (Item amount): 100
+QUANTITY (Quantity): 10
+PO_UNIT (Unit of measure): pc
+For more information, see the parameter documentation for the
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     HEADERDATA>HeaderData</> and
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     ITEMDATA>ItemData</> tables.
+Example: Incoming invoice with foreign currency, GR-based invoice
+verification, and tax information
+This example specifies the header data that you need to enter in the
+<LS>HeaderData</> table, the item data that you need to enter in the
+<LS>Itemdata</> table, and the tax information that you need to enter in
+the <LS>TaxData</>table, in order to park an invoice in a foreign
+currency.
+Purchase Order: 10 pc of material A @ 10.00 USD
+Goods receipt 1: 4 pc of material A
+Goods receipt 2: 6 pc of material A
+For this purchase order, you receive an incoming invoice referencing PO
+no. 4500007505, PO item 10, goods receipt document 50010095, 2000, item
+1. A quantity of 4 pc of material A and a gross amount of 46.60 USD and
+16% tax (6.60 USD) is invoiced. You enter the following data:
+<ZH>HeaderData table</>
+INVOICE_IND (invoice/credit memo): X
+DOC_DATE (document date): 20.05.2000
+PSTNG_DATE (Posting date): 23.05.2000
+COMP_CODE (company code): 1000
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 46,60
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500007505
+PO_ITEM (Purchase order item): 00010
+REF_DOC (GR document): 50010095
+REF_DOC_YEAR (fiscal year of current period): 2000
+REF_DOC_ITEM (Item in a GR document): 1
+TAX_CODE (Tax code): VN
+ITEM_AMOUNT (Item amount): 40,00
+QUANTITY (Quantity): 4
+PO_UNIT (Unit of measure): pc
+<ZH>TaxData table</>
+TAX_CODE (tax code): VN
+TAX_AMOUNT (tax amount in document currency): 6,60
+For more information, see the parameter documentation for the
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     ITEMDATA>ItemData</>, and
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     TAXDATA>TaxData</> tables.
+Example: Change account assignments and add unplanned ones
+This example shows which header data you enter in the <LS>HeaderData</>
+table, which item data you enter in the <LS>ItemData</> table, and which
+account assignment data you enter in the <LS>AccountingData</> table in
+order to be able to change account assignments for an incoming invoice.
+For you to be able to change account assignments, a non-valuated goods
+receipt or no goods receipt must exist. GR-based invoice verification
+takes place.
+Purchase Order: 300 pc of material A @ 1.00 USD
+Goods receipt: 300 pc of material A
+For this purchase order with multiple account assignments, you receive
+an incoming invoice referencing PO number 4500006846, PO item 10, GR
+document 50008849, 2000, item 1. The quantity invoiced is 100 pc of
+material A, for a gross amount of 116.00 USD including 16% VAT. You want
+to change the planned account assignment for the second account
+assignment object and add an unplanned account assignment. You enter the
+following data:
+<ZH>HeaderData table</>
+INVOICE_IND (invoice/credit memo): X
+DOC_DATE (document date): 05.08.2000
+PSTNG_DATE (Posting date): 08.08.2000
+COMP_CODE (company code): 1000
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 17,40
+CALC_TAX_IND (Automatically calculate tax): X
+PMNTTRMS (Payment terms key): 0001
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500006846
+PO_ITEM (Purchase order item): 00010
+REF_DOC (GR document): 500008849
+REF_DOC_YEAR (fiscal year of current period): 2000
+REF_DOC_ITEM (Item in a GR document): 1
+TAX_CODE (Tax code): VN
+ITEM_AMOUNT (Item amount): 100
+QUANTITY (Quantity): 100
+PO_UNIT (Unit of measure): pc
+<ZH>AccountingData table</>
+<ZH>Line 1: Change second account assignment item</>
+INVOICE_DOC_ITEM (Document item in invoice document): 0001
+SERIAL_NO (Serial number for the account assignment): 02
+TAX_CODE (Tax code): VN
+ITEM_AMOUNT (Amount in document currency): 10,00
+QUANTITY (Quantity): 10
+PO_UNIT (purchase order unit): pc
+GL_ACCOUNT (G/L account number): 890000
+COSTCENTER (Cost center): 1200
+<ZH>Line 2: Add unplanned account assignment</>
+INVOICE_DOC_ITEM (Document item in invoice document): 0001
+XUNPL (Unplanned account assignment from Invoice Verification): X
+TAX_CODE (Tax code): VN
+ITEM_AMOUNT (Amount in document currency): 5,00
+QUANTITY (Quantity): 5
+PO_UNIT (purchase order unit): pc
+GL_ACCOUNT (G/L account number): 890000
+COSTCENTER (Cost center): 1200
+For more information, see the parameter documentation for the tables
+HeaderData,
+      <DS:FU.BAPI_INCOMINGINVOICE_PARK     ITEMDATA>ItemData</> and
+      <DS:FU.BAPI_INCOMINGINVOICE_PARK     ACCOUNTINGDATA>AccountingData
+</>.
+Example: Incoming invoice with planned delivery costs
+This example shows the header data that you need to enter in the
+<LS>HeaderData</> table, the item data that you need to enter in the
+<LS>ItemData</> table, and the tax information that you need to enter in
+table <LS>TaxData</> to create an invoice containing planned delivery
+costs.
+Purchase Order: 100 pc of material A @ 1.00 USD
+Goods receipt: 100 pc of material A
+For this purchase order, you receive an incoming invoice referencing PO
+no. 4500006986, PO item 10, for a quantity of 100 pc of material A and
+an amount of 136.00 USD incl. 16% VAT and 20.00 USD planned delivery
+costs. You enter the following data:
+<ZH>HeaderData table</>
+INVOICE_IND (invoice/credit memo): X
+DOC_DATE (document date): 10.08.2000
+PSTNG_DATE (Posting date): 12.08.2000
+COMP_CODE (company code): 1000
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 136,00
+<ZH>ItemData table</>
+<ZH>Line 1: Entry of PO item</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500006986
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (tax code): VN
+ITEM_AMOUNT (Item amount): 100,00
+QUANTITY (Quantity): 100
+PO_UNIT (Unit of measure): pc
+<ZH>Line 2: Entry of planned delivery costs</>
+INVOICE_DOC_ITEM (Invoice document item): 00002
+PO_NUMBER (purchase order number): 4500006986
+PO_ITEM (Purchase order item): 00010
+ITEM_AMOUNT (Item amount): 20,00
+QUANTITY (Quantity): 100
+PO_UNIT (Unit of measure): pc
+COND_TYPE (condition type): FRB1
+<ZH>TaxData table</>
+TAX_CODE (tax code): VN
+TAX_AMOUNT (tax amount in document currency): 16,00
+For more information, see the parameter documentation for the
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     ITEMDATA>ItemData</>, and
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     TAXDATA>TaxData</> tables.
+Example: Incoming invoice with withholding tax
+This example shows which header data you can enter in the <LS>HeaderData
+</> table, which item data you can enter in the <LS>Itemdata</> table,
+and which withholding tax information you can enter in the
+<LS>WithTaxData</> table, in order to park an incoming invoice with
+withholding tax.
+Purchase Order: 10 pc of material A @ 10.00 USD
+Goods receipt: 10 pc of material A
+For this purchase order, you receive an incoming invoice referencing PO
+no. 4500007505, PO item 10, goods receipt document 50010095, 2000, item
+1. A quantity of 10 pc and a gross amount of 100.00 USD is invoiced. You
+have to pay 10% withholding tax on the gross amount. Enter the following
+data:
+<ZH>HeaderData table</>
+INVOICE_IND (invoice/credit memo): X
+DOC_DATE (document date): 20.05.2000
+PSTNG_DATE (Posting date): 23.05.2000
+COMP_CODE (company code): WT01
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 100,00
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500007505
+PO_ITEM (Purchase order item): 00010
+REF_DOC (GR document): 50010095
+REF_DOC_YEAR (fiscal year of current period): 2000
+REF_DOC_ITEM (Item in a GR document): 1
+TAX_CODE (Tax code): V0
+ITEM_AMOUNT (Item amount): 100,00
+QUANTITY (Quantity): 10,00
+PO_UNIT (Unit of measure): pc
+<ZH>WithTaxData table</>
+SPLIT_KEY (grouping key for splitting withholding tax): 0001
+WI_TAX_TYPE (indicator for withholding tax type): R1
+WI_TAX_CODE (Withholding tax indicator): 01
+WI_TAX_BASE (Withholding tax base amount): 100
+WI_TAX_AMT (withholding tax amount in document currency): 10,00
+For more information, see the parameter documentation for the
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     ITEMDATA>ItemData</> and
+<DS:FU.BAPI_INCOMINGINVOICE_PARK     WITHTAXDATA>WithTaxData</> tables.
+Example: Incoming invoice with amount split
+This example shows which header data you enter in the <LS>HeaderData</>
+table, which item data you enter in the <LS>Itemdata</> table, and which
+information you enter in the <LS>VendorItemSplitData</> table, in order
+to generate an incoming invoice with an amount split.
+Purchase Order: 10 pc of material A @ 10.00 USD
+Goods receipt: 10 pc of material A
+For this purchase order, you receive an incoming invoice referencing PO
+no. 4500007505, PO item 10, goods receipt document 50010095, 2000, item
+1. A quantity of 10 pc and a gross amount of 100.00 USD is invoiced. You
+want to distribute the gross amount among two creditor lines. 40% of the
+gross amount is to be paid immediately by check, and the remaining 60%
+of the gross amount is to be paid within 14 days subject to 3% cash
+discount. You enter the following data:
+<ZH>HeaderData table</>
+INVOICE_IND (invoice/credit memo): X
+DOC_DATE (document date): 20.05.2000
+PSTNG_DATE (Posting date): 23.05.2000
+COMP_CODE (company code): 0001
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 100,00
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500007505
+PO_ITEM (Purchase order item): 00010
+REF_DOC (GR document): 50010095
+REF_DOC_YEAR (fiscal year of current period): 2000
+REF_DOC_ITEM (Item in a GR document): 1
+TAX_CODE (Tax code): V0
+ITEM_AMOUNT (Item amount): 100,00
+QUANTITY (Quantity): 10,00
+PO_UNIT (Unit of measure): pc
+<ZH>VendorItemSplitData table</>
+<ZH>Vendor line item 1</>
+SPLIT_KEY (Grouping key for splitting creditor line): 0001
+SPLIT_AMOUNT (partial invoice amount in document currency): 40,00
+PYMT_METH (payment method): S
+TAX_CODE (tax code): V0
+PMNTTRMS (Payment terms key): 0001
+<ZH>Vendor line item 2</>
+SPLIT_KEY (Grouping key for splitting creditor line): 0002
+SPLIT_AMOUNT (partial invoice amount in document currency): 60,00
+PYMT_METH (payment method): U
+TAX_CODE (tax code): V0
+PMNTTRMS (Payment terms key): 0003
+For more information, see the parameter documentation for the
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     ITEMDATA>ItemData</> and
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     VENDORITEMSPLITDATA>
+VendorItemSplitData</> tables.
+Example: Incoming invoice with G/L and material account posting.
+This example shows you which header data you must enter in the
+<LS>HeaderData</> table, which item data you enter in the <LS>ItemData
+</> table, which G/L account information you enter in the
+<LS>GlAccountData</> table, and which material account information you
+enter in the <LS>MateralData</> table in order to park an incoming
+invoice.
+You receive an invoice referencing PO no. 4500006846, PO item 10. A
+quantity of 100 pc of material A for a gross amount of 150.80 USD
+including 16% VAT is invoiced. This includes a G/L account posting of 10
+USD to account 400000 in company code 1, and a material account posting
+of 20 USD to the material MAT01. You enter the following data:
+<ZH>HeaderData table</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_DATE (document date): 05.08.2000
+PSTNG_DATE (Posting date): 08.08.2000
+COMP_CODE (company code): 1000
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 150,80
+CALC_TAX_IND (Automatically calculate tax): X
+PMNTTRMS (Payment terms key): 0001
+<ZH>ItemData table</>
+INVOICE_DOC_ITEM (Invoice document item): 00001
+PO_NUMBER (purchase order number): 4500006846
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): VN
+ITEM_AMOUNT (Item amount): 100
+QUANTITY (Quantity): 100
+PO_UNIT (Unit of measure): pc
+<ZH>GlAccountData table</>
+INVOICE_DOC_ITEM (Document item in invoice document): 00001
+GL_ACCOUNT (G/L account): 400000
+ITEM_AMOUNT (Item amount): 10,00
+DB_CR_IND (Debit/credit indicator): S
+COMP_CODE (company code): 0001
+TAX_CODE (Tax code): VN
+COSTCENTER (Cost center): 1
+<ZH>MaterialData table</>
+INVOICE_DOC_ITEM (Document item in invoice document): 0001
+MATERIAL (Material): MAT01
+PLANT (Valuation area): 0001
+DB_CR_INP (Debit/credit indicator): S
+ITEM_AMOUNT (Item amount): 10,00
+QUANTITY (MENGE_D): 1
+PO_UNIT (purchase order unit): pc
+TAX_CODE (Tax code): VN
+For more information, see the parameter documentation for the tables
+HeaderData,
+      <DS:FU.BAPI_INCOMINGINVOICE_PARK     ITEMDATA>ItemData</>,
+      <DS:FU.BAPI_INCOMINGINVOICE_PARK     GLACCOUNTDATA> GlAccountData
+</> and
+    <DS:FU.BAPI_INCOMINGINVOICE_PARK     MATERIALDATA>MaterialData</>
+Example: Incoming invoice for a purchase order for external services and
+service-based invoice verification
+This example shows which header data you must enter in the
+<LS>HeaderData</> table, which item data you must enter in the <LS>ItemD
+ata</> table, and which account assignment data you must enter in the
+<LS>AccountingData</> table in order to enter and post an incoming
+invoice.
+You receive an invoice referencing PO no. 4500000191, PO item 10. The
+invoice is for two services A and B, each with a quantity of six service
+units. Service A has a gross amount of 580 USD incl. 16% VAT. Service B
+has 812 USD including 16% VAT. 50% of service A was assigned to each of
+the cost centers 1000 and 2000. 50% of service B was assigned to each of
+the cost centers 1000 and 3000. The service acceptance is performed
+jointly for both services with the service entry sheet number
+1000000022. The account assignments cannot be changed. You enter the
+following data:
+<ZH>HeaderData table</>
+INVOICE_IND (post invoice/credit memo): X
+DOC_TYPE (Document type): RE
+DOC_DATE (document date): 10.01.2002
+PSTNG_DATE (Posting date): 10.01.2002
+COMP_CODE (company code): 0001
+CURRENCY (currency key): USD
+GROSS_AMOUNT (Gross amount): 1392,00
+CALC_TAX_IND (Automatically calculate tax): X
+PMNTTRMS (Payment terms key): 0001
+<ZH>ItemData table</>
+<ZH>First entry for service A:</>
+INVOICE_DOC_ITEM (Invoice document item): 000001
+PO_NUMBER (purchase order number): 4500000191
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Item amount): 250,00
+QUANTITY (Quantity): 3
+PO_UNIT (Unit of measure): SU
+SHEET_NO (Entry sheet number): 1000000022
+SHEET_ITEM (Line number) : 10
+<ZH>Second entry for service A:</>
+INVOICE_DOC_ITEM (Invoice document item): 000002
+PO_NUMBER (purchase order number): 4500000191
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Item amount): 250,00
+QUANTITY (Quantity): 3
+PO_UNIT (Unit of measure): SU
+SHEET_NO (Entry sheet number): 1000000022
+SHEET_ITEM (Line number) : 10
+<ZH>First entry for service B:</>
+INVOICE_DOC_ITEM (Invoice document item): 000003
+PO_NUMBER (purchase order number): 4500000191
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Item amount): 350,00
+QUANTITY (Quantity): 3
+PO_UNIT (Unit of measure): SU
+SHEET_NO (Entry sheet number): 1000000022
+SHEET_ITEM (Line number) : 20
+<ZH>Second entry for service B:</>
+INVOICE_DOC_ITEM (Invoice document item): 000004
+PO_NUMBER (purchase order number): 4500000191
+PO_ITEM (Purchase order item): 00010
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Item amount): 350,00
+QUANTITY (Quantity): 3
+PO_UNIT (Unit of measure): SU
+SHEET_NO (Entry sheet number): 1000000022
+SHEET_ITEM (Line number) : 20
+<ZH>AccountingData table</>
+<ZH>First account assignment for service A:</>
+INVOICE_DOC_ITEM (Document item in invoice document): 000001
+SERIAL_NO (Serial number for the account assignment): 01
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Amount in document currency): 250,00
+QUANTITY (Quantity): 3
+PO_UNIT (purchase order unit): SU
+<ZH>Second account assignment for service A:</>
+INVOICE_DOC_ITEM (Document item in invoice document): 000002
+SERIAL_NO (Serial number for the account assignment): 02
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Amount in document currency): 250,00
+QUANTITY (Quantity): 3
+PO_UNIT (purchase order unit): SU
+<ZH>First account assignment for service B:</>
+INVOICE_DOC_ITEM (Document item in invoice document): 000003
+SERIAL_NO (Serial number for the account assignment): 01
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Amount in document currency): 350,00
+QUANTITY (Quantity): 3
+PO_UNIT (purchase order unit): SU
+<ZH>Second account assignment for service B:</>
+INVOICE_DOC_ITEM (Document item in invoice document): 000004
+SERIAL_NO (Serial number for the account assignment): 03
+TAX_CODE (Tax code): V1
+ITEM_AMOUNT (Amount in document currency): 350,00
+QUANTITY (Quantity): 3
+PO_UNIT (purchase order unit): SU
+For more information, see the parameter documentation for the tables
+HeaderData,
+      <DS:FU.BAPI_INCOMINGINVOICE_PARK     ITEMDATA>ItemData</>, and
+      <DS:FU.BAPI_INCOMINGINVOICE_PARK     ACCOUNTINGDATA>
+AccountingData</>.
+Example: Incoming invoice for a one-time supplier
+This example shows how to proceed in order to enter and post an invoice
+for a one-time supplier.
+It is not necessary to populate the <LS>AddressData</> table. If you do
+not enter any data in the <LS>AddressData</> table, the address data for
+the one-time supplier from the purchase order is adopted 1:1 in the
+invoice.
+If you use the <LS>AddressData</> table for the data transfer, the
+address data for the one-time supplier is read from the purchase order
+into the invoice and is then overwritten or supplemented by the fields
+in the <LS>AddressData</> table.
+In the purchase order for the one-time supplier, the name is 'SAP AG',
+the postal code is '60000', and the street and building number are
+'Neurottstrasse 16'. You receive an invoice with the one-time supplier
+address as follows: Name 'SAP AG', postal code '69190', and place
+'Walldorf'. Enter the following data:
+<ZH>AddressData table</>
+ACC_1_TIME (One-time supplier indicator): X
+NAME (Name): SAP AG
+POSTL_CODE (Postal code): 69190
+CITY (Place): Walldorf
+The invoice is posted with the following one-time supplier address data:
+Name 'SAP AG', street and building number 'Neurottstrasse 16', postal
+code '69190', place 'Walldorf'.
+For more information, see the parameter documentation for the table
+AddressData.
+Example: Incoming invoice for different payee
+This example shows you which address data you must enter in the
+<LS>AddressData</> table in order to enter and post an invoice for a
+different payee.
+You receive an invoice for the different payee with the name 'SAP AG',
+postal code '69190', place 'Walldorf', bank number '38070724', and
+account number '4711'. Enter the following data:
+<ZH>AddressData table</>
+ACC_1_TIME (One-time supplier indicator): ' '
+NAME (Name): SAP AG
+POSTL_CODE (Postal code): 69190
+CITY (Place): Walldorf
+BANK_NO (Bank number): 38070724
+BANK_ACCT (Bank account number): 4711
+For more information, see the parameter documentation for table
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     ADDRESSDATA>AddressData</>.
+IF &[SWITCH]MM_SFWS_DINV_02& = 'X'.
+Example: Provisional invoice/differential invoice
+For an example of how to create invoices within differential invoicing,
+see the documentation for function module
+  <DS:FU.BAPI_INCOMINGINVOICE_CREATE>BAPI_INCOMINGINVOICE_CREATE</>
+(Invoice Verification: Post Incoming Invoice).
+ENDIF.
+Example: Assignment to purchase order
+If your invoice references a purchasing document or scheduling agreement
+and you wish to enter goods items, you must populate the following
+fields:
+<ZH>HeaderData table</>
+INVOICE_IND (Invoice=X/Credit memo=blank): X
+DOC_DATE (Document number in document): 11.05.2000
+PSTNG_DATE (Posting date in document : 11.06.2000
+COMP_CODE (Company code): 0001
+CURRENCY (Currency key): EUR
+<ZH>AdditionalHeaderData table</>
+ASSIGN_DELIV (Indicator: Delivery item assignment): X
+DELIV_POSTING (Posting logic for delivery items (Invoice=S/Credit
+memo=H): S
+SEL_GOODS (Indicator: Goods invoice/Service): X
+<ZH>SelectPo table</>
+PO_NUMBER (Document number of purchasing document): 4500000679
+For more information, see the parameter documentation for the tables
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     ADDITIONALHEADERDATA>
+AdditionalHeaderData</>, and
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     SELECTPO>SelectPo</>.
+Example: Assignment to delivery note
+If your invoice references an external delivery note and you want to
+enter goods items you must populate the following fields:
+<ZH>HeaderData table</>
+INVOICE_IND (Invoice=X/Credit memo=blank): X
+DOC_DATE (Document date in document): 11.05.2000
+PSTNG_DATE (Posting date in document): 11.06.2000
+COMP_CODE (Company code): 0001
+CURRENCY (Currency key): EUR
+<ZH>AdditionalHeaderData table</>
+ASSIGN_DELIV (Indicator: Delivery item assignment): X
+DELIV_POSTING (Posting logic for delivery items (Invoice=S/Credit
+memo=H): S
+SEL_GOODS (Indicator: Goods invoice/Service): X
+SEL_ VENDOR (Number of selection supplier): SPENCER
+<ZH>SelectDelivery table</>
+DELIVERY_NOTE (Number of external delivery note): 11/00-256
+For more information, see the parameter documentation for the tables
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     HEADERDATA>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     ADDITIONALHEADERDATA>
+AdditionalHeaderData</>, and
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     SELECTDELIVERY>SelectDelivery</>.
+Example: Assignment to service entry sheet (lean services)
+If your invoice references a service entry sheet for lean services you
+must populate the following fields:
+<ZH>HeaderData table</>
+INVOICE_IND (Invoice=X/Credit memo=blank): X
+DOC_DATE (Document date in document): 11.05.2000
+PSTNG_DATE (Posting date in document): 11.06.2000
+COMP_CODE (Company code): 0001
+CURRENCY (Currency key): EUR
+<ZH>AdditionalHeaderData table</>
+ASSIGN_DELIV (Indicator: Delivery item assignment): X
+DELIV_POSTING (Posting logic for delivery items (Invoice=S/Credit
+memo=H): S
+SEL_GOODS (Indicator: Goods invoice/Service): X
+SEL_ VENDOR (Number of selection supplier): SPENCER
+<ZH>SelectService table</>
+SHEET_NO (Number of the service entry sheet): 1000000245
+SHEET_ITEM (Item number of service entry sheet): 00001 (optional)
+For more information, see the parameter documentation for the tables
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     HEADERDATA>HeaderDa>HeaderData</>,
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     ADDITIONALHEADERDATA>
+AdditionalHeaderData</>, and
+ <DS:FU.BAPI_INCOMINGINVOICE_PARK     SELECTSERVICE_LEAN>
+SelectService_Lean.</>
+&FUNCTIONALITY&
+This method enables you to post provisional invoice documents.
+Provisional invoice documents have the status 'on hold', 'on hold (from
+parking)', 'parked', 'parked as complete' or 'parked and released'.
+<ZH>Restrictions</>
+It is not possible to post invoice documents that have been flagged for
+background invoice verification with this method. Neither can you post
+invoice documents saved within the framework of the EDI process using
+this method.
+&EXAMPLE&
+
+&HINTS&
+The authorization objects
+ <DS:UO.M_RECH_WRK>M_RECH_WRK</> and
+  <DS:UO.M_RECH_BUK>M_RECH_BUK</> are checked with activity 77 for
+parked invoice documents. For invoice documents with one of the other
+above-mentioned statuses, activity 01 is checked.
+<ZH>Transfer</>
+You must transfer the key fields of the incoming invoice
+(InvoiceDocNumber and FiscalYear) to the method as import parameters.
+<ZH>Return messages</>
+INCLUDE BAPI_RET OBJECT DOKU ID TX LANGUAGE EN
+&FURTHER_SOURCES_OF_INF&
+The method can only perform its function if no error messages have been
+generated in the <LS>Return</> table. This is the case if it was
+possible to process the header data and all items without errors.
+No transaction control is implemented. This means that the invoker must
+perform the 'Commit Work' itself after successful invocation of this
+method if no errors have been notified to the invoker in the <LS>Return
+</> parameter.
+INCLUDE BAPI_INCOMINGINVOICE_SPERRL OBJECT DOKU ID TX

@@ -1,0 +1,100 @@
+&FUNCTIONALITY&
+You can use this method to create requirement coverage requests. A
+requirement coverage request may be:
+
+a purchase requisition,
+if the requirement cannot be covered on the desired date by existing
+stocks on hand in the warehouse or stores, or
+
+a reservation,
+if adequate stocks are on hand.
+As of SAP Release 4.0A, use the method <LB>CreateFromData</> of the
+business objects <LS>PurchaseRequisition</> and <LS>MaterialReservation
+</>.
+&HINTS&
+The following authorization objects are checked:
+
+<DS:UO.M_BANF_BSA>M_BANF_BSA</>,,Document type in requisition
+<DS:UO.M_BANF_EKG>M_BANF_EKG</>,,Purchasing group in requisition
+<DS:UO.M_BANF_EKO>M_BANF_EKO</>,,Purchasing org. in requisition
+<DS:UO.M_BANF_WRK>M_BANF_WRK</>,,Plant in requisition
+<DS:UO.M_MRES_BWA>M_RES_BWA</>,,Reservations: Movement type
+<DS:UO.M_MRES_WWA>M_MRES_WWA</>,,Reservations: Plant
+Data transfer
+<ZH>Item data</>
+The item data of the requirement coverage request is passed on in the
+table <LB>RequirementItems</>, whereby at least the following data is
+necessary:
+
+Item counter (PREQ_ITEM field)
+Material number (MATERIAL field)
+The following can also be passed on as an alternative to the material
+number:
+Material group (MAT_GRP field) and
+Short text (short description) (SHORT_TEXT field) and
+Unit of measure (UNIT field) and
+Price (C_AMT_BAPI field) and
+Purchasing group (PUR_GROUP field)
+If the material number is passed on, the material group, short text etc.
+are taken from the material master record.
+Requested quantity (QUANTITY field)
+Requested date (DELIV_DATE field in the format YYYYMMDD) and date
+category (DEL_DATCAT field)
+If the current date is passed on, the date category must be '1'.
+Alternative categories are '2' (week format) or '3' (month format); here
+too, DELIV_DATE must be passed on in the format YYYMMDD and is then
+adjusted accordingly when displayed.
+Object type (RES_REQ_ID field)
+If a purchase requisition is to be created, this field must contain 'X'.
+In the case of a reservation it must be 'Y'.
+The following fields are also necessary. If they are not passed on in
+the method, the specifications are taken from the relevant user master
+record (parameter values). Note that they must at all events be
+available.
+
+Document type for purchase requisitions (DOC_TYPE field)
+Parameter ID BSA
+Plant (PLANT field)
+Parameter ID WRK
+Storage location (STORE_LOC field)
+Parameter ID LAG
+<ZH>Account assignments</>
+Account assignment data for each requirement coverage request item (cost
+center field COST_CTR) can be passed on in the transfer table
+<LB>ReqAccountAssignment</>.
+If it is not passed on, costs are assigned to the cost center stored in
+the user master record (parameter ID CNT). A precondition for this is
+that the account assignment category (field ACCTASSCAT) that is passed
+on is not SPACE.
+If the account assignment category is not passed on, a purchase
+requisition item without account assignment is generated.
+<ZH>SAP user master record</>
+The parameter ID BWA (movement type for reservations) must be maintained
+in the relevant user master record.
+Return
+The method then returns the object number (parameter NUMBER) under which
+the requirement coverage request was created. The parameter ITEM is
+present for technical reasons and is always returned with its initial
+value.
+If errors have occurred, these are shown in the <LB>Return</> table.
+<ZH>Number assignment</>
+If no external object number was passed on (table <LB>RequirementItems
+</>, PREQ_NO field), the number is assigned internally by the method. A
+precondition for internal number assignment is that the number range
+object RESB (reservations) is adjusted in Customizing for Inventory
+Management in the SAP System as follows:
+
+Change the interval with the number 01 to 0000000001 to 0019999999
+Add a new interval with the number 10 from 0090000000 to 0099999999.
+You can maintain the number range in the Implementation Guide (IMG):
+<DS:SIMG.SIMG_CFMENUOLMBOMC2>Define Number Assignment for Reservations
+</>
+This adjustment is necessary because in the standard system the same
+interval has also been created for the external assignment of purchase
+requisition numbers. This means that one and the same number can be
+assigned for reservations and purchase requisitions. For example, just
+one number is assigned if both lines that are to be saved as purchase
+requisitions and lines that are to be saved as reservations are to be
+transferred in the table <LB>RequirementItems</>.
+&FURTHER_SOURCES_OF_INF&
+

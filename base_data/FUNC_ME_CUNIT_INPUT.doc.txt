@@ -1,0 +1,24 @@
+Dieser Funktionsbaustein prüft, ob für den übergebenen Freigabecode die
+Freigabe durchgeführt werden kann. Wenn dies nicht der Fall ist, ergeht
+Exception NO_RELEASE.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein prüft, ob für den übergebenen Freigabecode die
+Rücknahme der Freigabe durchgeführt werden kann. Wenn dies der Fall
+ist, wird die Freigabe zurückgesetzt. Falls gewünscht, wird ein
+Dialogfenster gesendet, was den daraus resultierenden Freigabezustand
+anzeigt.
+Anderenfalls werden entsprechende Meldungen gesendet.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein prüft, ob für den übergebenen Freigabecode die
+Freigabe durchgeführt werden kann. Wenn dies der Fall ist, wird die
+Freigabe gesetzt und, falls gewünscht, ein Dialogfenster gesendet, was
+den daraus resultierenden Freigabezustand anzeigt.
+Anderenfalls werden entsprechende Meldungen gesendet.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Dieser Funktionsbaustein führt die Funktion des Konvertierungsexit
+CUNIT durch. Er konvertiert eine sprachenabhängige Eingabe einer
+Maßeinheit in die sprachenunabhängige interne Maßeinheit. Er wird
+dann benötigt, wenn eine Maßeinheit in einem unformatierten Feld, d.h.
+einem Feld, das nicht einer Domäne mit CUNIT zugeordnet ist, eingeben
+wird.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

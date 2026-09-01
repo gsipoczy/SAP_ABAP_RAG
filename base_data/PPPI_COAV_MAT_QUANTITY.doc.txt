@@ -1,0 +1,30 @@
+Processing Logic
+During automatic value assignment, one of the following values is
+assigned to the characteristic:
+If the process instruction also contains the characteristic
+PPPI_MATERIAL_ITEM, "Item number of the material component", and a value
+has been assigned to this characteristic:
+the quantity of the specified material component
+<ZK>Exception:</> If batch determination has been carried out
+for the material component, the quantity can only be determined using
+the reservation item (PPPI_RESERVATION_ITEM), see below.
+If the process instruction also contains characteristic
+PPPI_RESERVATION_ITEM, "Item number of the reservation", and a value
+has been assigned to this characteristic:
+the quantity of the reserved material
+If the process instruction also contains characteristic
+PPPI_ORDER_ITEM_NUMBER, "Number of the order item", and a value has been
+assigned to this characteristic:
+the quantity of the specified order item
+Otherwise:
+the quantity of the material assigned in the order header
+&HINTS&
+In generated process instructions, the values of the specified
+characteristics are assigned automatically if you use one of the
+following scopes of generation:
+Scope of generation,,,,,,Characteristic
+For all reservations (01),,,,,,PPPI_MATERIAL_ITEM
+,,,,,,PPPI_RESERVATION_ITEM
+For all order items (02),,,,,,PPPI_ORDER_ITEM
+For all reservations,,,,,,PPPI_MATERIAL_ITEM
+and order items (03),,,,,,PPPI_RESERVATION_ITEM

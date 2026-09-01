@@ -1,0 +1,17 @@
+&FUNCTIONALITY&
+Exiting a condition maintenance session <ZH>without</> saving.
+The <DS:DE.COND_MNT_HANDLE>handle</> to be transferred must be valid,
+that is, it must be the handle of the session that is currently running.
+This module checks whether there would be a loss of data due to data not
+yet having been saved. This check is sometimes ignored, for example, if
+the parameter IV_IGNORE_DATALOSS is set. Otherwise, a resumable
+exception is triggered if there is a danger of data being lost.
+The following actions are performed to close the maintenance session:
+The blocks are released
+The internal data is reset
+&EXAMPLE&
+
+&HINTS&
+After this module is called, the session has the status <LS>closed</>.
+&FURTHER_SOURCES_OF_INF&
+<DS:RE.SAPLCOND_MNT_INTF>Function group COND_MNT_INTF</>

@@ -1,0 +1,4 @@
+&FUNCTIONALITY&
+You can use this BAPI function module to read customer-material info
+records. You should enter the info record's identification number in
+the parameter field.

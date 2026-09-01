@@ -1,0 +1,23 @@
+&FUNCTIONALITY&
+This method can be used to change purchase requisitions.
+&EXAMPLE&
+
+&HINTS&
+The following authorization objects are checked with activity 02
+(change):
+
+<DS:UO.M_BANF_BSA>M_BANF_BSA</>,,Document type in requisition
+<DS:UO.M_BANF_EKG>M_BANF_EKG</>,,Purchasing group in requisition
+<DS:UO.M_BANF_EKO>M_BANF_EKO</>,,Purch. organization in requisition
+<DS:UO.M_BANF_WRK>M_BANF_WRK</>,,Plant in requisition
+<ZH>Transfer</>
+You must pass on the purchase requisition number and the necessary
+tables for the items that are to be changed. For more information, refer
+to the documentation on the table parameters.
+To fill the table parameters correctly with the old status, use the
+method <LS>GetDetail</> of the business object <LS>PurchaseRequisition
+</>before invoking this method.
+<ZH>Return messages</>
+INCLUDE BAPI_RET
+&FURTHER_SOURCES_OF_INF&
+

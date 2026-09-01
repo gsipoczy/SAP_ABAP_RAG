@@ -1,0 +1,27 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein wird in der Standardbezugsquellenfindung
+(Funktionsbaustein: ME_SEARCH_SOURCE_OF_SUPPLY) vor der eigentlichen
+Bezugsquellenfindung aufgerufen und dient zur alternativen Findung der
+Bezugsquellen für Kunden, die SAP Retail einsetzen. Die nachfolgendene
+Standardbezugsquellenfindung kann dabei mit Hilfe des
+Rückgabeparameters CH_READY ausgeschaltet werden.
+&EXAMPLE&
+Aufrufstelle in der Standardbezugsquellenfindung (Funktionsbaustein:
+ME_SEARCH_SOURCE_OF_SUPPLY).
+&HINTS&
+Zu Release 4.6C wird zur alternativen Bestimmung der Bezugsquellen nur
+der Customer-Exit EXIT_SAPLWSUS_001 ausgeliefert, in dem der Kunde eine
+individuelle Bezugsquellenfindung implementieren kann.
+Dieser Customer-Exit befindet sich in der SAP-Erweiterung LWSUS001.
+
+Zur Korrektur der ermittelten Bezugsquellen gibt es nach der
+Standardbezugsquellenfindung in dem Funktionsbaustein ME_SEARCH_SOUR
+CE_OF_SUPPLY den User-Exit EXIT_SAPLMEQR_001. Dieser Customer-Exit wird
+auch dann berücksichtigt, wenn mit Hilfe des Rückgabeparameters
+CH_READY die Standardbezugsquellenfindung ausgeschaltet wird.
+&FURTHER_SOURCES_OF_INF&
+Weitere Informationen finden Sie in der SAP-Bibliothek unter
+<LS>MM-Einkauf -> Optimierter Einkauf -> Ermittlung von Bezugsquellen
+</>.
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

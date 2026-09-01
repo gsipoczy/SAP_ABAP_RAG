@@ -1,0 +1,13 @@
+&FUNCTIONALITY&
+SAP internal!
+&EXAMPLE&
+
+&HINTS&
+This BAPI and the interfaces thathave arisen from it serve exclusively
+the SAP internal communication in the "Cross System Flow of Goods"
+scenario.
+It is forbidden to use this without explicit permission from the
+Inventory Management department. No incidents of any kind are analyzed
+or corrected.
+&FURTHER_SOURCES_OF_INF&
+

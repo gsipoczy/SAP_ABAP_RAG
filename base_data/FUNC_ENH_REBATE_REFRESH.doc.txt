@@ -1,0 +1,39 @@
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+This function module is used to determine the rebate sales from the
+info structure S469 for the extended rebate processing.
+In a specified period the entire data for a condition is read from the
+S469 and summed up for each variable key. Simultaneously, the data for
+the whole conditon is summed up, too.
+&EXAMPLE&
+
+&HINTS&
+This function module is a copy of the function module
+SD_BONUS_TURN_OVER that was adjusted for the extended rebate
+processing.
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Refresh for table BONUS_RECORDS.
+&EXAMPLE&
+
+&HINTS&
+This function module is a copy of the function module 'BONUS_REFRESH'
+ for the extended rebate processing.
+&FURTHER_SOURCES_OF_INF&
+

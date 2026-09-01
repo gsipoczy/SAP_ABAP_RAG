@@ -1,0 +1,59 @@
+&FUNCTIONALITY&
+Erlaubt das Abmischen der Bestellentwicklungsdaten mit bereits
+verdichteten Daten pro Referenzschlüssel. Der Funktionsbaustein sucht
+für den übergebenen Referenzschlüssel nach bereits verdichteten
+Bestellentwicklungssätzen und mischt diese mit den bereits gefundenen
+Daten aus der Bestellentwicklung ab.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein liefert für eine oder mehrere Kombinationen aus
+EBELN und EBELP alle gefundenen Belege aus der Tabelle EKDF (Belegfluss
+Differenzrechnungsstellung). Das Lesen erfolgt wenn möglich gepuffert.
+Es ist möglich die Suche weiter einzuschränken durch Übergabe von
+LFPOS/LFBNR/LFGJA. Doppelt gefundene Belege werden nur einmal
+ausgegeben.
+
+Importparameter:
+IT_DINV_KEY (Type: IF_MRM_DINV_SERVICES=>GTY_T_DINV_ITEM_KEY) -
+Übergabetabelle der zu lesenden Datensätze
+IV_BYPASSING_BUFFER (Type: BOOLE_D) - Kennzeichen zur Pufferumgehung
+IV_REFRESH_BUFFER (Type:  BOOLE_D) - Kennzeichen zum Puffer-Reset
+
+Exportparameter:
+ET_EKDF (Type: EKDF_TTY)
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein liefert für eine oder mehrere Kombinationen aus
+EBELN und EBELP alle gefundenen Belege aus der Tabelle EKDF (Belegfluss
+Differenzrechnungsstellung). Das Lesen erfolgt wenn möglich gepuffert.
+Es ist möglich die Suche weiter einzuschränken durch Übergabe von
+LFPOS/LFBNR/LFGJA. Doppelt gefundene Belege werden nur einmal
+ausgegeben.
+
+Importparameter:
+IT_DINV_KEY (Type: IF_MRM_DINV_SERVICES=>GTY_T_DINV_ITEM_KEY) -
+Übergabetabelle der zu lesenden Datensätze
+IV_BYPASSING_BUFFER (Type: BOOLE_D) - Kennzeichen zur Pufferumgehung
+IV_REFRESH_BUFFER (Type:  BOOLE_D) - Kennzeichen zum Puffer-Reset
+
+Exportparameter:
+ET_EKDF (Type: EKDF_TTY)
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

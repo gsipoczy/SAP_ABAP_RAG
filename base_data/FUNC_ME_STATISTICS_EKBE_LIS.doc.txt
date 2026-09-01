@@ -1,0 +1,49 @@
+&FUNCTIONALITY&
+This function module calculates the variance between the GR date and
+the statistical delivery date from the purchasing document. The
+statistical delivery date can be specified in the PO as a day, a week,
+or a month. This results in the following logic for determining the
+delivery date variance:
+
+a) Day:         The variance reflects the difference between the GR
+                date and the statistical delivery date.
+
+b) Week:        The variance reflects the difference between the GR
+                date and the date of the first day of the week in which
+                the statistical delivery date falls if the GR date lies
+                before this first day.
+
+                The variance reflects the difference between the GR
+                date and the date of the last day of the week in which
+                the statistical delivery date falls if the GR date lies
+                after the last day of this week.
+
+                If the GR date lies within the specified week, the
+                variance is zero.
+
+c) Month:       The logic corresponds to case b) except that the first
+                or last day of the relevant month is taken for
+                comparison purposes.
+
+
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+Der Funktionsbaustein stößt die Statistikfortschreibungen im
+Logistik-Informationssystem und RK-Obligo an. Der Anstoß erfolgt über
+die Erzeugung eines Bestellentwicklungssatzes aus Wareneingang oder
+Rechnungseingang.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Der Funktionsbaustein trifft die Vorbereitungen für
+Statistikfortschreibungen im Logistik-Informationssystem und im
+RK-Obligo.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Der Funktionsbaustein stößt die Statistikfortschreibungen im
+Logistik-Informationssystem und RK-Obligo an. Der Anstoß erfolgt über
+die Erzeugung eines Bestellentwicklungssatzes aus Wareneingang oder
+Rechnungseingang.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

@@ -1,0 +1,176 @@
+&FUNCTIONALITY&
+Eingabe:  IUNAME      : Benutzername (optional)
+                  IOBJECT_TYP : verwendetes Objekt (siehe Tabelle
+TOJTB)
+                        z.B. 'BUS2091' für ServiceEntrySheet
+                  IOBJECT_ID  : Id des gerade verwendeten Objektes
+                        z.B. '1000000206' : LBLNI für Erfassungsblatt
+                 ISAVE       : Flag, ob Daten auf die Datenbank
+geschrieben
+                        werden sollen (default BLANK -> nicht
+speichern)
+                        (optional)
+
+Fügt das Objekt in die interne Tabelle mit ein. Ist es schon
+vorhanden wird es überschrieben mit aktuellem Zeitstempel,
+sonst wird es vorne angehängt. Es gibt beim Anhängen keine Obergrenze.
+Ist ISAVE = X werden die Daten mit MODIFY in die DB-Tabelle ESRUO ge-
+schrieben.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Eingabe:  IUNAME   : Benutzername (optional)
+                  IACTION  : betroffene Action (optional)
+                          (CHAR30)   z.B. 'ME21' (Transaktion) oder
+                          '0200' (Dynpro)
+                  IELEMENT : Element, daß auf-/abgeblendet wird
+(optional)
+                           (CHAR50)   z.B. 'Langtext'
+                  IACTIVE  : Wert der Einstellung der Action (optional)
+                           (CHAR50)
+                  ISAVE    : Flag, ob Daten auf die Datenbank
+geschrieben
+                     werden sollen (default BLANK -> nicht speichern)
+                     (optional)
+                  IESDUS   : Tabelle mit aktuellen
+Benutzereinstellungen in
+                     der Form Action / Element / Active, die angehängt
+                     werden sollen (optional)
+
+Wenn eine der Eingaben IACTION, IELEMENT oder IACTIVE gefüllt sind,
+wird genau dieser Eintrag in die interne Tabelle eingefügt.
+Sind die Eingaben leer, so werden alle Einträge in der Tabelle IESDUS
+in die interne Tabelle eingetragen.
+Ist es schon vorhanden wird es überschrieben, sonst wird angehängt.
+Ist ISAVE = X werden die Daten mit MODIFY in die DB-Tabelle ESDUS ge-
+schrieben.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Eingabe:  IUNAME   : Benutzername (optional)
+                  IACTION  : betroffene Action (optional)
+                          (CHAR30)   z.B. 'ME21' (Transaktion) oder
+                          '0200' (Dynpro)
+                  IELEMENT : Element, daß auf-/abgeblendet wird
+(optional)
+                           (CHAR50)   z.B. 'Langtext'
+                  IACTIVE  : Wert der Einstellung der Action (optional)
+                           (CHAR50)
+                  ISAVE    : Flag, ob Daten auf die Datenbank
+geschrieben
+                     werden sollen (default BLANK -> nicht speichern)
+                     (optional)
+                  IESDUS   : Tabelle mit aktuellen
+Benutzereinstellungen in
+                     der Form Action / Element / Active, die angehängt
+                     werden sollen (optional)
+
+Wenn eine der Eingaben IACTION, IELEMENT oder IACTIVE gefüllt sind,
+wird genau dieser Eintrag in die interne Tabelle eingefügt.
+Sind die Eingaben leer, so werden alle Einträge in der Tabelle IESDUS
+in die interne Tabelle eingetragen.
+Ist es schon vorhanden wird es überschrieben, sonst wird angehängt.
+Ist ISAVE = X werden die Daten mit MODIFY in die DB-Tabelle ESDUS ge-
+schrieben.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Eingabe:  IUNAME      : Benutzername (optional)
+                  IOBJECT_TYP : verwendetes Objekt (siehe Tabelle
+TOJTB)
+                        z.B. 'BUS2091' für ServiceEntrySheet
+                  MAXANZ      : Anzahl der anzuzeigenden Objekte
+(default 30)
+                        (optional)
+                  MAXSTORE    : Anzahl der zuspeichernden Objekte
+(default 100)
+                        (optional)
+                  IESRUO      : Tabelle in der die Ergebnisse stehen
+sollen,
+                        wird überschrieben
+
+Ein/Ausgabe: IESRUO    : Tabelle mit zuletzt verwendeten Objekten,
+                        zuletzt verwendetes Objekt steht oben,
+                        maximal MAXANZ Einträge
+
+Liest Daten zum Objekt und zum Benutzer von der Datenbank
+und reorganisiert die Datenbanktabelle, d.h.
+alle überzähligen durch es_append_user_objects hinzugefügten
+Objekte werden auf der Datenbank gelöscht. MAXANZ gibt an,
+wieviele Objekte zurückgegeben und MAXSTORE viele auf der Datenbank
+gehalten werden.
+Die Tabelle IESRUO wird zuerst leer gemacht und dann mit den gelesenen
+Daten gefüllt.
+An die interne Tabelle der Funktionsgruppe MLSO werden die Daten ange-
+hängt.
+Bei einem erneuten Lesen bevor die Daten gespeichert werden wird
+gepuffert aus der internen Tabelle der Funktionsbausteine gelesen.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Eingabe:  IUNAME  : Benutzername (optional)
+                  IACTION : betroffene Action
+                                        z.B. 'ME21' (Transaktion) oder
+                                                '0200' (Dynpro)
+                  IDB     : Lesen von DB
+Ein/Ausgabe: IESDUS: Tabelle mit aktuellen Benutzereinstellungen in
+                    der Form Action / Element / Active
+
+Liest Daten zur Aktion von der Datenbank.
+Die Tabelle IESDUS wird zuerst leer gemacht und dann mit den gelesenen
+Daten gefüllt.
+An die interne Tabelle der Funktionsgruppe MLSO werden die Daten ange-
+hängt.
+Bei einem erneuten Lesen bevor die Daten gespeichert werden wird
+gepuffert aus der internen Tabelle der Funktionsbausteine gelesen.
+Wenn IDB = 'X'wird auf jeden Fall von der Datenbank gelesen.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Alle Einträge durch es_append_user_objects werden mit modify auf die
+Datenbank geschrieben.
+Es können Einträge zu verschiedenen Objekten vorhanden sein. Die
+Grenzen
+MAXANZ/MAXSTORE von es_read_user_objects spielen keine Rolle. Beim
+Lesen eines Objektes
+mit es_read_user_object werden die überzähligen Objekte wieder
+gelöscht.
+Die interne Tabelle wird gelöscht.
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

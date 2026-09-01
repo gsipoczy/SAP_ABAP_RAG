@@ -1,0 +1,14 @@
+&FUNCTIONALITY&
+The function module increases 9 figure postal codes, numerical only, to
+10 figure postal codes according to US ZIP code format.
+&EXAMPLE&
+Entry:      Output:
+12345         12345
+123456789     12345-6789
+12345-678     12345-678
+A12345678     A12345678
+&HINTS&
+The function module increases the 9 figure IDOC field to 10 figures in
+order to match US ZIP code requirements. If any other application areas
+arise, you can try to read the relevant check routine, e.g. from the
+customer master.

@@ -1,0 +1,29 @@
+&FUNCTIONALITY&
+Der Funktionsbaustein <LS>ME_PR_PRICE_BADI</> ruft zwei
+Business-Add-Ins(BAdIs) auf:
+<LS>BADI_ME_PR_PRICE</> (nur SAP-intern implementierbar)
+<LS>BADI_ME_PR_PRICE_CUST</> (für Implementation durch Kunden)
+In beiden BAdIs kann ein neuer Preis, eine neue Preiseinheit und ein
+neuer Währungsschlüssel für die aktuelle Bestellanforderungsposition
+ermittelt werden.
+Wenn im BAdI gültige Werte ermittelt werden, so ändert der
+Funktionsbaustein die Bestellanforderungsdaten entsprechend.
+Das SAP-interne BAdI wird zuerst gerufen, und seine Rückgabedaten
+könnendurch die Rückgabedaten des Kunden-BAdIs überschrieben werden.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+Siehe Dokumentation der BAdIs <DS:SIMG.BADI_ME_PR_PRICE>BADI_ME_PR_PRICE
+</> und <DS:SIMG.BADI_ME_PR_PRICE_CUST>BADI_ME_PR_PRICE_CUST</> sowie
+ihrer Methoden DETERMINE_PRICE und MESSAGE_HANDLING.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Im Rahmen der Direktbeschaffung kann es sein, daß Banfen erzeugt
+werden, noch bevor der Fertigungsauftrag existiert. Diese Banfen werden
+zunächst auf Kontierung 'unbekannt' gesetzt. Wenn der Fertigungsauftrag
+dann vorhanden ist, soll die Kontierung auf diesen Auftrag geändert
+werden. Dies geschieht aber nur, wenn die Kontierung vorher wirklich
+'unbekannt' war und die Banf aus einem Fertigungsauftrag heraus erzeugt
+wurde.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

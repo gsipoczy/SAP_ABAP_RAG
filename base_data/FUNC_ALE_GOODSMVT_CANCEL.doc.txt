@@ -1,0 +1,35 @@
+&FUNCTIONALITY&
+Dieser Funktionsbaustein wurde generiert aus
+dem Objekt <LS>BUS2017</> und der Methode <LS>CANCEL</>
+für den BAPI-Aufruf durch ALE.
+Der Funktionsbaustein wird im Ausgangssystem ausgeführt. Er wandelt
+zunächst die Daten aus den BAPI-Parametern ins IDoc-Format um. Dann
+wird das IDoc an die entsprechenden Empfänger versendet. Dort erfolgt
+der BAPI-Aufruf.
+Die Schnittstelle des Funktionsbausteins enthält alle ausgehenden
+Parameter vom entsprechenden BAPI-Funktionsbaustein
+<DS:FU.BAPI_GOODSMVT_CANCEL>BAPI_GOODSMVT_CANCEL</>
+und zusätzlich die folgenden Parameter, die in der ALE-Schicht
+verwendet werden:
+
+<LS>SERIAL_ID</>
+Dieser Eingabeparameter enthält die <DS:DE.CHNUM>Kanalnumber</>, wird
+nur bei aktiver Serialisierung verwendet.
+<LS>RECEIVERS</>
+Der Parameter enthält die Namen von <DS:DE.LOGSYS>Logischen Systemen</>
+(Empfängern), bei denen der BAPI-Aufruf stattfindet.
+<LS>COMMUNICATION_DOCUMENTS</>
+Die Rückgabetabelle enthält den Namen vom logischen System im Feld
+LOGSYS, den Objekttyp im Feld OBJTYPE und den Objektschlüssel im Feld
+OBJKEY. Sie weist darauf hin, daß ein Objekt vom Typ <LS>IDOC</> mit
+diesem Schlüssel in diesem logischen System erzeugt wurde.
+<LS>APPLICATION_OBJECTS</>
+Die Eingabetabelle enthält die Objekte von Anwendungen, die beim
+BAPI-Aufruf verarbeitet werden. Im Feld LOGSYS geben Sie bitte den
+Namen des logischen Systems an, aus dem die Anwendungsobjekte stammen.
+Die Anwendungsobjekte werden durch Objekttyp OBJTYP und Objektschlüssel
+OBJKEY identifiziert.
+
+&EXAMPLE&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

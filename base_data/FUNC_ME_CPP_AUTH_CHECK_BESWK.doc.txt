@@ -1,0 +1,61 @@
+&FUNCTIONALITY&
+Den Baustein <LS>ME_CCP_ACTIVE_CHECK</> sollten Sie nutzen, um
+festzustellen, ob die CCP-Funktionalität in einem System aktiviert ist
+oder nicht.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein prüft Bezugsquellen, ob sie im Rahmen der
+erweiterten Bezugsquellenfindung gültig sind. In diesem Falle werden
+die fehlenden Daten ergänzt, d.h. das beschaffende Werk wird gefüllt.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Funktionsbaustein soll die Dauer einer Lieferung berechnen. Als
+Ausgangspunkt wird die buchungskreisübergreifende Beschaffung
+angenommen, d.h. eine Bestellung bzw. eine Anfrage wird angelegt mit
+Bezug zu einer Bestellanforderung in einem anderen Buchungskreis. Die
+benötigte Zeit für die Umlagerungslieferung muss bei der Bestimmung des
+Lieferdatums bzw. der Einteilungsdaten berücksichtigt werden.
+Der vorliegende Baustein sucht die Versanddaten, wie sie auf der
+Umlagerungsbestellung erscheinen würden. Wenn dort keine Planlieferzeit
+angegeben ist, so wird die Route ausgewertet. Wenn keine Route
+angegebenist, so wird der Einkaufsinfosatz für das Lieferwerk
+ausgewertet.
+Zusätzlich wird das <DS:GLOS.5C733369F735D311AE620060B03C9BBE>Business
+Add-In</> (BAdI) MECCP_DEL_DURATION gerufen. Übergeben werden die
+versandspezifischen Daten, die Materialnummer und die eventuell
+zugrundeliegende Bestellanforderungsposition. Geändert werden kann die
+Lieferdauer in Tagen.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+Der Baustein <LS>ME_CPP_AUTH_CHECK_BESWK</> wird genutzt, um die
+Berechtigung für verschiedene Aktivitäten im Zuge des CCP-Prozesses zu
+prüfen.
+Es kann beispielsweise geprüft werden, ob ein Benutzer die Berechtigung
+hat, einer Bestellanforderung ein beschaffendes Werk zuzuweisen oder ob
+er bei bereits vorhandenem beschaffenden Werk einen Lieferanten zuweisen
+darf.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION

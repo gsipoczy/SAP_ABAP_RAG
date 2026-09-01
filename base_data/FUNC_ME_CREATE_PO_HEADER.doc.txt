@@ -1,0 +1,3 @@
+Dieser Funktionsbaustein erzeugt einen Bestellkopf und speichert ihn im
+lokalen Gedächtnis.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

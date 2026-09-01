@@ -1,0 +1,19 @@
+Dieser Funktionsbaustein sucht für ein bestimmtes Material und Werk
+offene Bestellungen. Sobald die erste gefunden wurde, wird nicht mehr
+weitergesucht, sondern ein entsprechendes Flag zurückgegeben. Offen ist
+eine Bestellung dann, wenn entweder die WE-Menge oder die RE-Menge
+kleiner der Bestellmenge ist.
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Der Funktionsbaustein liest die angeforderten
+Umlagerungsbestellpositionen und bereitet die Daten für den
+Warenausgang auf.
+
+
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+Diese Position liest alle Bestellpositionen, sowie deren Einteilungen
+zu den übergebenen Indizes. Das es sich bei den Indizes um
+'Gruppenindizes' handelt, müssen dann die einzelnen Positionen, die dem
+übergebenen Material, Werk und Lagerort entsprechen, herausgefunden
+werden.
+DE-EN-LANG-SWITCH-NO-TRANSLATION

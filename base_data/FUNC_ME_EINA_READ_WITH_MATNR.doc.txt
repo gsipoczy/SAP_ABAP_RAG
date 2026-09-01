@@ -1,0 +1,53 @@
+&FUNCTIONALITY&
+Die Funktionsbausteine der Gruppe ME05 dienen zur Unterstützung von
+Zugriffen auf die Tabelle EINA des Einkaufsinfosatzes über die
+Materialnummer und/oder die Lieferantennummer. Der Funktionsbaustein
+ME_EINA_READ ist in dieser Gruppe der mächtigste Funktionsbaustein mit
+folgenden Eigenschaften:
+Falls die Eingabetabellen nur mit Materialnummern bzw. nur mit
+Lieferantennummern gefüllt sind, werden die gelesenen Sätze nicht nur
+an die Schnittstelle übergeben, sondern auch in einen internen Puffer
+der Funktionsgruppe ME05 gestellt.
+Falls Materialnummern und Lieferantennummern angegeben werden, wird
+versucht, möglichst viel Information aus den Puffern zu lesen.
+Infosätze, die nicht im Puffer gefunden werden, werden unter der
+Benutzung von Rangestabellen von der Datenbank gelesen. Dabei wird eine
+mögliche Überschreitung der zulässigen Größe der Rangestabellen nicht
+abgefangen! Die Ergebnismenge wird nicht in den Puffer gestellt.
+RESET N1
+Für folgende Spezialfälle gibt es optimierte Zugriffsbausteine:
+Materialnummer und Lieferantennummer eindeutig bekannt:
+   ME_EINA_SINGL_READ_MATNR_LIFNR
+Lieferantennummer eindeutig bekannt, Liste von Materialnummern:
+   ME_EINA_READ_WITH_LIFNR
+Materialnummer eindeutig bekannt, Liste von Lieferanten:
+   ME_EINA_READ_WITH_MATNR
+Zugriffe mit diesen Bausteinen haben im wesentlichen die gleichen
+Eigenschaften wie Zugriffe mit ME_EINA_READ, haben aber einfachere
+Schnittstellen und im Fall von ME_EINA_READ_WITH_LIFNR und
+ME_EINA_READ_WITH_MATNR nicht die Einschränkung der Rangestabellen.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+Siehe Funktionsbeschreibung von FB ME_EINA_READ
+DE-EN-LANG-SWITCH-NO-TRANSLATION
+&FUNCTIONALITY&
+
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+Siehe Funktionsbeschreibung von FB ME_EINA_READ
+DE-EN-LANG-SWITCH-NO-TRANSLATION

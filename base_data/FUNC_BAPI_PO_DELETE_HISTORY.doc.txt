@@ -1,0 +1,19 @@
+&FUNCTIONALITY&
+Updating of purchase order history from the delivery.
+&EXAMPLE&
+
+&HINTS&
+<ZH>Restrictions of invoker</>:
+The entries in the PO history table EKBE that are to be changed must be
+completely transferred to the BAPI structure BAPIEKBE. The function
+module FUNCTION MAP2E_EKBE_TO_BAPIEKBE is available for this purpose.
+The BAPI does not reread the records, i.e. all fields passed on by the
+invoker (including initial ones) are adopted.
+No data consistency checks at all are carried out.
+The control Insert, Update, and Delete is effected via EKBE-ELIKZ (=
+'I', 'U', 'D').
+The function module ME_UPDATE_DELIVERY was encapsulated only to enable
+asynchronous invocation via ALE. There is no functionality other than
+that provided by ME_UPDATE_DELIVERY.
+&FURTHER_SOURCES_OF_INF&
+

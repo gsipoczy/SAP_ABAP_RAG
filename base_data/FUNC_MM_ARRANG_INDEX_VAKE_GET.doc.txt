@@ -1,0 +1,13 @@
+&FUNCTIONALITY&
+Ermitteln der Konditionen und Timesätze für den nachträglichen Aufbau
+der LIS-Statistiken im Bereich Einkauf. Über den Parameter
+'CONDITION_ALL' kann gesteuert werden, ob alle Konditionen einer
+Absprache oder nur die mit dem Kennzeichen 'verspätet eingestellt' für
+die Weiterverarbeitung bereitgestellt werden sollen.
+&EXAMPLE&
+
+&HINTS&
+
+&FURTHER_SOURCES_OF_INF&
+
+DE-EN-LANG-SWITCH-NO-TRANSLATION
